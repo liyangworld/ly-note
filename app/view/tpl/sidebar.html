@@ -1,0 +1,25 @@
+
+<ul>
+    {% for item in sideBarItems %}
+        {% set x = loop.index %}
+        <li class={{'active' if (action === item.action) else ''}}>
+
+            {% if item.action ==='' %}
+                <span>{{x}}. {{item.title}}</span>
+            {% else %}
+                <a href={{'/'+controller+'/'+item.action}}>{{x}}. {{item.title}}</a>
+            {% endif %}
+
+            {% if item.children.length !==0 %}
+                <ul>
+                    {% for child in item.children %}
+                        {% set y = loop.index %}
+                        <li>
+                            <a href={{'/'+controller+'/'+child.action}}>{{x}}.{{y}}. {{child.title}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

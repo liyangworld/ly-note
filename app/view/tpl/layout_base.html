@@ -1,0 +1,25 @@
+{% extends './layout_root.html' %}
+
+{% block style %}
+{{super()}}
+<link rel="stylesheet" href="/public/css/normalize.css">
+<link rel="stylesheet" href="/public/css/main.css">
+{% endblock %}
+
+{% block body %}
+{{super()}}
+
+<header class="website-header">
+    {% include "./header.html" %}
+</header>
+<div class="website-main">
+    <div class="website-sidebar">
+        {% include "./sidebar.html" %}
+    </div>
+    <div class="website-content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+{% block elsebody %}{% endblock %}
+{% endblock %}

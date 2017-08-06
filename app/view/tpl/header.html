@@ -1,0 +1,22 @@
+
+{% set headerItems = [
+                {title:'HTML',controller:'html'},
+                {title:'CSS',controller:'css'},
+                {title:'JavaScript',controller:'javascript'},
+                {title:'jQuery',controller:'jquery'},
+                {title:'Bootstrap',controller:'bootstrap'},
+                {title:'Vue',controller:'vue'},
+                {title:'Element',controller:'element'},
+                {title:'React',controller:'react'},
+                {title:'ReactNative',controller:'reactNative'},
+                {title:'Node',controller:'node'},
+                {title:'Egg',controller:'egg'}
+            ]
+%}
+<ul>
+    {% for item in headerItems %}
+        <li class={{'active' if (controller === item.controller) else ''}}>
+            <a href={{"/"+item.controller+"/index"}}>{{item.title}}</a>
+        </li>
+    {% endfor %}
+</ul>
