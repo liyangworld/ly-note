@@ -113,6 +113,9 @@ body{
 .website-content a:hover{
     text-decoration: underline;
 }
+.website-content a + a{
+    margin-left:20px;
+}
 .website-content>:last-child{
     margin-bottom:0;
 }

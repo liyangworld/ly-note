@@ -51,6 +51,13 @@
     </tr>
     </tbody>
 </table>
+<h3>JavaScript 的兼容性处理</h3>
+<p>IE9 及以上对 es5 支持很好。因此 js 的兼容性处理方案如下：</p>
+<ol>
+    <li>只需支持IE9及以上：用Babel转译到 es5 即可。</li>
+    <li>需支持IE8及以下：先用Babel转译到 es5，然后引用es5-shim.js填补一些数组等方法，再引入json3.js填补JSON.parse和JSON.stringify方法。</li>
+</ol>
+<p>需注意Object.defineProperty无法填补，因此Vue无法支持IE8。</p>
 
 <h3> JavaScript 资源</h3>
 <p>一、在线教程、文档</p>
@@ -70,8 +77,20 @@
 
 <p>三、实用工具</p>
 <ol>
-    <li><a target="_blank" href="http://caniuse.com/#tables">Can I use</a></li>
+    <li>
+        <a target="_blank" href="http://caniuse.com/#tables">Can I use</a>
+        <a target="_blank" href="http://kangax.github.io/compat-table/es6/">js 部分</a>
+    </li>
     <li><a target="_blank" href="http://www.w3school.com.cn/tiy/t.asp?f=jseg_bodysection">W3School 在线测试</a></li>
-    <li><a target="_blank" href="http://babeljs.cn/repl/">BABEL 在线实验</a></li>
+    <li>
+        <a target="_blank" href="http://babeljs.io/">BABEL 英文</a>
+        <a target="_blank" href="http://babeljs.cn/repl/">BABEL 中文 在线实验</a>
+    </li>
+    <li><a target="_blank" href="https://github.com/es-shims/es5-shim">es5-shim</a></li>
+    <li><a target="_blank" href="https://github.com/bestiejs/json3">json3</a></li>
+    <li>
+        <a target="_blank" href="https://lodash.com/">Lodash</a>
+        <a target="_blank" href="http://lodashjs.com/docs/">Lodash 中文文档</a>
+    </li>
 </ol>
 {% endblock %}
