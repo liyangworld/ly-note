@@ -1,7 +1,7 @@
 
 <ul>
     {% for item in sideBarItems %}
-        {% set x = loop.index %}
+        {% set x = loop.index0 %}
         <li class={{'active' if (action === item.action) else ''}}>
 
             {% if item.action ==='' %}
@@ -14,7 +14,7 @@
                 <ul>
                     {% for child in item.children %}
                         {% set y = loop.index %}
-                        <li>
+                        <li class={{'active' if (action === child.action) else ''}}>
                             <a href={{'/'+controller+'/'+child.action}}>{{x}}.{{y}}. {{child.title}}</a>
                         </li>
                     {% endfor %}

@@ -89,15 +89,29 @@ body{
 /******************************整体布局*************结束*************/
 
 /******************************文章内容*************开始*************/
+.website-content ul,.website-content ol{
+    margin:10px 0;
+}
 .website-content h1{
     margin:0 0 10px;
     padding:10px 0;
     text-align: center;
     border-bottom:1px solid #ccc;
 }
+.website-content h2,h3{
+    margin:10px 0;
+}
 .website-content p{
     line-height: 24px;
-    margin:0 0 10px;
+    margin:0 0 8px;
+}
+.website-content a{
+    color:#108ee9;
+    text-decoration: none;
+    font-size:14px;
+}
+.website-content a:hover{
+    text-decoration: underline;
 }
 .website-content>:last-child{
     margin-bottom:0;
@@ -119,6 +133,16 @@ body{
 }
 .website-content table td{
     border:1px solid #00f;
+}
+pre{
+    background-color: #FAFAFA;
+    border:1px solid #ccc;
+    padding: 10px;
+    overflow-x: auto;
+    font-family: "Inconsolata";
+    font-size:13px;
+    line-height:1.5;
+    color:#637c84;
 }
 /******************************文章内容*************结束*************/
 
