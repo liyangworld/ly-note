@@ -1,0 +1,19 @@
+
+{% extends '../../tpl/layout_egg.html' %}
+
+{% set title_suffix = '引言' %}
+
+{% block content %}
+
+<h1>引言</h1>
+<p>Egg 是阿里开源的 Node.js 框架，基于 koa ，专注于提供 Web 开发的核心功能和一套灵活可扩展的插件机制。<a target="_blank" href="https://eggjs.org/zh-cn/tutorials/index.html">Egg官网</a> </p>
+<h2>Egg 升级计划</h2>
+<ol>
+    <li>
+        <p>Egg 1.x : 基于 Koa 1.x 开发，异步解决方案基于 <a target="_blank" href="https://github.com/tj/co">co</a> 封装的 generator function。</p>
+    </li>
+    <li>
+        <p>Egg next : 将基于 Koa 2.x 开发，异步解决方案基于 async function，不再支持 Node.js 6.x。</p>
+    </li>
+</ol>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends '../../tpl/layout_react.html' %}
+
+{% set title_suffix = '事件处理' %}
+
+{% block content %}
+
+<h1>事件处理</h1>
+<p>React 已为原生标签封装好了一系列的 on* 事件属性，且处理了浏览器兼容性问题。但这些事件属性默认只能使用在原生标签上。</p>
+
+<h3>一、React 与 原生HTML 中事件绑定的不同</h3>
+<p>1. 在原生HTML 中标签的事件属性名为全小写，而 React 中则为小驼峰式。</p>
+<pre>
+&lt;button onclick="handleClick()">原生HTML&lt;/button>
+&lt;button onClick={handleClick}>React&lt;/button>
+</pre>
+<p>2. 阻止默认事件，原生HTML 中可用“return false”，React 只能使用 e.preventDefault()。<p/>
+
+<h3>二、React 中 this 的几种绑定方式。建议使用最后两种，传参用第二种</h3>
+<p>1. 在标签的事件属性中绑定。</p>
+<pre>
+&lt;button onClick={this.handleClick.bind(this)}>React&lt;/button>
+</pre>
+<p>2. 给标签的事件属性传入箭头函数。</p>
+<pre>
+&lt;button onClick={ ()=>{this.handleClick()} }>React&lt;/button>
+</pre>
+<p>3. 在组件的构造函数中绑定。</p>
+<pre>
+constructor(){
+    this.handleClick = this.handleClick.bind(this);
+}
+</pre>
+<p>4. 将事件处理函数定义为箭头函数。</p>
+<pre>
+handleClick = ()=>{ //do something };
+</pre>
+
+<h3>三、受控组件</h3>
+<p>一般来说表单元素 input、textarea、select 的值都是由浏览器自身维护的，而在 React 中需要统一在 state 中维护。</p>
+<pre>
+class DemoForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {name: '',description: '',city: '',fruit: true};
+    }
+    handleNameChange = (event)=> {
+        this.setState({name: event.target.value});
+    };
+    handleDescriptionChange = (event)=> {
+        this.setState({description: event.target.value});
+    };
+    handleCityChange = (event)=> {
+        this.setState({city: event.target.value});
+    };
+    handleFruitChange = (event)=> {
+        this.setState({fruit: event.target.checked});
+    };
+    handleSubmit = (event)=> {
+        event.preventDefault();
+    };
+
+    render() {
+        return (
+            &lt;form onSubmit={this.handleSubmit}>
+                &lt;label>Name:
+                    &lt;input type="text" value={this.state.name} onChange={this.handleNameChange} />
+                &lt;/label>
+                &lt;label>Description:
+                    &lt;textarea value={this.state.description} onChange={this.handleDescriptionChange} />
+                &lt;/label>
+                &lt;label>Pick the city:
+                    &lt;select value={this.state.city} onChange={this.handleCityChange}>
+                        &lt;option value="beijing">beijing&lt;/option>
+                        &lt;option value="shanghai">shanghai&lt;/option>
+                        &lt;option value="nanjing">nanjing&lt;/option>
+                    &lt;/select>
+                &lt;/label>
+                &lt;label>apple:
+                    &lt;input name="fruit" type="checkbox" checked={this.state.fruit} onChange={this.handleFruitChange} />
+                &lt;/label>
+                &lt;input type="submit" value="Submit" />
+            &lt;/form>
+        );
+    }
+}
+</pre>
+{% endblock %}

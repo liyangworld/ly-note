@@ -1,0 +1,99 @@
+{% extends '../../tpl/layout_draft.html' %}
+
+{% set title_suffix = '草稿' %}
+
+{% block content %}
+<h1>草稿</h1>
+<h3>判断一个对象是否为空 {} 的三种方法</h3>
+<p>1. for ... in </p>
+<pre>
+function isEmptyObject(obj){
+    for(var key in obj){ return true }
+    return false;
+}
+</pre>
+<p>2. JSON.stringify()</p>
+<pre>
+function isEmptyObject(obj){
+    if(JSON.stringify(obj) === '{}'){ return true }
+    return false;
+}
+</pre>
+<p>3. ES6新增的Object.keys()</p>
+<pre>
+function isEmptyObject(obj){
+    if(Object.keys(obj).length === 0){ return true }
+    return false;
+}
+</pre>
+
+<h3>封装 AJAX 请求</h3>
+<p>1. 参数连接</p>
+<pre>
+function _joinParams(obj,isSkipEmpty) {
+    var str = [];
+    for (var key in obj) {
+        if (isSkipEmpty) {
+            if (obj[key] === null || obj[key] === '') continue;
+        }
+        str.push(key + "=" + obj[key]);
+    }
+    return str.join("&");
+};
+</pre>
+<p>2. get 请求</p>
+<pre>
+var get = function(url, params,successFn,errorFn) {
+        var serverURL = url;
+        var paramsStr = _joinParams(params,true);
+
+        if (paramsStr) {
+            if (serverURL.indexOf('?') > 0) {
+                serverURL += '&' + paramsStr;
+            }else{
+                serverURL += '?' + paramsStr;
+            }
+        }
+        $.ajax({
+            url: serverURL,
+            method: 'GET',
+            dataType: 'json',
+            data: null,
+            cache: false,
+            crossDomain: true,
+            complete: function (jqXHR, textStatus) {
+            },
+            success: function (responseData, textStatus, jqXHR) {
+                successFn && successFn(responseData);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                errorFn && errorFn();
+            }
+        });
+    }
+</pre>
+<p>3. post 请求</p>
+<pre>
+var post = function (url, data, successFn, errorFn) {
+        var postData = JSON.stringify(data);
+        $.ajax({
+            url: url,
+            method: 'POST',
+            dataType: 'json',
+            contentType: "application/json",
+            data: postData,
+            cache: false,
+            crossDomain: true,
+            complete: function (jqXHR, textStatus) {
+
+            },
+            success: function (responseData, textStatus, jqXHR) {
+                successFn && successFn(responseData);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                errorFn && errorFn();
+            }
+        });
+    }
+</pre>
+{% endblock %}

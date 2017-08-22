@@ -1,0 +1,53 @@
+
+{% extends '../../tpl/layout_react.html' %}
+
+{% set title_suffix = '快速使用' %}
+
+{% block content %}
+
+<h1>快速使用</h1>
+<h3>一、初始化项目</h3>
+<pre>
+npm install create-react-app -g
+create-react-app my-app
+
+cd my-app
+npm start
+</pre>
+<h3>二、使用 JSX</h3>
+<p>JSX 是 JavaScript 的一种语法扩展。可以在 { } 中嵌入任意的表达式。比如：变量、null、算术表达式、&& 、三元运算符、函数调用、Array.(map、filter、...) 等。</p>
+<p>{ } 可以存在于标签的属性值和内容中。</p>
+<p>JSX 相比于 HTML 更倾向于 JavaScript，所以标签的类名class用className代替，标签label的属性for用htmlFor代替。样式属性style的值中，CSS属性用相应的小驼峰命名代替。</p>
+<p>JSX 为了防止 XSS（cross-site-scripting）攻击，默认会对嵌入的值进行转义。</p>
+
+<h3>三、构建组件</h3>
+<p>React 中 组件名首字母必须大写，以区分原生标签和React组件标签。每个组件必须只有一个根元素。</p>
+<p>1. 函数式组件</p>
+<pre>
+function Welcome(props) {
+  return &lt;h1>Hello, {props.name}&lt;/h1>;
+}
+</pre>
+<p>2. 类组件</p>
+<pre>
+class Welcome extends React.Component {
+    render() {
+        return &lt;h1>Hello, {this.props.name}&lt;/h1>;
+    }
+}
+</pre>
+
+<h3>四、props 和 state</h3>
+<p>父组件通过 props 把数据和回调函数传给子组件。子组件不允许直接修改所得到的props，但可以通过回调让父组件来修改。组件可以通过 this.props.children 来获取自身标签中填充的子元素。</p>
+<p>组件都可以拥有自身的状态即this.state，通过this.setState()方法来修改状态。</p>
+<p>使用this.setState()方法需注意的几点：</p>
+<p>1. 此方法可接受2个参数，第一个参数为{}或函数(prevState,props)=>{return {}}，第二个参数为回调函数，可选。</p>
+<p>2. 此方法不保证是同步的，不会立刻改变this.state。后续操作可在回调函数或componentDidUpdate中进行。</p>
+<p>3. 每次调用都会造成重新渲染。可以在生命周期shouldComponentUpdate中进行优化。</p>
+<p>4. 在同一处连续多次调用this.setState({})时，会将其合并为一次，此时应该以方法作为参数来避免。</p>
+
+<h3>五、组件的生命周期 <a href="https://facebook.github.io/react/docs/react-component.html#the-component-lifecycle" target="_blank">官网链接</a> </h3>
+<p>组件挂载：constructor => componentWillMount => render => componentDidMount</p>
+<p>组件更新：componentWillReceiveProps => shouldComponentUpdate => componentWillUpdate => render => componentDidUpdate</p>
+<p>组件销毁：componentWillUnmount</p>
+{% endblock %}

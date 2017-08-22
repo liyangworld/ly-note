@@ -1,0 +1,128 @@
+
+{% extends '../../tpl/layout_react.html' %}
+
+{% set title_suffix = '前端组件 - 演化' %}
+
+{% block content %}
+
+<h1>前端组件 - 演化</h1>
+<p>前端组件往往具备一定的结构样式和功能，即对应的 html 和 js ，此时若想组件复用则需要同时引入 html和js。我们可以将 html 放在 js 中，如同 React 所做的一样。</p>
+接下来构建可点击的组件 LikeButton，并抽出组件基类 Click_Component 。
+<h3>版本一</h3>
+<pre>
+class LikeButton {
+    constructor () {
+        this.state = { isLiked: false };
+    }
+    handleClick(){
+        const likeText = this.el.querySelector('.like-text');
+        this.state.isLiked = !this.state.isLiked;
+        likeText.innerHTML = this.state.isLiked ? '取消' : '点赞';
+    };
+    render () {
+        this.el = createDOMFromString(`&lt;button class='like-button'>&lt;span class='like-text'>点赞&lt;/span>&lt;/button>`);
+        this.el.addEventListener('click', this.handleClick, false);
+        return this.el;
+    }
+}
+const createDOMFromString = (domStr)=>{
+    let wrapDiv = document.createElement('div');
+    wrapDiv.innerHTML = domStr;
+    return wrapDiv.firstChild;
+};
+</pre>
+<p>使用如下：</p>
+<pre>
+const likeButton1 = new LikeButton();
+const wrapper = document.querySelector('.wrapper');
+wrapper.appendChild(likeButton1.render());
+</pre>
+
+<h3>版本二</h3>
+<pre>
+class LikeButton {
+    constructor () {
+        this.state = { isLiked: false };
+    }
+    setState(state){
+        const oldEl = this.el;
+        this.state = state;
+        this.el = this.render();
+        if (this.onStateChange) this.onStateChange(oldEl, this.el);
+    }
+    handleClick(){
+        this.setState({ isLiked: !this.state.isLiked });
+    }
+    render () {
+        this.el = createDOMFromString(`&lt;button class='like-button'>&lt;span class='like-text'>${this.state.isLiked ? '取消' : '点赞'}&lt;/span>&lt;/button>`);
+        this.el.addEventListener('click', this.handleClick.bind(this));
+        return this.el;
+    }
+}
+const createDOMFromString = (domStr)=>{
+    let wrapDiv = document.createElement('div');
+    wrapDiv.innerHTML = domStr;
+    return wrapDiv.firstChild;
+};
+</pre>
+<p>使用如下：</p>
+<pre>
+const wrapper = document.querySelector('.wrapper');
+const likeButton1 = new LikeButton();
+likeButton1.onStateChange = (oldEl, newEl) => {
+  wrapper.insertBefore(newEl, oldEl);
+  wrapper.removeChild(oldEl);
+};
+wrapper.appendChild(likeButton1.render());
+</pre>
+
+<h3>版本三</h3>
+<pre>
+class Click_Component{
+    constructor(props={}){
+        this.props = props;
+    }
+    setState(state){
+        this.state = Object.assign({},this.state,state);
+        const oldEl = this.el;
+        this.el = this._renderDom();
+        this.onStateChange && this.onStateChange(oldEl,this.el);
+    }
+    _renderDom(){
+        this.el = createDOMFromString(this.render());
+        this.onClick && this.el.addEventListener('click', this.onClick.bind(this), false);
+        return this.el;
+    }
+}
+const createDOMFromString = (domStr)=>{
+    let wrapDiv = document.createElement('div');
+    wrapDiv.innerHTML = domStr;
+    return wrapDiv.firstChild;
+};
+const mount = (component,wrapper) => {
+    wrapper.appendChild(component._renderDom());
+    component.onStateChange = (oldEl,newEl) => {
+        wrapper.insertBefore(newEl,oldEl);
+        wrapper.removeChild(oldEl);
+    };
+};
+</pre>
+<pre>
+class LikeButton extends Click_Component {
+    constructor (props) {
+        super(props);
+        this.state = { isLiked: false };
+    }
+    onClick () {
+        this.setState({ isLiked: !this.state.isLiked });
+    }
+    render(){
+        return `&lt;button class="like-button" style="background-color:${this.props.bgColor}">&lt;span>${this.state.isLiked ? '取消' : '点赞'}&lt;/span>&lt;/button>`
+    }
+}
+</pre>
+<p>使用如下：</p>
+<pre>
+mount(new LikeButton({bgColor:'#f60'}),document.querySelector('.wrapper'));
+</pre>
+{% endblock %}

@@ -1,0 +1,15 @@
+
+{% extends './layout_base.html' %}
+
+{% set title = 'Bootstrap-'+ title_suffix %}
+{% set controller = 'bootstrap' %}
+{% set sideBarItems = [
+                {
+                    title:'常用总结',
+                    action:'',
+                    children:[
+                        {title:'总结1',action:'summary1'}
+                    ]
+                }
+            ]
+%}
