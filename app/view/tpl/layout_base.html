@@ -23,3 +23,8 @@
 
 {% block elsebody %}{% endblock %}
 {% endblock %}
+
+{% block script %}
+{{super()}}
+<script src="/public/js/main.js"></script>
+{% endblock %}

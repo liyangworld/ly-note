@@ -1,0 +1,96 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '各版本常见方法' %}
+
+{% block content %}
+
+<h1>各版本常见方法</h1>
+
+<h2>ECMAScript 5</h2>
+<p class="margin-vertical-5">一、对象/数组 字面量扩展</p>
+<p>
+    <span class="my-title" title="return ({ get x(){ return 1 } }).x === 1;">Getter</span>
+    <span class="my-title" title="var value = 0;({ set x(v){ value = v; } }).x = 1;return value === 1;">Setter</span>
+    <span class="my-title" title="return { a: true, }.a === true;">对象的尾部逗号</span>
+    <span class="my-title" title="return [1,].length === 1;">数组的尾部逗号</span>
+    <span class="my-title" title="return ({ if: 1 }).if === 1;">保留词作为属性名</span>
+</p>
+<p class="margin-vertical-5">二、对象的静态方法</p>
+<p>
+    <span class="my-title" title="">Object.keys</span>
+    <span class="my-title" title="">Object.create</span>
+    <span class="my-title" title="">Object.defineProperty</span>
+    <span class="my-title" title="">Object.defineProperties</span>
+
+    <span class="my-title" title="">Object.seal</span>
+    <span class="my-title" title="">Object.isSealed</span>
+    <span class="my-title" title="">Object.freeze</span>
+    <span class="my-title" title="">Object.isFrozen</span>
+    <span class="my-title" title="">Object.preventExtensions</span>
+    <span class="my-title" title="">Object.isExtensible</span>
+    <span class="my-title" title="">Object.getPrototypeOf</span>
+    <span class="my-title" title="">Object.getOwnPropertyDescriptor</span>
+    <span class="my-title" title="">Object.getOwnPropertyNames</span>
+</p>
+<p class="margin-vertical-5">三、数组的方法</p>
+<p>
+    <span class="my-title" title="">Array.isArray</span>
+    <span class="my-title" title="">arr.indexOf</span>
+    <span class="my-title" title="">arr.lastIndexOf </span>
+    <span class="my-title" title="">arr.forEach</span>
+
+    <span class="my-title" title="">arr.map</span>
+    <span class="my-title" title="">arr.reduce</span>
+    <span class="my-title" title="">arr.reduceRight</span>
+    <span class="my-title" title="">arr.filter</span>
+
+    <span class="my-title" title="">arr.every</span>
+    <span class="my-title" title="">arr.some</span>
+</p>
+<p class="margin-vertical-5">四、字符串的方法</p>
+<p>
+    <span class="my-title" title='return "foobar"[3] === "b";'>类数组的索引访问</span>
+    <span class="my-title" title="">str.trim</span>
+</p>
+<p class="margin-vertical-5">五、日期的方法</p>
+<p>
+    <span class="my-title" title="">Date.now</span>
+    <span class="my-title" title="">date.toISOString</span>
+    <span class="my-title" title="">date.toJSON</span>
+</p>
+<p class="margin-vertical-5">六、其他</p>
+<p>
+    <span class="my-title" title="">函数绑定fn.bind()</span>
+    <span class="my-title" title="">JSON.parse</span>
+    <span class="my-title" title="">JSON.stringify</span>
+    <span class="my-title" title="return parseInt('010') === 10;">parseInt忽略开头的0</span>
+    <span class="my-title" title="">严格模式 'use strict'</span>
+
+</p>
+<h2>ECMAScript 6</h2>
+<p class="margin-vertical-5">一、语法</p>
+<p>
+    <span class="my-title" title="return (function (a = 1, b = 2) { return a === 3 && b === 2; }(3));">函数的默认参数</span>
+    <span class="my-title" title='return (function (foo, ...args) { return args instanceof Array && args + "" === "bar,baz";}("foo", "bar", "baz"));'>函数的剩余参数</span>
+    <span class="my-title" title='return Math.max(...[1, 2, 3]) === 3; ~~~~~  return [...[1, 2, 3]][2] === 3; ~~~~~  return ["a", ..."bcd", "e"][3] === "d"; ~~~~~  var iterable = (function*(){ yield 1; yield 2; yield 3; }()); return Math.max(...iterable) === 3;'>展开操作符 ...</span>
+    <span class="my-title" title='var a = 7, b = 8, c = {a,b};return c.a === 7 && c.b === 8; ~~~~~ return ({ y() { return 2; } }).y() === 2;'>对象属性/方法的缩写</span>
+    <span class="my-title" title="var x = 'y';return ({ [x]: 1 }).y === 1; ~~~~~  var x = 'y';return ({ [x](){ return 1 } }).y() === 1;">对象可计算的属性/方法</span>
+    <span class="my-title" title='var arr = [5];for (var item of arr)return item === 5;'>for...of 循环</span>
+    <span class="my-title" title='var a = "ba", b = "QUX";return `foo bar${a + "z"} ${b.toLowerCase()}` === "foo bar\nbaz qux";'>模板字符串 `${a}`</span>
+
+
+</p>
+<h2>ECMAScript 7</h2>
+
+<h2>ECMAScript 8</h2>
+{% endblock %}
+
+{% block script %}
+{{super()}}
+<script>
+    window.onload = function () {
+        _initMyTitle();
+    };
+</script>
+{% endblock %}

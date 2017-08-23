@@ -8,6 +8,9 @@ module.exports = app => {
         * index(){
             yield this.ctx.render('pages/javascript/index.html');
         }
+        * versions(){
+            yield this.ctx.render('pages/javascript/versions.html',{action:'versions'});
+        }
     }
     return JavascriptController;
 };

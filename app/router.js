@@ -10,6 +10,9 @@ module.exports = app => {
 
     app.get('/css/index', 'css.index');
     app.get('/javascript/index', 'javascript.index');
+    app.get('/javascript/versions', 'javascript.versions');
+
+
     app.get('/jquery/index', 'jquery.index');
     app.get('/bootstrap/index', 'bootstrap.index');
     app.get('/vue/index', 'vue.index');

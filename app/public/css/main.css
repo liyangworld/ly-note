@@ -31,6 +31,7 @@ body{
     flex:auto;
     overflow-y:auto;
     padding:15px;
+    font-size:14px;
 }
 
 .website-header ul{
@@ -90,7 +91,10 @@ body{
 
 /******************************文章内容*************开始*************/
 .website-content ul,.website-content ol{
-    margin:10px 0;
+    margin:5px 0;
+}
+.website-content ul li,.website-content ol li{
+    line-height: 24px;
 }
 .website-content h1{
     margin:0 0 10px;
@@ -99,11 +103,14 @@ body{
     border-bottom:1px solid #ccc;
 }
 .website-content h2,h3{
-    margin:10px 0;
+    margin:14px 0;
 }
 .website-content p{
-    line-height: 24px;
-    margin:0 0 8px;
+    line-height: 20px;
+    margin:0;
+}
+.website-content p .my-title{
+    margin-left: 20px;
 }
 .website-content a{
     color:#108ee9;
@@ -146,6 +153,23 @@ pre{
     font-size:13px;
     line-height:1.5;
     color:#637c84;
+}
+.my-title-show{
+    position:absolute;
+    max-width:300px;
+    padding:10px;
+    background:#fff;
+    border-radius:5px;
+    border:2px solid #000;
+    font-size:12px;
+    -webkit-box-shadow: 2px 1px 7px rgba(0,0,0,.3);
+    -moz-box-shadow: 2px 1px 7px rgba(0,0,0,.3);
+    box-shadow: 2px 1px 7px rgba(0,0,0,.3);
+
+
+}
+.website-content .margin-vertical-5{
+    margin:5px 0;
 }
 /******************************文章内容*************结束*************/
 
