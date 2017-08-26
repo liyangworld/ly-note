@@ -65,7 +65,7 @@
     <span class="my-title" title="">JSON.parse</span>
     <span class="my-title" title="">JSON.stringify</span>
     <span class="my-title" title="return parseInt('010') === 10;">parseInt忽略开头的0</span>
-    <span class="my-title" title="">严格模式 'use strict'</span>
+    <span class="my-title" title=''>严格模式 'use strict'</span>
 
 </p>
 <h2>ECMAScript 6</h2>
@@ -80,7 +80,40 @@
     <span class="my-title" title='var a = "ba", b = "QUX";return `foo bar${a + "z"} ${b.toLowerCase()}` === "foo bar\nbaz qux";'>模板字符串 `${a}`</span>
 
 
+    <span class="my-title" title='var [a, , [b], c] = [5, null, [6]];return a === 5 && b === 6 && c === undefined; ~~~~~  var [a, b, c] = "ab";return a === "a" && b === "b" && c === undefined;  ~~~~~  var {c, x:d, e} = {c:7, x:8};return c === 7 && d === 8 && e === undefined;'>数组/对象解构</span>
+    <span class="my-title" title='var [e, {x:f, g}] = [9, {x:10}];var {h, x:[i]} = {h:11, x:[12]};return e === 9 && f === 10 && g === undefined && h === 11 && i === 12;'>嵌套解构</span>
+    <span class="my-title" title='for(var [i, j, k] in { qux: 1 }) { return i === "q" && j === "u" && k === "x"; }  ~~~~~  for(var [i, j, k] of [[1,2,3]]) { return i === 1 && j === 2 && k === 3; }'>for of/in 解构</span>
+    <span class="my-title" title='var {a = 1, b = 0, z:c = 3} = {b:2, z:undefined};var [d = 0, e = 5, f = 6] = [4,,undefined]; return a === 1 && b === 2 && c === 3 && d === 4 && e === 5 && f === 6;  ~~~~~  var [a, ...b] = [3, 4, 5]; var [c, ...d] = [6]; return a === 3 && b instanceof Array && (b + "") === "4,5" && c === 6 && d instanceof Array && d.length === 0;'>默认值及剩余 解构</span>
+
+
+    <span class="my-title" title=''>let 和 const</span>
+    <span class="my-title" title='var b = x => x + "foo"; return (b("fee fie foe ") === "fee fie foe foo");'>箭头函数</span>
+    <span class="my-title" title='return typeof class C {} === "function"'>class、constructor、extends、super、static</span>
+    <span class="my-title" title='function * generator(){ yield 5; yield 6;}; var iterator = generator(); var item = iterator.next(); var passed = item.value === 5 && item.done === false; item = iterator.next(); passed    &= item.value === 6 && item.done === false;item = iterator.next(); passed    &= item.value === undefined && item.done === true; return passed;'>generators</span>
+
 </p>
+<p class="margin-vertical-5">二、内置对象 属性/方法 的扩展</p>
+<p>
+    <span class="my-title" title='var obj = {a:false}; var o = Object.assign(obj, {a:true}, {b:true}); return "a" in o && "b" in o && obj.a === true;'>Object.assign</span>
+    <span class="my-title" title="return typeof Object.is === 'function' && Object.is(NaN, NaN) && !Object.is(-0, 0);">Object.is</span>
+    <span class="my-title" title='var o = {}; var sym = Symbol(), sym2 = Symbol(), sym3 = Symbol(); o[sym]  = true; o[sym2] = true; o[sym3] = true; var result = Object.getOwnPropertySymbols(o); return result[0] === sym && result[1] === sym2 && result[2] === sym3;'>Object.getOwnPropertySymbols</span>
+    <span class="my-title" title='return Object.setPrototypeOf({}, Array.prototype) instanceof Array;'>Object.setPrototypeOf</span>
+    <span class="my-title" title="function foo(){}; return foo.name === 'foo' && (function(){}).name === '';">函数的 name 属性</span>
+
+</p>
+<p>
+    <span class="my-title" title=''>String.raw </span>
+
+</p>
+
+
+<p class="margin-vertical-5">三、新增的内置对象</p>
+<P>
+    <span class="my-title" title='ArrayBuffer、Int8Array、Uint8Array、Uint8ClampedArray、Int16Array、Uint16Array、Int32Array、Uint32Array、Float32Array、Float64Array'>各种 Array</span>
+    <span class="my-title" title='Int8、Uint8、Int16、Uint16、Int32、Uint32、Float32、Float64'>DataView</span>
+
+</P>
+
 <h2>ECMAScript 7</h2>
 
 <h2>ECMAScript 8</h2>

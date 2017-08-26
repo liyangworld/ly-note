@@ -25,8 +25,17 @@ window._initMyTitle = function () {
             };
             el.onmousemove = function (e) {
                 e = e || window.e;
-                elTitle.style.top = e.clientY+10+'px';
-                elTitle.style.left = e.clientX+10+'px';
+                if((e.clientX+ 10 + elTitle.offsetWidth) < window.innerWidth){
+                    elTitle.style.left = e.clientX+10+'px';
+                }else{
+                    elTitle.style.right = window.innerWidth- e.clientX+10+'px';
+                }
+                if((e.clientY+ 10 + elTitle.offsetHeight) < window.innerHeight){
+                    elTitle.style.top = e.clientY+10+'px';
+                }else{
+                    elTitle.style.bottom = window.innerHeight- e.clientY+10+'px';
+                }
+
             }
         }
     }
