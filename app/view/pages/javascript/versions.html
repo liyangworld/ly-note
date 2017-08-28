@@ -102,7 +102,57 @@
 
 </p>
 <p>
-    <span class="my-title" title=''>String.raw </span>
+    <span class="my-title" title="let name = 'Bob'; String.raw`Hi\n${name}!` === 'Hi\nBob!'; ~~~~~ String.raw({  raw: ['foo', 'bar', 'baz'] }, 2 + 3, 'Java' + 'Script') === 'foo5barJavaScriptbaz';">String.raw </span>
+    <span class="my-title" title='String.fromCodePoint(65, 90) === "AZ"'>String.fromCodePoint </span>
+    <span class="my-title" title="'ABC'.codePointAt(1) === '66'; ~~~~~ 'XYZ'.codePointAt(42) === undefined">str.codePointAt </span>
+    <span class="my-title" title="var str = '\u1E9B\u0323'; str.normalize('NFC') === '\u1E9B\u0323'">str.normalize </span>
+    <span class="my-title" title="'abc'.repeat(0) === ''; ~~~~~ 'abc'.repeat(2) === 'abcabc'">str.repeat </span>
+    <span class="my-title" title="'abcabc'.startsWith('ab') === true;~~~~~'abcabc'.startsWith('ab',3) === true;">str.startsWith </span>
+    <span class="my-title" title="'abcabc'.endsWith('bc') === true;  ~~~~~  'abcabc'.endsWith('bc',2) === true;">str.endsWith </span>
+    <span class="my-title" title="'Blue Whale'.includes('Blue') === true;">str.includes </span>
+    <span class="my-title" title='return /./igm.flags === "gim" && /./.flags === "";'>reg.flags </span>
+
+</p>
+<p>
+    <span class="my-title" title="Array.from('foo') => ['f', 'o', 'o']; ~~~~~ Array.from([1, 2, 3], x => x + x) === [2, 4, 6]; ~~~~~  Array.from({length: 3}, (v, i) => i) => [0, 1, 2]; ~~~~~  function f() { return Array.from(arguments); };f(1, 2, 3) => [1, 2, 3];">Array.from</span>
+    <span class="my-title" title="Array.of(2) => [2]; ~~~~~ Array(2) => [,];">Array.of</span>
+    <span class="my-title" title="[1, 2, 3, 4, 5].copyWithin(0, 3, 4) => [4, 2, 3, 4, 5];改变原数组">arr.copyWithin</span>
+    <span class="my-title" title="function isBigEnough(element) { return element >= 15;} [12, 5, 8, 130, 44].find(isBigEnough) === 130;">arr.find</span>
+    <span class="my-title" title="function isBigEnough(element) { return element >= 15; } [12, 5, 8, 130, 44].findIndex(isBigEnough) === 3;">arr.findIndex</span>
+    <span class="my-title" title="[1, 2, 3].fill(4, 1, 2) => [1,4,3]">arr.fill</span>
+    <span class="my-title" title="var arr = ['a', 'b', 'c']; var iterator = arr.keys(); [...iterator] => [0,1,2]">arr.keys</span>
+    <span class="my-title" title="var a = ['w', 'y']; var iterator = a.values(); [...iterator] => ['w', 'y']">arr.values</span>
+    <span class="my-title" title="var a = ['a', 'b']; var iterator = a.entries();for (let e of iterator) { console.log(e); } //[0, 'a'] //[1, 'b']">arr.entries</span>
+</p>
+<p>
+    <span class="my-title">Number.isFinite</span>
+    <span class="my-title">Number.isInteger</span>
+    <span class="my-title">Number.isSafeInteger</span>
+    <span class="my-title">Number.isNaN</span>
+    <span class="my-title">Number.parseFloat</span>
+    <span class="my-title">Number.parseInt</span>
+    <span class="my-title">Number.EPSILON</span>
+    <span class="my-title">Number.MIN_SAFE_INTEGER</span>
+    <span class="my-title">Number.MAX_SAFE_INTEGER</span>
+</p>
+<p>
+    <span class="my-title">Math.clz32</span>
+    <span class="my-title">Math.imul</span>
+    <span class="my-title">Math.sign</span>
+    <span class="my-title">Math.log10</span>
+    <span class="my-title">Math.log2</span>
+    <span class="my-title">Math.log1p</span>
+    <span class="my-title">Math.expm1</span>
+    <span class="my-title">Math.cosh</span>
+    <span class="my-title">Math.sinh</span>
+    <span class="my-title">Math.tanh </span>
+    <span class="my-title">Math.acosh </span>
+    <span class="my-title">Math.asinh </span>
+    <span class="my-title">Math.atanh  </span>
+    <span class="my-title" title="去尾">Math.trunc</span>
+    <span class="my-title">Math.fround </span>
+    <span class="my-title">Math.cbrt </span>
+    <span class="my-title">Math.hypot </span>
 
 </p>
 
@@ -111,12 +161,76 @@
 <P>
     <span class="my-title" title='ArrayBuffer、Int8Array、Uint8Array、Uint8ClampedArray、Int16Array、Uint16Array、Int32Array、Uint32Array、Float32Array、Float64Array'>各种 Array</span>
     <span class="my-title" title='Int8、Uint8、Int16、Uint16、Int32、Uint32、Float32、Float64'>DataView</span>
-
 </P>
+<p>
+    <span class="my-title" title="var key1 = {}; var key2 = {}; var map = new Map([[key1, 123], [key2, 456]]); return map.has(key1) && map.get(key1) === 123 && map.has(key2) && map.get(key2) === 456;">Map</span>
+    <span class="my-title" title="var key = {}; var map = new Map(); map.set(key, 123); return map.size === 1;">map.size</span>
+
+    <span class="my-title" title="var key = {}; var map = new Map(); map.set(key, 123); return map.size === 1;">map.set</span>
+    <span class="my-title" title="var myMap = new Map(); myMap.set('bar', 'foo'); myMap.get('bar');">map.get</span>
+    <span class="my-title" title="var myMap = new Map(); myMap.set('bar', 'foo'); myMap.has('bar');">map.has</span>
+    <span class="my-title" title="var myMap = new Map(); myMap.set('bar', 'foo'); myMap.delete('bar');">map.delete</span>
+    <span class="my-title" title="var myMap = new Map(); myMap.set('bar', 'foo'); myMap.clear();">map.clear</span>
+
+    <span class="my-title" title="function logMapElements(value, key, map) { console.log(`m[${key}] = ${value}`); } new Map([['foo', 3], ['bar', {}], ['baz', undefined]]).forEach(logMapElements);">map.forEach</span>
+    <span class="my-title" title="var map = new Map([['foo', 3], ['bar', {}], ['baz', undefined]]); var iterator = map.keys(); console.log(iterator.next().value;);">map.keys</span>
+    <span class="my-title" title="var map = new Map([['foo', 3], ['bar', {}], ['baz', undefined]]); var iterator = map.values(); console.log(iterator.next().value;);">map.values</span>
+    <span class="my-title" title="var map = new Map([['foo', 3], ['bar', {}], ['baz', undefined]]); var iterator = map.entries(); console.log(iterator.next().value => ['foo', 3];);">map.entries</span>
+</p>
+<p>
+    <span class="my-title" title="var key = {}; var weakmap = new WeakMap(); weakmap.set(key, 123); return weakmap.has(key) && weakmap.get(key) === 123;只能以对象为key">WeakMap</span>
+    <span class="my-title">wmap.set</span>
+    <span class="my-title">wmap.get</span>
+    <span class="my-title">wmap.has</span>
+    <span class="my-title">wmap.delete</span>
+</p>
+<p>
+    <span class="my-title" title="var obj1 = {}; var obj2 = {}; var set = new Set([obj1, obj2]); return set.has(obj1) && set.has(obj2);">Set</span>
+
+    <span class="my-title" title="var set = new Set([1,2]);set.size === 2;">set.size</span>
+    <span class="my-title" title="var set = new Set(); set.add(1).add(2);">set.add</span>
+    <span class="my-title" title="var set = new Set([1]); set.has(1);">set.has</span>
+    <span class="my-title" title="var set = new Set(['foo']); set.delete('foo');">set.delete</span>
+    <span class="my-title">set.clear</span>
+    <span class="my-title" title="function logSetElements(value1, value2, set) { console.log(value1 === value2); } new Set(['foo', 'bar', undefined]).forEach(logSetElements);">set.forEach</span>
+    <span class="my-title" title="var set = new Set(['foo', 'bar']); var iterator = set.values(); console.log(iterator.next().value;);">set.values</span>
+    <span class="my-title" title="var set = new Set(['foo', 'bar']); var iterator = set.entries(); iterator.next().value => ['foo','foo'];">set.entries</span>
+</p>
+<p>
+    <span class="my-title" title="var obj1 = {}, obj2 = {}; var weakset = new WeakSet([obj1, obj2]); return weakset.has(obj1) && weakset.has(obj2);">WeakSet</span>
+    <span class="my-title" title="var obj1 = {}, obj2 = {}; var weakset = new WeakSet(); weakset.add(obj1)">wset.add</span>
+    <span class="my-title">wset.has</span>
+    <span class="my-title">wset.delete</span>
+</p>
+<p>
+    <span class="my-title">Proxy</span>
+    <span class="my-title">Reflect</span>
+    <span class="my-title">Promise</span>
+    <span class="my-title">Symbol</span>
+</p>
 
 <h2>ECMAScript 7</h2>
-
+<p>
+    <span class="my-title" title="return 2 ** 3 === 8 && -(5 ** 2) === -25 && (-5) ** 2 === 25; ~~~~~ var a = 2; a **= 3; return a === 8;">幂运算符 ** </span>
+    <span class="my-title" title="['a', 'b', 'c'].includes('c', 1);">arr.includes</span>
+</p>
 <h2>ECMAScript 8</h2>
+<p>
+    <span class="my-title">async await</span>
+    <span class="my-title" title='var obj = Object.create({ a: "qux", d: "qux" }); obj.a = "foo"; obj.b = "bar"; obj.c = "baz"; var v = Object.values(obj); return Array.isArray(v) && String(v) === "foo,bar,baz";'>Object.values</span>
+    <span class="my-title" title='var obj = Object.create({ a: "qux", d: "qux" });
+    obj.a = "foo"; obj.b = "bar"; obj.c = "baz";
+    var e = Object.entries(obj);
+    return Array.isArray(e)
+    && e.length === 3
+    && String(e[0]) === "a,foo"
+    && String(e[1]) === "b,bar"
+    && String(e[2]) === "c,baz";'>Object.entries</span>
+    <span class="my-title" title="浅复制">Object.getOwnPropertyDescriptors</span>
+    <span class="my-title" title="'hello'.padStart(10, '1234') === '12341hello'">str.padStart</span>
+    <span class="my-title" title="'hello'.padEnd(10, '1234') === 'hello12341'">str.padEnd</span>
+    <span class="my-title">函数定义和调用的尾逗号</span>
+</p>
 {% endblock %}
 
 {% block script %}
