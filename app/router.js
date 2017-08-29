@@ -11,6 +11,9 @@ module.exports = app => {
     app.get('/css/index', 'css.index');
     app.get('/javascript/index', 'javascript.index');
     app.get('/javascript/versions', 'javascript.versions');
+    app.get('/javascript/grammar', 'javascript.grammar');
+    app.get('/javascript/dataTypes', 'javascript.dataTypes');
+    app.get('/javascript/operator', 'javascript.operator');
 
 
     app.get('/jquery/index', 'jquery.index');

@@ -1,0 +1,86 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '数据类型' %}
+
+{% block content %}
+
+<h1>数据类型</h1>
+<h2>7种数据类型</h2>
+<p>JavaScript 有7数据类型：数值（number）、字符串（string）、布尔值（boolean）、对象（object）、undefined、null、Symbol 。</p>
+<p>通常，我们将 数值、字符串、布尔值 称为原始类型（primitive type）。</p>
+<p>对象 又可以分成三个子类型：狭义的对象（object）、数组（array）、函数（function）。</p>
+
+<h2>typeof</h2>
+<p>typeof 运算符可以返回一个值的数据类型，有以下几个结果："number"、"string"、"boolean"、"undefined"、"object"、"function"、"symbol" 。</p>
+<pre>
+typeof {} // "object"
+typeof [] // "object"
+typeof null // "object"
+</pre>
+
+<h2>数据类型转换</h2>
+<h3>一、强制转换</h3>
+<p>强制转换主要指使用 Number、String 和 Boolean 三个构造函数，手动将各种类型的值，转换成数字、字符串或者布尔值。</p>
+<p>1. Boolean() ：得到 true 、false 。</p>
+<p>以下值都转换为 false：''、0、+0、-0、null、undefined、NaN ；其他的都为 true 。</p>
+<p>2. Number() ：得到 数值 、NaN 。</p>
+<pre>
+Number(123) // 123
+Number("") // 0
+Number(" 123 ") // 123
+Number("123 abc") // NaN
+Number(true) // 1
+Number(false) // 0
+Number(null) // 0
+Number(undefined) // NaN
+</pre>
+<p>Number 方法的参数是对象时，将返回NaN，除非是包含单个数值的数组。其内部是先调用对象的 valueOf()，再调用 toString()。</p>
+<pre>
+Number({a: 1}) // NaN
+Number([1, 2, 3]) // NaN
+Number([5]) // 5
+</pre>
+<p>3. String() ：得到字符串。</p>
+<pre>
+String(1.23) // "1.23"
+String('abc') // "abc"
+String(true) // "true"
+String(undefined) // "undefined"
+String(null) // "null"
+</pre>
+<p>String 方法的参数 是数组时，返回该数组的字符串形式；是函数时，返回函数声明的整体字符串；是对象时，返回"[object Object]" 。其内部是先调用对象的 toString()，再调用 valueOf()。</p>
+<pre>
+String([1,2]) // "1,2"
+String({}) // "[object Object]"
+var fn = function (){ console.log(1); };
+String(fn) // "function (){ console.log(1); }"
+</pre>
+
+<h3>二、自动转换</h3>
+<p>自动转换 皆是以 强制转换 为基础的。</p>
+<p>1. 自动转换为布尔值：参考强制转换。</p>
+<p>2. 自动转换为字符串：主要发生在加法运算时。</p>
+<pre>
+'5' + 1 // '51'
+'5' + true // "5true"
+'5' + {} // "5[object Object]"
+'5' + [] // "5"
+</pre>
+<p>3. 自动转换为数值：主要发生在部分加法运算 和 所有其他运算时。</p>
+<pre>
+'5' - '2' // 3
+'5' * '2' // 10
+true - 1  // 0
+false + 1 // 1
+'5' * []    // 0
+false / '5' // 0
+'abc' - 1   // NaN
+</pre>
+
+
+
+
+
+
+{% endblock %}

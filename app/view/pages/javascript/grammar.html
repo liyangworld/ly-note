@@ -1,0 +1,118 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '基本语法' %}
+
+{% block content %}
+
+<h1>基本语法</h1>
+<h2>变量</h2>
+<h3>一、声明变量</h3>
+<pre>
+var x ;
+x = 1 ;
+var a = 2 ;
+</pre>
+<p>如果只是声明变量而没有赋值，则该变量的值是 undefined 。</p>
+<h3>二、变量提升</h3>
+<p>JavaScript引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）。</p>
+<pre>
+console.log(a);
+var a = 1;
+</pre>
+<pre>
+var a;
+console.log(a);
+a = 1;
+</pre>
+<p>以上两段代码是等价的。最后的结果显示为 undefined ，表示变量a已声明，但还未赋值。</p>
+<p>变量提升只对 var 声明的变量有效，若将第一段代码中的 var 替换为 let 或 const 则报错。</p>
+
+<h2>标识符</h2>
+<p>标识符 是用来识别具体对象的一个名称。最常见的标识符就是 变量名 和 函数名。几乎所有编程语言的标识符都对大小写敏感。</p>
+<p>标识符可以使用任意Unicode字母（包括英文字母和其他语言的字母），以及美元符号（$）和下划线（_）。但首字符不能是数字（0-9）。</p>
+
+<h2>注释</h2>
+<p>单行注释：//此处为注释内容 ；多行注释：/*此处为注释内容*/ 。</p>
+
+<h2>条件语句</h2>
+<h3>一、if </h3>
+<pre>
+var score = 99;
+if (score > 90) {
+    console.log("优秀");
+}else if (score > 60) {
+    console.log("及格");
+}else{
+    console.log("少玩游戏多看书");
+}
+</pre>
+<h3>二、三元运算符 ? : </h3>
+<pre>
+var isEven = (n % 2 === 0) ? true : false ;
+</pre>
+<h3>三、switch</h3>
+<pre>
+var a = 1;
+switch(a){
+    case 1:
+        console.log(1);
+    break;
+    case "1":
+        console.log("1");
+    break;
+    default:
+        console.log("其他");
+}
+</pre>
+<p>switch 判断使用的是全等（===）。</p>
+
+<h2>循环</h2>
+<h3>一、for</h3>
+<pre>
+for (var i = 0; i < 5; i++) {
+    console.log(i);
+}
+var n = 0;
+for (;;) {
+    console.log(n++);//无限循环
+}
+</pre>
+<p>初始化之后便会进行判断，若上面 i 的初始值为5 则不会进入循环体。break 跳出循环，continue 立即结束本轮循环而进入下次循环。</p>
+<h3>二、for in 对象</h3>
+<pre>
+var obj = {a:1,b:2};
+for (var key in obj){
+    console.log(key + " : " + obj[key]);
+}
+</pre>
+<h3>三、for of 数组</h3>
+<pre>
+var arr = [1 , 2 , 3];
+for (var value of arr){
+    console.log(value);
+}
+</pre>
+<h3>四、while</h3>
+<pre>
+var n = 11;
+while(n--){
+    console.log(n);
+}
+while(true){
+    console.log("无限循环");
+}
+</pre>
+<h3>五、do while</h3>
+<pre>
+var n = 11;
+do{
+    n--;
+    console.log(n);
+}while(n);
+</pre>
+
+
+
+
+{% endblock %}
