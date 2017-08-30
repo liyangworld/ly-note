@@ -6,5 +6,125 @@
 {% block content %}
 
 <h1>运算符</h1>
+<h2>加法运算符</h2>
+<p>加法运算符可完成两种运算：算术的加法、字符串连接。遵循以下规则：</p>
+<ol>
+    <li>运算子有对象时，进行字符串连接。内部是先调用对象的valueOf()，再调用toString()；若为Date实例，则先调用toString()。</li>
+    <li>运算子无对象但有字符串时，都转为字符串并进行连接。</li>
+    <li>运算子无对象也无字符串时，都转为数值，进行加法运算。</li>
+</ol>
+<pre>
+'1' + {foo: 'bar'} // "1[object Object]"
+'1' + [1] // "11"
+'1' + true // "1true"
+'1' + 1 // "11"
+true + true // 2
+1 + true // 2
+</pre>
+<pre>
+var date1 = new Date("2017-08-30 10:29");
+var date2 = new Date("2017-08-30 10:30");
+console.log(date1 + date2); // Wed Aug 30 2017 10:29:00 GMT+0800 (中国标准时间)Wed Aug 30 2017 10:30:00 GMT+0800 (中国标准时间)
+console.log(date1 - date2); // -60000
+console.log(date1 + 1); // Wed Aug 30 2017 10:29:00 GMT+0800 (中国标准时间)1
+console.log(date1 - 1); // 1504060139999
+</pre>
 
+<h2>算术运算符</h2>
+<p>9 个算术运算符：加（+）、减（-）、乘（*）、除（/）、取余（%）、自增（++）、自减（--）、正数值运算符（+a）、负数值运算符（-a）</p>
+<h3>除（/）</h3>
+<pre>
+console.log(0/0); // NaN
+console.log(1/0); // Infinity
+console.log(-1/0); // -Infinity
+</pre>
+<h3>取余（%）</h3>
+<p>运算结果的正负号由第一个运算子的正负号决定。</p>
+<pre>
+console.log(3%2); // 1
+console.log(-1%2); // -1
+console.log(1%-2); // 1
+</pre>
+<h3>自增（++）和 自减（--）</h3>
+<p>符号在前，则先自增（减）再返回；符号在后，则先返回再自增（减）。</p>
+<pre>
+var a = 0, b = 0;
+var c = a++, d = --b;
+console.log(a,b,c,d); // 1 -1 0 -1
+</pre>
+<h3>数值运算符</h3>
+<p>数值运算符的作用在于可以将任何值转为数值（与Number函数的作用相同）。</p>
+<pre>
++true // 1
+-[] // -0
+-{} // NaN
+</pre>
+
+<h2>赋值运算符</h2>
+<p>赋值运算符有如下这些：= 、+= 、-+ 、*= 、/= 、%= 、>>= 、<<= 、>>>= 、&= 、|= 、^= 。</p>
+<pre>
+x += y // 等同于 x = x + y
+x >>= y // 等同于 x = x >> y
+x &= y // 等同于 x = x & y
+</pre>
+
+<h2>比较运算符</h2>
+<p>比较运算符有如下这些：== 、=== 、!= 、!== 、> 、>= 、< 、<= 。</p>
+<p>> 、>= 、< 、<= 四个运算符比较规则是：如果有对象，则先调用对象的valueOf()再调用toString()；如果都是字符串，则比较 Unicode 码点；否则，都转成数值，再进行比较。</p>
+<pre>
+[2] > '11' // true
+{x: 1} >= {x: 2} // true
+new Date("2017-08-31") > new Date("2017-08-30") // true
+</pre>
+<pre>
+'cat' < 'dog' // true
+'cat' < 'catalog' // true
+'大' > '小' // false
+</pre>
+<pre>
+5 > '4' // true
+true > false // true
+</pre>
+
+<p>任何值（包括NaN本身）与NaN比较，都返回false ，但 NaN 是唯一不与自身相等的。</p>
+<pre>
+1 <= NaN // false
+NaN <= NaN // false
+NaN != NaN // true
+</pre>
+<p>全等（===）：类型、对象的引用、值 都相等。</p>
+<pre>
+NaN === NaN  // false
++0 === -0 // true
+{} === {} // false
+[] === [] // false
+(function (){} === function (){}) // false
+undefined === undefined // true
+null === null // true
+</pre>
+<p>相等（==）：类型相同时即全等；类型不同时，先转换为同类型（字符串或数值），再全等比较。转换级别依次是：对象 -> 字符串 -> 布尔值 -> 数值 。最好不用此符号。</p>
+<pre>
+'true' == true // false 等同于 NaN === 1
+'' == 0 // true
+</pre>
+<pre>
+[0] == 0 // true 等同于 Number([0]) === 0
+[0] == '' // false 等同于 String([0]) === ''
+</pre>
+<p>undefined和null与其他类型的值比较时，结果都为false，它们互相比较时结果为true。</p>
+<pre>
+false == null // false
+false == undefined // false
+undefined == null // true
+</pre>
+<p>比较两个日期是否是同一刻，用它们之差是否等于 0 。</p>
+<pre>
+new Date() == new Date() // false
+new Date() - new Date() === 0 // true
+</pre>
+
+<h2>布尔运算符</h2>
+<h2>位运算符</h2>
+<h2>其他运算符</h2>
+<h2>运算顺序</h2>
 {% endblock %}

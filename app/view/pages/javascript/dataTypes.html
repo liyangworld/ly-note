@@ -40,6 +40,7 @@ Number(undefined) // NaN
 Number({a: 1}) // NaN
 Number([1, 2, 3]) // NaN
 Number([5]) // 5
+Number([]) // 0
 </pre>
 <p>3. String() ：得到字符串。</p>
 <pre>
@@ -59,7 +60,7 @@ String(fn) // "function (){ console.log(1); }"
 
 <h3>二、自动转换</h3>
 <p>自动转换 皆是以 强制转换 为基础的。</p>
-<p>1. 自动转换为布尔值：参考强制转换。</p>
+<p>1. 自动转换为布尔值：主要发生在条件判断时。</p>
 <p>2. 自动转换为字符串：主要发生在加法运算时。</p>
 <pre>
 '5' + 1 // '51'
