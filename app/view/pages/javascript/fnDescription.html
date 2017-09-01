@@ -1,0 +1,228 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '函数-说明' %}
+
+{% block content %}
+
+<h1>函数-说明</h1>
+<h2>第一等公民</h2>
+<p>JavaScript语言将函数看作一种值，与其它值（数值、字符串、布尔值等等）地位相同。即既可以将函数赋值给变量和对象的属性，又可以作为函数的参数和返回值。所以在JavaScript中又称函数为第一等公民。</p>
+
+
+<h2>函数的声明</h2>
+<h3>函数的三种声明方式</h3>
+<p>根据ECMAScript的规范，不得在非函数的代码块中声明函数。</p>
+<p>1. function 命令</p>
+<pre>
+fn("此方式可以在声明之前调用");
+function fn(s){
+    console.log(s);
+}
+</pre>
+<p>2. 变量赋值函数表达式</p>
+<pre>
+var fn = function x(s){
+    console.log(s);
+};
+fn("此方式只有在声明之后才能调用");
+// x()只能在函数内部调用，可省略
+</pre>
+<p>3. Function构造函数</p>
+<p>最后一个参数会被当做函数体，前面的都是函数参数。</p>
+<pre>
+var add = new Function(
+  'x',
+  'y',
+  'return x + y'
+);
+add(1,2);
+</pre>
+<h3>函数的重复声明</h3>
+<p>同种方式声明的，则后者覆盖前者；不同方式声明的，则以变量赋值的为准。</p>
+<pre>
+f(); // 2
+function f() {
+  console.log(0);
+}
+var f = function() {
+  console.log(1);
+};
+function f() {
+  console.log(2);
+}
+f(); // 1
+</pre>
+
+<h2>函数的属性和方法</h2>
+<h3>name属性</h3>
+<p>name属性返回紧跟在function关键字之后的那个函数名。</p>
+<pre>
+function f1() {}
+f1.name // 'f1'
+var f2 = function () {};
+f2.name // ''
+var f3 = function myName() {};
+f3.name // 'myName'
+</pre>
+
+<h3>length属性</h3>
+<p>length属性返回函数预期传入的参数个数，即形参个数。</p>
+<pre>
+function f(a, b) {}
+f.length // 2
+</pre>
+
+<h3>toString()</h3>
+<p>函数的toString方法返回函数的源码。</p>
+<pre>
+function f() {
+  a();
+}
+f.toString();
+//"function f() {
+//a();
+//}"
+</pre>
+
+<h2>函数作用域</h2>
+<p>作用域（scope）指的是变量存在的范围。Javascript只有两种作用域的变量：全局变量，在函数外部声明的变量；局部变量，在函数内部定义的变量。</p>
+<p>在函数内部，局部变量会覆盖同名的全局变量。</p>
+<h3>函数内部的变量提升</h3>
+<p>与全局作用域一样，函数作用域内部也会产生“变量提升”现象。var命令声明的变量，不管在什么位置，变量声明都会被提升到函数体的头部。</p>
+<pre>
+function foo(x) {
+    if (x > 1) {
+        var tmp = x - 1;
+    }
+    console.log(tmp);
+}
+foo(2); // 1
+foo(0); // undefined
+</pre>
+<pre>
+function foo(x) {
+    var tmp;
+    if (x > 1) {
+        tmp = x - 1;
+    }
+    console.log(tmp);
+}
+</pre>
+
+<h2>函数本身的作用域</h2>
+<p>函数本身也是一个值，也有自己的作用域。它的作用域与变量一样，就是其声明时所在的作用域，与其运行时所在的作用域无关。</p>
+<pre>
+var  a = 1;
+function x() {
+    console.log(a);
+};
+function f() {
+    var a = 2;
+    x();
+}
+f(); // 1
+</pre>
+
+<h2>函数的参数</h2>
+<h3>参数的省略</h3>
+<p>函数参数不是必需的，Javascript允许省略参数。</p>
+<p>没有办法只省略靠前的参数，而保留靠后的参数。如果一定要省略靠前的参数，只有显式传入undefined。</p>
+<pre>
+function f(a, b) {
+    console.log(a,b);
+}
+f();    // undefined undefined
+f(1);   // 1  undefined
+f(,2);   // 报错(语法错误)
+f(undefined,2);   // undefined  2
+</pre>
+<h3>参数的默认值</h3>
+<pre>
+function f(a = 10, b = 20) {
+    console.log(a,b);
+}
+f();    // 10 20
+f(1);   // 1 20
+f(,2);   // 报错(语法错误)
+f(undefined,2);   // 10 2
+</pre>
+<pre>
+function f(a,b) {
+    if( a === undefined || a === null) a = 10;
+    if( b === undefined || b === null) b = 20;
+    console.log(a,b);
+}
+</pre>
+
+<h3>同名参数</h3>
+<p>如果有同名的参数，则取最后出现的那个值。</p>
+<pre>
+function f(a, a) {
+  console.log(a);
+}
+f(1, 2) // 2
+f(1) // undefined
+</pre>
+<h3>arguments</h3>
+<p>由于JavaScript允许函数有不定数目的参数，所以定义了 arguments 来在函数体内获取调用时所有的参数。arguments 是类数组对象。</p>
+<p>在 ‘严格模式’ 下，不允许对 arguments[i] 赋值，并禁用了 arguments.callee 属性。</p>
+<p>因为箭头函数不暴露arguments对象，所以在箭头函数里arguments 为undefined。此时可以使用剩余参数代替。剩余参数是数组。</p>
+<pre>
+var fn = (a,b,...args)=>{
+        console.log(args.length);
+    }
+fn(1,2,3,4); // 2
+fn(1,2); // 0
+</pre>
+<pre>
+function fn(a, b) {
+    var args = Array.prototype.slice.call(arguments, fn.length);
+    console.log(args.length);
+}
+fn(1,2,3,4); // 2
+fn(1,2); // 0
+</pre>
+
+<h2>闭包</h2>
+<p>闭包形式上就是定义在一个函数内的内部函数，由于内部函数可以访问外部函数的变量，所以闭包最大的特点，就是可以维持其诞生的环境。</p>
+<pre>
+function createIncrementor(start) {
+    return function () {
+        return ++start;
+    };
+}
+var inc = createIncrementor(5);
+inc() // 6
+</pre>
+<pre>
+function Person(name) {
+    var _age;
+    function setAge(n) {
+        _age = n;
+    }
+    function getAge() {
+        return _age;
+    }
+    return {
+        name: name,
+        getAge: getAge,
+        setAge: setAge
+    };
+}
+var p1 = Person('张三');
+p1.setAge(25);
+p1.getAge() // 25
+</pre>
+
+<h2>立即调用的函数表达式（IIFE）</h2>
+<p>JavaScript引擎规定，如果function关键字出现在行首，一律解释成语句，不应该以圆括号结尾。所以定义 IIFE 时不要让function关键字出现在行首。</p>
+<pre>
+(function(){ /* code */ })();
+</pre>
+
+
+
+
+
+{% endblock %}

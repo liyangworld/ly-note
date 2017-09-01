@@ -98,7 +98,7 @@ body{
 }
 .website-content h1{
     margin:0 0 10px;
-    padding:10px 0;
+    padding:0 0 10px;
     text-align: center;
     border-bottom:1px solid #ccc;
 }

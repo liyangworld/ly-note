@@ -20,6 +20,41 @@ module.exports = app => {
         * operator(){
             yield this.ctx.render('pages/javascript/operator.html',{action:'operator'});
         }
+        * objDescription(){
+            yield this.ctx.render('pages/javascript/objDescription.html',{action:'objDescription'});
+        }
+        * arrDescription(){
+            yield this.ctx.render('pages/javascript/arrDescription.html',{action:'arrDescription'});
+        }
+        * fnDescription(){
+            yield this.ctx.render('pages/javascript/fnDescription.html',{action:'fnDescription'});
+        }
+
+        * Object(){
+            yield this.ctx.render('pages/javascript/Object.html',{action:'Object'});
+        }
+        * Array(){
+            yield this.ctx.render('pages/javascript/Array.html',{action:'Array'});
+        }
+        * String(){
+            yield this.ctx.render('pages/javascript/String.html',{action:'String'});
+        }
+        * RegExp(){
+            yield this.ctx.render('pages/javascript/RegExp.html',{action:'RegExp'});
+        }
+        * Math(){
+            yield this.ctx.render('pages/javascript/Math.html',{action:'Math'});
+        }
+        * Date(){
+            yield this.ctx.render('pages/javascript/Date.html',{action:'Date'});
+        }
+        * JSON(){
+            yield this.ctx.render('pages/javascript/JSON.html',{action:'JSON'});
+        }
+        * console(){
+            yield this.ctx.render('pages/javascript/console.html',{action:'console'});
+        }
+
     }
     return JavascriptController;
 };

@@ -1,0 +1,110 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '对象-说明' %}
+
+{% block content %}
+
+<h1>对象-说明</h1>
+<p>对象（object）是JavaScript的核心概念，也是最重要的数据类型。对象的所有键名都是字符串，引号可以省略；不符合标识符的键名需要显示的添加引号。</p>
+
+<h3>属性的读取和赋值</h3>
+<p>有两种方法：点运算符、方括号运算符。</p>
+<pre>
+var obj = { a : '123' };
+var key = 'a';
+
+obj.a // '123'
+obj['a'] = '321'
+obj[key] // '321'
+</pre>
+
+<h3>遍历所有属性</h3>
+<p>1. for ... in </p>
+<p>遍历对象所有可枚举（enumerable）的属性，包括继承的属性。toString等默认不可遍历。</p>
+<pre>
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.describe = function () {
+  return 'Name: '+this.name;
+};
+var person = new Person('Jane');
+
+for (var key in person) {
+  console.log(key); // name describe
+}
+</pre>
+<pre>
+for (var key in person) {
+  if (person.hasOwnProperty(key)) {
+    console.log(key); // name
+  }
+}
+</pre>
+<p>2. Object.keys()</p>
+<p>遍历对象自身的可枚举（enumerable）属性，不包括继承的属性。顺序与for...in 顺序一致。</p>
+<pre>
+Object.keys(person); // name
+</pre>
+<p>3. Object.getOwnPropertyNames()</p>
+<p>遍历对象自身的所有属性，包括不可枚举的，但不包括继承的属性。</p>
+<pre>
+Object.getOwnPropertyNames(person); // name
+</pre>
+
+<h3>in 运算符</h3>
+<p>用于检查对象是否包含某个属性，包括继承的、不可枚举的。</p>
+<pre>
+var o = new Object();
+'toString' in o // true
+</pre>
+<p>读取一个不存在的键时，会返回undefined。在浏览器环境，所有全局变量都是window对象的属性。因此可以利用这一点，来检查一个全局变量是否被声明。</p>
+<pre>
+if (window.a) {...} // 不报错  但此方法不准确，若 a 为 falsy 值
+
+if ('a' in window) {
+  // 变量 a 声明过
+} else {
+  // 变量 a 未声明
+}
+</pre>
+<h3>delete 命令</h3>
+<p>1. delete命令用于删除对象的属性，删除成功后返回true。</p>
+<pre>
+var o = {p: 1};
+delete o.p // true
+</pre>
+<p>2. 删除一个不存在的属性时，delete不报错，而且返回true。</p>
+<pre>
+var o = {};
+delete o.p // true
+</pre>
+<p>3. 只能删除对象自身的属性，无法删除继承的属性。依然返回true。</p>
+<pre>
+var o = {};
+delete o.toString // true
+o.toString // function toString() { [native code] }
+</pre>
+<p>4. 删除 不得删除 的属性时，返回false。</p>
+<pre>
+var o = Object.defineProperty({}, 'p', {
+  value: 123,
+  configurable: false
+});
+delete o.p // false
+o.p // 123
+</pre>
+<p>5. delete命令不能删除 var 声明的变量，只能用来删除属性。</p>
+<pre>
+var p = 1;
+delete p // false
+delete window.p // false
+
+window.p = 2;
+delete p // true
+delete window.p // true
+</pre>
+
+
+{% endblock %}

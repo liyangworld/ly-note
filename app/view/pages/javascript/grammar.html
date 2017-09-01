@@ -13,6 +13,12 @@ var x ;
 x = 1 ;
 var a = 2 ;
 </pre>
+<pre>
+window.b = 1 ;
+const b = 2 ;
+window.b = 3 ;
+console.log(b," | ",window.b); // 2 " | " 3
+</pre>
 <p>如果只是声明变量而没有赋值，则该变量的值是 undefined 。</p>
 <h3>二、变量提升</h3>
 <p>JavaScript引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）。</p>
@@ -79,18 +85,22 @@ for (;;) {
 }
 </pre>
 <p>初始化之后便会进行判断，若上面 i 的初始值为5 则不会进入循环体。break 跳出循环，continue 立即结束本轮循环而进入下次循环。</p>
-<h3>二、for in 对象</h3>
+<h3>二、for ... in </h3>
+<p>遍历对象所有可枚举（enumerable）的属性，包括继承的属性。toString等默认不可遍历。</p>
 <pre>
 var obj = {a:1,b:2};
 for (var key in obj){
     console.log(key + " : " + obj[key]);
 }
 </pre>
-<h3>三、for of 数组</h3>
+<h3>三、for ... of </h3>
+<p>遍历可迭代对象的自身属性值(不含继承的)： Array、Map、Set、arguments、String 等。</p>
 <pre>
-var arr = [1 , 2 , 3];
-for (var value of arr){
-    console.log(value);
+Array.prototype.arrCustom = function () {};
+let iterable = [3, 5, 7];
+iterable.foo = "hello";
+for (let i of iterable) {
+  console.log(i); // 3, 5, 7
 }
 </pre>
 <h3>四、while</h3>

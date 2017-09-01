@@ -1,0 +1,66 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '数组-说明' %}
+
+{% block content %}
+
+<h1>数组-说明</h1>
+<h2>多维数组</h2>
+<pre>
+var arr = [[1],[2]];
+arr[0][0] // 1
+arr[1][0] // 2
+</pre>
+<h2>length 属性</h2>
+<p>length 属性 表示数组中元素的数量，可读写。</p>
+<pre>
+var arr = [1,2,3];
+arr.length // 3
+arr.length = 0 ; // 清空数组
+</pre>
+<h2>遍历数组</h2>
+<p>1. for 循环</p>
+<pre>
+var arr = [1, 2, 3];
+for(var i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+</pre>
+<p>2. for ... of </p>
+<p>遍历可迭代对象的自身属性值(不含继承的)： Array、Map、Set、arguments、String 等。</p>
+<pre>
+var arr = [1, 2, 3];
+for(var value of arr) {
+  console.log(value);
+}
+</pre>
+<p>3. forEach</p>
+<p>没有办法中止或者跳出 forEach 循环，除了抛出一个异常。如果数组在迭代时被修改了，则某些元素会被跳过。不建议使用该方法。</p>
+<pre>
+var words = ["one", "two", "three", "four"];
+words.forEach(function(word) {
+  console.log(word); // "one"  "two"  "four"
+  if (word === "two") {
+    words.shift();
+  }
+});
+</pre>
+
+<h2>类数组对象转为数组</h2>
+<p>类数组对象（array-like object）：看上去很像数组，有 length 属性，但不是数组，不能直接使用数组的方法。如：arguments、String、DOM元素集合等。</p>
+<p>使用数组的slice方法将类数组对象变成真正的数组：</p>
+<pre>
+var arr = Array.prototype.slice.call(arrayLike);
+</pre>
+<pre>
+(function(){
+    var prevArgs = Array.prototype.slice.call(arguments);
+    var nextArgs = prevArgs.map(function(value,index){
+         return value*value;
+    });
+    console.log(nextArgs.toString()); // "1,4,9"
+})(1,2,3);
+</pre>
+
+{% endblock %}
