@@ -15,7 +15,7 @@ window._initMyTitle = function () {
                 preTitle = this.title;
                 this.title = '';
                 elTitle = document.createElement('div');
-                elTitle.textContent = preTitle;
+                elTitle.innerHTML = preTitle;
                 elTitle.className = 'my-title-show';
                 document.body.appendChild(elTitle);
             };
@@ -39,5 +39,9 @@ window._initMyTitle = function () {
             }
         }
     }
+};
+
+window.onload = function () {
+    _initMyTitle();
 };
 

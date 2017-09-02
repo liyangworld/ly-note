@@ -6,7 +6,7 @@
 {% block content %}
 
 <h1>对象-说明</h1>
-<p>对象（object）是JavaScript的核心概念，也是最重要的数据类型。对象的所有键名都是字符串，引号可以省略；不符合标识符的键名需要显示的添加引号。</p>
+<p>对象（object）是JavaScript的核心概念，也是最重要的数据类型 {}。对象的所有键名都是字符串，引号可以省略；不符合标识符的键名需要显示的添加引号。</p>
 
 <h3>属性的读取和赋值</h3>
 <p>有两种方法：点运算符、方括号运算符。</p>
@@ -105,6 +105,14 @@ window.p = 2;
 delete p // true
 delete window.p // true
 </pre>
-
+<h2>对象字面量和JSON</h2>
+<p>对象字面量{} 和 JavaScript Object Notation (JSON)是不同的。虽然他们看起来相似，不同点有：</p>
+<ol>
+  <li>JSON 只允许 ("property": value syntax) 形式的属性定义。属性名必须用双引号括起来。且属性定义不允许使用简便写法。</li>
+  <li>JSON中，属性的值仅允许字符串，数字，数组，true，false，或者其他JSON对象。 </li>
+  <li>JSON中，不允许将值设置为函数。</li>
+  <li> Date 等对象，经JSON.parse()处理后，会变成字符串。</li>
+  <li>JSON.parse() 不会处理计算的属性名，会当做错误抛出。</li>
+</ol>
 
 {% endblock %}

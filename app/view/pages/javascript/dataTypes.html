@@ -13,13 +13,35 @@
 <p>JavaScript 内部，所有数值都是以64位浮点数形式储存，整数也是如此。符号位(1位)——指数部分(11位)——小数部分(52位)。</p>
 <p>JavaScript 内部，每个字符都是以16位（即2个字节）的UTF-16格式储存。</p>
 
-
-<h2>typeof</h2>
+<h2>数据类型的判断</h2>
+<h3>一、typeof</h3>
 <p>typeof 运算符可以返回一个值的数据类型，有以下几个结果："number"、"string"、"boolean"、"undefined"、"object"、"function"、"symbol" 。</p>
 <pre>
 typeof {} // "object"
 typeof [] // "object"
 typeof null // "object"
+</pre>
+<h3>二、Object.prototype.toString()</h3>
+<pre>
+new Object().toString(); // "[object Object]"
+</pre>
+<p>该方法返回对象的类型字符串，其中第二个Object表示该值的构造函数。因此包装对象将返回 "[object String]"等。</p>
+<p>由于实例对象可能会自定义toString方法，覆盖掉Object.prototype.toString方法，比如：数组、字符串、函数、Date，因此可以使用 Object.prototype.toString.call() 方法来获取对象的类型字符串。</p>
+<pre>
+var _typeof = function (o){
+    var s = Object.prototype.toString.call(o);
+    return s.match(/\[object (.*)\]/)[1].toLowerCase();
+};
+_typeof([]); // "array"
+// 返回值有："number"、"string"、"boolean"、"undefined"、"null"、"symbol"、"object"、"array"、"function"、"arguments"、"date"、"regexp"、"math"、"error"、"window"。
+</pre>
+<pre>
+["Number","String","Boolean","Undefined","Null","Symbol","Object","Array","Function","Arguments","Date","RegExp","Math","Error","Window"].forEach(function (t) {
+    _typeof['is' + t] = function (o) {
+        return _typeof(o) === t.toLowerCase();
+    };
+});
+_typeof.isArray([]); // true
 </pre>
 
 <h2>数据类型转换</h2>

@@ -6,5 +6,226 @@
 {% block content %}
 
 <h1>String对象</h1>
+<p>String对象是三个包装对象之一，用来生成字符串的包装对象。</p>
+<pre>
+1. var str = "123" ;
+2. var str = String(123) ;
+3. var str = new String("123") ;
+</pre>
+<h2 class="text-center">属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>静态属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>prototype</td>
+            <td>对象的原型，可为对象新增实例属性和方法。String.prototype.new=null;</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>实例属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">length</td>
+        <td>返回字符串的长度，只可读</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 class="text-center">方法</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>静态方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="my-title" title="String.fromCharCode(65,90,97,122) === 'AZaz'">fromCharCode</td>
+        <td>使用给定的一系列Unicode值创建字符串。但是无法处理高位编码的字符</td>
+    </tr>
+    <tr>
+        <td class="my-title" title="String.fromCodePoint(26446) === '李'">fromCodePoint</td>
+        <td>同fromCharCode，区别是此方法可以处理高位编码的字符</td>
+    </tr>
+    <tr>
+        <td class="my-title" title='let name = "Bob"; String.raw `Hi\n${name}!`; // "Hi\\nBob!" ~~~~~ String.raw({raw: "test"}, 0, 1, 2); // "t0e1s2t"'>raw</td>
+        <td>唯一一个内置的模板字符串标签函数，返回模板字符串的原始字面量值</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>实例方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">indexOf</td>
+        <td>返回指定的字符(串)在该字符串中(从start开始)首次出现的位置索引，无则返回-1</td>
+    </tr>
+    <tr>
+        <td class="useful my-title" title="'abcabc'.lastIndexOf('c',2); // 2">lastIndexOf</td>
+        <td>从后往前查询位置索引，返回截止start之前首次出现的位置索引</td>
+    </tr>
+    <tr>
+        <td>search</td>
+        <td>查找子串或与正则匹配的值，并返回首次出现的索引值或-1，类似于indexOf()</td>
+    </tr>
+    <tr>
+        <td class="my-title" title="'abcabc'.match('bc'); // ['bc', index: 1, input: 'abcabc']">match</td>
+        <td>在字符串中检索指定的字符(串)或多个正则匹配，返回数组或null</td>
+    </tr>
+    <tr>
+        <td class="useful my-title" title="'abcabc'.replace('a','A'); // 'Abcabc' ~~~~~  'abcabc'.replace(/a/g,'A'); // 'AbcAbc'">replace</td>
+        <td>在字符串中查找匹配的子串，并将其替换成其他子串，返回新字符串</td>
+    </tr>
+    <tr>
+        <td class="useful">split</td>
+        <td>将字符串分割成数组并返回。()和("未匹配")都将得到单元素数组，("")将把每个字符分割开。第二个参数限定数组长度</td>
+    </tr>
+    <tr>
+        <td class="useful">slice(i1,i2)</td>
+        <td>提取子串并返回，取头不取尾。</td>
+    </tr>
+    <tr>
+        <td class="useful">substr(i,n)</td>
+        <td>提取从指定索引i开始的n个字符串并返回。</td>
+    </tr>
+    <tr>
+        <td>substring(i1,i2)</td>
+        <td>提取子串并返回，取头不取尾。i1、i2不分先后。</td>
+    </tr>
+    <tr>
+        <td>charAt(i)</td>
+        <td>返回在指定位置的字符</td>
+    </tr>
+    <tr>
+        <td>charCodeAt(i)</td>
+        <td>返回在指定位置的字符的Unicode编码</td>
+    </tr>
+    <tr>
+        <td class="useful">toLowerCase</td>
+        <td>把字符串转为小写</td>
+    </tr>
+    <tr>
+        <td class="useful">toUpperCase</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td class="my-title" title="str4=str1.concat(str2,str3)">concat</td>
+        <td>连接多个字符串，并返回新的字符串 </td>
+    </tr>
+    <tr>
+        <td class="useful">trim</td>
+        <td>去除字符串两边的空白</td>
+    </tr>
+
+    <tr>
+        <td>codePointAt</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>endsWith</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>includes</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>localeCompare</td>
+        <td>把字符串转为大写</td>
+    </tr>
+
+
+    <tr>
+        <td>normalize</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>padEnd</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>padStart</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>repeat</td>
+        <td>把字符串转为大写</td>
+    </tr>
+
+
+    <tr>
+        <td>startsWith</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>toLocaleLowerCase</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>toLocaleUpperCase</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>trimLeft</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    <tr>
+        <td>trimRight</td>
+        <td>把字符串转为大写</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>继承的属性、方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>toString()</td>
+            <td>返回对象的字符串形式。覆盖了Object 对象的 toString 方法</td>
+        </tr>
+        <tr>
+            <td>valueOf()</td>
+            <td>返回一个String对象的原始值。返回值同 toString 方法一样</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}

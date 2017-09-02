@@ -144,6 +144,9 @@ body{
 .website-content table td{
     border:1px solid #00f;
 }
+.website-content table td.useful{
+    color:#f60;
+}
 pre{
     background-color: #FAFAFA;
     border:1px solid #ccc;
@@ -170,6 +173,9 @@ pre{
 }
 .website-content .margin-vertical-5{
     margin:5px 0;
+}
+.text-center{
+    text-align: center;
 }
 /******************************文章内容*************结束*************/
 
