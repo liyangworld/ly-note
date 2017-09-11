@@ -12,7 +12,7 @@
 2. var str = String(123) ;
 3. var str = new String("123") ;
 </pre>
-<h2 class="text-center">属性</h2>
+<h2>属性</h2>
 <table>
     <thead>
         <tr>
@@ -43,7 +43,8 @@
     </tbody>
 </table>
 
-<h2 class="text-center">方法</h2>
+<h2>方法</h2>
+<p>以正则表达式为参数的方法有 search()、match()、replace()、split() 。</p>
 
 <table>
     <thead>
@@ -58,11 +59,11 @@
         <td>使用给定的一系列Unicode值创建字符串。但是无法处理高位编码的字符</td>
     </tr>
     <tr>
-        <td class="my-title" title="String.fromCodePoint(26446) === '李'">fromCodePoint</td>
+        <td class="es6 my-title" title="String.fromCodePoint(134071) === '𠮷'">fromCodePoint</td>
         <td>同fromCharCode，区别是此方法可以处理高位编码的字符</td>
     </tr>
     <tr>
-        <td class="my-title" title='let name = "Bob"; String.raw `Hi\n${name}!`; // "Hi\\nBob!" ~~~~~ String.raw({raw: "test"}, 0, 1, 2); // "t0e1s2t"'>raw</td>
+        <td class="es6 my-title" title='let name = "Bob"; String.raw `Hi\n${name}!`; // "Hi\\nBob!" ~~~~~ String.raw({raw: "test"}, 0, 1, 2); // "t0e1s2t"'>raw</td>
         <td>唯一一个内置的模板字符串标签函数，返回模板字符串的原始字面量值</td>
     </tr>
     </tbody>
@@ -77,13 +78,15 @@
     </thead>
     <tbody>
     <tr>
-        <td class="useful">indexOf</td>
+        <td class="useful">indexOf(str,start)</td>
         <td>返回指定的字符(串)在该字符串中(从start开始)首次出现的位置索引，无则返回-1</td>
     </tr>
     <tr>
-        <td class="useful my-title" title="'abcabc'.lastIndexOf('c',2); // 2">lastIndexOf</td>
+        <td class="useful my-title" title="'abcabc'.lastIndexOf('c',2); // 2">lastIndexOf(str,start)</td>
         <td>从后往前查询位置索引，返回截止start之前首次出现的位置索引</td>
     </tr>
+
+
     <tr>
         <td>search</td>
         <td>查找子串或与正则匹配的值，并返回首次出现的索引值或-1，类似于indexOf()</td>
@@ -112,14 +115,16 @@
         <td>substring(i1,i2)</td>
         <td>提取子串并返回，取头不取尾。i1、i2不分先后。</td>
     </tr>
+
     <tr>
-        <td>charAt(i)</td>
-        <td>返回在指定位置的字符</td>
+        <td class="my-title" title="str4=str1.concat(str2,str3)">concat</td>
+        <td>连接多个字符串，并返回新的字符串 </td>
     </tr>
-    <tr>
-        <td>charCodeAt(i)</td>
-        <td>返回在指定位置的字符的Unicode编码</td>
-    </tr>
+
+
+
+
+
     <tr>
         <td class="useful">toLowerCase</td>
         <td>把字符串转为小写</td>
@@ -129,73 +134,72 @@
         <td>把字符串转为大写</td>
     </tr>
     <tr>
-        <td class="my-title" title="str4=str1.concat(str2,str3)">concat</td>
-        <td>连接多个字符串，并返回新的字符串 </td>
-    </tr>
-    <tr>
-        <td class="useful">trim</td>
-        <td>去除字符串两边的空白</td>
-    </tr>
-
-    <tr>
-        <td>codePointAt</td>
-        <td>把字符串转为大写</td>
-    </tr>
-    <tr>
-        <td>endsWith</td>
-        <td>把字符串转为大写</td>
-    </tr>
-    <tr>
-        <td>includes</td>
-        <td>把字符串转为大写</td>
-    </tr>
-    <tr>
-        <td>localeCompare</td>
-        <td>把字符串转为大写</td>
-    </tr>
-
-
-    <tr>
-        <td>normalize</td>
-        <td>把字符串转为大写</td>
-    </tr>
-    <tr>
-        <td>padEnd</td>
-        <td>把字符串转为大写</td>
-    </tr>
-    <tr>
-        <td>padStart</td>
-        <td>把字符串转为大写</td>
-    </tr>
-    <tr>
-        <td>repeat</td>
-        <td>把字符串转为大写</td>
-    </tr>
-
-
-    <tr>
-        <td>startsWith</td>
-        <td>把字符串转为大写</td>
-    </tr>
-    <tr>
         <td>toLocaleLowerCase</td>
-        <td>把字符串转为大写</td>
+        <td>把字符串转为小写</td>
     </tr>
     <tr>
         <td>toLocaleUpperCase</td>
         <td>把字符串转为大写</td>
     </tr>
     <tr>
-        <td>trimLeft</td>
-        <td>把字符串转为大写</td>
+        <td>charAt(i)</td>
+        <td>返回在指定位置的字符</td>
     </tr>
     <tr>
-        <td>trimRight</td>
-        <td>把字符串转为大写</td>
+        <td>charCodeAt(i)</td>
+        <td>返回在指定位置的字符的Unicode编码</td>
+    </tr>
+
+
+
+    <tr>
+        <td>localeCompare</td>
+        <td>比较两字符串的排序，返回负值（前）、0、正值（后）</td>
+    </tr>
+
+    <tr>
+        <td class="useful es5">trim</td>
+        <td>去除字符串两边的空白</td>
+    </tr>
+
+    <tr>
+        <td class="es6 my-title" title="var s = '𠮷a'; s.codePointAt(0) === 134071; s.codePointAt(2) === 97; ~~~~~ for (let ch of s) { console.log(ch.codePointAt(0)); // 134071 97}">codePointAt(i)</td>
+        <td>同charCodeAt，区别是该方法可处理高位编码</td>
+    </tr>
+    <tr>
+        <td class="es6 my-title" title="'abc'.includes('b',1) === true; 'abc'.includes('b',2) === false;">includes(str,start)</td>
+        <td>判断一个字符串是否包含另外一个字符串，start默认为0</td>
+    </tr>
+    <tr>
+        <td class="es6 my-title" title="'abcbc'.endsWith('c',2) === false; 'abcbc'.endsWith('c',3) === true;">endsWith(str,end)</td>
+        <td>判断当前字符串是否是以给定的子字符串“结尾”的，返回true/false，end索引不算，默认为原字符串长度</td>
+    </tr>
+    <tr>
+        <td class="es6 my-title" title="'abcbc'.startsWith('a',0) === true; 'abcbc'.startsWith('a',1) === false;">startsWith(str,start)</td>
+        <td>判断当前字符串是否是以给定的子字符串“开头”的，返回true/false，start索引算，默认为0</td>
+    </tr>
+    <tr>
+        <td class="es6 my-title" title="'abc'.repeat(0) === ''; 'abc'.repeat(2) === 'abcabc';">repeat(n)</td>
+        <td>重复字符串n次并返回新字符串</td>
+    </tr>
+    <tr>
+        <td class="es6">normalize</td>
+        <td>按照指定的一种 Unicode 正规形式将当前字符串正规化，默认值为"NFC"，可选值有："NFC", "NFD", "NFKC","NFKD"</td>
+    </tr>
+
+
+    <tr>
+        <td class="my-title" title="'abc'.padStart(5) === '  abc'; 'abc'.padStart(5,'3') === '33abc'">padStart(n,str)</td>
+        <td>填充字符串头部直到字符串长度为n</td>
+    </tr>
+    <tr>
+        <td class="my-title" title="'abc'.padEnd(5,'3') === 'abc33'; 'abc'.padEnd(2,'3') === 'abc'">padEnd(n,str)</td>
+        <td>填充字符串尾部直到字符串长度为n</td>
     </tr>
     </tbody>
 </table>
 
+<h2>继承的属性、方法</h2>
 <table>
     <thead>
         <tr>
@@ -205,7 +209,7 @@
     </thead>
     <tbody>
         <tr>
-            <td>toString()</td>
+            <td class="my-title" title="'abc'.toString() === 'abc'; ">toString()</td>
             <td>返回对象的字符串形式。覆盖了Object 对象的 toString 方法</td>
         </tr>
         <tr>

@@ -73,7 +73,7 @@ body{
     color:#364149;
     font-size:14px;
     display: block;
-    padding:7px 15px;
+    padding:4px 15px;
 }
 .website-sidebar ul a{
     text-decoration: none;
@@ -139,13 +139,31 @@ body{
     padding:8px;
 }
 .website-content table th{
-    border:1px solid #0f0;
-}
-.website-content table td{
     border:1px solid #00f;
 }
-.website-content table td.useful{
+.website-content table td{
+    border:1px solid #000;
+}
+.useful{
     color:#f60;
+}
+td{
+    position: relative;
+}
+td.es3::before,td.es5::before,td.es6::before{
+    position:absolute;
+    left:-20px;
+    color: #00f;
+}
+td.es3::before{
+    content:'\2462';
+}
+td.es5::before{
+    content:'\2464';
+}
+td.es6::before{
+    content:'\2465\2465';
+    left:-35px;
 }
 pre{
     background-color: #FAFAFA;

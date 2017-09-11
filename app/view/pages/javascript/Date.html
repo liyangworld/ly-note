@@ -6,5 +6,279 @@
 {% block content %}
 
 <h1>Date对象</h1>
+<p>Date对象 用来处理日期和时间。可以表示的时间范围是，1970年1月1日00:00:00前后的各1亿天。</p>
+<pre>
+1、var d1 = new Date() ;  //当前日期和时间
+2、var d6 = new Date(ms) ;  //ms指距1970年1月1日之间相差的毫秒数
+3、var d2 = new Date("month dd,yyyy hh:mm:ss") ;  //month指英文月份，其他为数字
+4、var d3 = new Date("month dd,yyyy") ;
+5、var d4 = new Date(yyyy,mth,dd,hh,mm,ss) ;  //皆为数字，mth指月份索引值( 0-11 )
+6、var d5 = new Date(yyyy,mth,dd) ;
+</pre>
+
+<h2>属性</h2>
+<table>
+    <thead>
+    <tr>
+        <th>静态属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>prototype</td>
+        <td>对象的原型，可为对象新增实例属性和方法。Date.prototype.new=null;</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2>方法</h2>
+<p>Date对象的方法主要分为2种形式：本地时间和UTC时间。同一个方法，一般都会有此2种时间格式操作。UTC时间( Universal Coordinated Time )即世界标准时间，与GMT(格林尼治时间)相同。北京时间的时区为东8区，比GMT时间早8个小时。</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>静态方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td>parse()</td>
+        <td>解析日期字符串，并返回毫秒数</td>
+    </tr>
+    <tr>
+        <td>UTC()</td>
+        <td>接受的参数同日期构造函数接受最多参数时一样，返回毫秒数</td>
+    </tr>
+
+    <tr>
+        <td class="es5">now()</td>
+        <td>返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>本地时间 get/set方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">getFullYear()</td>
+        <td>从 Date 对象以四位数字返回年份</td>
+    </tr>
+    <tr>
+        <td class="useful">getMonth()</td>
+        <td>从 Date 对象返回月份 (0 - 11)</td>
+    </tr>
+    <tr>
+        <td class="useful">getDate()</td>
+        <td>从 Date 对象返回一个月中的某一天 (1 - 31)</td>
+    </tr>
+    <tr>
+        <td class="useful">getHours()</td>
+        <td>返回 Date 对象的小时字段 (0 - 23)</td>
+    </tr>
+    <tr>
+        <td class="useful">getMinutes()</td>
+        <td>返回 Date 对象的分钟字段 (0 - 59)</td>
+    </tr>
+    <tr>
+        <td class="useful">getSeconds()</td>
+        <td>返回 Date 对象的秒数字段 (0 - 59)</td>
+    </tr>
+    <tr>
+        <td class="useful">getMilliSeconds()</td>
+        <td>返回 Date 对象的毫秒字段(0 - 999)</td>
+    </tr>
+    <tr>
+        <td class="useful">getDay()</td>
+        <td>从 Date 对象返回星期(0 - 6)，0为星期天</td>
+    </tr>
+    <tr>
+        <td class="useful">getTime()</td>
+        <td>返回 1970 年 1 月 1 日至今的毫秒数</td>
+    </tr>
+    <tr>
+        <td>getTimezoneOffset()</td>
+        <td>返回GMT 时间和本地时间之间的时差，以分钟为单位（如：-480）</td>
+    </tr>
+    <tr>
+        <td class="useful">setFullYear(yyyy,mth,dd)</td>
+        <td>设置年份，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td class="useful">setMonth(mth,dd)</td>
+        <td>设置月份，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td class="useful">setDate(dd)</td>
+        <td>设置一个月的某一天</td>
+    </tr>
+    <tr>
+        <td class="useful">setHours(hh,mm,sec,msec)</td>
+        <td>设置小时，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td class="useful">setMinutes(mm,sec,msec)</td>
+        <td>设置分钟，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td class="useful">setSeconds(sec,msec)</td>
+        <td>设置秒，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td class="useful">setMilliSeconds(msec)</td>
+        <td>设置毫秒</td>
+    </tr>
+    <tr>
+        <td>setTime(msec)</td>
+        <td>以毫秒设置 Date 对象</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>其他方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td>toLocaleString()</td>
+        <td>可根据本地时间把 Date 对象转换为字符串并返回，结果格式如下：2016/11/29 下午4:57:11</td>
+    </tr>
+    <tr>
+        <td>toUTCString()</td>
+        <td>根据世界时 (UTC) 把 Date 对象转换为字符串并返回，结果格式如下：Tue, 29 Nov 2016 09:30:16 GMT</td>
+    </tr>
+    <tr>
+        <td>toDateString()</td>
+        <td>可把 Date 对象的日期部分转换为字符串并返回，结果格式如下：Tue Nov 29 2016</td>
+    </tr>
+    <tr>
+        <td>toLocaleDateString()</td>
+        <td>根据本地时间把 Date 对象的日期部分转换为字符串并返回，结果格式如下：2016/11/29</td>
+    </tr>
+    <tr>
+        <td>toTimeString()</td>
+        <td>可把 Date 对象的时间部分转换为字符串并返回，结果格式如下：17:04:52 GMT+0800 (中国标准时间)</td>
+    </tr>
+    <tr>
+        <td>toLocaleTimeString()</td>
+        <td>根据本地时间把 Date 对象的时间部分转换为字符串并返回，结果格式如下：下午5:06:43</td>
+    </tr>
+
+    <tr>
+        <td class="useful es5">toISOString()</td>
+        <td>可以使用ISO标准（UTC时间）将 Date 对象转换为字符串并返回，结果格式如下：2016-11-29T08:58:57.717Z</td>
+    </tr>
+    <tr>
+        <td class="es5">toJSON()</td>
+        <td>将 Date 对象转换为字符串，并格式化为 JSON 数据格式，结果格式如下：2016-11-29T08:58:57.717Z （同ISO）</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>UTC时间 get/set方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>getUTCFullYear()</td>
+        <td>根据世界时从 Date 对象以四位数字返回年份</td>
+    </tr>
+    <tr>
+        <td>getUTCMonth()</td>
+        <td>根据世界时从 Date 对象返回月份 (0 - 11)</td>
+    </tr>
+    <tr>
+        <td>getUTCDate()</td>
+        <td>根据世界时从 Date 对象返回一个月中的某一天 (1 - 31)</td>
+    </tr>
+    <tr>
+        <td>getUTCHours()</td>
+        <td>根据世界时返回 Date 对象的小时字段 (0 - 23)</td>
+    </tr>
+    <tr>
+        <td>getUTCMinutes()</td>
+        <td>根据世界时返回 Date 对象的分钟字段 (0 - 59)</td>
+    </tr>
+    <tr>
+        <td>getUTCSeconds()</td>
+        <td>根据世界时返回 Date 对象的秒数字段 (0 - 59)</td>
+    </tr>
+    <tr>
+        <td>getUTCMilliSeconds()</td>
+        <td>根据世界时返回 Date 对象的毫秒字段(0 - 999)</td>
+    </tr>
+    <tr>
+        <td>getUTCDay()</td>
+        <td>根据世界时从 Date 对象返回星期(0 - 6)，0为星期天</td>
+    </tr>
+    <tr>
+        <td>setUTCFullYear(yyyy,mth,dd)	</td>
+        <td>根据世界时设置年份，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td>setUTCMonth(mth,dd)</td>
+        <td>根据世界时设置月份，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td>setUTCDate(dd)</td>
+        <td>根据世界时设置一个月的某一天</td>
+    </tr>
+    <tr>
+        <td>setUTCHours(hh,mm,sec,msec)</td>
+        <td>根据世界时设置小时，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td>setUTCMinutes(mm,sec,msec)</td>
+        <td>根据世界时设置分钟，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td>setUTCSeconds(sec,msec)</td>
+        <td>根据世界时设置秒，第一个参数必填</td>
+    </tr>
+    <tr>
+        <td>setUTCMilliSeconds(msec)</td>
+        <td>根据世界时设置毫秒</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2>继承的属性、方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th>继承的属性、方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>toString()</td>
+        <td>覆盖了Object 对象的 toString 方法。返回 Tue Nov 29 2016 16:53:55 GMT+0800 (中国标准时间)</td>
+    </tr>
+    <tr>
+        <td>valueOf()</td>
+        <td>返回一个Date对象的原始值。即毫秒值</td>
+    </tr>
+    </tbody>
+</table>
 
 {% endblock %}

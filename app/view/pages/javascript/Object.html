@@ -6,5 +6,156 @@
 {% block content %}
 
 <h1>Object对象</h1>
+<p>JavaScript 原生提供Object对象，所有其他对象都继承自这个对象。Object本身也是一个构造函数，可以直接通过它来生成新对象。</p>
+<pre>
+var obj = {a: 1};
+var obj = new Object({a: 1});
+</pre>
+
+<h2>属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>静态属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>prototype</td>
+            <td>对象的原型，可为对象新增实例属性和方法。Object.prototype.new=null;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>静态方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="es5 useful my-title" title="Object.create(null);// 创建一个原型为null的空对象  ~~~~~  Object.create(Object.prototype);// 相当于 new Object();相当于 {} ~~~~~  Object.create({}, { p: { value: 42,writable: true, enumerable: true, configurable: true } });// 属性p是可写,可枚举,可配置的,属性特性若省略则默认为false">create</td>
+            <td>使用指定的原型对象及其属性去创建一个新的对象</td>
+        </tr>
+        <tr>
+            <td class="es5 useful">keys</td>
+            <td>返回一个数组，由对象的自身可枚举属性组成</td>
+        </tr>
+        <tr>
+            <td class="es5">getOwnPropertyNames</td>
+            <td>返回一个数组，由对象 自身拥有的枚举或不可枚举属性名称字符串组成</td>
+        </tr>
+
+        <tr>
+            <td class="es5 useful my-title" title="var o = {}; o.a = 1; // 相当于 Object.defineProperty(o, 'a', {value : 1,writable : true,configurable : true,enumerable : true});">defineProperty</td>
+            <td>在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象</td>
+        </tr>
+        <tr>
+            <td class="es5 my-title" title='var obj = {}; Object.defineProperties(obj, {"property1": {  value: true,  writable: true},"property2": {  value: "Hello",  writable: false} });'>defineProperties</td>
+            <td>在一个对象上定义新的属性或修改现有属性，并返回该对象</td>
+        </tr>
+        <tr>
+            <td class="es5">seal</td>
+            <td>让一个对象密封，并返回被密封后的对象</td>
+        </tr>
+        <tr>
+            <td class="es5">isSealed</td>
+            <td>判断一个对象是否被密封</td>
+        </tr>
+        <tr>
+            <td class="es5">freeze</td>
+            <td>冻结一个对象并返回，冻结之后该对象不允许任何修改</td>
+        </tr>
+        <tr>
+            <td class="es5">isFrozen</td>
+            <td>判断一个对象是否被冻结</td>
+        </tr>
+        <tr>
+            <td class="es5">preventExtensions</td>
+            <td>让一个对象变的不可扩展，也就是永远不能再添加新的属性</td>
+        </tr>
+        <tr>
+            <td class="es5">isExtensible</td>
+            <td>判断对象是否是可扩展的（是否可以在它上面添加新的属性）,默认情况下对象是可扩展的</td>
+        </tr>
+        <tr>
+            <td class="es5">getPrototypeOf</td>
+            <td>返回对象的原型。如果没有，则返回 null</td>
+        </tr>
+        <tr>
+            <td class="es5 my-title" title='var o = { bar: 42 }; Object.getOwnPropertyDescriptor(o, "bar"); // {configurable: true,enumerable: true,value: 42,writable: true}'>getOwnPropertyDescriptor</td>
+            <td>返回对象上一个自身属性对应的属性描述符</td>
+        </tr>
+
+        <tr>
+            <td class="es6 useful my-title" title="var obj = Object.assign({},obj1,obj2);">assign</td>
+            <td>将所有可枚举的属性的值从源对象复制到目标对象并返回，改变原对象、浅拷贝</td>
+        </tr>
+        <tr>
+            <td class="es6 my-title" title="Object.is([], []);// false ~~~~~ Object.is(0, -0); // false">is</td>
+            <td>判断两个参数是否是同一个值</td>
+        </tr>
+        <tr>
+            <td class="es6">getOwnPropertySymbols</td>
+            <td>返回一个数组，由对象自身的所有 symbol 属性键组成</td>
+        </tr>
+        <tr>
+            <td class="es6">setPrototypeOf</td>
+            <td>设置对象的原型</td>
+        </tr>
+        <tr>
+            <td>values</td>
+            <td>返回一个数组，由对象自身可枚举的属性值组成</td>
+        </tr>
+        <tr>
+            <td class="my-title" title='var obj = { foo: "bar", baz: 42 }; var map = new Map(Object.entries(obj));'>entries</td>
+            <td>返回一个由对象自身可枚举属性[key，value]对组成的数组</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj) );// 浅拷贝">getOwnPropertyDescriptors</td>
+            <td>返回对象的所有自身属性的描述符，如果没有任何自身属性，则返回空对象</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>实例方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">hasOwnProperty</td>
+            <td>判断参数是否是对象的自身（不继承）属性</td>
+        </tr>
+        <tr>
+            <td>isPrototypeOf</td>
+            <td>判断对象是否存在于参数的原型链上</td>
+        </tr>
+        <tr>
+            <td>propertyIsEnumerable</td>
+            <td>判断指定的属性名是否是当前对象的可枚举的自身属性</td>
+        </tr>
+
+        <tr>
+            <td>toString</td>
+            <td>返回一个表示该对象的字符串</td>
+        </tr>
+        <tr>
+            <td>toLocaleString</td>
+            <td>返回一个表示该对象的字符串</td>
+        </tr>
+        <tr>
+            <td>valueOf</td>
+            <td>返回指定对象的原始值</td>
+        </tr>
+    </tbody>
+</table>
 
 {% endblock %}

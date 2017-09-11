@@ -1,0 +1,51 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'Boolean对象' %}
+
+{% block content %}
+
+<h1>Boolean对象</h1>
+<p>Boolean对象是三个包装对象之一，用来生成布尔值的包装对象。</p>
+<pre>
+1. var bool = true ;
+2. var bool = Boolean(1) ;
+3. var bool = new Boolean(true) ;
+</pre>
+
+<h2>属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>静态属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>prototype</td>
+            <td>对象的原型，可为对象新增实例属性和方法。Boolean.prototype.new=null;</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>继承的属性、方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>继承的属性、方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>toString()</td>
+            <td>把布尔值转为字符串并返回</td>
+        </tr>
+        <tr>
+            <td>valueOf()</td>
+            <td>返回一个Boolean对象的原始值</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

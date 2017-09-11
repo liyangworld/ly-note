@@ -39,6 +39,12 @@ module.exports = app => {
         * String(){
             yield this.ctx.render('pages/javascript/String.html',{action:'String'});
         }
+        * Number(){
+            yield this.ctx.render('pages/javascript/Number.html',{action:'Number'});
+        }
+        * Boolean(){
+            yield this.ctx.render('pages/javascript/Boolean.html',{action:'Boolean'});
+        }
         * RegExp(){
             yield this.ctx.render('pages/javascript/RegExp.html',{action:'RegExp'});
         }
@@ -53,6 +59,9 @@ module.exports = app => {
         }
         * console(){
             yield this.ctx.render('pages/javascript/console.html',{action:'console'});
+        }
+        * Globals(){
+            yield this.ctx.render('pages/javascript/Globals.html',{action:'Globals'});
         }
 
     }

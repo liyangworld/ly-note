@@ -6,5 +6,239 @@
 {% block content %}
 
 <h1>Math对象</h1>
+<p>Math对象没有构造函数Math() ；即不允许创建实例对象。调用Math对象的属性和方法时使用 静态调用 。</p>
+<h2>Math.random()</h2>
+<p>该方法返回 [0,1) 之间的随机数。</p>
+<p>1. 生成任意范围的随机数 [min,max)</p>
+<pre>
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+</pre>
+<p>2. 生成任意范围的随机整数 [min,max]</p>
+<pre>
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+</pre>
+<p>3. 生成指定长度的随机字符串</p>
+<pre>
+function random_str(length) {
+    var ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz' + '0123456789-_';
+    var str = '';
+    for (var i=0; i < length; ++i) {
+        var rand = Math.floor(Math.random() * ALPHABET.length);
+        str += ALPHABET.substr(rand,1);
+    }
+    return str;
+}
+</pre>
+
+<h2>属性</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>静态属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>PI</td>
+        <td>圆周率（约等于3.14159）</td>
+    </tr>
+    <tr>
+        <td>SQRT2</td>
+        <td>2 的平方根（ √2 约等于1.414）</td>
+    </tr>
+    <tr>
+        <td>SQRT1_2</td>
+        <td>1/2 的平方根（ 1/√2 约等于0.707）</td>
+    </tr>
+    <tr>
+        <td>E</td>
+        <td>算术常量e ，即自然对数的底数（ 约等于2.718）</td>
+    </tr>
+    <tr>
+        <td>LN2</td>
+        <td>2 的自然对数（ 约等于0.693）</td>
+    </tr>
+    <tr>
+        <td>LN10</td>
+        <td>10 的自然对数（ 约等于2.302）</td>
+    </tr>
+    <tr>
+        <td>LOG2E</td>
+        <td>以2为底的e的对数（ 约等于1.414）</td>
+    </tr>
+    <tr>
+        <td>LOG10E</td>
+        <td>以10为底的e的对数（ 约等于0.434）</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>方法</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>静态方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">random()</td>
+        <td>返回 [0,1) 之间的随机数</td>
+    </tr>
+    <tr>
+        <td class="useful">abs(x)</td>
+        <td>返回 x 绝对值</td>
+    </tr>
+    <tr>
+        <td class="useful my-title" title="Math.round(0.5) === 1; Math.round(-1.5) === -1;">round(x)</td>
+        <td>返回 x 四舍五入后的整数</td>
+    </tr>
+    <tr>
+        <td class="useful">ceil(x)</td>
+        <td>向上取整，返回刚好大于等于 x 的整数</td>
+    </tr>
+    <tr>
+        <td class="useful">floor(x) </td>
+        <td>向下取整，返回刚好小于等于 x 的整数</td>
+    </tr>
+    <tr>
+        <td class="useful">max(x,y,z,...,n)</td>
+        <td>返回 x,y,z,...,n 中的最大数</td>
+    </tr>
+    <tr>
+        <td class="useful">min(x,y,z,...,n)</td>
+        <td>返回 x,y,z,...,n 中的最小数</td>
+    </tr>
+    <tr>
+        <td>sqrt(x)</td>
+        <td>返回 x 的平方根</td>
+    </tr>
+    <tr>
+        <td>pow(x,y)</td>
+        <td>返回 x 的 y 次幂</td>
+    </tr>
+    <tr>
+        <td>exp(x)</td>
+        <td>返回 e 的 x 次幂</td>
+    </tr>
+    <tr>
+        <td>log(x)</td>
+        <td>返回 x 的自然对数（底为e）</td>
+    </tr>
+
+
+    <tr>
+        <td>sin(x)</td>
+        <td>返回 x 的正弦</td>
+    </tr>
+    <tr>
+        <td>cos(x)</td>
+        <td>返回 x 的余弦</td>
+    </tr>
+    <tr>
+        <td>tan(x)</td>
+        <td>返回 x 的正切</td>
+    </tr>
+    <tr>
+        <td>asin(x)</td>
+        <td>返回 x 的反正弦</td>
+    </tr>
+    <tr>
+        <td>acos(x)</td>
+        <td>返回 x 的反余弦</td>
+    </tr>
+    <tr>
+        <td>atan(x)</td>
+        <td>返回 x 的反正切（介于 -PI/2 与 PI/2 之间）</td>
+    </tr>
+    <tr>
+        <td>atan2(y,x)</td>
+        <td>返回从 x轴 到点(x,y) 的角度（介于 -PI/2 与 PI/2 之间）</td>
+    </tr>
+
+    <tr>
+        <td class="useful es6 my-title" title="Math.trunc(-2.2); // -2">trunc(x)</td>
+        <td>去尾</td>
+    </tr>
+    <tr>
+        <td class="es6">fround</td>
+        <td>将任意的数字转换为离它最近的单精度浮点数形式的数字</td>
+    </tr>
+    <tr>
+        <td class="es6">sign</td>
+        <td>返回一个数字的正负性, 1, -1, 0, -0, NaN</td>
+    </tr>
+    <tr>
+        <td class="es6">clz32</td>
+        <td>返回一个数字在转换成 32位 无符号整形数字的二进制形式后, 开头的 0 的个数</td>
+    </tr>
+    <tr>
+        <td class="es6">imul</td>
+        <td>返回两个参数的类C的32位整数乘法运算的运算结果</td>
+    </tr>
+    <tr>
+        <td class="es6">log10(x)</td>
+        <td>返回以 10 为底x的对数</td>
+    </tr>
+    <tr>
+        <td class="es6">log2(x)</td>
+        <td>返回以 2 为底x的对数</td>
+    </tr>
+    <tr>
+        <td class="es6">log1p(x)</td>
+        <td>返回 x+1 后的自然对数 (底为 E)</td>
+    </tr>
+
+    <tr>
+        <td class="es6">expm1(x)</td>
+        <td>返回 E^x - 1</td>
+    </tr>
+    <tr>
+        <td class="es6">sinh</td>
+        <td>返回一个数字(单位为角度)的双曲正弦值</td>
+    </tr>
+    <tr>
+        <td class="es6">cosh</td>
+        <td>返回数值的双曲余弦值</td>
+    </tr>
+    <tr>
+        <td class="es6">tanh</td>
+        <td>返回一个数的双曲正切值</td>
+    </tr>
+    <tr>
+        <td class="es6">asinh</td>
+        <td>返回数字的反双曲正弦值</td>
+    </tr>
+    <tr>
+        <td class="es6">acosh</td>
+        <td>返回数字的反双曲余弦值</td>
+    </tr>
+    <tr>
+        <td class="es6">atanh</td>
+        <td>返回数字的反双曲正切值</td>
+    </tr>
+    <tr>
+        <td class="es6">cbrt</td>
+        <td>返回任意数字的立方根</td>
+    </tr>
+    <tr>
+        <td class="es6">hypot</td>
+        <td>返回所有参数的平方和的平方根</td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+
 
 {% endblock %}

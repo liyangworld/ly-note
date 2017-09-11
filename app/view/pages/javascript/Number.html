@@ -1,0 +1,149 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'Number对象' %}
+
+{% block content %}
+
+<h1>Number对象</h1>
+<p>Number对象是三个包装对象之一，用来生成数值的包装对象。</p>
+<pre>
+1. var num = 123 ;
+2. var num = Number("123") ;
+3. var num = new Number(123) ;
+</pre>
+
+<h2>属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>静态属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>prototype</td>
+            <td>对象的原型，可为对象新增实例属性和方法。Number.prototype.new=null;</td>
+        </tr>
+        <tr>
+            <td>NaN</td>
+            <td>表示非数值，指向NaN</td>
+        </tr>
+
+        <tr>
+            <td>MAX_VALUE</td>
+            <td>表示最大的正数</td>
+        </tr>
+        <tr>
+            <td>MIN_VALUE</td>
+            <td>表示最小的正数</td>
+        </tr>
+
+        <tr>
+            <td>POSITIVE_INFINITY</td>
+            <td>正的无限，指向Infinity</td>
+        </tr>
+        <tr>
+            <td>NEGATIVE_INFINITY</td>
+            <td>负的无限，指向-Infinity</td>
+        </tr>
+        <tr>
+            <td class="es6 my-title" title=" var x = 0.2,y = 0.3,z = 0.1; var equal = (Math.abs(x - y + z) < Number.EPSILON);">EPSILON</td>
+            <td>表示 1 和大于 1 的最小值的差值</td>
+        </tr>
+        <tr>
+            <td class="es6">MAX_SAFE_INTEGER</td>
+            <td>表示能够精确表示的最大整数，即9007199254740991</td>
+        </tr>
+        <tr>
+            <td class="es6">MIN_SAFE_INTEGER</td>
+            <td>表示能够精确表示的最小整数，即-9007199254740991</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>静态方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="es6">parseInt(str,radix)</td>
+            <td>根据给定的进制数把一个字符串解析成整数，与全局的 parseInt() 相同</td>
+        </tr>
+        <tr>
+            <td class="es6">parseFloat</td>
+            <td>把一个字符串解析成浮点数，与全局的 parseFloat() 相同</td>
+        </tr>
+        <tr>
+            <td class="es6">isNaN</td>
+            <td>判断给定的参数是否为NaN，区别于全局的isNaN()，该方法不会将参数强制转换为数值</td>
+        </tr>
+        <tr>
+            <td class="es6">isFinite</td>
+            <td>检测传入的参数是否是一个有穷数，区别于全局的isFinite()，该方法不会将参数强制转换为数值，</td>
+        </tr>
+        <tr>
+            <td class="es6">isInteger</td>
+            <td>判断给定的参数是否为整数，NaN 和正负 Infinity 不是整数</td>
+        </tr>
+        <tr>
+            <td class="es6">isSafeInteger</td>
+            <td>判断传入的参数值是否是一个“安全整数”，[-(2<sup>53</sup> - 1),2<sup>53</sup> - 1]</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>实例方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>toExponential(n)</td>
+            <td>以指数表示法返回该数值字符串表示形式，n表示小数位数（四舍五入）</td>
+        </tr>
+        <tr>
+            <td>toFixed(n)</td>
+            <td>把数字转换为字符串并返回，n限定小数点后的位数（四舍五入）</td>
+        </tr>
+        <tr>
+            <td>toPrecision(n)</td>
+            <td>把数字转换为字符串并返回，n限定数字的位数（四舍五入），用于四舍五入时不太可靠</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>继承的属性、方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th>继承的属性、方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>toString(radix)</td>
+        <td>覆盖了Object 对象的 toString 方法，radix默认为10</td>
+    </tr>
+    <tr>
+        <td>toLocaleString()</td>
+        <td>返回这个数字在特定语言环境下的表示字符串</td>
+    </tr>
+    <tr>
+        <td>valueOf()</td>
+        <td>返回一个Number对象的原始值</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}

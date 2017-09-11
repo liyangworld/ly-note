@@ -6,5 +6,214 @@
 {% block content %}
 
 <h1>Array对象</h1>
+<p>Array 作为构造函数使用时，不同的参数，会导致它的行为不一致：无参数时，返回一个空数组；多参数时，所有参数都是新数组的成员；单参数时，非数值则是新数组成员，正整数则是新数组的长度，非正整数则报错。new 关键字可省略。</p>
+<pre>
+1、var arr = ["dog","cat","fish"];
+2、var arr = new Array("dog","cat","fish");
+3、var arr = new Array(3); // arr.length === 3
+</pre>
+
+<h2>属性</h2>
+<table>
+    <thead>
+    <tr>
+        <th>静态属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>prototype</td>
+        <td>对象的原型，可为对象新增实例属性和方法。Array.prototype.new=null;</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>实例属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">length</td>
+        <td>返回数组的长度，可读可写</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<p>以下方法中改变原数组的有：push、pop、unshift、shift、splice、reverse、sort、copyWithin 。</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>静态方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful es5">isArray</td>
+        <td>确定参数是否是一个 Array，优于instanceof</td>
+    </tr>
+    <tr>
+        <td class="es6 my-title" title="Array.of(2) => [2]; ~~~~~ Array(2) => [,];">of</td>
+        <td>创建一个数组</td>
+    </tr>
+    <tr>
+        <td class="es6 my-title" title="Array.from('foo') => ['f', 'o', 'o']; ~~~~~ Array.from([1, 2, 3], x => x + x) === [2, 4, 6]; ~~~~~  Array.from({length: 3}, (v, i) => i) => [0, 1, 2]; ~~~~~  function f() { return Array.from(arguments); };f(1, 2, 3) => [1, 2, 3];">from</td>
+        <td>从一个类似数组或可迭代的对象中创建一个新的数组实例</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>实例方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">push</td>
+            <td>向数组的末尾添加一个或多个元素，并返回数组改变后的长度</td>
+        </tr>
+        <tr>
+            <td class="useful">pop</td>
+            <td>删除数组的最后一个元素并返回删除的元素</td>
+        </tr>
+        <tr>
+            <td class="useful">unshift</td>
+            <td>向数组的开头添加一个或多个元素，并返回数组改变后的长度</td>
+        </tr>
+        <tr>
+            <td class="useful">shift</td>
+            <td>删除数组的第一个元素并返回删除的元素</td>
+        </tr>
+        <tr>
+            <td class="useful">splice(i,n,"item")</td>
+            <td>在数组i位置处，向后删除n个元素(并添加多个元素)，返回由删除元素组成的数组</td>
+        </tr>
+        <tr>
+            <td class="useful">slice(i1,i2)</td>
+            <td>获取子数组并返回，含头不含尾。i1、i2可为负值，-1最后元素，-2倒数第二，以此类推。i1所指位置始终在i2前面</td>
+        </tr>
+        <tr>
+            <td class="useful">concat</td>
+            <td>将多个数组中的元素合并成一个新数组并返回</td>
+        </tr>
+        <tr>
+            <td class="useful">join</td>
+            <td>把数组的所有元素用分隔符连接成一个字符串并返回，(无參时用逗号连接)</td>
+        </tr>
+        <tr>
+            <td class="useful">reverse</td>
+            <td>反转数组的元素顺序，并返回改变后的数组</td>
+        </tr>
+        <tr>
+            <td class="useful">sort</td>
+            <td>对数组的元素进行排序并返回，默认按字母升序，可传入排序函数作为参数，如：function(a,b){return a-b;}</td>
+        </tr>
+
+        <tr>
+            <td class="useful es5">forEach(fn(curV,i,arr), thisV)</td>
+            <td>遍历数组</td>
+        </tr>
+        <tr>
+            <td class="useful es5">indexOf("item",start)</td>
+            <td>搜索数组中的元素并返回其(从start开始)第一次出现的位置索引</td>
+        </tr>
+        <tr>
+            <td class="useful es5">lastIndexOf("item",start)</td>
+            <td>从后往前查询位置索引，返回从start开始向前首次出现的位置索引</td>
+        </tr>
+        <tr>
+            <td class="useful es5 my-title" title="arr.reduce(function(accumulator, currentValue, currentIndex, array), initialValue)">reduce(fn,iValue)</td>
+            <td>对累加器和数组中的每个元素 (从左到右)应用一个函数，将其减少为单个值并返回</td>
+        </tr>
+        <tr>
+            <td class="es5">reduceRight(fn,iValue)</td>
+            <td>对累加器和数组中的每个元素 (从右到左)应用一个函数，将其减少为单个值并返回</td>
+        </tr>
+        <tr>
+            <td class="useful es5">map(fn)</td>
+            <td>返回一个由 经过处理后的元素 所组成的新数组。参数fn：function(currentItem,index,arr){return ?}</td>
+        </tr>
+
+        <tr>
+            <td class="useful es5">filter(fn)</td>
+            <td>返回一个由 符合条件的元素 所组成的新数组。参数fn：function(currentItem,index,arr){return ?}</td>
+        </tr>
+        <tr>
+            <td class="es5">every(fn)</td>
+            <td>检测数组所有元素是否都符合指定条件,是则返回true。空数组返回true</td>
+        </tr>
+        <tr>
+            <td class="es5">some(fn)</td>
+            <td>检测数组中是否有元素符合指定条件,有则返回true。空数组返回false</td>
+        </tr>
+
+        <tr>
+            <td class="es6">find(fn)</td>
+            <td>返回数组中满足提供的测试函数的第一个元素的值，无则返回 undefined</td>
+        </tr>
+        <tr>
+            <td class="es6">findIndex(fn)</td>
+            <td>返回数组中满足提供的测试函数的第一个元素的索引，无则返回-1</td>
+        </tr>
+        <tr>
+            <td class="es6 my-title" title="var arr = ['a', 'b', 'c']; var iterator = arr.keys(); [...iterator] => [0,1,2]">keys</td>
+            <td>返回一个新的Array迭代器，它包含数组中每个索引的键</td>
+        </tr>
+        <tr>
+            <td class="es6 my-title" title="var a = ['w', 'y']; var iterator = a.values(); [...iterator] => ['w', 'y']">values</td>
+            <td>返回一个新的 Array Iterator 对象，该对象包含数组每个索引的值</td>
+        </tr>
+        <tr>
+            <td class="es6 my-title" title="var a = ['a', 'b']; var iterator = a.entries();for (let e of iterator) { console.log(e); } //[0, 'a'] //[1, 'b']">entries</td>
+            <td>返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对</td>
+        </tr>
+        <tr>
+            <td class="es6 my-title" title="[1, 2, 3].fill(4, 1, 2) => [1,4,3]">fill(value,start,end)</td>
+            <td>用一个固定值填充一个数组中从起始索引到终止索引内的全部元素</td>
+        </tr>
+        <tr>
+            <td class="es6 my-title" title="[1, 2, 3, 4, 5].copyWithin(0, 3, 4) => [4, 2, 3, 4, 5];改变原数组">copyWithin(target,start,end)</td>
+            <td>浅复制数组的一部分到同一数组中的另一个位置，并返回它，而不修改其大小</td>
+        </tr>
+        <tr>
+            <td>includes(item,start)</td>
+            <td>判断一个数组是否包含一个指定的值，返回true / false</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>继承的属性、方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>继承的属性、方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="my-title" title="[1,2].toString() === '1,2'; ">toString()</td>
+            <td>返回对象的字符串形式。覆盖了Object 对象的 toString 方法</td>
+        </tr>
+        <tr>
+            <td>toLocaleString()</td>
+            <td>返回一个字符串，数组中的元素将使用各自的 toLocaleString 方法转成字符串</td>
+        </tr>
+        <tr>
+            <td>valueOf()</td>
+            <td>返回一个Array对象的原始值。返回值为原数组</td>
+        </tr>
+    </tbody>
+</table>
 
 {% endblock %}

@@ -22,11 +22,14 @@ module.exports = app => {
     app.get('/javascript/Object', 'javascript.Object');
     app.get('/javascript/Array', 'javascript.Array');
     app.get('/javascript/String', 'javascript.String');
+    app.get('/javascript/Number', 'javascript.Number');
+    app.get('/javascript/Boolean', 'javascript.Boolean');
     app.get('/javascript/RegExp', 'javascript.RegExp');
     app.get('/javascript/Math', 'javascript.Math');
     app.get('/javascript/Date', 'javascript.Date');
     app.get('/javascript/JSON', 'javascript.JSON');
     app.get('/javascript/console', 'javascript.console');
+    app.get('/javascript/Globals', 'javascript.Globals');
 
 
     app.get('/jquery/index', 'jquery.index');

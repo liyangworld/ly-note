@@ -108,11 +108,10 @@ delete window.p // true
 <h2>对象字面量和JSON</h2>
 <p>对象字面量{} 和 JavaScript Object Notation (JSON)是不同的。虽然他们看起来相似，不同点有：</p>
 <ol>
-  <li>JSON 只允许 ("property": value syntax) 形式的属性定义。属性名必须用双引号括起来。且属性定义不允许使用简便写法。</li>
-  <li>JSON中，属性的值仅允许字符串，数字，数组，true，false，或者其他JSON对象。 </li>
+  <li>JSON 只允许 键值对 形式的属性定义。属性名必须用双引号括起来（不能是单引号）。</li>
+  <li>JSON中，属性的值仅允许 字符串，数字，数组，{}，true，false，null。 </li>
   <li>JSON中，不允许将值设置为函数。</li>
-  <li> Date 等对象，经JSON.parse()处理后，会变成字符串。</li>
-  <li>JSON.parse() 不会处理计算的属性名，会当做错误抛出。</li>
+  <li>数组或对象最后一个成员的后面，不能加逗号。</li>
 </ol>
 
 {% endblock %}

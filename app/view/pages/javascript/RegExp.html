@@ -6,5 +6,260 @@
 {% block content %}
 
 <h1>RegExp对象</h1>
+<p>正则表达式（regular expression）是描述字符模式的对象，是对字符串执行模式匹配的强大工具。</p>
+<p>以正则表达式为参数的 String对象 方法有 search()、match()、replace()、split() 。</p>
+<pre>
+1、var reg = new RegExp(模式,修饰符) ;  如：var reg = new RegExp("\\w+");  //这里用到了字符转义( \ )
+2、var reg = /模式/修饰符 ;        如：var reg = /\w+/;
+</pre>
+
+<h2>修饰符</h2>
+<table>
+    <thead>
+    <tr>
+        <th>修饰符</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">i</td>
+        <td>忽略大小写</td>
+    </tr>
+    <tr>
+        <td class="useful">g</td>
+        <td>全局匹配（查找所有匹配的，而非找到第一个匹配就停止）</td>
+    </tr>
+    <tr>
+        <td>m</td>
+        <td>多行匹配</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>方括号</h2>
+<table>
+    <thead>
+    <tr>
+        <th>表达式</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">[abc]</td>
+        <td>查找方括号之间的任何字符（a、b、c）</td>
+    </tr>
+    <tr>
+        <td>[^abc]</td>
+        <td>查找任何不在方括号之间的字符（非 a、b、c）</td>
+    </tr>
+    <tr>
+        <td class="useful">[0-9]</td>
+        <td>查找任何从0到9的数字</td>
+    </tr>
+    <tr>
+        <td class="useful">[a-z]</td>
+        <td>查找任何从小a到小z的字母</td>
+    </tr>
+    <tr>
+        <td class="useful">[A-Z]</td>
+        <td>查找任何从大A到大Z的字母</td>
+    </tr>
+    <tr>
+        <td>[A-z]</td>
+        <td>查找任何从大A到小z的字母和符号（包括所有字母及之间的符号）</td>
+    </tr>
+    <tr>
+        <td class="useful">red|green|blue</td>
+        <td>查找任何指定的选项（red 或 green 或 blue）</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>量词</h2>
+<table>
+    <thead>
+    <tr>
+        <th>量词</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">n？</td>
+        <td>包含零个或一个n</td>
+    </tr>
+    <tr>
+        <td class="useful">n*、n*?</td>
+        <td>包含零个或多个n，依次为贪婪模式、非贪婪模式</td>
+    </tr>
+    <tr>
+        <td class="useful">n+、n+?</td>
+        <td>包含一个或多个n，依次为贪婪模式、非贪婪模式</td>
+    </tr>
+    <tr>
+        <td>n{X}</td>
+        <td>包含X个n（X个连续重复的n）</td>
+    </tr>
+    <tr>
+        <td>n{X,}</td>
+        <td>包含至少X个n</td>
+    </tr>
+    <tr class="useful">
+        <td>n{X,Y}</td>
+        <td>包含 [X,Y] 个n</td>
+    </tr>
+
+    <tr class="useful">
+        <td>^n</td>
+        <td>以n为开头</td>
+    </tr>
+    <tr class="useful">
+        <td>n$</td>
+        <td>以n为结尾</td>
+    </tr>
+    <tr>
+        <td>m(?=n)</td>
+        <td>匹配其后紧接n的m</td>
+    </tr>
+    <tr>
+        <td>m(?!n)</td>
+        <td>匹配其后没有紧接n的m</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>元字符</h2>
+<table>
+    <thead>
+    <tr>
+        <th>元字符</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">.</td>
+        <td>代表任何单个字符，除了换行和行结束符</td>
+    </tr>
+    <tr>
+        <td>\w、\W</td>
+        <td>依次代表单词字符、非单词字符</td>
+    </tr>
+    <tr>
+        <td>\d、\D</td>
+        <td>依次代表数字、非数字</td>
+    </tr>
+    <tr>
+        <td>\s、\S</td>
+        <td>依次代表空白字符、非空白字符</td>
+    </tr>
+    <tr>
+        <td>\b、\B</td>
+        <td>依次代表单词边界、非单词边界（可用在开头或结尾）</td>
+    </tr>
+    <tr>
+        <td>\n、\r、\t、\v、\f</td>
+        <td>依次代表换行符、回车符、制表符、垂直制表符、换页符</td>
+    </tr>
+    <tr>
+        <td>\cX</td>
+        <td>表示Ctrl-[X]，其中的X是A-Z之中任一个英文字母</td>
+    </tr>
+    <tr>
+        <td>\0</td>
+        <td>代表null字符（U+0000）</td>
+    </tr>
+    <tr>
+        <td>\xxx</td>
+        <td>代表以八进制数xxx表示的字符</td>
+    </tr>
+    <tr>
+        <td>\xdd</td>
+        <td>代表以十六进制数dd定义的字符，如十六进制 57 (W)</td>
+    </tr>
+    <tr>
+        <td>\uxxxx</td>
+        <td>代表以十六进制数xxxx定义的Unicode字符</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<h2>属性</h2>
+<table>
+    <thead>
+    <tr>
+        <th>实例属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>ignoreCase</td>
+        <td>返回一个布尔值，表示是否设置了i修饰符，该属性只读</td>
+    </tr>
+    <tr>
+        <td>global</td>
+        <td>返回一个布尔值，表示是否设置了g修饰符，该属性只读</td>
+    </tr>
+    <tr>
+        <td>multiline</td>
+        <td>返回一个布尔值，表示是否设置了m修饰符，该属性只读</td>
+    </tr>
+    <tr>
+        <td>source</td>
+        <td>返回正则表达式的字符串形式（不包括反斜杠），该属性只读</td>
+    </tr>
+    <tr>
+        <td>lastIndex</td>
+        <td>返回下一次开始搜索的位置。该属性可读写，但是只在设置了g修饰符时有意义</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th>实例方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">reg.test(str)</td>
+        <td>检索字符串str是否有匹配的值，有则返回true，无则返回false</td>
+    </tr>
+    <tr>
+        <td>reg.exec(str)</td>
+        <td>检索字符串str，如果发现匹配，就返回一个数组，成员是每一个匹配成功的子字符串，否则返回null</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2>继承的属性、方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th>继承的属性、方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="my-title" title=" /a/g.toString() === '/a/g'; ">toString()</td>
+        <td>返回对象的字符串形式。覆盖了Object 对象的 toString 方法</td>
+    </tr>
+    <tr>
+        <td>valueOf()</td>
+        <td>返回一个RegExp对象的原始值。返回值同 toString 方法一样</td>
+    </tr>
+    </tbody>
+</table>
+
 
 {% endblock %}

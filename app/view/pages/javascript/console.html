@@ -6,5 +6,173 @@
 {% block content %}
 
 <h1>console对象</h1>
+<p>console对象是 JavaScript 的原生对象，可以输出各种信息到控制台。</p>
+<h2>console.log 使用方法</h2>
+<p>该方法可以接受多个参数，将它们的结果连接起来输出。</p>
+<p>支持以下占位符：%s (字符串)、%d (整数)、%i (整数)、%f (浮点数)、%o (对象的链接)、%c (CSS格式字符串)。</p>
+<pre>
+console.log('a', 'b', 'c'); // a b c
+console.log(' %d + %d = %d ', 1, 1, 2,'end'); //  1 + 1 = 2 end
+console.log('%cThis text is styled!','color: red; background: yellow; font-size: 24px;');
+</pre>
+<h2>自定义方法</h2>
+<pre>
+['log', 'info', 'warn', 'error'].forEach(function(method) {
+    console[method] = console[method].bind(console,new Date().toISOString());
+});
+console.log("出错了！"); // 2017-09-04T07:03:12.871Z 出错了！
+</pre>
+
+
+<h2>console 方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th>静态方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="useful">log</td>
+        <td>在控制台输出信息</td>
+    </tr>
+    <tr>
+        <td>info</td>
+        <td>同log</td>
+    </tr>
+    <tr>
+        <td>debug</td>
+        <td>同log</td>
+    </tr>
+    <tr>
+        <td>warn</td>
+        <td>同log，但会在最前面加一个黄色三角，表示警告</td>
+    </tr>
+    <tr>
+        <td>error</td>
+        <td>同log，但会在最前面加一个红色的叉，表示错误</td>
+    </tr>
+    <tr>
+        <td class="useful my-title" title='var languages = [
+  { name: "JavaScript", fileExtension: ".js" },
+  { name: "TypeScript", fileExtension: ".ts" },
+  { name: "CoffeeScript", fileExtension: ".coffee" }
+];
+console.table(languages);'>table</td>
+        <td>将复合类型的数据 {}、[{},{}] 转为表格显示</td>
+    </tr>
+    <tr>
+        <td class="my-title" title='function greet(user) { console.count(); } greet("bob");'>count</td>
+        <td>用于计数被调用了多少次</td>
+    </tr>
+    <tr>
+        <td class="my-title" title="console.dir({f1: 'foo', f2: 'bar'})">dir、dirxml</td>
+        <td>以易于阅读和打印的格式显示 {}</td>
+    </tr>
+
+    <tr>
+        <td class="my-title" title="console.assert(false, '判断条件不成立');">assert</td>
+        <td>进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序执行</td>
+    </tr>
+    <tr>
+        <td class="my-title" title="console.time('计时');// do something...; console.timeEnd('计时');">time、timeEnd</td>
+        <td>用于计时，可以算出中间操作所花费的准确时间</td>
+    </tr>
+    <tr>
+        <td>profile、profileEnd</td>
+        <td>开启、结束性能测试器（profile）</td>
+    </tr>
+    <tr>
+        <td>group、groupEnd、groupCollapsed</td>
+        <td>将显示的信息分组折叠</td>
+    </tr>
+    <tr>
+        <td>trace</td>
+        <td>显示当前执行的代码在堆栈中的调用路径</td>
+    </tr>
+    <tr>
+        <td>clear</td>
+        <td>清除控制台</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>命令行 API</h2>
+<table>
+    <thead>
+    <tr>
+        <th>属性、方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>$_</td>
+        <td>$_属性返回上一个表达式的值</td>
+    </tr>
+    <tr>
+        <td>$0 - $4</td>
+        <td>控制台保存了最近5个在Elements面板选中的DOM元素，$0代表倒数第一个，$1代表倒数第二个</td>
+    </tr>
+    <tr>
+        <td>$(selector)、$$(selector)</td>
+        <td>类似于document.querySelector()、querySelectorAll()</td>
+    </tr>
+    <tr>
+        <td class="my-title" title='$x("//p[a]");// 返回所有包含a元素的p元素'>$x(path)</td>
+        <td>返回一个数组，包含匹配特定XPath表达式的所有DOM元素</td>
+    </tr>
+    <tr>
+        <td>inspect(el)</td>
+        <td>打开相关面板，并选中相应的元素</td>
+    </tr>
+    <tr>
+        <td>getEventListeners(el)</td>
+        <td>返回一个{}，键为各种事件，值为回调函数组成的数组</td>
+    </tr>
+    <tr>
+        <td>keys(obj)、values(obj)</td>
+        <td>类似于Object.keys()、Object.values()</td>
+    </tr>
+    <tr>
+        <td class="my-title" title='monitorEvents(window, ["resize", "scroll"]);'>monitorEvents(el[, events])</td>
+        <td>监听特定对象上发生的特定事件</td>
+    </tr>
+
+    <tr>
+        <td>unmonitorEvents(el[, events])</td>
+        <td>取消监听</td>
+    </tr>
+    <tr>
+        <td>profile([name])，profileEnd([name])</td>
+        <td>启动、结束一个特定名称的CPU性能测试</td>
+    </tr>
+    <tr>
+        <td>clear()</td>
+        <td>清除控制台</td>
+    </tr>
+    <tr>
+        <td>copy(el)</td>
+        <td>复制特定DOM元素到剪贴板</td>
+    </tr>
+    <tr>
+        <td>dir(obj)、dirxml(obj)</td>
+        <td>是console.dir、console.dirxml 方法的别名</td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<h2>debugger语句</h2>
+<p>debugger语句主要用于除错，作用是设置断点。</p>
+<pre>
+for(var i = 0; i < 5; i++){
+    console.log(i);
+    if (i === 2) debugger;
+}
+</pre>
+
 
 {% endblock %}
