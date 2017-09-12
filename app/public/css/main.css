@@ -109,7 +109,7 @@ body{
     line-height: 20px;
     margin:0;
 }
-.website-content p .my-title{
+.website-content p >span{
     margin-left: 20px;
 }
 .website-content a{

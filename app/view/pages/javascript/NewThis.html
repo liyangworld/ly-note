@@ -1,0 +1,61 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'new、this关键词' %}
+
+{% block content %}
+
+<h1>new、this关键词</h1>
+<p>JavaScript 语言的对象体系，不是基于“类”的，而是基于构造函数（constructor）和原型链（prototype）。</p>
+<p>new 关键词作用于构造函数。构造函数的写法与普通函数一样，但构造函数中使用this关键词，生成实例对象时使用new关键词。</p>
+<pre>
+var Person = function(name){
+    this.name = name;
+};
+var p1 = new Person('张三');
+</pre>
+
+<h2>new 命令的原理</h2>
+<p>使用new命令时，它后面的函数调用就不是正常的调用，而是依次执行下面的步骤：</p>
+<ol>
+    <li>创建一个空对象，作为将要返回的对象实例</li>
+    <li>将这个空对象的原型，指向构造函数的prototype属性</li>
+    <li>将这个空对象赋值给函数内部的this关键字</li>
+    <li>开始执行构造函数内部的代码</li>
+</ol>
+<p>如果构造函数内部有return语句，而且return后面跟着一个对象，new命令会返回return语句指定的对象；否则，就会不管return语句，返回this对象。</p>
+<pre>
+function _new(constructor,params){
+    var args = ([]).slice.call(arguments);
+    var constructor = args.shift();
+    var obj = Object.create(constructor.prototype); // 完成1、2步
+    var result = constructor.apply(obj, args); // 完成3、4步，如果构造函数定义了返回值
+    return (typeof result === 'object' && result != null) ? result : obj;
+}
+</pre>
+
+<h2>this 的绑定</h2>
+<p>this 的绑定与函数声明的位置无关，与函数被调用的方式有关。即 this 依赖于函数的调用而非函数的声明。</p>
+<table>
+    <thead>
+        <tr>
+            <th>绑定方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>call(thisV,arg1,arg2,...)</td>
+            <td>函数的调用。第一个参数指定this的指向，若为null和undefined，则默认传入全局对象</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="Math.max.apply(null, [1,2,3]);// 最大值3">apply(thisV,arr)</td>
+            <td>函数的调用。同call方法，但接收数组作为函数调用时的参数</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="function add(x, y) { return x + y*this.n; } var plus5 = add.bind({n:2}, 5); plus5(3);// 11 ~~~~~  var _slice = Function.prototype.call.bind(Array.prototype.slice); _slice([1,2,3],0,1); ~~~~~ var _bind = Function.prototype.call.bind(Function.prototype.bind); _bind(fn,obj);">bind(thisV,arg1,arg2,...)</td>
+            <td>返回一个新函数，第一个参数指定this的指向，其后的参数绑定为原函数的参数</td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

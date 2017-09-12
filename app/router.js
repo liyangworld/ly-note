@@ -31,6 +31,9 @@ module.exports = app => {
     app.get('/javascript/console', 'javascript.console');
     app.get('/javascript/Globals', 'javascript.Globals');
 
+    app.get('/javascript/NewThis', 'javascript.NewThis');
+    app.get('/javascript/Prototype', 'javascript.Prototype');
+
 
     app.get('/jquery/index', 'jquery.index');
     app.get('/bootstrap/index', 'bootstrap.index');

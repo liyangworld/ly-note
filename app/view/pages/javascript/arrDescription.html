@@ -36,7 +36,7 @@ for(var value of arr) {
 }
 </pre>
 <p>3. forEach</p>
-<p>没有办法中止或者跳出 forEach 循环，除了抛出一个异常。如果数组在迭代时被修改了，则某些元素会被跳过。不建议使用该方法。</p>
+<p>没有办法中止或者跳出 forEach 循环，除了抛出一个异常。该循环会跳过数组中的空元素，不会跳过undefined；可接受一个thisValue作为第二个参数。如果数组在迭代时被修改了，则某些元素会被跳过。不建议使用该方法。</p>
 <pre>
 var words = ["one", "two", "three", "four"];
 words.forEach(function(word) {

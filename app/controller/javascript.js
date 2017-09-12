@@ -64,6 +64,13 @@ module.exports = app => {
             yield this.ctx.render('pages/javascript/Globals.html',{action:'Globals'});
         }
 
+        * NewThis(){
+            yield this.ctx.render('pages/javascript/NewThis.html',{action:'NewThis'});
+        }
+        * Prototype(){
+            yield this.ctx.render('pages/javascript/Prototype.html',{action:'Prototype'});
+        }
+
     }
     return JavascriptController;
 };
