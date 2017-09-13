@@ -6,5 +6,73 @@
 {% block content %}
 
 <h1>原型与继承</h1>
+<p>JavaScript 的每个对象都继承自另一个对象，后者称为“原型”（prototype）对象。只有null除外，它没有自己的原型对象。</p>
+<p>原型链可一直追溯到 Object.prototype ，而 Object.prototype.__proto__ 为null。</p>
+<p>每个构造函数都有自身的 prototype 属性：{constructor , __proto__} ；每个实例对象都有自身的 __proto__ 属性，指向构造函数的 prototype 。</p>
+<p>修改某个对象的原型时，一般要同时校正constructor属性的指向。</p>
+<pre>
+var Person = function(name){
+    this.name = name;
+};
+var p1 = new Person('张三');
+
+Person.prototype ;// {constructor , __proto__}
+p1.__proto__     ===     Person.prototype  ;
+Person.prototype.__proto__    ===   Object.prototype ;
+</pre>
+
+<h2>Object.create() 的原理</h2>
+<pre>
+Object.create = function (prototype) {
+    function F() {}
+    F.prototype = prototype;
+    return new F();
+};
+</pre>
+
+<pre>
+var obj1 = {}; //  obj1.__proto__ ===  Object.prototype
+var obj2 = new Object(); //  obj2.__proto__ ===  Object.prototype
+var obj3 = Object.create({}); //  obj3.__proto__ =>  { __proto__: Object.prototype }
+var obj4 = Object.create(Object.prototype); //  obj4.__proto__ ===  Object.prototype
+
+var obj5 = Object.create(null); //  obj5.__proto__  === null
+</pre>
+
+<h2>继承</h2>
+<p>通过父类和子类的构造函数实现继承，需要以下两步：</p>
+<ol>
+    <li>定义子类的构造函数，并在其中调用父类的构造函数。</li>
+    <li>将子类构造函数的 prototype 指向父类的实例对象。</li>
+</ol>
+<pre>
+function Child(value) {
+    Father.call(this);
+    this.prop = value;
+}
+Child.prototype = Object.create(Father.prototype); //  或者 Child.prototype = new Father();
+Child.prototype.constructor = Child;
+
+Child.prototype.method = '...';
+</pre>
+<p>其中第二步中，不将Child.prototype 指向 Father.prototype，是因为如果如此，其后对Child.prototype 的改变将会连带 Father.prototype 一起改变。</p>
+
+<h2>多重继承</h2>
+
+<pre>
+function Father1() { this.hello = 'hello'; }
+function Father2() { this.world = 'world'; }
+function Child() {
+    Father1.call(this);
+    Father2.call(this);
+}
+Child.prototype = Object.create(Father1.prototype);
+Object.assign(Child.prototype, Father2.prototype); // 只复制可枚举的属性
+Child.prototype.constructor = Child;
+
+var c = new Child();
+</pre>
+<p>JavaScript 不提供多重继承功能，即不允许一个对象同时继承多个对象。以上方法只是一个残缺版。因为当Father2.prototype 改变之后，Child 不会跟着相应变化。</p>
+<p>以上子类 Child 同时继承了父类Father1和Father2。这种模式又称为 Mixin（混入）。</p>
 
 {% endblock %}

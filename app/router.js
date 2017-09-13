@@ -28,11 +28,14 @@ module.exports = app => {
     app.get('/javascript/Math', 'javascript.Math');
     app.get('/javascript/Date', 'javascript.Date');
     app.get('/javascript/JSON', 'javascript.JSON');
+    app.get('/javascript/Error', 'javascript.Error');
     app.get('/javascript/console', 'javascript.console');
     app.get('/javascript/Globals', 'javascript.Globals');
+    app.get('/javascript/Promise', 'javascript.Promise');
 
     app.get('/javascript/NewThis', 'javascript.NewThis');
     app.get('/javascript/Prototype', 'javascript.Prototype');
+    app.get('/javascript/Module', 'javascript.Module');
 
 
     app.get('/jquery/index', 'jquery.index');

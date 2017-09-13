@@ -1,0 +1,92 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'Error对象' %}
+
+{% block content %}
+
+<h1>Error对象</h1>
+<p>JavaScript解析或执行时，一旦发生错误，引擎就会抛出一个错误对象的实例，然后整个程序就中断在发生错误的地方，不再往下执行。</p>
+<p>JavaScript 提供了如下的原生错误类型：Error、SyntaxError、ReferenceError、RangeError、TypeError、URIError、EvalError。</p>
+
+<pre>
+var err = new Error('出错了');
+</pre>
+
+<h2>属性</h2>
+<table>
+    <thead>
+    <tr>
+        <th>静态属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>prototype</td>
+        <td>对象的原型，可为对象新增实例属性和方法。Error.prototype.new=null;</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th>实例属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>name</td>
+            <td>错误对象的类型名，一般为其构造函数的名称</td>
+        </tr>
+        <tr>
+            <td>message</td>
+            <td>错误对象的错误信息，一般为其构造函数的参数</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>继承的属性、方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th>继承的属性、方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>toString()</td>
+        <td>覆盖了Object 对象的 toString 方法。一般返回 this.name + ':' + this.message </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>自定义错误类型</h2>
+<pre>
+function UserError(message) {
+   this.message = message || "默认信息";
+   this.name = "UserError";
+}
+UserError.prototype = new Error();
+UserError.prototype.constructor = UserError;
+</pre>
+
+<h2>try...catch...finally</h2>
+<pre>
+function f() {
+    try {
+        console.log(0);
+        throw 'bug';
+    } catch(e) {
+        console.log(1);
+        return true; // 这句原本会延迟到finally代码块结束再执行
+    } finally {
+        console.log(3);
+        return false; // 这句会截断前面那句return
+    }
+}
+</pre>
+{% endblock %}

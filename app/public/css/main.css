@@ -24,8 +24,11 @@ body{
     flex-shrink: 0;
     border-right:1px solid #E6E6E6;
     background-color: #fafafa;
-    overflow-y:auto;
+    overflow-y:hidden;
     padding:10px 0;
+}
+.website-sidebar:hover{
+    overflow-y:auto;
 }
 .website-content{
     flex:auto;

@@ -1,0 +1,118 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'Promise对象' %}
+
+{% block content %}
+
+<h1>Promise对象</h1>
+
+<p>Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。Promise对象的几个特点：</p>
+<ol>
+    <li>Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。</li>
+    <li>一旦状态改变，就不会再变。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。</li>
+    <li>Promise对象一旦新建(new)就会立即执行，无法中途取消。</li>
+</ol>
+
+<h2>基本用法</h2>
+<pre>
+var prom = new Promise(function(resolve, reject) {
+    if (/* 异步操作成功 */){
+        resolve(data);
+    } else {
+        reject(data);
+    }
+});
+prom.then(function(data) {
+    // success
+}, function(data) {
+    // failure
+});
+</pre>
+<p>resolve 函数的作用是，将Promise对象的状态从 pending 变为 fulfilled；并将数据data传递出去。</p>
+<p>reject 函数的作用是，将Promise对象的状态从 pending 变为 rejected；并将数据data传递出去。</p>
+<p>then 方法可以接受两个回调函数作为参数，分别指定 fulfilled状态和rejected状态的回调函数。但一般不用第二个参数，而用catch方法。</p>
+<h3>图片异步加载</h3>
+<pre>
+function loadImageAsync(url) {
+    return new Promise(function(resolve, reject) {
+        var image = new Image();
+        image.onload = function() {
+            resolve(image);
+        };
+        image.onerror = function() {
+            reject(new Error('Could not load image at ' + url));
+        };
+        image.src = url;
+    });
+}
+</pre>
+
+
+
+
+<h2>属性</h2>
+<table>
+    <thead>
+    <tr>
+        <th>静态属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>prototype</td>
+        <td>对象的原型，可为对象新增实例属性和方法。Promise.prototype.new=null;</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width:100px;">静态方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="my-title" title="var p = Promise.resolve({a:1}); p.then(function (s){   console.log(s) });">resolve</td>
+            <td>生成Promise实例。参数是一个Promise实例时原封不动地返回该实例；参数是一个thenable对象时立即执行thenable对象的then方法；无参或其他参数时返回一个fulfilled状态的Promise实例，该参数将被传入then的回调函数中。</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="var p = Promise.reject({a:1}); p.catch(function (s){   console.log(s) });">reject</td>
+            <td>生成一个rejected状态的Promise实例，并且参数会原封不动地被传入catch或then中(thenable对象也不例外)。</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="var p = Promise.all([p1, p2, p3]);">all</td>
+            <td>将多个 Promise 实例，包装成一个新的 Promise 实例。所有实例的状态都为fulfilled时新实例的状态才为fulfilled，否则为rejected。回调函数接收的参数是：fulfilled时为所有实例返回值组成的数组，rejected时为第一个reject的返回值</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="var p = Promise.race([p1, p2, p3]);">race</td>
+            <td>同all方法，但新实例的状态由第一个改变的状态决定。回调函数接收的参数便是第一个变化的实例返回值</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <th style="width:100px;">实例方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful my-title" title='getJSON("/posts.json").then(function(data) { return data.content; }).then(function(content) {  // ...}); ~~~~~  getJSON("/post/1.json").then(function(post) { return getJSON(post.commentURL); }).then(function funcA(comments) {  console.log("resolved: ", comments);}, function funcB(err){  console.log("rejected: ", err);});'>then</td>
+            <td>返回一个新的Promise实例，因此可以链式调用。若前一个then的回调函数返回值是一个Promise实例，则后一个then的回调函数会等该Promise对象的状态发生变化后才会被调用；否则会将返回值作为参数传入后一个then的回调函数并立即调用。</td>
+        </tr>
+        <tr>
+            <td class="useful my-title" title="getJSON('/posts.json').then(function(posts){
+ ...}).catch(function(error) { console.log('发生错误！', error); });">catch</td>
+            <td>返回一个新的Promise实例，因此可以链式调用。用于指定发生错误时的回调函数。</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

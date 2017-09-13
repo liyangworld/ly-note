@@ -24,10 +24,6 @@
             <td>Infinity</td>
             <td>代表正无穷大,（负无穷大为 -Infinity）</td>
         </tr>
-        <tr>
-            <td>undefined</td>
-            <td>代表未定义的值</td>
-        </tr>
     </tbody>
 </table>
 
@@ -41,12 +37,20 @@
     </thead>
     <tbody>
         <tr>
+            <td class="useful">setTimeout(fn,ms)</td>
+            <td>在指定时间之后再执行，返回该定时器编号(整数)，可使用clearTimeout(timer)取消该定时器。H5规定最短间隔是4毫秒。间隔为0时表示，在当前脚本的同步任务和“任务队列”中已有的事件，全部处理完以后立即执行</td>
+        </tr>
+        <tr>
+            <td class="useful">setInterval(fn,ms)</td>
+            <td>每隔指定时间便执行一次，返回该定时器编号(整数)，可使用clearInterval(timer)取消该定时器。H5规定最短间隔是10毫秒</td>
+        </tr>
+        <tr>
             <td>isNaN()</td>
             <td>判断给定的参数是否为NaN，区别于Number.isNaN()，该方法会将参数强制转换为数值</td>
         </tr>
         <tr>
             <td>isFinite()</td>
-            <td>检测传入的参数是否是一个有穷数，区别于Number.isFinite()，该方法会将参数强制转换为数值，</td>
+            <td>检测传入的参数是否是一个有穷数，区别于Number.isFinite()，该方法会将参数强制转换为数值</td>
         </tr>
         <tr>
             <td>parseInt(str,radix)</td>

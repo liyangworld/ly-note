@@ -57,11 +57,17 @@ module.exports = app => {
         * JSON(){
             yield this.ctx.render('pages/javascript/JSON.html',{action:'JSON'});
         }
+        * Error(){
+            yield this.ctx.render('pages/javascript/Error.html',{action:'Error'});
+        }
         * console(){
             yield this.ctx.render('pages/javascript/console.html',{action:'console'});
         }
         * Globals(){
             yield this.ctx.render('pages/javascript/Globals.html',{action:'Globals'});
+        }
+        * Promise(){
+            yield this.ctx.render('pages/javascript/Promise.html',{action:'Promise'});
         }
 
         * NewThis(){
@@ -69,6 +75,9 @@ module.exports = app => {
         }
         * Prototype(){
             yield this.ctx.render('pages/javascript/Prototype.html',{action:'Prototype'});
+        }
+        * Module(){
+            yield this.ctx.render('pages/javascript/Module.html',{action:'Module'});
         }
 
     }
