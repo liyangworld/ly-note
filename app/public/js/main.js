@@ -15,7 +15,7 @@ window._initMyTitle = function () {
                 preTitle = this.title;
                 this.title = '';
                 elTitle = document.createElement('div');
-                elTitle.innerHTML = preTitle;
+                elTitle.textContent = preTitle;
                 elTitle.className = 'my-title-show';
                 document.body.appendChild(elTitle);
             };

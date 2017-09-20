@@ -108,6 +108,9 @@ body{
 .website-content h2,h3{
     margin:14px 0;
 }
+.website-content h4{
+    margin:8px 0;
+}
 .website-content p{
     line-height: 20px;
     margin:0;
@@ -147,6 +150,14 @@ body{
 .website-content table td{
     border:1px solid #000;
 }
+tr.separator{
+    height:5px;
+    background-color: #0f0;
+}
+tr.separator td{
+    border:none;
+    padding: 0;
+}
 .useful{
     color:#f60;
 }
@@ -166,6 +177,14 @@ td.es5::before{
 }
 td.es6::before{
     content:'\2465\2465';
+    left:-35px;
+}
+td.es7::before{
+    content:'\2466\2466';
+    left:-35px;
+}
+td.es8::before{
+    content:'\2467\2467';
     left:-35px;
 }
 pre{

@@ -80,6 +80,24 @@ module.exports = app => {
             yield this.ctx.render('pages/javascript/Module.html',{action:'Module'});
         }
 
+        * BomPageRender(){
+            yield this.ctx.render('pages/javascript/BomPageRender.html',{action:'BomPageRender'});
+        }
+        * BomWindow(){
+            yield this.ctx.render('pages/javascript/BomWindow.html',{action:'BomWindow'});
+        }
+        * BomLocation(){
+            yield this.ctx.render('pages/javascript/BomLocation.html',{action:'BomLocation'});
+        }
+        * BomScreen(){
+            yield this.ctx.render('pages/javascript/BomScreen.html',{action:'BomScreen'});
+        }
+
+
+        * DomDocument(){
+            yield this.ctx.render('pages/javascript/DomDocument.html',{action:'DomDocument'});
+        }
+
     }
     return JavascriptController;
 };

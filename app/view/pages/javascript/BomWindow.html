@@ -1,0 +1,207 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'window对象' %}
+
+{% block content %}
+
+<h1>window对象</h1>
+<p>在浏览器中，window对象 有两层含义：一指当前的浏览器窗口；二指所有js对象的顶层对象，也是所有全局变量的所属对象。挂载在 window对象 上的<a href="/javascript/Globals" target="_blank">js全局变量和方法</a>。</p>
+<p>如果文档包含框架（&lt;iframe> 标签），则浏览器会为 HTML 文档创建一个 window 对象，并为每个框架分别创建一个自己的 window 对象。</p>
+
+<h2>属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">window.document</td>
+            <td>返回document对象</td>
+        </tr>
+        <tr>
+            <td class="useful">window.location</td>
+            <td>返回location对象，同document.location</td>
+        </tr>
+        <tr>
+            <td class="useful">window.history</td>
+            <td>返回history对象</td>
+        </tr>
+        <tr>
+            <td>window.navigator</td>
+            <td>返回navigator对象</td>
+        </tr>
+        <tr>
+            <td>window.screen</td>
+            <td>返回screen对象</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+
+
+        <tr>
+            <td>window.name</td>
+            <td>设置或返回窗口的名称，只能保存字符串，且当浏览器窗口关闭后所保存的值就会消失。与&lt;iframe>窗口通信时非常有用。</td>
+        </tr>
+        <tr>
+            <td>window.top</td>
+            <td>返回最顶层的父窗口</td>
+        </tr>
+        <tr>
+            <td class="useful">window.parent</td>
+            <td>返回父窗口</td>
+        </tr>
+        <tr>
+            <td class="useful">window.self</td>
+            <td>返回当前窗口的window对象（即自身）</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="&lt;iframe src='' id='fm'>&lt;/iframe> // window.frames[0] === window.frames['fm'] === window.frames.fm === window.fm">window.frames</td>
+            <td>返回由window对象组成的数组,每个window对象对应于窗口中的一个框架。若iframe元素设置了id或name属性则也可用对象的属性调用方式获取。</td>
+        </tr>
+        <tr>
+            <td>window.length</td>
+            <td>返回窗口中的框架数量，同window.frames.length</td>
+        </tr>
+
+        <tr>
+            <td>window.opener</td>
+            <td>返回打开本窗口的源窗口window对象</td>
+        </tr>
+        <tr>
+            <td>window.closed</td>
+            <td>返回窗口是否已被关闭</td>
+        </tr>
+        <tr>
+            <td>window.defaultStatus、window.status</td>
+            <td>设置或返回窗口状态栏中的默认文本。除欧朋外在其他浏览器的默认配置下均无效</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+
+
+        <tr>
+            <td>window.outerWidth、window.outerHeight</td>
+            <td>返回浏览器的外部宽度及高度，包含浏览器的工具条与滚动条</td>
+        </tr>
+        <tr>
+            <td>window.innerWidth、window.innerHeight</td>
+            <td>返回浏览器的文档可视区(viewport)的宽度及高度，不包含浏览器的工具条与滚动条，但包含滚动条自身的宽度及高度。当用户放大(缩小)网页的时候，值会相反的减小(增大)，因为网页的像素大小不变，只是每个像素占据的屏幕空间变大(变小)了</td>
+        </tr>
+        <tr>
+            <td>window.pageXOffset、window.pageYOffset</td>
+            <td>返回当前页面相对于窗口显示区左上角的 X及Y 位置，即滚动隐藏部分</td>
+        </tr>
+        <tr>
+            <td>window.screenLeft、window.screenX</td>
+            <td>返回浏览器左上角距设备屏幕左上角的x坐标</td>
+        </tr>
+        <tr>
+            <td>window.screenTop、window.screenY</td>
+            <td>返回浏览器左上角距设备屏幕左上角的y坐标</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td class="useful">window.onload</td>
+            <td>事件属性，发生在文档在浏览器窗口中加载完毕时</td>
+        </tr>
+        <tr>
+            <td class="my-title" title='window.onerror = function (message, filename, lineno, colno, error) { console.log("出错了！--> %s", error.stack); };'>window.onerror</td>
+            <td>事件属性，浏览器脚本发生错误时，会触发window对象的error事件</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<h2>方法</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">alert(msg)</td>
+            <td>弹出警告框</td>
+        </tr>
+        <tr>
+            <td>confirm(msg)</td>
+            <td>弹出确认对话框，返回true/false</td>
+        </tr>
+        <tr>
+            <td>prompt(msg,defaultText)</td>
+            <td>显示可输入对话框，返回输入内容或空字符串；取消返回null</td>
+        </tr>
+        <tr>
+            <td>window.open(URL,name,specs,replace)</td>
+            <td>打开窗口并返回window对象，如 ：window.open('','','width=200,height=100')</td>
+        </tr>
+        <tr>
+            <td>window.close()</td>
+            <td>关闭窗口</td>
+        </tr>
+        <tr>
+            <td>window.createPopup()</td>
+            <td>创建一个 pop-up 窗口,仅IE支持</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>window.resizeTo(width,height)</td>
+            <td>把浏览器窗口大小调整为指定的宽度和高度</td>
+        </tr>
+        <tr>
+            <td>window.moveBy(dx,dy)</td>
+            <td>可使浏览器窗口相对于当前坐标移动指定的像素</td>
+        </tr>
+        <tr>
+            <td>window.moveTo(x,y)</td>
+            <td>把浏览器窗口的左上角移动到一个指定的坐标</td>
+        </tr>
+        <tr>
+            <td>window.scrollBy(dx,dy)</td>
+            <td>把文档内容滚动指定的像素数</td>
+        </tr>
+        <tr>
+            <td class="useful">window.scrollTo(x,y)</td>
+            <td>把文档内容滚动到指定的坐标</td>
+        </tr>
+        <tr>
+            <td>window.focus()</td>
+            <td>把键盘焦点给予一个窗口</td>
+        </tr>
+        <tr>
+            <td>window.blur()</td>
+            <td>把键盘焦点从顶层窗口移开</td>
+        </tr>
+        <tr>
+            <td>window.print()</td>
+            <td>打印当前窗口的内容</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td class="useful">window.getComputedStyle(el)</td>
+            <td>返回一个包含该HTML元素的最终样式信息的对象</td>
+        </tr>
+        <tr>
+            <td>window.getSelection()</td>
+            <td>返回一个Selection对象，表示用户现在选中的文本，(window.getSelection()).toString()</td>
+        </tr>
+        <tr>
+            <td>window.matchMedia()</td>
+            <td>用来检查CSS的mediaQuery语句</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+
+{% endblock %}

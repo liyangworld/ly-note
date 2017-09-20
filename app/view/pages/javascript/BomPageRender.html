@@ -1,0 +1,82 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '网页渲染流程' %}
+
+{% block content %}
+
+<h1>网页渲染流程</h1>
+
+<h2>基本渲染流程</h2>
+<p>浏览器的核心是两部分：渲染引擎和JavaScript解释器（又称JavaScript引擎）。</p>
+<p>渲染引擎处理网页，通常分成四个阶段:</p>
+<ol>
+    <li>解析代码：HTML代码解析为DOM，DOM 树的构建过程是一个深度遍历过程：当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点；CSS代码解析为CSSOM（CSS Object Model）</li>
+    <li>对象合成：将DOM和CSSOM合成一棵渲染树（render tree）</li>
+    <li>布局：计算出渲染树的布局（layout）</li>
+    <li>绘制：将渲染树绘制到屏幕</li>
+</ol>
+<img src="../../../public/imgs/webkitflow.png" alt="webkit网页渲染流程" title="webkit网页渲染流程">
+
+<p>以上四步并非严格按顺序执行，往往第一步还没完成，第二步和第三步就已经开始了。所以，会看到这种情况：网页的HTML代码还没下载完，但浏览器已经显示出内容了。</p>
+<p>reflow（重流）：变化改变了布局则触发 重流 并重绘。</p>
+<p>repaint（重绘）：改变颜色等不影响布局的变化只触发 重绘。</p>
+
+<h2>JavaScript 的影响</h2>
+<h3>一、JavaScript 的四种嵌入方法</h3>
+<ol>
+    <li>script 标签引入外部脚本</li>
+    <li>script 标签中书写脚本代码</li>
+    <li>标签的事件属性中书写脚本代码</li>
+    <li>URL协议：URL支持以 javascript: 协议的方式，执行JavaScript代码</li>
+</ol>
+<p>如果 script 标签的 type 属性值是浏览器不识别的，则浏览器不会执行和显示其中的内容。可用于定义模板内容。</p>
+<pre>
+&lt;script type="text/template">
+    &lt;img src="1.jpg">
+&lt;/script>
+</pre>
+<pre>
+&lt;a href="javascript:console.log('Hello');void(0);">点击&lt;/a>
+</pre>
+
+<h3>二、JavaScript 的加载顺序</h3>
+<p>浏览器加载JavaScript脚本，主要通过 &lt;script&gt; 标签完成。正常的网页加载流程是这样的:</p>
+<ol>
+    <li>浏览器一边下载HTML网页，一边开始解析</li>
+    <li>解析过程中，发现 &lt;script&gt; 标签则暂停解析，网页渲染的控制权转交给JavaScript引擎</li>
+    <li>若引入了外部脚本，则下载并执行，否则直接执行</li>
+    <li>执行完毕，控制权交还渲染引擎，恢复往下解析HTML网页</li>
+</ol>
+<p>因此，较好的做法是将 &lt;script&gt; 标签都放在页面底部，样式文件放在 &lt;head&gt; 中。</p>
+<p>对于连续引入的外部脚本，浏览器会并行下载，但会顺序执行，保证脚本之间的依赖关系。</p>
+
+<p>对于来自同一个域名的资源，比如脚本文件、样式表文件、图片文件等，浏览器一般最多同时下载六个（IE11允许同时下载13个）。如果是来自不同域名的资源，就没有这个限制。所以，通常把静态文件放在不同的域名之下，以加快下载速度。</p>
+
+<h4>defer属性 和 async属性</h4>
+<pre>
+&lt;script src="a.js" defer>&lt;/script>
+&lt;script src="b.js" async>&lt;/script>
+</pre>
+<p>defer属性、async属性 和 动态生成 &lt;script&gt; 标签 都不会阻塞页面渲染。</p>
+<ol>
+    <li>defer属性：脚本文件将在DOMContentLoaded事件触发前执行（即刚刚读取完&lt;/html>标签），只能用于外部引入的 &lt;script&gt; 标签。在所有defer标签中执行顺序确定。</li>
+    <li>async属性：使用另一个进程下载脚本，脚本下载完成时，浏览器暂停解析HTML网页，开始执行下载的脚本，执行完毕后浏览器恢复解析HTML网页。先下载完先执行，所以无法确定执行顺序。若同时使用async和defer属性，则async有效。</li>
+    <li>动态生成 &lt;script&gt; 标签 同async一样也是先下载完先执行，所以无法确定执行顺序。如果想避免这个问题，可以设置async属性为false(代码如下)，不过需要注意的是，在这段代码后面加载的脚本文件，会因此都等待b.js执行完成后再执行。</li>
+</ol>
+<pre>
+['a.js', 'b.js'].forEach(function(src) {
+      var script = document.createElement('script');
+      script.src = src;
+      script.async = false;
+      document.head.appendChild(script);
+});
+</pre>
+
+<h4>加载使用的协议</h4>
+<pre>
+&lt;script src="example.js">&lt;/script>  // 默认为 http
+&lt;script src="https://example.js">&lt;/script>  //  https
+&lt;script src="//example.js">&lt;/script> // 根据当前网页协议动态确定
+</pre>
+{% endblock %}
