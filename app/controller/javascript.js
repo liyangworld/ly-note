@@ -92,6 +92,12 @@ module.exports = app => {
         * BomScreen(){
             yield this.ctx.render('pages/javascript/BomScreen.html',{action:'BomScreen'});
         }
+        * BomCORS(){
+            yield this.ctx.render('pages/javascript/BomCORS.html',{action:'BomCORS'});
+        }
+        * BomStorage(){
+            yield this.ctx.render('pages/javascript/BomStorage.html',{action:'BomStorage'});
+        }
 
 
         * DomDocument(){

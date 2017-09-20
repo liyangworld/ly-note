@@ -7,10 +7,151 @@
 
 <h1>history/location 对象</h1>
 
+<h2>history对象</h2>
+<p>浏览器窗口有一个history对象，用来保存浏览历史。</p>
+
+<h3>属性</h3>
+<table>
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>length</td>
+            <td>返回历史列表中的网址数目。IE和Opera从0开始,而Firefox、Chrome和Safari从1开始。</td>
+        </tr>
+        <tr>
+            <td>state</td>
+            <td>返回当前页面的state对象，这是一种可以不必等待popstate 事件而查看状态的方式</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>方法</h3>
+<table>
+    <thead>
+    <tr>
+        <th>方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">back()</td>
+            <td>加载 history 列表中的前一个 URL，等同于浏览器的后退键。页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。</td>
+        </tr>
+        <tr>
+            <td class="useful">forward()</td>
+            <td>加载 history 列表中的下一个 URL，等同于浏览器的前进键。</td>
+        </tr>
+        <tr>
+            <td class="useful">go(i)</td>
+            <td>加载 history 列表中的某个具体页面，i指相对位置。go(-1)相当于back()、go(0)相当于刷新本页、go(1)相当于forward()</td>
+        </tr>
+        <tr>
+            <td class="h5 my-title" title="history.pushState({a:'任意数据'}, null, 'test.html');">pushState(state,title,url)</td>
+            <td>在浏览记录中添加一条新记录，浏览器地址栏会立刻显示新地址但页面不会跳转。state：状态对象，popstate事件触发时，该对象会传入回调函数；title：新页面的标题；url：新的网址，必须与当前页面处在同一个域，若url参数设置了一个新的锚点值（即hash），并不会触发hashchange事件</td>
+        </tr>
+        <tr>
+            <td class="h5">replaceState(state,title,url)</td>
+            <td>替换浏览历史中的当前这条纪录</td>
+        </tr>
+    </tbody>
+</table>
+<h3>popstate事件</h3>
+<p>每当同一个文档的浏览历史（即history对象）出现变化时，就会触发popstate事件。需要注意的是，仅仅调用pushState方法或replaceState方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用JavaScript调用back、forward、go方法时才会触发。另外，该事件只针对同一个文档（hash值变化也属同一个文档），如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。</p>
+
+<pre>
+window.addEventListener('popstate', function(event) {
+      console.log('location: ' + document.location);
+      console.log('state: ' + JSON.stringify(event.state));
+});
+</pre>
 
 
+<h2>location对象</h2>
+<p>window.location 同 document.location，提供了当前文档的URL信息。历史上，IE曾经不允许对document.location赋值，为了保险起见，建议优先使用window.location。</p>
+<h3>属性</h3>
+<table>
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">location.href</td>
+            <td>设置或返回当前文档的完整 URL。假设为"http://user:passwd@www.example.com:4097/path/a.html?x=111#part1"</td>
+        </tr>
+        <tr>
+            <td>location.protocol</td>
+            <td>设置或返回当前 URL 的协议。此处为："http:"</td>
+        </tr>
+        <tr>
+            <td class="useful">location.host</td>
+            <td>设置或返回当前 URL 的主机名称和端口号。此处为："www.example.com:4097"</td>
+        </tr>
+        <tr>
+            <td>location.hostname</td>
+            <td>设置或返回当前 URL 的主机名。此处为："www.example.com"</td>
+        </tr>
+        <tr>
+            <td>location.port</td>
+            <td>设置或返回当前 URL 的端口部分。此处为："4097"</td>
+        </tr>
+        <tr>
+            <td class="useful">location.pathname</td>
+            <td>设置或返回当前 URL 的路径部分。此处为："/path/a.html"</td>
+        </tr>
+        <tr>
+            <td class="useful">location.search</td>
+            <td>设置或返回当前 URL 的查询部分（问号 ? 之后的部分）。此处为："?x=111"</td>
+        </tr>
+        <tr>
+            <td class="useful">location.hash</td>
+            <td>设置或返回当前 URL 的锚部分（从 # 号开始的部分）。此处为："#part1"</td>
+        </tr>
+        <tr>
+            <td>location.user</td>
+            <td>设置或返回当前 URL 主机名前的用户名。此处为："user"</td>
+        </tr>
+        <tr>
+            <td>location.password</td>
+            <td>设置或返回当前 URL 主机名前的密码。此处为："passwd"</td>
+        </tr>
+    </tbody>
+</table>
 
-
-
+<h3>方法</h3>
+<table>
+    <thead>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">location.reload(bool)</td>
+            <td>重新载入当前文档，即刷新。true则优先从服务器重新加载，false则优先从本地缓存重新加载（默认值）</td>
+        </tr>
+        <tr>
+            <td>location.assign(newURL)</td>
+            <td>跳转到一个新网址</td>
+        </tr>
+        <tr>
+            <td>location.replace(newURL)</td>
+            <td>跳转到新网址，并将取代掉history对象中的当前记录</td>
+        </tr>
+        <tr>
+            <td>location.toString()</td>
+            <td>将location对象转为字符串，等价于document.location.href</td>
+        </tr>
+    </tbody>
+</table>
 
 {% endblock %}

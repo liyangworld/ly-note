@@ -6,8 +6,84 @@
 {% block content %}
 
 <h1>navigator/screen 对象</h1>
+<h2>navigator 对象</h2>
+<h3>属性</h3>
+<table>
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>navigator.platform</td>
+            <td>返回运行浏览器的操作系统平台,如：Win32</td>
+        </tr>
+        <tr>
+            <td>navigator.appName</td>
+            <td>返回浏览器的名称。IE是“Microsoft Internet Explorer”；
+                其他浏览器是“Netscape”。</td>
+        </tr>
+        <tr>
+            <td>navigator.appCodeName</td>
+            <td>返回浏览器的代码名。所有浏览器都返回“Mozilla” </td>
+        </tr>
+        <tr>
+            <td>navigator.appVersion</td>
+            <td>返回浏览器的平台和版本信息。如 Chrome ：
+                5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36</td>
+        </tr>
+        <tr>
+            <td>navigator.userAgent</td>
+            <td>返回浏览器用于 HTTP 请求的用户代理头的值。如 Chrome ：
+                Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36</td>
+        </tr>
+        <tr>
+            <td>navigator.cookieEnabled</td>
+            <td>返回布尔值，判断浏览器是否启用了 cookie</td>
+        </tr>
+        <tr>
+            <td>navigator.onLine</td>
+            <td>返回布尔值，判断浏览器是否连接网络了</td>
+        </tr>
+        <tr>
+            <td>navigator.geolocation</td>
+            <td>返回一个Geolocation对象，包含用户地理位置的信息</td>
+        </tr>
+    </tbody>
+</table>
 
+<h2>screen 对象</h2>
 
+<h3>属性</h3>
+<table>
+    <thead>
+    <tr>
+        <th>属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>screen.width、screen.height</td>
+            <td>返回设备屏幕的宽度及高度（单位px）</td>
+        </tr>
+        <tr>
+            <td>screen.availwidth、screen.availheight</td>
+            <td>返回设备屏幕的可用宽度及高度（单位px），如不包括系统任务栏</td>
+        </tr>
+        <tr>
+            <td>screen.colorDepth</td>
+            <td>返回设备或缓冲器上调色板的比特深度（比特每像素），如：24</td>
+        </tr>
+        <tr>
+            <td>screen.pixelDepth</td>
+            <td>返回显示屏幕的颜色分辨率（比特每像素），同上，如：24</td>
+        </tr>
+
+    </tbody>
+</table>
 
 
 

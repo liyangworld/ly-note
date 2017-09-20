@@ -187,6 +187,17 @@ td.es8::before{
     content:'\2467\2467';
     left:-35px;
 }
+td.h5::before{
+    position:absolute;
+    left:-22px;
+    color: #00f;
+    content:'H5';
+    width:16px;
+    height:16px;
+    font-size:8px;
+    border-radius:8px;
+    border: 1px solid #00f
+}
 pre{
     background-color: #FAFAFA;
     border:1px solid #ccc;
