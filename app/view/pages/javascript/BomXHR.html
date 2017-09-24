@@ -1,0 +1,160 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'XMLHttpRequest 对象' %}
+
+{% block content %}
+
+<h1>XMLHttpRequest 对象</h1>
+<p>1999年，微软公司发布IE浏览器5.0版，第一次引入了新功能：允许JavaScript脚本向服务器发起HTTP请求。</p>
+<p>如今AJAX（Asynchronous Javascript And XML）已成为脚本发起HTTP通信的代名词。AJAX通过原生的XMLHttpRequest对象发出HTTP请求，得到服务器返回的数据后，再进行处理。尽管名字里有XML, 但 XMLHttpRequest 可以取回所有类型的数据资源，并不局限于XML。而且除了HTTP ,它还支持file 和 ftp 协议。</p>
+<p>AJAX可以是同步请求也可以是异步请求。但是，大多数情况下，特指异步请求。因为同步的Ajax请求，对浏览器有“堵塞效应”。</p>
+
+
+<h2>属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>实例属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">xhr.readyState</td>
+            <td>请求当前所处的状态，共五种状态。0(UNSENT未打开):open()方法还未被调用;1(OPENED未发送):send()方法还未被调用;2(HEADERS_RECEIVED已获取响应头):send()方法已经被调用, 响应头和响应状态已经返回，3(LOADING正在下载响应体)响应体下载中,responseText中已经获取了部分数据;4(DONE请求完成):整个请求过程已经完毕</td>
+        </tr>
+
+        <tr>
+            <td class="useful">xhr.response</td>
+            <td>返回接收到的数据体（即body部分）。它的类型可以是ArrayBuffer、Blob、Document、JSON对象、或者一个字符串，这由XMLHttpRequest.responseType属性的值决定。如果请求未完成或失败，则该值为 null</td>
+        </tr>
+        <tr>
+            <td>xhr.responseType</td>
+            <td>指定服务器返回数据（xhr.response）的类型。”“：字符串（默认值）；“arraybuffer”：ArrayBuffer对象；“blob”：Blob对象；“document”：Document对象；“json”：JSON对象；“text”：字符串。</td>
+        </tr>
+        <tr>
+            <td class="useful">xhr.responseText</td>
+            <td>返回从服务器接收到的字符串，如果本次请求没有成功或者数据不完整，该属性就会等于null</td>
+        </tr>
+        <tr>
+            <td>xhr.responseXML</td>
+            <td>返回从服务器接收到的Document对象，如果本次请求没有成功或者数据不完整，或者不能被解析为XML或HTML，该属性等于null</td>
+        </tr>
+        <tr>
+            <td class="useful">xhr.status</td>
+            <td>返回本次请求所得到的HTTP状态码。200：OK访问正常；301：Moved Permanently永久移动；302：Move temporarily暂时移动；304：Not Modified未修改；307：Temporary Redirect暂时重定向；401：Unauthorized未授权；403：Forbidden禁止访问；404：Not Found未发现指定网址；500：Internal Server Error，服务器发生错误</td>
+        </tr>
+        <tr>
+            <td>xhr.statusText</td>
+            <td>返回请求的响应状态信息,包含一个状态码和原因短语 (例如 "200 OK") </td>
+        </tr>
+        <tr>
+            <td>xhr.timeout</td>
+            <td>表示多少毫秒后，如果请求仍然没有得到结果，就会自动终止；0表示无时间限制</td>
+        </tr>
+        <tr>
+            <td>xhr.withCredentials</td>
+            <td>表示跨域请求时，用户信息（比如Cookie和认证的HTTP头信息）是否会包含在请求之中，默认为false</td>
+        </tr>
+        <tr>
+            <td>xhr.upload</td>
+            <td>可以在 upload 上添加一个事件监听来跟踪上传过程，比如xhr.upload.onprogress</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td class="useful">xhr.onreadystatechange</td>
+            <td>指向一个回调函数，当readyState属性改变时会调用它。此时readystatechange事件也会触发</td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th>实例方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">xhr.open(method,url,async,user,password)</td>
+            <td>用于指定发送HTTP请求的参数，一共可以接受五个参数。重复调用则相当于abort()</td>
+        </tr>
+        <tr>
+            <td class="useful">xhr.send(data)</td>
+            <td>用于实际发出HTTP请求。参数可选，GET方法则data作为查询字符串附加在URL后面，POST方法则作为数据体。所有XMLHttpRequest的监听事件，都必须在send()方法调用之前设定</td>
+        </tr>
+        <tr>
+            <td>xhr.abort()</td>
+            <td>用来终止已经发出的HTTP请求</td>
+        </tr>
+        <tr>
+            <td>xhr.getAllResponseHeaders()</td>
+            <td>返回服务器发来的所有HTTP头信息</td>
+        </tr>
+        <tr>
+            <td>xhr.getResponseHeader()</td>
+            <td>返回HTTP头信息指定字段的值</td>
+        </tr>
+        <tr>
+            <td>xhr.setRequestHeader()</td>
+            <td>用于设置HTTP头信息。该方法必须在open()之后、send()之前调用</td>
+        </tr>
+        <tr>
+            <td>xhr.overrideMimeType()</td>
+            <td>用来指定服务器返回数据的MIME类型</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>事件</h2>
+<table>
+    <thead>
+    <tr>
+        <th>事件</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">readyStateChange</td>
+            <td>readyState属性改变时</td>
+        </tr>
+
+        <tr>
+            <td>loadstart</td>
+            <td>请求发出</td>
+        </tr>
+        <tr>
+            <td class="useful">load</td>
+            <td>请求成功完成</td>
+        </tr>
+        <tr>
+            <td>loadend</td>
+            <td>请求完成，不管成功或失败</td>
+        </tr>
+        <tr>
+            <td>progress</td>
+            <td>正在发送和加载数据</td>
+        </tr>
+        <tr>
+            <td>abort</td>
+            <td>请求被中止，比如用户调用了abort()方法</td>
+        </tr>
+        <tr>
+            <td>timeout</td>
+            <td>用户指定的时限到期，请求还未完成</td>
+        </tr>
+        <tr>
+            <td class="useful">error</td>
+            <td>请求失败</td>
+        </tr>
+
+    </tbody>
+</table>
+
+{% endblock %}

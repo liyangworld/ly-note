@@ -6,8 +6,144 @@
 {% block content %}
 
 <h1>浏览器数据存储</h1>
+<h2>简介</h2>
+<p>浏览器提供了一些数据本地存储的API，用以保存用户的信息。如：Cookie、LocalStorage、SessionStorage、IndexedDB、WebSQL；以及缓存：CacheStorage、ApplicationCache。</p>
+
+<h2>Cookie</h2>
+<p>Cookie 是服务器保存在浏览器的一小段文本信息，浏览器每次向服务器发出请求时，就会自动附上这段信息。</p>
+<p>浏览器可以设置不接受 Cookie，也可以设置不向服务器发送 Cookie。window.navigator.cookieEnabled属性返回浏览器是否打开了Cookie功能。</p>
+<p>Cookie 的限制：</p>
+<ol>
+    <li>数量限制：目前，Firefox是每个域名最多设置50个Cookie，而Safari和Chrome没有域名数量的限制。</li>
+    <li>大小限制：所有Cookie的累加长度限制为4KB。超过这个长度的Cookie，将被忽略，不会被设置。</li>
+</ol>
+<p>为了避免数量的限制，可将多条合并为一条：</p>
+<pre>
+name=key1=b&key2=d&key3=f
+</pre>
+
+<h3>1. 服务器设置Cookie</h3>
+<pre>
+Set-Cookie: key1=value1;
+Set-Cookie: key2=value2; expires=Sun, 16 Jul 3567 06:23:41 GMT
+</pre>
+<p>设置Cookie时必须一条一条得设置；除了Cookie本身的内容(键值对)，还有一些可选的属性也是可以写入的，它们都必须以分号分隔。</p>
+<pre>
+Set-Cookie: value[; expires=date][; domain=domain][; path=path][; secure]
+</pre>
+<table>
+    <thead>
+        <tr>
+            <th>Cookie的属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>value</td>
+            <td>必需的，它是一个键值对，用于指定Cookie的值</td>
+        </tr>
+        <tr>
+            <td>expires</td>
+            <td>用于指定Cookie过期时间。它的格式采用Date.toUTCString()的格式。如果不设置该属性，或者设为null，Cookie只在当前会话（session）有效，浏览器窗口一旦关闭，当前Session结束，该Cookie就会被删除。</td>
+        </tr>
+        <tr>
+            <td>domain</td>
+            <td>指定Cookie所在的域名，比如example.com或.example.com（这种写法将对所有子域名生效）、subdomain.example.com。如果未指定，默认为设定该Cookie的域名。</td>
+        </tr>
+        <tr>
+            <td>path</td>
+            <td>用来指定路径，必须是绝对路径（比如/、/mydir），如果未指定，默认为请求该 Cookie 的网页路径。</td>
+        </tr>
+        <tr>
+            <td>secure</td>
+            <td>用来指定Cookie只能在加密协议HTTPS下发送到服务器。该属性只是一个开关，不需要指定值。如果通信是HTTPS协议，该开关自动打开。</td>
+        </tr>
+        <tr>
+            <td>max-age</td>
+            <td>用来指定Cookie有效期，单位秒</td>
+        </tr>
+        <tr>
+            <td>HttpOnly</td>
+            <td>用于设置该Cookie不能被JavaScript读取，即document.cookie返回值中不包含这条</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>设置同名Cookie时，如果domain、path和secure属性都一样，则为修改，否则便是新增一条同名Cookie。浏览器将向服务器发送多个同名的键值对。</p>
+
+<h3>2. 浏览器设置Cookie</h3>
+<pre>
+document.cookie = 'key1=value1;expires=Thu, 01-Jan-2970 00:00:01 GMT';
+</pre>
+<p>document.cookie可读可写，但一次只能写入一个Cookie，而且写入并不是覆盖，而是添加；返回时则返回全部的键值对。写入cookie时等号两边不能有空格，并且必须对分号、逗号和空格进行转义（它们都不允许作为Cookie的值），可以用encodeURIComponent方法。</p>
+<p>若想删除某个cookie，只需将expires设置为0或一个过去的日期即可。</p>
 
 
+<h2>localStorage、sessionStorage</h2>
+<p>sessionStorage保存的数据用于浏览器的一次会话，当会话结束（通常是该窗口关闭），数据被清空；localStorage保存的数据长期存在，下一次访问该网站的时候，网页可以直接读取以前保存的数据。除了保存期限的长短不同，这两个对象的属性和方法完全一样。一般常用localStorage。</p>
+<p>目前，每个域名的存储空间上限视浏览器而定，Chrome是2.5MB，Firefox和Opera是5MB，IE是10MB。</p>
+
+<h3>属性、方法、事件</h3>
+<table>
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>localStorage.length</td>
+            <td>返回所有键值对的个数</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>localStorage.setItem(key,value)</td>
+            <td>存入或修改数据，所有的数据都是以文本格式保存的</td>
+        </tr>
+        <tr>
+            <td>localStorage.getItem(key)</td>
+            <td>获取数据</td>
+        </tr>
+        <tr>
+            <td>localStorage.key(index)</td>
+            <td>获取数据，索引值从0开始</td>
+        </tr>
+        <tr>
+            <td>localStorage.removeItem(key)</td>
+            <td>清除某个键名对应的数据</td>
+        </tr>
+        <tr>
+            <td>localStorage.clear()</td>
+            <td>清除所有的数据</td>
+        </tr>
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <th>事件</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="my-title" title="如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信。所有浏览器之中，只有IE浏览器除外，它会在所有页面触发storage事件。">window.addEventListener("storage",callback);</td>
+            <td>当储存的数据发生变化时，会触发storage事件。事件event对象有四个属性：key(发生变化的key)、oldValue(更新前的值,新增则为null)、newValue(更新后的值,删除则为null)、url(原始触发事件的网址)</td>
+        </tr>
+    </tbody>
+</table>
 
 
 {% endblock %}

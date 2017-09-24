@@ -7,6 +7,139 @@
 
 <h1>同源政策、CORS、AJAX</h1>
 
+<h2>同源政策</h2>
+<p>1995年，同源政策由 Netscape 公司引入浏览器。目前，所有浏览器都实行这个政策。最初，它的含义是指，A 网页设置的 Cookie，B 网页不能打开，除非这两个网页“同源”。所谓“同源”指的是”三个相同“：协议相同、域名相同、端口相同。</p>
+<p>现如今“同源政策”更为严格。如果非同源，共有三种行为受到限制：</p>
+<ol>
+    <li>Cookie、LocalStorage 和 IndexedDB 无法读取。</li>
+    <li>DOM 无法获得。</li>
+    <li>AJAX 请求无效（可以发送，但浏览器会拒绝接受响应）。</li>
+</ol>
+
+<h2>规避同源政策</h2>
+<h3>1. Cookie</h3>
+<p>Cookie 是服务器写入浏览器的一小段信息，只有同源的网页(Cookie不要求协议相同)才能共享。但是，如果两个网页一级域名相同，只是二级域名不同，浏览器允许通过设置相同的document.domain来共享 Cookie。</p>
+<p>假设 A网页是http://w1.example.com/a.html，B网页是http://w2.example.com/b.html，则同时设置相同的document.domain，这两个网页就可以共享Cookie了。</p>
+<pre>
+document.domain = 'example.com';
+</pre>
+
+<p>也可以在服务器端进行操作，服务器在设置 Cookie 的时候，指定 Cookie 的所属域名为一级域名，比如.example.com，如此二级域名和三级域名不用做任何设置，都可以读取这个Cookie。</p>
+<pre>
+Set-Cookie: key=value; domain=.example.com; path=/
+</pre>
+<p>但是，这种方法只适用于 Cookie 和 iframe 窗口，LocalStorage 和 IndexedDB 无法通过这种方法，规避同源政策，可以使用PostMessage API。</p>
+
+<h3>2. iframe</h3>
+<p>网页中可以使用iframe元素，嵌入其他网页，每个iframe元素形成自己的窗口，即有自己的window对象，因此一个网页之中会形成多个窗口。但是，只有在同源的情况下，父窗口和子窗口才能通信；如果跨域，就无法拿到对方的DOM。即可以使用脚本拿到父子窗口的window对象(name属性可自由操作)，但无法拿到和操作对方的DOM。</p>
+<p>一、父窗口获取子iframe的window对象的两种方法：</p>
+<ol>
+    <li>通过获取iframe标签：使用 document.getElementById 等方法可以拿到子iframe的DOM节点，然后使用contentWindow属性获得其window对象，或者使用contentDocument属性获得包含的document对象。</li>
+    <li>window.frames属性：父窗口的window.frames属性返回所有子iframe的window对象，window.frames[0]指第一个子iframe。如果iframe元素设置了name或id属性(如id='fm')，则window.frames['fm'] === window.frames.fm === window.fm。</li>
+</ol>
+
+<dl>
+    <dt>二、子iframe获取父窗口的window对象：</dt>
+    <dd>
+        <p>可以使用window.parent引用父窗口。如果当前页面没有父窗口，则window.parent属性返回自身即window.self。</p>
+        <p>子iframe的window对象有一个frameElement属性，返回它在父窗口中的DOM节点，若无父窗口则该属性等于null。</p>
+    </dd>
+</dl>
+
+<h4>iframe跨窗口通信</h4>
+<p>如果两个窗口一级域名相同，只是二级域名不同，那么设置document.domain属性，就可以规避同源政策，拿到DOM。对于完全不同源的窗口，目前有两种方法可以解决跨域窗口的通信问题：片段识别符、跨文档通信API。</p>
+
+<dl>
+    <dt>片段识别符：URL的#号后面的部分，即hash值（#）。如果只是改变片段识别符，页面不会重新刷新。</dt>
+    <dd>父窗口改变子iframe的hash值：</dd>
+    <dd><pre>
+document.getElementById('fm').src = originURL + '#' + data;</pre>
+    </dd>
+    <dd>子iframe改变父窗口的hash值：</dd>
+    <dd><pre>
+window.parent.location.href= target + “#” + hash;</pre>
+    </dd>
+    <dd>监听hashchange事件：</dd>
+    <dd><pre>
+window.onhashchange = function() {
+    var message = window.location.hash;
+}</pre>
+    </dd>
+</dl>
+
+<dl>
+    <dt>跨文档通信API：HTML5引入了一个window.postMessage(msg,origin)方法，允许跨窗口通信，不论这两个窗口是否同源。IE8及以上都支持。</dt>
+    <dd>在父窗口中向子iframe发送消息：</dd>
+    <dd><pre>
+window.frames['fm'].postMessage('Hello child!', 'http://child.com');</pre></dd>
+    <dd>在子iframe中向父窗口发送消息：</dd>
+    <dd><pre>
+        window.parent.postMessage('Hello father!', 'http://father.com');</pre></dd>
+    <dd>监听message事件接收消息：</dd>
+    <dd><pre>
+window.addEventListener('message',function(e){
+                console.log(e.data);
+            },false);</pre></dd>
+    <dd>message事件的事件对象event有三个常用属性：event.data（消息内容）、event.origin（消息的目标网址）、event.source（消息事件的来源窗口window对象）。</dd>
+</dl>
+
+<h3>3. localStorage</h3>
+<p>通过window.postMessage方法，可实现间接读写其他窗口 localStorage 的功能。即获取自身的localStorage，然后作为消息发送出去。</p>
+
+<h2>CORS</h2>
+<p>CORS是一个W3C标准，全称是“跨域资源共享”（Cross-origin resource sharing）。</p>
+<p>一般浏览器通过 XMLHttpRequest 向服务器发送请求，但是受到同源策略的限制。而CORS便解决了这个问题，允许浏览器跨域请求。</p>
+<p>CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10（IE8/9借由XDomainRequest实现）。</p>
+<p>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。浏览器一旦发现AJAX请求跨域，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。因此，实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨域通信。</p>
+
+<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。</p>
+<p>同时满足以下两大条件的就属于简单请求：</p>
+<ol>
+    <li>请求方法是以下三种方法之一：GET、POST、HEAD</li>
+    <li>HTTP的头信息不超出以下几种字段：Accept、Accept-Language、Content-Language、Last-Event-ID、Content-Type（只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain）</li>
+</ol>
+<p>凡是不同时满足上面两个条件的就属于非简单请求。浏览器对这两种请求的处理，是不一样的。</p>
+<h3>简单请求</h3>
+<p>对于简单请求，浏览器直接发出CORS请求。即自动在头信息中增加一个Origin字段，值为当前网页地址（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。若不同意则抛出一个错误，被XMLHttpRequest的onerror回调函数捕获。</p>
+<p>服务器端的设置：</p>
+<ol>
+    <li>Access-Control-Allow-Origin: * // 允许的域名</li>
+    <li>Access-Control-Allow-Credentials: true // 可选，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可Cookie可以包含在请求中，此时需要在AJAX请求中打开withCredentials属性：xhr.withCredentials = true。</li>
+    <li>Access-Control-Expose-Headers: aaa // 可选，CORS请求时 XMLHttpRequest 对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段就必须在Access-Control-Expose-Headers里面指定。此处指定，getResponseHeader('aaa')可以返回aaa字段的值。</li>
+</ol>
+
+
+<h3>非简单请求</h3>
+<p>非简单请求是那种对服务器有特殊要求的请求，比如请求方法是PUT或DELETE，或者Content-Type字段的类型是application/json。</p>
+<p>非简单请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为“预检”请求（preflight）(使用OPTIONS方法)。浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。只有得到肯定答复，浏览器才会发出正式的XMLHttpRequest请求，否则就报错。</p>
+<p>一旦服务器通过了“预检”请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样了。</p>
+<p>“预检”请求的回应中可能有一个字段 Access-Control-Max-Age，值为秒数，表示本次预检请求的有效期，在此期间，不用发出另一条预检请求。 </p>
+
+<h3>CORS与JSONP的比较</h3>
+<p>JSONP只支持GET请求，CORS支持所有类型的HTTP请求。JSONP的优势在于 支持老式浏览器 和 向不支持CORS的网站请求数据。</p>
+
+
+<h2>AJAX</h2>
+<p>同源政策规定，AJAX请求只能发给同源的网址，否则就报错。除了架设服务器代理（浏览器请求同源服务器，再由后者请求外部服务），有三种方法规避这个限制：JSONP、WebSocket、CORS。</p>
+<h3>1.JSONP</h3>
+<p>JSONP 的原理是动态创建一个 &lt;script&gt; 标签，由此向服务器请求JSON数据，服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。此函数将立即执行。</p>
+<pre>
+function addScriptTag(src) {
+    var script = document.createElement('script');
+    script.setAttribute("type","text/javascript");
+    script.src = src;
+    document.body.appendChild(script);
+}
+
+window.onload = function () {
+  addScriptTag('http://example.com/ip?callback=foo');
+}
+
+function foo(data) {
+  console.log('Your public IP address is: ' + data.ip);
+};
+</pre>
+
 
 
 

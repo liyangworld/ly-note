@@ -92,16 +92,37 @@ module.exports = app => {
         * BomScreen(){
             yield this.ctx.render('pages/javascript/BomScreen.html',{action:'BomScreen'});
         }
+        * BomXHR(){
+            yield this.ctx.render('pages/javascript/BomXHR.html',{action:'BomXHR'});
+        }
+        * BomFetch(){
+            yield this.ctx.render('pages/javascript/BomFetch.html',{action:'BomFetch'});
+        }
         * BomCORS(){
             yield this.ctx.render('pages/javascript/BomCORS.html',{action:'BomCORS'});
+        }
+        * BomWebSocket(){
+            yield this.ctx.render('pages/javascript/BomWebSocket.html',{action:'BomWebSocket'});
         }
         * BomStorage(){
             yield this.ctx.render('pages/javascript/BomStorage.html',{action:'BomStorage'});
         }
 
 
+        * DomAbstract(){
+            yield this.ctx.render('pages/javascript/DomAbstract.html',{action:'DomAbstract'});
+        }
         * DomDocument(){
             yield this.ctx.render('pages/javascript/DomDocument.html',{action:'DomDocument'});
+        }
+        * DomElement(){
+            yield this.ctx.render('pages/javascript/DomElement.html',{action:'DomElement'});
+        }
+        * DomStyle(){
+            yield this.ctx.render('pages/javascript/DomStyle.html',{action:'DomStyle'});
+        }
+        * DomEvent(){
+            yield this.ctx.render('pages/javascript/DomEvent.html',{action:'DomEvent'});
         }
 
     }

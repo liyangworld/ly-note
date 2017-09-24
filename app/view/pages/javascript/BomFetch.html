@@ -1,0 +1,296 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = 'Fetch API' %}
+
+{% block content %}
+
+<h1>Fetch API</h1>
+<h2>简介</h2>
+<p>Ajax操作所用的XMLHttpRequest对象，已经有十多年的历史，它的API设计并不是很好，输入、输出、状态都在同一个接口管理，容易写出非常混乱的代码。</p>
+<p>Fetch API是一种新规范(IE不支持)，用来取代XMLHttpRequest对象。它主要有以下特点：</p>
+<ol>
+    <li>接口合理化，Ajax是将所有不同性质的接口都放在XHR对象上，而Fetch是将它们分散在几个不同的对象上，设计更合理</li>
+    <li>Fetch操作返回Promise对象，避免了嵌套的回调函数</li>
+    <li>数据传送是以数据流（stream）的形式进行的。对于大文件，数据是一段一段得到的</li>
+</ol>
+
+<p>Fetch API引入三个新的对象（也是构造函数）：Headers, Request和Response。</p>
+
+<h2>fetch() 方法</h2>
+<p>基本用法：</p>
+<pre>
+fetch(url).then(function (response) {
+    return response.json();
+}).then(function (jsonData) {
+    console.log(jsonData);
+}).catch(function () {
+    console.log('出错了');
+});
+</pre>
+<p>fetch() 方法还可以接受一个Request对象实例作为参数；当url作为第一个参数时，可接受各项配置作为第二个参数。</p>
+<pre>
+fetch(req);
+fetch(url);
+fetch(url,{ method: "POST", body: "data" });
+</pre>
+
+
+
+<h2>Headers 对象</h2>
+<h3>1.构造Headers实例</h3>
+<pre>
+var headers1 = new Headers();
+var headers2 = new Headers({
+    "Content-Type": "text/plain",
+    "Content-Length": '1999',
+    "X-Custom-Header": "ProcessThisImmediately",
+});
+</pre>
+<h3>2.方法</h3>
+<table>
+    <thead>
+        <tr>
+            <th>实例方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">append()</td>
+            <td>返回 给现有的header字段添加一个值，不存在则新增</td>
+        </tr>
+        <tr>
+            <td>set()</td>
+            <td>替换现有的header的值，不存在则新增</td>
+        </tr>
+        <tr>
+            <td>has()</td>
+            <td>返回是否存在指定的header</td>
+        </tr>
+        <tr>
+            <td>get()</td>
+            <td>从Headers对象中返回指定header的第一个值</td>
+        </tr>
+        <tr>
+            <td>getAll()</td>
+            <td>以数组的形式从Headers对象中返回指定header的全部值</td>
+        </tr>
+        <tr>
+            <td>delete()</td>
+            <td>从Headers对象中删除指定header</td>
+        </tr>
+        <tr>
+            <td>entries()</td>
+            <td>以 迭代器 的形式返回Headers对象中所有的键值对</td>
+        </tr>
+
+        <tr>
+            <td>keys()</td>
+            <td>以迭代器的形式返回Headers对象中所有存在的header名</td>
+        </tr>
+
+        <tr>
+            <td>values()</td>
+            <td>以迭代器的形式返回Headers对象中所有存在的header的值</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<h2>Request 对象</h2>
+<h3>1.构造Request实例</h3>
+<pre>
+var req1 = new Request("/index.html");
+var req2 = new Request("/uploadImage", {
+    method: "POST",
+    headers: {
+      "Content-Type": "image/png",
+    },
+    body: "image data"
+});
+var req3 = new Request(req1,{ method: "POST" });
+</pre>
+
+<h3>2.属性</h3>
+<table>
+    <thead>
+        <tr>
+            <th>实例属性(皆只读)</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">req.url</td>
+            <td>返回请求使用的 URL</td>
+        </tr>
+        <tr>
+            <td class="useful">req.method</td>
+            <td>返回请求使用的方法 (GET, POST, 等.)</td>
+        </tr>
+        <tr>
+            <td class="useful">req.mode</td>
+            <td>返回请求的模式 (例如： cors, no-cors默认值, same-origin)</td>
+        </tr>
+        <tr>
+            <td class="useful">req.cache</td>
+            <td>返回请求的缓存模式 (例如： default, reload, no-cache)</td>
+        </tr>
+        <tr>
+            <td class="useful">req.headers</td>
+            <td>返回请求所关联的 Headers 对象</td>
+        </tr>
+        <tr>
+            <td class="useful">req.bodyUsed</td>
+            <td>返回body是否被使用过</td>
+        </tr>
+
+
+        <tr>
+            <td>req.credentials</td>
+            <td>返回请求的凭证 (例如： omit, same-origin)</td>
+        </tr>
+        <tr>
+            <td>req.redirect</td>
+            <td>返回如何处理重定向模式 (例如： follow, error, or manual)</td>
+        </tr>
+        <tr>
+            <td>req.integrity</td>
+            <td>返回请求内容的 subresource integrity 值 (例如： sha256-BpfBw7ivV8q2jLiT13fxDYAe2tJllusRSZ273h2nFSE=)</td>
+        </tr>
+
+        <tr>
+            <td>req.context</td>
+            <td>返回请求的上下文 (例如：audio, image, iframe, 等)</td>
+        </tr>
+        <tr>
+            <td>req.referrer</td>
+            <td>返回请求的来源 (例如：client)</td>
+        </tr>
+        <tr>
+            <td>req.referrerPolicy</td>
+            <td>returns the referrer policy</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<h2>Response 对象</h2>
+<h3>1.构造Response实例</h3>
+<pre>
+var res1 = new Response('返回的数据');
+var res2 = new Response(
+    JSON.stringify({photos: {photo: []}}),
+    {'status': 200, headers: headers}
+);
+</pre>
+
+<h3>2.属性</h3>
+<table>
+    <thead>
+        <tr>
+            <th>实例属性(皆只读)</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">res.ok</td>
+            <td>返回一个布尔值来标示该Response成功(状态码200-299) 还是失败</td>
+        </tr>
+        <tr>
+            <td class="useful">res.status</td>
+            <td>返回Response的状态码 (例如, 200)</td>
+        </tr>
+        <tr>
+            <td>res.statusText</td>
+            <td>返回与该Response状态码一致的状态信息 (例如, "OK")</td>
+        </tr>
+        <tr>
+            <td class="useful">res.type</td>
+            <td>返回Response的类型 (例如, basic正常的同域请求、default、error、cors表示CORS机制的跨域请求、opaque表示非CORS机制的跨域请求，受到严格限制)</td>
+        </tr>
+        <tr>
+            <td class="useful">res.url</td>
+            <td>返回Response的URL</td>
+        </tr>
+        <tr>
+            <td class="useful">res.headers</td>
+            <td>返回此Response所关联的Headers 对象</td>
+        </tr>
+
+        <tr>
+            <td>res.redirected</td>
+            <td>表示该Response是否来自一个重定向，如果是的话，它的URL列表将会有多个</td>
+        </tr>
+        <tr>
+            <td class="useful">req.bodyUsed</td>
+            <td>返回body是否被使用过</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3.方法</h3>
+<table>
+    <thead>
+        <tr>
+            <th>静态方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Response.error() </td>
+            <td>返回一个type属性为error的Response对象实例</td>
+        </tr>
+        <tr>
+            <td>Response.redirect(url, status) </td>
+            <td>返回的Response对象实例会重定向到另一个URL</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Request/Response 都有的方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>实例方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">clone()</td>
+            <td>复制一份Request/Response实例，以便多次获取body</td>
+        </tr>
+        <tr>
+            <td class="useful">json()</td>
+            <td>返回body内容</td>
+        </tr>
+        <tr>
+            <td class="useful">text()</td>
+            <td>返回body内容</td>
+        </tr>
+        <tr>
+            <td>arrayBuffer()</td>
+            <td>返回body内容</td>
+        </tr>
+        <tr>
+            <td>blob()</td>
+            <td>返回body内容</td>
+        </tr>
+        <tr>
+            <td>formData()</td>
+            <td>返回body内容</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+{% endblock %}
