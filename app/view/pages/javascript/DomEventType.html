@@ -1,0 +1,402 @@
+
+{% extends '../../tpl/layout_javascript.html' %}
+
+{% set title_suffix = '事件类型' %}
+
+{% block content %}
+
+<h1>事件类型</h1>
+
+<h2>一、鼠标事件</h2>
+<table>
+    <thead>
+        <tr>
+            <th>事件</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>click</td>
+            <td>鼠标单击时触发，即在同一个位置完成一次mousedown动作和mouseup动作。触发顺序是：mousedown->mouseup->click</td>
+        </tr>
+        <tr>
+            <td>dblclick</td>
+            <td>鼠标双击时触发</td>
+        </tr>
+
+        <tr>
+            <td>mousedown</td>
+            <td>鼠标按下时触发</td>
+        </tr>
+        <tr>
+            <td>mousemove</td>
+            <td>鼠标在一个节点内部移动时触发</td>
+        </tr>
+        <tr>
+            <td>mouseup</td>
+            <td>鼠标释放时触发</td>
+        </tr>
+        <tr>
+            <td>mouseenter</td>
+            <td>鼠标进入节点时触发，只触发一次</td>
+        </tr>
+        <tr>
+            <td>mouseover</td>
+            <td>鼠标进入节点时触发，只要鼠标在节点内部移动，mouseover事件会在子节点上触发多次</td>
+        </tr>
+        <tr>
+            <td>mouseout</td>
+            <td>鼠标离开节点时触发，会冒泡</td>
+        </tr>
+        <tr>
+            <td>mouseleave</td>
+            <td>鼠标离开节点时触发，不会冒泡</td>
+        </tr>
+        <tr>
+            <td>contextmenu</td>
+            <td>在一个节点上点击鼠标右键时触发，或者按下“上下文菜单”键时触发</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<h3>鼠标事件的事件对象 MouseEvent</h3>
+<p>MouseEvent对象继承了UIEvent对象和Event对象。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>实例属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ctrlKey、altKey、shiftKey、metaKey</td>
+            <td>返回一个布尔值，表示鼠标事件发生时，是否按下了某个键</td>
+        </tr>
+        <tr>
+            <td>button</td>
+            <td>返回一个数值，表示按下了鼠标哪个键：-1(没有按下键)、0(按下主键,通常是左键)、1(按下辅助键,通常是中键或者滚轮键)、2(按下次键,通常是右键)</td>
+        </tr>
+        <tr>
+            <td>buttons</td>
+            <td>返回一个3位的二进制数，表示同时按下了哪些键。用来处理同时按下多个鼠标键的情况。001(左键)、010(右键)、100(中键或滚轮键)</td>
+        </tr>
+        <tr>
+            <td>clientX、clientY</td>
+            <td>返回鼠标位置相对于浏览器窗口左上角的水平或垂直坐标</td>
+        </tr>
+        <tr>
+            <td>screenX、screenY</td>
+            <td>返回鼠标位置相对于屏幕左上角的水平或垂直坐标</td>
+        </tr>
+        <tr>
+            <td>movementX、movementY</td>
+            <td>返回当前位置与上一个mousemove事件之间的水平或垂直距离</td>
+        </tr>
+        <tr>
+            <td>relatedTarget</td>
+            <td>返回事件的次要相关节点，无则返回null。如mouseenter事件返回即将离开的节点</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<h2>二、wheel事件</h2>
+<p>wheel事件是与鼠标滚轮相关的事件，目前只有一个wheel事件。该事件的事件对象继承了MouseEvent、UIEvent、Event的属性。</p>
+<table>
+    <thead>
+        <tr>
+            <th>实例属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>deltaX、deltaY、deltaZ</td>
+            <td>返回一个数值，表示滚轮的水平、垂直、Z轴的滚动量</td>
+        </tr>
+        <tr>
+            <td>deltaMode</td>
+            <td>返回一个数值，表示滚动的单位，适用于上面三个属性。0表示像素，1表示行，2表示页</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<h2>三、键盘事件</h2>
+<table>
+    <thead>
+        <tr>
+            <th>事件</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>keydown</td>
+            <td>按下键盘时触发</td>
+        </tr>
+        <tr>
+            <td>keyup</td>
+            <td>松开键盘时触发</td>
+        </tr>
+        <tr>
+            <td>keypress</td>
+            <td>只要按下的键并非Ctrl、Alt、Shift和Meta，则触发</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>如果用户一直按键不松开，就会连续触发键盘事件，触发的顺序如下：keydown、keypress、keydown、keypress、重复以上过程、keyup。</p>
+
+<h3>键盘事件的事件对象 KeyboardEvent</h3>
+<p>KeyboardEvent对象继承了UIEvent对象和MouseEvent对象。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>实例属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ctrlKey、altKey、shiftKey、metaKey</td>
+            <td>返回一个布尔值，表示是否按下对应的键</td>
+        </tr>
+        <tr>
+            <td>key</td>
+            <td>返回一个字符串，表示按下的键名，若无法识别则返回'Unidentified'。若同时按下了控制键和符号键，则仅返回符号键</td>
+        </tr>
+        <tr>
+            <td>charCode</td>
+            <td>返回keypress事件按键的Unicode值，该属性已从标准中移除</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>四、进度事件</h2>
+<p>进度事件用来描述一个事件进展的过程，比如XMLHttpRequest对象发出的HTTP请求的过程、&lt;img>、&lt;audio>、&lt;video>、&lt;style>、&lt;link>加载外部资源的过程。下载和上传都会发生进度事件。</p>
+<table>
+    <thead>
+        <tr>
+            <th>事件</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>loadstart</td>
+            <td>进度开始时触发</td>
+        </tr>
+        <tr>
+            <td>load</td>
+            <td>进度成功结束时触发</td>
+        </tr>
+        <tr>
+            <td>abort</td>
+            <td>当进度事件被中止时触发。如果发生错误，导致进程中止，不会触发该事件</td>
+        </tr>
+        <tr>
+            <td>error</td>
+            <td>由于错误导致资源无法加载时触发</td>
+        </tr>
+        <tr>
+            <td>loadend</td>
+            <td>进度停止时触发，发生顺序排在error事件\abort事件\load事件后面</td>
+        </tr>
+        <tr>
+            <td>progress</td>
+            <td>当操作处于进度之中，由传输的数据块不断触发</td>
+        </tr>
+        <tr>
+            <td>timeout</td>
+            <td>进度超时时触发</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>进度事件的事件对象 ProgressEvent</h3>
+<table>
+    <thead>
+        <tr>
+            <th>实例属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>lengthComputable</td>
+            <td>返回一个布尔值，表示当前进度是否具有可计算的长度。如果为false，就表示当前进度无法测量</td>
+        </tr>
+        <tr>
+            <td>total</td>
+            <td>返回一个数值，表示当前进度的总长度。如果是通过HTTP下载某个资源，表示内容本身的长度，不含HTTP头部的长度</td>
+        </tr>
+        <tr>
+            <td>loaded</td>
+            <td>返回一个数值，表示当前进度已经完成的数量</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>五、拖拉事件</h2>
+<p>拖拉指的是，用户在某个对象上按下鼠标键不放，拖动它到另一个位置，然后释放鼠标键，将该对象放在那里。</p>
+<p>拖拉的对象有好几种，包括Element节点、图片、链接、选中的文字等等。在HTML网页中，除了Element节点默认不可以拖拉，其他（图片、链接、选中的文字）都是可以直接拖拉的。为了让Element节点可拖拉，可以将该节点的draggable属性设为true。</p>
+<p>draggable属性可用于任何Element节点，但是图片（img元素）和链接（a元素）不加这个属性，就可以拖拉。对于它们，用到这个属性的时候，往往是将其设为false，防止拖拉。注意，一旦某个Element节点的draggable属性设为true，就无法再用鼠标选中该节点内部的文字或子节点了。</p>
+<table>
+    <thead>
+        <tr>
+            <th>事件</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>drag</td>
+            <td>拖拉过程中，在被拖拉的节点上持续触发</td>
+        </tr>
+        <tr>
+            <td>dragstart</td>
+            <td>拖拉开始时在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。通常应该在这个事件的监听函数中，指定拖拉的数据</td>
+        </tr>
+        <tr>
+            <td>dragend</td>
+            <td>拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。它与dragstart事件，在同一个节点上触发。不管拖拉是否跨窗口，或者中途被取消，dragend事件总是会触发的</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>dragenter</td>
+            <td>拖拉进入当前节点时，在当前节点上触发，该事件的target属性是当前节点。通常应该在这个事件的监听函数中，指定是否允许在当前节点放下（drop）拖拉的数据。如果当前节点没有该事件的监听函数，或者监听函数不执行任何操作，就意味着不允许在当前节点放下数据</td>
+        </tr>
+        <tr>
+            <td>dragover</td>
+            <td>拖拉到当前节点上方时，在当前节点上持续触发，该事件的target属性是当前节点。该事件与dragenter事件基本类似，默认会重置当前的拖拉事件的效果（DataTransfer对象的dropEffect属性）为none，即不允许放下被拖拉的节点，所以如果允许在当前节点drop数据，通常会使用preventDefault方法，取消重置拖拉效果为none</td>
+        </tr>
+        <tr>
+            <td>dragleave</td>
+            <td>拖拉离开当前节点范围时，在当前节点上触发，该事件的target属性是当前节点</td>
+        </tr>
+        <tr>
+            <td>drop</td>
+            <td>被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发。注意，如果当前节点不允许drop，即使在该节点上方松开鼠标键，也不会触发该事件。如果用户按下Escape键，取消这个操作，也不会触发该事件。该事件的监听函数负责取出拖拉数据，并进行相关处理。</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<p>关于拖拉事件的几点注意事项：</p>
+<ol>
+    <li>拖拉过程只触发以上这些拖拉事件，尽管鼠标在移动，但是鼠标事件不会触发。</li>
+    <li>将文件从操作系统拖拉进浏览器，不会触发dragStart和dragend事件。</li>
+    <li>dragenter和dragover事件的监听函数，用来指定可以放下（drop）拖拉的数据。由于网页的大部分区域不适合作为drop的目标节点，所以这两个事件的默认设置为当前节点不允许drop。如果想要在目标节点上drop拖拉的数据，首先必须阻止这两个事件的默认行为，或者取消这两个事件。</li>
+</ol>
+
+<p>拖拉事件用一个DragEvent对象表示，该对象继承MouseEvent对象，因此也就继承了UIEvent和Event对象。DragEvent对象只有一个独有的属性DataTransfer，其他都是继承的属性。DataTransfer属性用来读写拖拉事件中传输的数据。</p>
+<h3>DataTransfer对象</h3>
+
+<p>拖拉的数据保存两方面的值：数据的种类（又称格式）和数据的值。数据的种类是一个MIME字符串，比如 text/plain、text/uri-list、text/html、image/jpeg，数据的值是一个字符串。一般来说，如果拖拉一段文本，则数据默认就是那段文本；如果拖拉一个链接，则数据默认就是链接的URL。</p>
+<p>当拖拉事件开始的时候，可以提供数据类型和数据值；在拖拉过程中，通过dragenter和dragover事件的监听函数，检查数据类型，以确定是否允许放下（drop）被拖拉的对象。比如，在只允许放下链接的区域，检查拖拉的数据类型是否为text/uri-list。发生drop事件时，监听函数取出拖拉的数据，对其进行处理。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>实例属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>dropEffect</td>
+            <td>设置放下（drop）被拖拉节点时的效果，可能的值包括copy（复制被拖拉的节点）、move（移动被拖拉的节点）、link（创建指向被拖拉的节点的链接）、none（无法放下被拖拉的节点）。一般在dragenter和dragover事件的监听函数中设置</td>
+        </tr>
+        <tr>
+            <td>effectAllowed</td>
+            <td>设置本次拖拉中允许的效果，可能的值包括copy（复制被拖拉的节点）、move（移动被拖拉的节点）、link（创建指向被拖拉节点的链接）、copyLink（允许copy或link）、copyMove（允许copy或move）、linkMove（允许link或move）、all（允许所有效果）、none（无法放下被拖拉的节点）、uninitialized（默认值，等同于all）。dragstart事件的监听函数，可以设置被拖拉节点允许的效果；dragenter和dragover事件的监听函数，可以设置目标节点允许的效果</td>
+        </tr>
+        <tr>
+            <td>files</td>
+            <td>一个FileList对象，包含一组本地文件，可以用来在拖拉操作中传送。如果本次拖拉不涉及文件，则属性为空的FileList对象。</td>
+        </tr>
+        <tr>
+            <td>types</td>
+            <td>一个数组，保存每一次拖拉的数据格式，比如拖拉文件，则格式信息就为File</td>
+        </tr>
+        <tr>
+            <td>实例属性</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>实例属性</td>
+            <td>说明</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>实例方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="my-title" title='event.dataTransfer.setData("text/plain", "Text to drag");'>setData()</td>
+            <td>用来设置事件所带有的指定类型的数据。它接受两个参数，第一个是数据类型，第二个是具体数据。如果指定的类型在现有数据中不存在，则该类型将写入types属性；如果已经存在，在该类型的现有数据将被替换。如果拖拉文本框或者拖拉选中的文本，会默认将文本数据添加到dataTransfer属性，不用手动指定。</td>
+        </tr>
+        <tr>
+            <td>getData()</td>
+            <td>接受一个字符串（表示数据类型）作为参数，返回事件所带的指定类型的数据（通常是用setData方法添加的数据）。如果指定类型的数据不存在，则返回空字符串。通常只有drop事件触发后，才能取出数据。</td>
+        </tr>
+        <tr>
+            <td>clearData()</td>
+            <td>接受一个字符串（表示数据类型）作为参数，删除事件所带的指定类型的数据。如果没有指定类型，则删除所有数据。如果指定类型不存在，则原数据不受影响</td>
+        </tr>
+        <tr>
+            <td>setDragImage()</td>
+            <td>拖动过程中（dragstart事件触发后），浏览器会显示一张图片跟随鼠标一起移动，表示被拖动的节点。这张图片是自动创造的，通常显示为被拖动节点的外观，不需要自己动手设置。setDragImage方法可以用来自定义这张图片，它接受三个参数，第一个是img图片元素或者canvas元素，如果省略或为null则使用被拖动的节点的外观，第二个和第三个参数为鼠标相对于该图片左上角的横坐标和右坐标。</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2>触摸事件</h2>
+<h2>表单事件</h2>
+<h2>文档事件</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

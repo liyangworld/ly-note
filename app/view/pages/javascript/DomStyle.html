@@ -1,17 +1,186 @@
 
 {% extends '../../tpl/layout_javascript.html' %}
 
-{% set title_suffix = 'DomStyle' %}
+{% set title_suffix = '属性、样式操作' %}
 
 {% block content %}
 
-<h1>DomStyle</h1>
+<h1>属性、样式操作</h1>
+<h2>属性操作</h2>
+
+<h3>1. HTML标签的标准属性</h3>
+<p>HTML标签的标准属性（即在标准中定义的属性），会自动成为元素节点对象的属性。比如：id、class、style、name、title、src、url、href、value、method、action 等。这些属性可读写。</p>
+<pre>
+img.src = 'http://www.example.com/image.jpg';
+</pre>
+<p>HTML标签的属性名是大小写不敏感的，但是JavaScript对象的属性名是大小写敏感的。转换规则是，转为JavaScript属性名时，一律采用小写。如果属性名包括多个单词，则采用小驼峰式，如事件属性onclick -> onClick。</p>
+<p>有些HTML标签属性名是JavaScript的保留字，转为JavaScript属性时，必须改名。如：class -> className，for -> htmlFor。</p>
 
 
+<h3>2. Element.dataset属性</h3>
+<p>有时，需要在HTML元素上附加数据，供JavaScript脚本使用，此时可以使用标准提供的data-*属性，来自定义属性。</p>
+<p>注意，data-后面的属性名有限制，只能包含字母、数字、连词线（-）、点（.）、冒号（:）和下划线（_)。而且，属性名不应该使用A到Z的大写字母，比如不能有data-helloWorld这样的属性名，而要写成data-hello-world。</p>
+<p>删除一个data-*属性，可以直接使用delete命令。</p>
+
+<pre>
+&lt;div data-hello-world="hi">&lt;/div>
+el.dataset.helloWorld; // "hi"
+el.dataset.helloWorld = "hello";
+delete    el.dataset.helloWorld;
+</pre>
+
+<h3>3. 完全自定义属性</h3>
+<pre>
+&lt;div foo="hi">&lt;/div>
+</pre>
 
 
+<h3>4. Element.attributes属性</h3>
+<p>HTML元素对象有一个attributes属性，返回一个类似数组的动态对象，成员是该元素标签的所有属性节点对象，属性的实时变化都会反映在这个节点对象上。可以使用索引值或者某个属性名来获取其中的属性节点对象。</p>
+<p>属性节点对象有name和value属性，对应于该属性的属性名和属性值，等同于nodeName属性和nodeValue属性。value属性可读写。</p>
+<pre>
+document.body.attributes[0]
+document.body.attributes['class']
+</pre>
+
+<h3>5. 属性操作API</h3>
+<p>元素提供了几个方法用来操作标签元素的属性：getAttribute()、setAttribute()、hasAttribute()、removeAttribute()、hasAttributes()、getAttributeNode()、setAttributeNode()。</p>
+<ol>
+    <li>这些方法可操作所有形式的属性。</li>
+    <li>getAttribute()只返回字符串，不会返回其他类型的值。HTML标签对象的属性会返回各种类型的值，包括字符串、数值、布尔值或对象。</li>
+    <li>这些方法只接受属性的标准名称，不用改写保留字，比如for和class都可以直接使用。另外，这些方法对于属性名是大小写不敏感的。</li>
+    <li>对于input标签的value、checked属性，建议直接操作，如：el.value、el.checked，因为标签上的值可能与页面显示的值不一致</li>
+</ol>
 
 
+<h2>样式操作</h2>
+<h3>1. style属性 —— 行内样式</h3>
+<p>元素对象的style属性可用来读写行内样式，返回值是一个style对象，CSS属性皆是该对象的属性。但是操作时属性名需要使用小驼峰式，如果CSS属性名是JavaScript保留字，则规则名之前需要加上字符串css，比如float写成cssFloat。</p>
+<p>style对象有一个cssText属性，值为一个字符串，可以读写或删除整个行内样式。</p>
+<pre>
+el.style.backgroundColor = 'red';
+</pre>
+<p>Style对象的以下三个方法，用来读写行内CSS规则：setProperty(name,value)、getPropertyValue(name)、removeProperty(name)。参数中属性名可用连词形式。</p>
+
+<pre>
+el.style.setProperty('background-color','red');
+</pre>
+
+
+<h3>2. window.getComputedStyle()</h3>
+<p>el.style只能获取行内样式，若想获取元素的最终样式可以使用window.getComputedStyle()方法，返回值也是一个style对象。但是此处style对象是只读的，并且不能使用CSS的简写，如margin需要分开获取：marginTop、marginLeft等。</p>
+<p>getComputedStyle方法还可以接受第二个参数，表示指定节点的伪元素（比如:before、:after、:first-line、:first-letter等）。</p>
+
+<pre>
+window.getComputedStyle(el).color;
+window.getComputedStyle(el, ':before').content;
+</pre>
+
+
+<h3>3. StyleSheet对象</h3>
+<p>&lt;link>节点和&lt;style>节点的sheet属性，可以获取其对应的StyleSheet对象。document对象的styleSheets属性，也可以返回当前页面的所有StyleSheet对象，它是一个类数组对象。而StyleSheet对象的ownerNode属性可以返回其所在的DOM节点，通常是&lt;link>或&lt;style>。</p>
+<pre>
+document.querySelector('style').sheet;
+document.styleSheets[0];
+document.styleSheets[0].ownerNode;
+</pre>
+<table>
+    <thead>
+        <tr>
+            <th>属性/方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>media</td>
+            <td>表示这个样式表是用于屏幕（screen）、打印（print）或两者都适用（all）。默认值是screen，只读</td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>用于打开或关闭一张样式表</td>
+        </tr>
+        <tr>
+            <td>href</td>
+            <td>返回StyleSheet对象连接的样式表地址，对于内嵌的&lt;style>节点，该属性等于null，只读</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>返回StyleSheet对象的title值</td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>返回StyleSheet对象的type值，通常是text/css</td>
+        </tr>
+        <tr>
+            <td>parentStyleSheet</td>
+            <td>CSS的@import命令允许在样式表中加载其他样式表。parentStyleSheet属性返回包含了当前样式表的那张样式表。如果当前样式表是顶层样式表，则该属性返回null</td>
+        </tr>
+        <tr>
+            <td>ownerNode</td>
+            <td>返回StyleSheet对象所在的DOM节点</td>
+        </tr>
+        <tr>
+            <td>cssRules</td>
+            <td>指向一个类似数组的对象，里面每一个成员就是当前样式表的一条CSS规则。每条CSS规则都有cssText属性和style属性，style属性即style对象,可读写</td>
+        </tr>
+
+        <tr>
+            <td class="my-title" title="sheet.insertRule('#block { color:white }', 0);">sheet.insertRule()</td>
+            <td>用于在当前样式表的cssRules对象中插入CSS规则</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="sheet.deleteRule(1);">sheet.deleteRule()</td>
+            <td>用于删除cssRules对象的CSS规则</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>4. window.matchMedia()</h3>
+<p>window.matchMedia方法用来检查CSS的mediaQuery语句。IE10及以上支持。</p>
+<p>该方法接受一个mediaQuery语句的字符串作为参数，返回一个MediaQueryList对象。该对象有两个属性：media(返回所查询的mediaQuery语句字符串)、matches(返回一个布尔值，表示当前环境是否匹配查询语句)。有两个方法，用来监听事件：addListener方法和removeListener方法。</p>
+<pre>
+var mql = window.matchMedia("(max-width: 700px)");
+
+mql.addListener(mqCallback);
+mql.removeListener(mqCallback);
+
+function mqCallback(mql) {
+    if (mql.matches) {
+        // 宽度小于等于700像素
+    } else {
+        // 宽度大于700像素
+    }
+}
+</pre>
+
+<h3>5. CSS事件</h3>
+<table>
+    <thead>
+        <tr>
+            <th>CSS事件</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>transitionend</td>
+            <td>CSS的过渡效果（transition）结束后，触发transitionend事件</td>
+        </tr>
+        <tr>
+            <td>animationstart</td>
+            <td>动画开始时触发</td>
+        </tr>
+        <tr>
+            <td>animationend</td>
+            <td>动画结束时触发</td>
+        </tr>
+        <tr>
+            <td>animationiteration</td>
+            <td>开始新一轮动画循环时触发。如果animation-iteration-count属性等于1，该事件不触发，即只播放一轮的CSS动画</td>
+        </tr>
+    </tbody>
+</table>
 
 
 {% endblock %}

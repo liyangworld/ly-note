@@ -124,6 +124,9 @@ module.exports = app => {
         * DomEvent(){
             yield this.ctx.render('pages/javascript/DomEvent.html',{action:'DomEvent'});
         }
+        * DomEventType(){
+            yield this.ctx.render('pages/javascript/DomEventType.html',{action:'DomEventType'});
+        }
 
     }
     return JavascriptController;

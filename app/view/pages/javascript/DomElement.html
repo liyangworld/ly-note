@@ -1,15 +1,205 @@
 
 {% extends '../../tpl/layout_javascript.html' %}
 
-{% set title_suffix = 'DomElement' %}
+{% set title_suffix = 'element 对象' %}
 
 {% block content %}
 
-<h1>DomElement</h1>
+<h1>element 对象</h1>
+<h2>简介</h2>
+<p>element 对象对应网页的HTML标签元素。每一个HTML标签元素，在DOM树上都会转化成一个Element节点对象。element 对象 具有Node对象、ParentNode接口、ChildNode接口的所有属性和方法。</p>
+
+<h2>属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>attributes</td>
+            <td>返回一个类数组对象(动态的)，成员是当前元素节点的所有属性节点</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>返回指定元素的id属性，可读写</td>
+        </tr>
+        <tr>
+            <td>tagName</td>
+            <td>返回指定元素的大写标签名，与nodeName属性的值相等</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>返回指定元素的title属性，可读写</td>
+        </tr>
+        <tr>
+            <td class="useful">className</td>
+            <td>返回当前元素节点的class属性，可读写</td>
+        </tr>
+        <tr>
+            <td class="useful">classList</td>
+            <td>返回一个类数组对象，该对象有以下方法：add()、remove()、toggle()、contains()、item()、toString()</td>
+        </tr>
+        <tr>
+            <td class="useful">style</td>
+            <td>返回元素的style属性，可读写</td>
+        </tr>
+        <tr>
+            <td class="useful">innerHTML</td>
+            <td>返回该元素包含的 HTML 代码，可读写。如果插入的是文本，最好用textContent</td>
+        </tr>
+        <tr>
+            <td>outerHTML</td>
+            <td>返回一个字符串，内容为指定元素节点的所有HTML代码，包括它自身和包含的所有子元素。可读写</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>previousElementSibling</td>
+            <td>返回元素的前一个兄弟元素，无则返回null</td>
+        </tr>
+        <tr>
+            <td>nextElementSibling</td>
+            <td>返回元素的后一个兄弟元素，无则返回null</td>
+        </tr>
+        <tr>
+            <td class="useful">offsetParent</td>
+            <td>返回元素最靠近的、position属性不等于static的上层元素。若当前元素display为none、或position为fixed，则返回null</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>clientLeft、clientTop</td>
+            <td>返回元素左、上边框的宽度（border），若有滚动条则包括滚动条的宽度</td>
+        </tr>
+        <tr>
+            <td>clientWidth、clientHeight</td>
+            <td>返回元素节点可见部分的宽、高，不含边框及以外部分</td>
+        </tr>
+
+        <tr>
+            <td>offsetWidth、offsetHeight</td>
+            <td>返回元素的宽、高，包含Border以及滚动条，不包含溢出部分</td>
+        </tr>
+        <tr>
+            <td>offsetLeft、offsetTop</td>
+            <td>返回元素左上角相对于Element.offsetParent节点的水平位移、垂直位移</td>
+        </tr>
+        <tr>
+            <td>scrollWidth、scrollHeight</td>
+            <td>返回元素的总宽、高，包含溢出部分，但不包含border和margin</td>
+        </tr>
+        <tr>
+            <td>scrollLeft、scrollTop</td>
+            <td>返回元素此时滚动的距离，可读写</td>
+        </tr>
 
 
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
 
 
+        <tr>
+            <td class="useful">querySelector()</td>
+            <td>返回第一个匹配的子元素，该方法先在全局搜索选择器，然后过滤出该元素的子元素</td>
+        </tr>
+        <tr>
+            <td class="useful">querySelectorAll()</td>
+            <td>返回所有匹配的子元素，该方法先在全局搜索选择器，然后过滤出该元素的子元素</td>
+        </tr>
+        <tr>
+            <td class="useful">getElementsByTagName()</td>
+            <td>返回当前元素的所有指定标签子元素集合，一个HTMLCollection对象</td>
+        </tr>
+        <tr>
+            <td class="useful">getElementsByClassName()</td>
+            <td>返回当前元素的所有指定类名子元素集合，一个HTMLCollection对象</td>
+        </tr>
+        <tr>
+            <td class="useful">closest(selector)</td>
+            <td>返回当前元素的最接近的父元素(或自身)</td>
+        </tr>
+        <tr>
+            <td>match(selector)</td>
+            <td>判断元素是否匹配给定的选择器</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td class="useful">getAttribute()</td>
+            <td>获取某个属性的值</td>
+        </tr>
+        <tr>
+            <td class="useful">setAttribute()</td>
+            <td>设置某个属性</td>
+        </tr>
+        <tr>
+            <td class="useful">hasAttribute()</td>
+            <td>判断是否有某个属性</td>
+        </tr>
+        <tr>
+            <td class="useful">removeAttribute()</td>
+            <td>移除某个属性</td>
+        </tr>
+        <tr>
+            <td>hasAttributes()</td>
+            <td>判断元素是否有属性</td>
+        </tr>
+        <tr>
+            <td>getAttributeNode()</td>
+            <td>获取某个属性节点</td>
+        </tr>
+        <tr>
+            <td>setAttributeNode()</td>
+            <td>设置某个属性节点</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td class="useful">addEventListener()</td>
+            <td>向元素添加事件句柄（IE8及之前使用attachEvent()）</td>
+        </tr>
+        <tr>
+            <td class="useful">removeEventListener()</td>
+            <td>移除元素中的事件句柄（IE8及之前使用detachEvent()）</td>
+        </tr>
+        <tr>
+            <td class="useful">dispatchEvent()</td>
+            <td>触发指定事件</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td class="useful">insertAdjacentHTML(position,htmlStr)</td>
+            <td>解析HTML字符串，然后将生成的节点插入到指定位置。position有四个值：beforebegin(在当前元素前面)、afterbegin(在当前元素里面，插在所有子元素之前)、beforeend(在当前元素里面，插在所有子元素之后)、afterend(在当前元素后面)</td>
+        </tr>
+
+        <tr>
+            <td class="useful">getBoundingClientRect()</td>
+            <td>返回一个对象，该对象有以下属性：width、height、left、top、right、bottom。都是以视口左上角为起点，border计算在内</td>
+        </tr>
+        <tr>
+            <td>getClientRects()</td>
+            <td>返回一个类数组对象，每个成员都同getBoundingClientRect()方法返回的对象一样。块级元素则返回一个成员，行内元素则根据所占行数返回多个成员；而getBoundingClientRect()永远只返回一个</td>
+        </tr>
+
+        <tr>
+            <td>focus()</td>
+            <td>使当前元素获得焦点</td>
+        </tr>
+        <tr>
+            <td>scrollIntoView(true)</td>
+            <td>滚动当前元素进入浏览器的可见区域，类似于设置window.location.hash的效果。true则顶部对齐，false则底部对齐</td>
+        </tr>
+    </tbody>
+</table>
 
 
 

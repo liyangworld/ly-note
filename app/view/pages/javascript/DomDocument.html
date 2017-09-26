@@ -6,6 +6,247 @@
 {% block content %}
 
 <h1>document对象</h1>
+<h2>简介</h2>
+<p>document对象指文档的根节点，每张网页都有自己的document节点。只要浏览器开始载入HTML文档，这个节点对象就存在了，可以直接调用。</p>
+<p>获取document节点的几种方法：</p>
+<ol>
+    <li>对于正常的网页，直接使用document或window.document</li>
+    <li>对于iframe载入的网页，使用iframe节点的contentDocument属性</li>
+    <li>对Ajax操作返回的文档，使用XMLHttpRequest对象的responseXML属性</li>
+    <li>对于包含某个节点的文档，使用该节点的ownerDocument属性</li>
+</ol>
+
+<h2>属性</h2>
+<table>
+    <thead>
+    <tr>
+        <th>属性</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>defaultView</td>
+            <td>在浏览器中返回document对象所在的window对象，否则返回null</td>
+        </tr>
+        <tr>
+            <td>doctype</td>
+            <td>返回文档类型节点</td>
+        </tr>
+        <tr>
+            <td class="useful">documentElement</td>
+            <td>返回当前文档的根元素（即html）</td>
+        </tr>
+        <tr>
+            <td class="useful">head</td>
+            <td>返回文档的head元素</td>
+        </tr>
+        <tr>
+            <td class="useful">body</td>
+            <td>返回文档的body元素</td>
+        </tr>
+        <tr>
+            <td>activeElement</td>
+            <td>返回当前文档中获得焦点的那个元素。用户通常可以使用Tab键移动焦点，使用空格键激活焦点。</td>
+        </tr>
+
+        <tr>
+            <td>forms</td>
+            <td>返回当前文档中所有表单元素form</td>
+        </tr>
+        <tr>
+            <td>images</td>
+            <td>返回页面所有图片元素（即img标签）</td>
+        </tr>
+        <tr>
+            <td>links</td>
+            <td>返回当前文档所有设定了href属性的a及area元素</td>
+        </tr>
+        <tr>
+            <td>embeds</td>
+            <td>返回网页中所有嵌入对象，即embed标签</td>
+        </tr>
+        <tr>
+            <td>scripts</td>
+            <td>返回当前文档的所有脚本（即script标签）</td>
+        </tr>
+        <tr>
+            <td>styleSheets</td>
+            <td>返回当前网页的所有样式表</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>documentURI</td>
+            <td>返回当前文档的网址，可用于所有文档（包括 XML 文档）</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>返回当前文档的网址，只能用于 HTML 文档</td>
+        </tr>
+        <tr>
+            <td>location</td>
+            <td>返回location对象</td>
+        </tr>
+        <tr>
+            <td>domain</td>
+            <td>返回当前文档的域名</td>
+        </tr>
+        <tr>
+            <td>lastModified</td>
+            <td>返回当前文档最后修改的时间戳，格式为字符串</td>
+        </tr>
+        <tr>
+            <td>referrer</td>
+            <td>返回一个字符串，表示当前文档的访问来源，总是与HTTP头信息的Referer保持一致</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>返回当前文档的标题</td>
+        </tr>
+        <tr>
+            <td>characterSet</td>
+            <td>返回渲染当前文档的字符集，比如UTF-8、ISO-8859-1</td>
+        </tr>
+        <tr>
+            <td>readyState</td>
+            <td>返回当前文档的状态：loading(加载HTML代码阶段,尚未完成解析)、interactive(加载外部资源阶段时)、complete(加载完成时)</td>
+        </tr>
+        <tr>
+            <td>designMode</td>
+            <td>控制当前文档是否可编辑，可选值 "on"、"off"，类似的有el.contentEditable属性</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="document.implementation.hasFeature('MutationEvents','2.0'); // 判断当前环境是否部署了MutationEvents的2.0版">implementation</td>
+            <td>返回一个对象，用来甄别当前环境部署了哪些DOM相关接口。该属性的hasFeature方法，可以判断当前环境是否部署了特定版本的特定接口</td>
+        </tr>
+        <tr>
+            <td>compatMode</td>
+            <td>返回浏览器处理文档的模式，可能的值为BackCompat（向后兼容模式）和CSS1Compat（严格模式）。如果网页代码的第一行设置了明确的DOCTYPE（比如<!doctype html>），document.compatMode的值都为CSS1Compat</td>
+        </tr>
+        <tr>
+            <td class="useful">cookie</td>
+            <td>用来操作浏览器Cookie</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td  class="useful">querySelector()</td>
+            <td>返回文档中匹配指定的CSS选择器的第一个元素。IE8支持CSS2选择器</td>
+        </tr>
+        <tr>
+            <td  class="useful">querySelectorAll()</td>
+            <td>返回文档中匹配指定的CSS选择器的所有元素列表，一个NodeList对象。IE8支持CSS2选择器</td>
+        </tr>
+        <tr>
+            <td  class="useful">getElementById()</td>
+            <td>独有方法，返回文档中指定id的元素</td>
+        </tr>
+        <tr>
+            <td>getElementsByName()</td>
+            <td>返回文档中所有指定name的元素集合，一个NodeList对象</td>
+        </tr>
+        <tr>
+            <td  class="useful">getElementsByClassName()</td>
+            <td>返回文档中所有指定类名的元素集合，一个HTMLCollection对象</td>
+        </tr>
+        <tr>
+            <td  class="useful">getElementsByTagName()</td>
+            <td>返回文档中所有指定标签名的元素集合，一个HTMLCollection对象</td>
+        </tr>
+        <tr>
+            <td>elementFromPoint(x,y)</td>
+            <td>返回位于页面指定位置最上层的Element子节点</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td  class="useful">createElement()</td>
+            <td>用来生成网页元素节点，如果参数里面包含尖括号（即&lt;和&gt;）会报错</td>
+        </tr>
+        <tr>
+            <td  class="useful">createDocumentFragment()</td>
+            <td>生成一个DocumentFragment对象，该对象是一个存在于内存的DOM片段，但是不属于当前文档</td>
+        </tr>
+        <tr>
+            <td>createTextNode()</td>
+            <td>用来生成文本节点</td>
+        </tr>
+        <tr>
+            <td>createAttribute()</td>
+            <td>生成一个新的属性对象节点，参数为属性名，用value设置值</td>
+        </tr>
+
+        <tr>
+            <td>createComment()</td>
+            <td>创建一个注释节点</td>
+        </tr>
+        <tr>
+            <td>importNode(node,deep)()</td>
+            <td>把一个节点从另一个文档复制到该文档以便应用，deep为true则一并复制子孙节点</td>
+        </tr>
+        <tr>
+            <td>adoptNode()</td>
+            <td>将某个节点，从其原来所在的文档移除，插入当前文档，并返回插入后的新节点</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>createEvent()</td>
+            <td>生成一个事件对象，该对象可以被element.dispatchEvent方法使用，触发指定事件</td>
+        </tr>
+        <tr>
+            <td class="useful">addEventListener()</td>
+            <td>向文档添加事件句柄（IE8及之前使用attachEvent()）</td>
+        </tr>
+        <tr>
+            <td class="useful">removeEventListener()</td>
+            <td>移除文档中的事件句柄（IE8及之前使用detachEvent()）</td>
+        </tr>
+        <tr>
+            <td class="useful">dispatchEvent()</td>
+            <td>触发指定事件</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>open()</td>
+            <td>用于新建一个文档，供write方法写入内容。它实际上等于清除当前文档，重新写入内容</td>
+        </tr>
+        <tr>
+            <td>close()</td>
+            <td>用于关闭open方法所新建的文档。一旦关闭，write方法就无法写入内容了</td>
+        </tr>
+        <tr>
+            <td>write()</td>
+            <td>用于向当前文档写入内容</td>
+        </tr>
+        <tr>
+            <td>writeln()</td>
+            <td>同write()方法，但会在输出内容的尾部添加换行符</td>
+        </tr>
+        <tr>
+            <td>hasFocus()</td>
+            <td>返回一个布尔值，表示当前文档之中是否有元素被激活或获得焦点</td>
+        </tr>
+
+        <tr>
+            <td>getSelection()</td>
+            <td>同window.getSelection()</td>
+        </tr>
+    </tbody>
+</table>
+
 
 
 

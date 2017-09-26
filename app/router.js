@@ -17,7 +17,7 @@ const routes = {
         'Object','Array','String','Number','Boolean','RegExp','Math','Date','JSON','Error','console','Globals','Promise',
         'NewThis','Prototype','Module',
         'BomPageRender','BomWindow','BomLocation','BomScreen','BomXHR','BomFetch','BomCORS','BomWebSocket','BomStorage',
-        'DomAbstract','DomDocument','DomElement','DomStyle','DomEvent'
+        'DomAbstract','DomDocument','DomElement','DomStyle','DomEvent','DomEventType'
     ],
     react:[
         'index','quickStart','eventHandle','componentEvolutionJs'
