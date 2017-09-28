@@ -9,8 +9,8 @@ const routes = {
     vue:['index'],
     element:['index'],
     reactNative:['index'],
-    node:['index'],
-    egg:['index'],
+    node:['index','quickStart','module','fs','querystring','global','process','child_process','Buffer','url','dns','http','https','path'],
+
     javascript:[
         'index','versions',
         'grammar','dataTypes','operator','objDescription','arrDescription','fnDescription',
@@ -21,7 +21,11 @@ const routes = {
     ],
     react:[
         'index','quickStart','eventHandle','componentEvolutionJs'
-    ]
+    ],
+    os:['index','winHotKey','winCli','lixHotKey','lixCli'],
+    express:['index'],
+    koa:['index'],
+    egg:['index']
 };
 
 function getRoutes(app,routes) {

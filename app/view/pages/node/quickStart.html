@@ -1,0 +1,152 @@
+
+{% extends '../../tpl/layout_node.html' %}
+
+{% set title_suffix = '快速安装使用' %}
+
+{% block content %}
+
+<h1>快速安装使用</h1>
+<h2>安装</h2>
+<p>安装流程可参考这篇文章：<a href="http://blog.csdn.net/erdouzhang/article/details/54883011" target="_blank">node环境（nvm+node+npm+环境配置）安装</a></p>
+<p>日常开发中电脑上可能装有多个版本的Node.js，可以使用nvm来对Node.js进行版本切换。<a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank">nvm下载地址</a></p>
+<p>Node.js有长期支持版（LTS）和最新特性版之分，建议生产环境使用长期支持版。<a href="https://nodejs.org/en/" target="_blank">Node.js官网下载地址</a></p>
+<p>安装Node.js的时候会自动安装好npm的，npm是Node.js的包管理工具。<a href="https://www.npmjs.com/" target="_blank">npm官网地址</a></p>
+
+<p>通过npm安装模块时都是去国外的镜像下载的，有的时候由于网络原因会导致安装模块失败，可以使用淘宝提供的镜像进行安装。<a href="https://npm.taobao.org/" target="_blank">淘宝 NPM 镜像</a></p>
+
+<h2>使用</h2>
+<h3>1. 检查是否都已安装成功</h3>
+<p>在命令行中分别输入以下命令以检查安装的版本。</p>
+<pre>
+nvm
+node -v
+npm -v
+</pre>
+
+<h3>2. nvm常用命令</h3>
+<p>若想更新nvm，可以通过Git将新版nvm目录从GitHub上拉取到本地，相当于重装了一次。</p>
+<table>
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>nvm</td>
+            <td>输出版本号及使用说明</td>
+        </tr>
+        <tr>
+            <td>nvm list [available]</td>
+            <td>查看已安装了的Node.js版本，加上参数available，查看目前所有可安装的Node.js版本</td>
+        </tr>
+        <tr>
+            <td>nvm install &lt;version></td>
+            <td>安装指定的Node.js版本，如：nvm install v7.9.0</td>
+        </tr>
+        <tr>
+            <td>nvm uninstall &lt;version></td>
+            <td>卸载指定的Node.js版本</td>
+        </tr>
+        <tr>
+            <td>nvm use [version]</td>
+            <td>切换为指定版本的Node.js进行使用，如：nvm use v7.9.0</td>
+        </tr>
+        <tr>
+            <td>nvm node_mirror [url]</td>
+            <td>设置Node.js的下载地址，默认为 https://nodejs.org/dist/</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>3. npm常用命令</h3>
+<p>升级 npm 可使用以下命令：</p>
+<pre>
+npm install npm -g
+</pre>
+<table>
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>npm -v</td>
+            <td>返回当前npm的版本</td>
+        </tr>
+        <tr>
+            <td>npm init</td>
+            <td>在项目中引导创建一个package.json文件</td>
+        </tr>
+        <tr>
+            <td>npm install xx@1.1.1</td>
+            <td>安装模块，不加版本号则安装最新版。-g表示全局安装，-S表示写入dependencies中，-D表示写入devDependencies中，-O表示写入optionalDependencies中</td>
+        </tr>
+        <tr>
+            <td>npm uninstall xx</td>
+            <td>卸载安装的模块,-g表示卸载全局的</td>
+        </tr>
+        <tr>
+            <td>npm update xx</td>
+            <td>升级安装的模块,-g表示升级全局的</td>
+        </tr>
+
+        <tr>
+            <td>npm list xx</td>
+            <td>查看当前项目中安装的模块信息，-g表示查看全局安装的。不指定xx则查看所有的</td>
+        </tr>
+
+        <tr>
+            <td>npm outdated</td>
+            <td>列出已经过时的模块，以便及时升级</td>
+        </tr>
+        <tr>
+            <td>npm config set</td>
+            <td>管理npm的配置，如registry='https://registry.npm.taobao.org/'</td>
+        </tr>
+        <tr>
+            <td>npm config list</td>
+            <td>显示配置信息</td>
+        </tr>
+        <tr>
+            <td>npm cache clean</td>
+            <td>清除npm本地缓存</td>
+        </tr>
+        <tr>
+            <td>npm start</td>
+            <td>启动模块，该模块在package.json文件scripts的start字段中定义；若没有设置start字段则执行node server.js</td>
+        </tr>
+        <tr>
+            <td class="my-title" title="npm run xx & npm run xxx // 同时并行执行 ~~~~~ npm run xx && npm run xxx // 前一个执行成功，再执行最后一个">npm run xx</td>
+            <td>npm run 会创建一个新的shell，执行指定的命令，因此它不一定是 Node 脚本，任何可执行文件都可以写在里面。不指定xx，则列出所有scripts中的脚本命令及内容。</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>4. node常用命令</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>node 回车</td>
+            <td>进入node交互模式，可直接执行js代码并输出结果</td>
+        </tr>
+        <tr>
+            <td>node xxx.js</td>
+            <td>执行某个js文件</td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% endblock %}

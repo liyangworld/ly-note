@@ -1,0 +1,124 @@
+
+{% extends '../../tpl/layout_node.html' %}
+
+{% set title_suffix = '模块' %}
+
+{% block content %}
+
+<h1>模块</h1>
+<h2>简介</h2>
+<p>Node.js 有一个简单的模块加载系统。 在 Node.js 中，每个js文件都被视为一个独立的模块。</p>
+
+<h2>模块包装器</h2>
+<p>Node.js 在加载模块并执行模块代码之前，都会使用一个函数包装器对模块代码进行包装。模块的加载可参考阮一峰的 <a href="http://www.ruanyifeng.com/blog/2015/05/require.html" target="_blank">require() 源码解读</a>。</p>
+<pre>
+(function(exports, require, module, __filename, __dirname) {
+    // 模块的代码实际上在这里
+});
+</pre>
+<p>这样做实现了以下几点：</p>
+<ol>
+    <li>保持了顶层的变量（用 var、const 或 let 定义）作用在模块范围内，而不是全局对象。</li>
+    <li>提供一些看似全局的但实际上是模块特定的变量：__filename 、 __dirname。</li>
+</ol>
+
+<h2>__dirname</h2>
+<p>当前模块的文件夹名称。等同于 __filename 的 path.dirname() 的值。</p>
+
+<h2>__filename</h2>
+<p>当前模块的文件名称---解析后的绝对路径。</p>
+
+<h2>exports</h2>
+<p>这是一个对于 module.exports 的更简短的引用形式。即exports 和 module.exports 指向同一个对象，但是当对其中任意一个重新赋值时，则它们之间便解绑了。模块的导出实际上是 module.exports 。</p>
+
+<h2>module 对象</h2>
+<p>在每个模块中，module 都指向当前模块的对象的引用。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>属性/方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">module.exports</td>
+            <td>该模块的实际导出对象，也可以导出其他类型如：函数、字符串等。</td>
+        </tr>
+        <tr>
+            <td>module.id</td>
+            <td>模块的标识符。 通常是完全解析后的文件名</td>
+        </tr>
+        <tr>
+            <td>module.filename</td>
+            <td>模块的完全解析后的文件名</td>
+        </tr>
+        <tr>
+            <td>module.paths</td>
+            <td>模块的所有可能的搜索路径</td>
+        </tr>
+
+        <tr>
+            <td>module.loaded</td>
+            <td>模块是否已经加载完成，或正在加载中</td>
+        </tr>
+        <tr>
+            <td>module.parent</td>
+            <td>最先引用该模块的模块，因为模块的加载缓存，只加载一次</td>
+        </tr>
+        <tr>
+            <td>module.children</td>
+            <td>返回一个数组，表示被该模块引用的模块对象</td>
+        </tr>
+        <tr>
+            <td>module.require(id)</td>
+            <td>返回已解析的模块的 module.exports</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2>require</h2>
+<table>
+    <thead>
+        <tr>
+            <th>属性/方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="useful">require()</td>
+            <td>引入模块</td>
+        </tr>
+        <tr>
+            <td>require.resolve()</td>
+            <td>使用内部的 require() 机制查询模块的位置, 此操作只返回解析后的文件名，不会加载此模块</td>
+        </tr>
+        <tr>
+            <td>require.cache</td>
+            <td>被引入的模块将被缓存在这个对象中。从此对象中删除键值对将会导致下一次 require 重新加载被删除的模块。注意不能删除 native addons（原生插件：C++等），因为它们的重载将会导致错误。</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<h2>模块加载的规则 require(x)</h2>
+<p>一、如果 x 以 "./" 或者 "/" 或者 "../" 开头 </p>
+<ol>
+    <li>确定 x 的绝对路径。</li>
+    <li>将 x 当成文件，依次查找下面文件，只要其中有一个存在，就返回该文件，不再继续执行：x -> x.js -> x.json -> x.node 。</li>
+    <li>将 x 当成目录，依次查找下面文件，只要其中有一个存在，就返回该文件，不再继续执行：x/package.json（main字段）-> x/index.js -> x/index.json -> x/index.node 。</li>
+</ol>
+
+
+<p>二、如果 x 不带路径</p>
+<ol>
+    <li>如果 x 是内置模块(如'http')，则返回该模块，不再继续执行。</li>
+    <li>如果 x 不是内置模块，则在 node_modules 目录下查找，从当前目录开始向上一层层的找node_modules 目录。</li>
+</ol>
+
+
+
+{% endblock %}

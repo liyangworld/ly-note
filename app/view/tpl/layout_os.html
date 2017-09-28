@@ -1,0 +1,31 @@
+
+{% extends './layout_base.html' %}
+
+{% set title = 'OS-'+ title_suffix %}
+{% set controller = 'os' %}
+{% set sideBarItems = [
+                {
+                    title:'常用总结',
+                    action:'',
+                    children:[
+                        {title:'总结',action:'summary1'}
+                    ]
+                },
+                {
+                    title:'Windows',
+                    action:'',
+                    children:[
+                        {title:'常用快捷键',action:'winHotKey'},
+                        {title:'命令行操作',action:'winCli'}
+                    ]
+                },
+                {
+                    title:'Linux',
+                    action:'',
+                    children:[
+                        {title:'常用快捷键',action:'lixHotKey'},
+                        {title:'命令行操作',action:'lixCli'}
+                    ]
+                }
+            ]
+%}
