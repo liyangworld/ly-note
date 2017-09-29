@@ -97,10 +97,13 @@
             <td>使用内部的 require() 机制查询模块的位置, 此操作只返回解析后的文件名，不会加载此模块</td>
         </tr>
         <tr>
-            <td>require.cache</td>
+            <td class="my-title" title="delete require.cache[moduleName];">require.cache</td>
             <td>被引入的模块将被缓存在这个对象中。从此对象中删除键值对将会导致下一次 require 重新加载被删除的模块。注意不能删除 native addons（原生插件：C++等），因为它们的重载将会导致错误。</td>
         </tr>
-
+        <tr>
+            <td>require.main</td>
+            <td>判断模块是直接执行，还是被调用执行。require.main === module; 直接执行(node xx.js)则返回true，被调用执行(require的)则返回false</td>
+        </tr>
     </tbody>
 </table>
 

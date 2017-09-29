@@ -7,7 +7,7 @@
 
 <h1>process - 进程</h1>
 <h2>简介</h2>
-<p>process 对象是一个全局变量，用以控制当前 Node.js 进程。</p>
+<p>process 对象是一个全局变量，用以控制当前 Node.js 进程。该对象部署了EventEmitter接口。</p>
 
 <h2>属性</h2>
 <table>
@@ -19,29 +19,57 @@
     </thead>
     <tbody>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.stdout</td>
+            <td>返回一个对象，表示标准输出。stdin和stdout都部署了stream接口。该对象的write方法等同于console.log</td>
         </tr>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.stdin</td>
+            <td>返回一个对象，表示标准输入</td>
         </tr>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.stderr</td>
+            <td>返回一个对象，表示标准错误</td>
         </tr>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td class="my-title" title="$ NODE_ENV=production node app.js">process.env</td>
+            <td>返回一个包含用户环境信息的对象。比如 process.env.HOME返回用户的主目录。通常的做法是新建一个环境变量NODE_ENV，用它确定当前所处的开发阶段，生产阶段设为production，开发阶段设为develop或staging，然后在脚本中读取process.env.NODE_ENV即可。</td>
         </tr>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.argv0</td>
+            <td>保存Node.js启动时传入的argv[0]参数值的一份只读副本。如：bash -c 'exec -a customArgv0 ./node'，这种方式启动时返回customArgv0</td>
         </tr>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.argv</td>
+            <td>返回一个数组，由命令行执行脚本时的各个参数组成。它的第一个成员总是node所在绝对路径，第二个成员是脚本文件绝对路径，其余成员是其他命令行参数</td>
         </tr>
+
+        <tr>
+            <td>process.execPath</td>
+            <td>返回Node可执行文件所在的绝对路径</td>
+        </tr>
+        <tr>
+            <td>process.execArgv</td>
+            <td>返回一个数组，成员是命令行下执行脚本时，在 Node 可执行文件与脚本文件之间的命令行参数</td>
+        </tr>
+        <tr>
+            <td>process.installPrefix</td>
+            <td>返回一个字符串，表示 Node 安装路径的前缀，比如/usr/local。相应地，Node 的执行文件目录为/usr/local/bin/node</td>
+        </tr>
+
+
+        <tr>
+            <td>process.platform</td>
+            <td>返回一个字符串，表示当前的操作系统，比如"Linux"</td>
+        </tr>
+        <tr>
+            <td>process.version</td>
+            <td>返回一个字符串，表示当前使用的 Node 版本，比如v6.10.0</td>
+        </tr>
+        <tr>
+            <td>process.pid</td>
+            <td>返回一个数字，表示当前进程的进程号</td>
+        </tr>
+
     </tbody>
 </table>
 
@@ -55,16 +83,17 @@
     </thead>
     <tbody>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.cwd()</td>
+            <td>返回运行当前脚本时所在的工作目录的绝对路径</td>
         </tr>
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.chdir(path)</td>
+            <td>切换工作目录到指定目录</td>
         </tr>
+
         <tr>
-            <td>属性</td>
-            <td>说明</td>
+            <td>process.exit()</td>
+            <td>退出当前进程</td>
         </tr>
         <tr>
             <td>属性</td>

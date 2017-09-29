@@ -9,7 +9,7 @@ const routes = {
     vue:['index'],
     element:['index'],
     reactNative:['index'],
-    node:['index','quickStart','module','fs','querystring','global','process','child_process','Buffer','url','dns','http','https','path'],
+    node:['index','quickStart','packageJson','module','npmPublish','commander','fs','querystring','global','process','child_process','Buffer','url','dns','http','https','path'],
 
     javascript:[
         'index','versions',

@@ -11,8 +11,17 @@ module.exports = app => {
         * quickStart(){
             yield this.ctx.render('pages/node/quickStart.html',{action:'quickStart'});
         }
+        * packageJson(){
+            yield this.ctx.render('pages/node/packageJson.html',{action:'packageJson'});
+        }
         * module(){
             yield this.ctx.render('pages/node/module.html',{action:'module'});
+        }
+        * npmPublish(){
+            yield this.ctx.render('pages/node/npmPublish.html',{action:'npmPublish'});
+        }
+        * commander(){
+            yield this.ctx.render('pages/node/commander.html',{action:'commander'});
         }
 
         * global(){

@@ -1,0 +1,38 @@
+
+{% extends '../../tpl/layout_node.html' %}
+
+{% set title_suffix = '编辑并发布npm包' %}
+
+{% block content %}
+
+<h1>编辑并发布npm包</h1>
+<h2>简介</h2>
+
+<p>npm 全称：node.js package manager，<a href="https://www.npmjs.com/" target="_blank">官网地址</a>。</p>
+<p>目前 npm 上管理着众多的第三方开发者发布的包，如：lodash、vue-cli等，有的可以直接在项目中引入(require)使用，有的可以与命令行交互。</p>
+
+<h2>发布流程</h2>
+<p>编辑并发布自己的npm包只需按照以下流程即可：</p>
+<ol>
+    <li>在npm官网注册登陆</li>
+    <li>新建一个文件夹，并 Git 初始化（git init）和同步到GitHub上。文件夹名称即包名，可在官网上搜索查看是否已存在</li>
+    <li>执行 npm init 创建 package.json 文件，并编辑该文件</li>
+    <li>在项目中新建lib文件夹（存放功能代码），并开始编辑项目功能</li>
+    <li>发布到npm官网上：执行npm who am i 查看当前用户，若没有则执行npm login按提示登陆npm账号，若没有账号则可执行npm adduser按提示注册账号。确认账号后，执行npm config list查看当前配置，确保registry="http://registry.npmjs.org"，发布时不要使用淘宝镜像。最后执行npm publish即可发布到npm官网上了。注意每次发布时版本号都需比前一次高。</li>
+</ol>
+<p>发布成功之后，就可以同其他的npm包一样，在项目中安装使用了。</p>
+
+<h2>制作命令行工具</h2>
+<p>有些包提供了一些命令行交互的功能，如 vue-cli，全局安装之后便可使用一些命令行命令。借助第三方包commander可以很方便的开发出这样的命令行工具。</p>
+<ol>
+    <li>执行 npm install commander -S 来安装包</li>
+    <li>新建 bin 文件夹来存放命令行相关的代码，如新增 xx.js文件，根据 commander API编辑文件，<a href="/node/commander" target="_blank">参考文章</a></li>
+    <li>在 package.json 文件中新增 "bin"字段 : "bin" : { "命令名" : "./bin/xx.js" }</li>
+    <li>修改版本号，执行 npm publish 发布</li>
+</ol>
+
+<p>发布成功之后，就可以全局安装，并使用该命令行工具了。</p>
+
+
+
+{% endblock %}
