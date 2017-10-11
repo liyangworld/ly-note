@@ -1,0 +1,50 @@
+
+{% extends '../../../tpl/layout_node.html' %}
+
+{% set title_suffix = '创建HTTP服务器' %}
+
+{% block content %}
+
+<h1>创建HTTP服务器</h1>
+<h2>简介</h2>
+<p>Node.js创造之初就是为了实现高性能Web服务器，使用http模块可以很容易得创建一个HTTP服务器。但是对于复杂的应用，一般使用第三方框架 Express、Koa、Egg 等。</p>
+<h3>创建HTTP服务器</h3>
+<pre>
+var http = require('http');
+
+var server = http.createServer((req,res)=>{
+    res.writeHead(200,{
+        'Content-Type': 'text/plain'
+    });
+    res.end('welcome!');
+});
+
+server.listen(9001,'127.0.0.1',()=>{
+	console.log('服务器监听于：http://127.0.0.1:9001/');
+});
+</pre>
+
+
+<h3>创建HTTPS服务器</h3>
+<p>创建HTTPS服务器使用https模块，需要额外处理SSL证书。其他的都与创建HTTP服务器相似。</p>
+<pre>
+var https = require('https');
+var fs = require('fs');
+
+var options = {
+        key: fs.readFileSync('./ssl/default.key'),
+        cert: fs.readFileSync('./ssl/default.cer')
+    };
+
+var server = https.createServer(options, (req,res)=>{
+    res.writeHead(200,{
+        'Content-Type': 'text/plain'
+    });
+    res.end('welcome!');
+});
+server.listen(9001,'127.0.0.1',()=>{
+	console.log('服务器监听于：https://127.0.0.1:9001/');
+});
+</pre>
+
+{% endblock %}

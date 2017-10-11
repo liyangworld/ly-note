@@ -1,0 +1,110 @@
+
+{% extends '../../../tpl/layout_fe.html' %}
+
+{% set title_suffix = '快速使用' %}
+
+{% block content %}
+
+<h1>快速使用</h1>
+
+<h2>简介</h2>
+<p>webpack 是一个现代 JavaScript 应用程序的模块打包器(module bundler)。</p>
+<p>目前业内有多种 JavaScript 模块化的工具，这些工具各有优势和限制。webpack 从这些系统中获得经验和教训，并将模块的概念应用于项目中的任何文件。</p>
+<p>webpack 的模块加载支持 CommonJS规范、AMD规范，webpack 2.0还会自动地对 ES6模块的 import/export 转译。webpack 通过 loader 可以支持各种语言和预处理器编写的模块。</p>
+
+<h2>初始化空项目</h2>
+<p>新建一个文件夹，并创建 package.json 文件。</p>
+<pre>
+mkdir test01 ; cd test01
+npm init
+</pre>
+
+<h2>安装webpack</h2>
+<p>对于大多数项目，建议本地安装。</p>
+<pre>
+npm install webpack -D // 本地安装
+npm install webpack -g // 全局安装
+</pre>
+
+<h2>构建项目目录</h2>
+<ol>
+    <li>新建 src目录（放置程序源码）、dist目录（放置生成的文件）</li>
+    <li>新建 dist/index.html、src/main.js、src/greet.js</li>
+</ol>
+<pre>
+/* dist/index.html */
+&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;title>Webpack test01&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;div id='root'>&lt;/div>
+    &lt;script src="bundle.js">&lt;/script>
+  &lt;/body>
+&lt;/html>
+</pre>
+
+<pre>
+/* src/greet.js */
+export default function(){
+    var greet = document.createElement('div');
+    greet.textContent = "welcome to webpack!";
+    return greet;
+}
+</pre>
+
+<pre>
+/* src/main.js */
+import greet from './greet'
+document.querySelector("#root").appendChild(greet());
+</pre>
+
+<h2>webpack命令行打包</h2>
+<p>可以使用webpack命令行工具将 src/main.js及其依赖 打包生成 dist/bundle.js。方式如下：</p>
+<pre>
+# webpack非全局安装的情况
+node_modules/.bin/webpack src/main.js dist/bundle.js
+</pre>
+<p>或者可以在 package.json 文件中新增一条scripts命令，然后使用 npm run xx。</p>
+<pre>
+/*  package.json  */
+"scripts": {
+    "build":"webpack src/main.js dist/bundle.js"
+  }
+</pre>
+<pre>
+npm run build
+</pre>
+
+
+
+<h2>webpack配置文件</h2>
+
+<p>由于大多数项目都会需要很复杂的设置，使用命令行的形式就会显得很繁琐和不直观，受到很大的限制。因此经常使用单独的配置文件进行设置。webpack 默认使用 webpack.config.js 作为配置文件。</p>
+<pre>
+/*  webpack.config.js  */
+const path = require('path');
+module.exports = {
+  entry: './src/main.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+</pre>
+<p>修改package.json文件，以下两条命令是等价的。</p>
+<pre>
+/*  package.json  */
+"scripts": {
+    "build1":"webpack --config webpack.config.js",
+    "build2":"webpack"
+  }
+</pre>
+
+
+
+
+
+{% endblock %}

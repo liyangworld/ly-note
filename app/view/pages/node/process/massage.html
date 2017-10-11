@@ -1,0 +1,71 @@
+
+{% extends '../../../tpl/layout_node.html' %}
+
+{% set title_suffix = '进程间通信' %}
+
+{% block content %}
+
+<h1>进程间通信</h1>
+<h2>简介</h2>
+
+<h3>创建子进程</h3>
+<pre>
+var child = child_process.spawn('node', [ 'xxx.js' ]);
+
+child.stdout.on('data', function (data) {
+    console.log('stdout: ' + data);
+});
+
+child.stderr.on('data', function (data) {
+    console.log('stderr: ' + data);
+});
+
+child.on('close', function (code) {
+    console.log('child process exited with code ' + code);
+});
+</pre>
+<p>使用 child_process.spawn(exec, args, options) 来创建一个子进程。参数exec是执行文件路径，可以是执行文件的相对或绝对路径，也可以是根据PATH环境变量能找到的执行文件名。参数args是数组，其中的每个成员都按顺序对应一个命令行参数。参数options可选，用于配置子进程的执行环境与行为。</p>
+<p>以上是通过子进程对象的.stdout和.stderr访问子进程的输出，但通过options.stdio字段的不同配置，可以将子进程的输入输出重定向到任何数据流上，或者让子进程共享父进程的标准输入输出流，或者直接忽略子进程的输入输出。</p>
+
+<h3>进程间通信</h3>
+<p>如果父子进程都是NodeJS进程，就可以通过IPC（进程间通讯）双向传递数据。</p>
+<pre>
+/* parent.js */
+var child = child_process.spawn('node', [ 'child.js' ], {
+        stdio: [ 0, 1, 2, 'ipc' ]
+    });
+child.on('message', function (msg) {
+    console.log(msg);
+});
+child.send({ hello: 'hello' });
+
+/* child.js */
+process.on('message', function (msg) {
+    msg.hello = msg.hello.toUpperCase();
+    process.send(msg);
+});
+</pre>
+<p>父进程在创建子进程时，在options.stdio字段中通过ipc开启了一条IPC通道，之后就可以监听子进程对象的message事件接收来自子进程的消息，并通过.send方法给子进程发送消息。在子进程这边，可以在process对象上监听message事件接收来自父进程的消息，并通过.send方法向父进程发送消息。数据在传递过程中，会先在发送端使用JSON.stringify方法序列化，再在接收端使用JSON.parse方法反序列化。</p>
+
+<h3>Linux下信号通信</h3>
+<pre>
+/* parent.js */
+var child = child_process.spawn('node', [ 'child.js' ]);
+child.kill('SIGTERM');
+
+/* child.js */
+process.on('SIGTERM', function () {
+    cleanUp();
+    process.exit(0);
+});
+</pre>
+
+<p>父进程通过.kill方法向子进程发送SIGTERM信号，子进程监听process对象的SIGTERM事件响应信号。</p>
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+
+{% extends '../../../tpl/layout_node.html' %}
+
+{% set title_suffix = '大、小文件拷贝' %}
+
+{% block content %}
+
+<h1>大、小文件拷贝</h1>
+<h2>简介</h2>
+<p>NodeJS提供了基本的文件操作API，但是像文件拷贝这种高级功能就没有提供（v8.5.0提供了），因此需要自己实现。</p>
+
+<h3>小文件拷贝</h3>
+<pre>
+var fs = require('fs');
+
+exports.copyFile = function(preFile,nextFile){
+    fs.readFile(preFile,(err,data)=>{
+        if(err){ console.log(err);return; }
+        fs.writeFile(nextFile,data,(err)=>{
+            if(err){ console.log(err);return; }
+        });
+    });
+}
+exports.copyFileSync = function(preFile,nextFile){
+    fs.writeFileSync(nextFile, fs.readFileSync(preFile));
+}
+</pre>
+
+
+<h3>大文件拷贝</h3>
+<p>上边的程序是一次性把文件的所有内容都读取到内存中，然后再一次性写入磁盘，这种方式不适合拷贝大文件，因为可能会导致内存爆仓。对于大文件，我们只能读一点写一点，直到完成拷贝。</p>
+<pre>
+var fs = require('fs');
+
+exports.copyFile = function(preFile,nextFile){
+    var rs = fs.createReadStream(preFile);
+    var ws = fs.createWriteStream(nextFile);
+    rs.pipe(ws);
+}
+</pre>
+
+{% endblock %}

@@ -1,64 +1,44 @@
-'use strict';
 /**
  * Created by liyang on 2017-08-06.
  */
 
+var makeController = require('../utils/makeController');
+
+const viewDir = 'node';
+const actions = [
+    {name:'index',hasAction:'',dir:''},
+    {name:'quickStart',hasAction:'quickStart',dir:''},
+    {name:'packageJson',hasAction:'packageJson',dir:''},
+    {name:'module',hasAction:'module',dir:''},
+    {name:'npmPublish',hasAction:'npmPublish',dir:''},
+
+    {name:'global',hasAction:'global',dir:'coreModules'},
+    {name:'process',hasAction:'process',dir:'coreModules'},
+    {name:'child_process',hasAction:'child_process',dir:'coreModules'},
+    {name:'Buffer',hasAction:'Buffer',dir:'coreModules'},
+    {name:'querystring',hasAction:'querystring',dir:'coreModules'},
+    {name:'url',hasAction:'url',dir:'coreModules'},
+    {name:'dns',hasAction:'dns',dir:'coreModules'},
+    {name:'path',hasAction:'path',dir:'coreModules'},
+    {name:'http',hasAction:'http',dir:'coreModules'},
+    {name:'https',hasAction:'https',dir:'coreModules'},
+    {name:'fs',hasAction:'fs',dir:'coreModules'},
+
+    {name:'commander',hasAction:'commander',dir:'thirdModules'},
+
+    {name:'copyFile',hasAction:'copyFile',dir:'fs'},
+    {name:'iterateDir',hasAction:'iterateDir',dir:'fs'},
+
+    {name:'createServer',hasAction:'createServer',dir:'http'},
+    {name:'sendRequest',hasAction:'sendRequest',dir:'http'},
+
+    {name:'massage',hasAction:'massage',dir:'process'},
+    {name:'guardProcess',hasAction:'guardProcess',dir:'process'}
+
+];
+
 module.exports = app => {
-    class NodeController extends app.Controller {
-        * index(){
-            yield this.ctx.render('pages/node/index.html');
-        }
-        * quickStart(){
-            yield this.ctx.render('pages/node/quickStart.html',{action:'quickStart'});
-        }
-        * packageJson(){
-            yield this.ctx.render('pages/node/packageJson.html',{action:'packageJson'});
-        }
-        * module(){
-            yield this.ctx.render('pages/node/module.html',{action:'module'});
-        }
-        * npmPublish(){
-            yield this.ctx.render('pages/node/npmPublish.html',{action:'npmPublish'});
-        }
-        * commander(){
-            yield this.ctx.render('pages/node/commander.html',{action:'commander'});
-        }
-
-        * global(){
-            yield this.ctx.render('pages/node/coreModules/global.html',{action:'global'});
-        }
-        * process(){
-            yield this.ctx.render('pages/node/coreModules/process.html',{action:'process'});
-        }
-        * child_process(){
-            yield this.ctx.render('pages/node/coreModules/child_process.html',{action:'child_process'});
-        }
-        * Buffer(){
-            yield this.ctx.render('pages/node/coreModules/Buffer.html',{action:'Buffer'});
-        }
-
-        * querystring(){
-            yield this.ctx.render('pages/node/coreModules/querystring.html',{action:'querystring'});
-        }
-
-        * url(){
-            yield this.ctx.render('pages/node/coreModules/url.html',{action:'url'});
-        }
-        * dns(){
-            yield this.ctx.render('pages/node/coreModules/dns.html',{action:'dns'});
-        }
-        * path(){
-            yield this.ctx.render('pages/node/coreModules/path.html',{action:'path'});
-        }
-        * http(){
-            yield this.ctx.render('pages/node/coreModules/http.html',{action:'http'});
-        }
-        * https(){
-            yield this.ctx.render('pages/node/coreModules/https.html',{action:'https'});
-        }
-        * fs(){
-            yield this.ctx.render('pages/node/coreModules/fs.html',{action:'fs'});
-        }
-    }
+    class NodeController extends app.Controller {}
+    makeController.makeActions(NodeController,viewDir,actions);
     return NodeController;
 };

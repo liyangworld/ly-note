@@ -76,9 +76,6 @@ module.exports = app => {
         * Prototype(){
             yield this.ctx.render('pages/javascript/Prototype.html',{action:'Prototype'});
         }
-        * Module(){
-            yield this.ctx.render('pages/javascript/Module.html',{action:'Module'});
-        }
 
         * BomPageRender(){
             yield this.ctx.render('pages/javascript/BomPageRender.html',{action:'BomPageRender'});

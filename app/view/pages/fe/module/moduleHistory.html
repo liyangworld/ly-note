@@ -1,0 +1,82 @@
+
+{% extends '../../../tpl/layout_fe.html' %}
+
+{% set title_suffix = '模块化历程概述' %}
+
+{% block content %}
+
+<h1>模块化历程概述</h1>
+
+<h2>简介</h2>
+<p>随着前端的业务逻辑增多，代码量增大，js 逐渐走向模快化。</p>
+
+<h2>一、原始的 IIFE</h2>
+<pre>
+var module1 = (function (...deps) {
+　  var _count = 0;
+　  var m1 = function () {};
+　  var m2 = function () {};
+　  return { m1 , m2 };
+})(dependencies);
+</pre>
+
+<h2>二、java风格的命名空间</h2>
+<pre>
+app.util.modA = xxx;
+app.tools.modA = xxx;
+app.tools.modA.format = xxx;
+</pre>
+<p>Yahoo的YUI早期就是这么做的，但是每次使用时都需要写一大串，所以YUI后来也不用这种方式了。</p>
+
+
+<h2>三、CommonJs规范</h2>
+<p>2009年，nodejs横空出世，人们可以用js来编写服务端的代码了。如果说浏览器端的js即便没有模块化也可以忍的话，那服务端是万万不能的。</p>
+<p>CommonJs社区制定了Modules/1.0规范。<a href="http://www.commonjs.org/history/" target="_blank">CommonJs历史</a>。Node.js便是基于该规范实现的模块化。Modules/1.0规范如下：</p>
+<ol>
+    <li>模块的标识应遵循的规则（书写规范）</li>
+    <li>定义全局函数require，通过传入模块标识来引入其他模块，执行的结果即为别的模块暴漏出来的API</li>
+    <li>如果被require函数引入的模块中也包含依赖，那么依次加载这些依赖</li>
+    <li>如果引入模块失败，那么require函数应该报一个异常</li>
+    <li>模块通过变量exports来向往暴漏API，exports只能是一个对象，暴漏的API须作为此对象的属性</li>
+</ol>
+
+<h2>四、服务端向浏览器端演进</h2>
+<p>Modules/1.0规范源于服务端，无法直接用于浏览器端。服务端require一个模块，直接就从硬盘或者内存中读取了，消耗的时间可以忽略。而浏览器则不同，需要从服务端来下载这个文件，然后运行里面的代码才能得到API，需要花费一个http请求，往往是异步的。</p>
+<p>在CommonJs社区对Modules/1.0规范进行讨论制定下一版本时，内部发生了比较大的分歧，分裂出了三个主张。</p>
+
+<h3>1. Modules/1.x</h3>
+<p>该主张认为在现有基础上进行改进即可满足浏览器端的需要，制定了Modules/Transport规范。是一种先通过工具把现有模块转化为符合浏览器上使用的模块，然后再使用的方案。</p>
+
+<h3>2. Modules/Async</h3>
+<p>该主张认为浏览器与服务器环境差别太大，不能沿用旧的模块标准。既然浏览器必须异步加载代码，那么模块在定义的时候就必须指明所依赖的模块，然后把本模块的代码写在回调函数里。最终从CommonJs中分裂了出去，独立制定了浏览器端的js模块化规范AMD，其典型实现者是RequireJS。</p>
+<h3>3. Modules/2.0</h3>
+<p>该主张既不想丢掉旧的规范，也不想像AMD那样推到重来。其吸收了两者的优点，如旧规范的通过require来声明依赖，AMD的预先加载以及通过return可以暴漏任意类型的数据。最终制定了一个Modules/Wrappings规范：</p>
+<ol>
+    <li>全局有一个module变量，用来定义模块</li>
+    <li>通过module.declare方法来定义一个模块</li>
+    <li>module.declare方法只接收一个参数，那就是模块的factory，此factory可以是函数也可以是对象，如果是对象，那么模块输出就是此对象</li>
+    <li>模块的factory函数传入三个参数：require,exports,module，用来引入其他依赖和导出本模块API</li>
+    <li>如果factory函数最后明确写有return数据（js函数中不写return默认返回undefined），那么return的内容即为模块的输出</li>
+</ol>
+
+<h2>五、AMD规范</h2>
+<p>AMD（Asynchronous Module Definition）是 <a href="http://requirejs.org/" target="_blank">RequireJS</a> 在推广过程中对模块定义的规范化产出。异步加载所需的模块，然后在回调函数中执行主逻辑。规范如下：</p>
+<ol>
+    <li>用全局函数define来定义模块，用法为：define(id?, dependencies?, factory);</li>
+    <li>id为模块标识，遵从CommonJS Module Identifiers规范</li>
+    <li>dependencies为依赖的模块数组，在factory中需传入形参与之一一对应。 如果dependencies的值中有"require"、"exports"或"module"，则与commonjs中的实现保持一致； 如果dependencies省略不写，则默认为["require", "exports", "module"]，factory中也会默认传入require,exports,module</li>
+    <li>如果factory为函数，模块对外暴漏API的方法有三种：return任意类型的数据、exports.xxx=xxx、module.exports=xxx</li>
+    <li>如果factory为对象，则该对象即为模块的返回值</li>
+</ol>
+<p>该规范中模块都是预先加载并且预先执行的。</p>
+
+<h2>六、CMD规范</h2>
+<p>CMD（Common Module Definition）是 <a href="https://seajs.github.io/seajs/docs/" target="_blank">SeaJS</a> 在推广过程中对模块定义的规范化产出。seajs的作者是国内大牛淘宝前端布道者玉伯。主要是基于Modules/Wrappings规范。</p>
+<p>定义模块时无需罗列依赖数组，在factory函数中需传入形参require,exports,module，然后它会调用factory函数的toString方法，对函数的内容进行正则匹配，通过匹配到的require语句来分析依赖，这些依赖会预先下载但不会预先执行。</p>
+
+<h2>七、ES6模块</h2>
+<p>ES6中新增了两个命令export和import，export命令用于规定es6模块的对外接口，import命令用于导入其他es6模块。一个独立的文件就是一个模块。</p>
+<p>但是目前浏览器和node.js环境对ES6模块的支持都不是很好，Chrome 61+、Edge 15+ 等支持，node v8.6.0 还处于试验阶段。webpack自动会对其进行转译。</p>
+
+
+{% endblock %}

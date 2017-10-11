@@ -1,14 +1,101 @@
 
 {% extends '../../../tpl/layout_node.html' %}
 
-{% set title_suffix = 'fs - 文件系统' %}
+{% set title_suffix = 'path - 路径' %}
 
 {% block content %}
 
-<h1>fs - 文件系统</h1>
+<h1>path - 路径</h1>
 <h2>简介</h2>
+<p>path 模块提供了一些工具函数，用于处理文件与目录的路径。</p>
+<p>path 模块的默认操作会根据 Node.js 应用程序运行的操作系统的不同而变化。</p>
+<pre>
+var path = require('path');
+</pre>
 
 
+<h2>属性</h2>
+<table>
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>path.delimiter</td>
+            <td>提供平台特定的路径分隔符。Windows（;）、POSIX（:）。</td>
+        </tr>
+        <tr>
+            <td>path.sep</td>
+            <td>提供了平台特定的路径片段分隔符。Windows（\）、POSIX（/）。</td>
+        </tr>
+        <tr>
+            <td>path.posix</td>
+            <td>提供了 path 方法针对 POSIX 的实现</td>
+        </tr>
+        <tr>
+            <td>path.win32</td>
+            <td>提供了 path 方法针对 Windows 的实现</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>parse(path)</td>
+            <td>返回一个对象pathObject，{ dir、root、base、name、ext }</td>
+        </tr>
+        <tr>
+            <td>format(pathObject)</td>
+            <td>从一个对象返回一个路径字符串。与 path.parse() 相反。pathObject为{ dir、root、base、name、ext }，有dir则root被忽略，有base则name和ext被忽略。</td>
+        </tr>
+        <tr>
+            <td>dirname(path)</td>
+            <td>返回一个 path 的目录名</td>
+        </tr>
+        <tr>
+            <td>basename(path[,ext])</td>
+            <td>返回一个 path 的最后一部分（即文件名带扩展名），ext指定文件扩展名。若传入ext则只返回文件名。</td>
+        </tr>
+        <tr>
+            <td>extname(path)</td>
+            <td>返回 path 的扩展名，即从 path 的最后一部分中的最后一个 . 字符到字符串结束。如果 path 的最后一部分没有 . 或 path 的文件名（见 path.basename()）的第一个字符是 .，则返回一个空字符串。</td>
+        </tr>
+
+
+        <tr>
+            <td>normalize(path)</td>
+            <td>规范化给定的 path，并解析 '..' 和 '.' 片段。当发现多个连续的路径分隔符时替换为单个的路径分隔符，末尾的多个分隔符会被保留。如果 path 是一个长度为零的字符串，则返回 '.'，表示当前工作目录。</td>
+        </tr>
+        <tr>
+            <td>join([...paths])</td>
+            <td>使用平台特定的分隔符把全部给定的 path 片段连接到一起，并规范化生成的路径。长度为零的 path 片段会被忽略。 如果连接后的路径字符串是一个长度为零的字符串，则返回 '.'，表示当前工作目录。</td>
+        </tr>
+        <tr>
+            <td>resolve([...paths])</td>
+            <td>把一个路径或路径片段的序列解析为一个绝对路径。从右往左解析，直到构造完成一个绝对路径即停止。如果处理完全部给定的 path 片段后还未生成一个绝对路径，则当前工作目录会被用上。生成的路径是规范化后的，且末尾的斜杠会被删除，除非路径被解析为根目录。若没有传入参数则返回当前工作目录的绝对路径。</td>
+        </tr>
+        <tr>
+            <td>isAbsolute(path)</td>
+            <td>判定 path 是否为一个绝对路径。绝对路径（'/foo/bar'、'/baz/..'），非绝对路径（'qux/'、'.'）</td>
+        </tr>
+        <tr>
+            <td>relative(from, to)</td>
+            <td>返回从 from 到 to 的相对路径（基于当前工作目录）。如果 from 和 to 各自解析到同一路径（调用 path.resolve()），则返回一个长度为零的字符串。</td>
+        </tr>
+
+    </tbody>
+</table>
 
 
 {% endblock %}

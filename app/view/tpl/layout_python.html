@@ -1,0 +1,22 @@
+
+{% extends './layout_base.html' %}
+
+{% set title = 'python-'+ title_suffix %}
+{% set controller = 'python' %}
+{% set sideBarItems = [
+                {
+                    title:'常用总结',
+                    action:'',
+                    children:[
+                        {title:'总结',action:'summary1'}
+                    ]
+                },
+                {
+                    title:'语法',
+                    action:'',
+                    children:[
+                        {title:'基本语法',action:'grammar'}
+                    ]
+                }
+            ]
+%}

@@ -1,4 +1,5 @@
 
+var makeController = require('./utils/makeController');
 
 const routes = {
     draft:['index'],
@@ -9,13 +10,20 @@ const routes = {
     vue:['index'],
     element:['index'],
     reactNative:['index'],
-    node:['index','quickStart','packageJson','module','npmPublish','commander','fs','querystring','global','process','child_process','Buffer','url','dns','http','https','path'],
+    node:['index','quickStart','packageJson','module','npmPublish','commander','fs','querystring','global','process','child_process','Buffer','url','dns','http','https','path','copyFile','iterateDir',
+        'createServer','sendRequest',
+        'massage','guardProcess'
+    ],
+    fe:['index',
+        'moduleHistory','requireJs','seaJs','es6Module',
+        'quickStart'
+    ],
 
     javascript:[
         'index','versions',
         'grammar','dataTypes','operator','objDescription','arrDescription','fnDescription',
         'Object','Array','String','Number','Boolean','RegExp','Math','Date','JSON','Error','console','Globals','Promise',
-        'NewThis','Prototype','Module',
+        'NewThis','Prototype',
         'BomPageRender','BomWindow','BomLocation','BomScreen','BomXHR','BomFetch','BomCORS','BomWebSocket','BomStorage',
         'DomAbstract','DomDocument','DomElement','DomStyle','DomEvent','DomEventType'
     ],
@@ -25,22 +33,14 @@ const routes = {
     os:['index','winHotKey','winCli','lixHotKey','lixCli'],
     express:['index'],
     koa:['index'],
-    egg:['index']
+    egg:['index'],
+    python:['index','grammar']
 };
-
-function getRoutes(app,routes) {
-    for(let key in routes){
-        routes[key].forEach((route)=>{
-            app.get(`/${key}/${route}`, `${key}.${route}`);
-        });
-    }
-}
-
 
 module.exports = app => {
 
     app.redirect('/', '/draft/index',302);
 
-    getRoutes(app,routes);
+    makeController.makeRoutes(app,routes);
 
 };

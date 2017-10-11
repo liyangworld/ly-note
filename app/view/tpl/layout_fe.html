@@ -1,0 +1,35 @@
+
+{% extends './layout_base.html' %}
+
+{% set title = 'FE-'+ title_suffix %}
+{% set controller = 'fe' %}
+{% set sideBarItems = [
+                {
+                    title:'常用总结',
+                    action:'',
+                    children:[
+                        {title:'总结',action:'summary1'}
+                    ]
+                },
+                {
+                    title:'模块化',
+                    action:'',
+                    children:[
+                        {title:'模块化历程概述',action:'moduleHistory'},
+                        {title:'RequireJS',action:'requireJs'},
+                        {title:'SeaJS',action:'seaJs'},
+                        {title:'ES6模块',action:'es6Module'}
+                    ]
+                },
+                {
+                    title:'Webpack',
+                    action:'',
+                    children:[
+                        {title:'快速使用',action:'quickStart'},
+                        {title:'总结',action:'summary1'},
+                        {title:'总结',action:'summary1'},
+                        {title:'总结',action:'summary1'}
+                    ]
+                }
+            ]
+%}
