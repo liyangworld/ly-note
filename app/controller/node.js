@@ -24,6 +24,7 @@ const actions = [
     {name:'https',hasAction:'https',dir:'coreModules'},
     {name:'fs',hasAction:'fs',dir:'coreModules'},
 
+    {name:'useful',hasAction:'useful',dir:'thirdModules'},
     {name:'commander',hasAction:'commander',dir:'thirdModules'},
 
     {name:'copyFile',hasAction:'copyFile',dir:'fs'},

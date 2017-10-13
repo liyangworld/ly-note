@@ -10,7 +10,7 @@ const routes = {
     vue:['index'],
     element:['index'],
     reactNative:['index'],
-    node:['index','quickStart','packageJson','module','npmPublish','commander','fs','querystring','global','process','child_process','Buffer','url','dns','http','https','path','copyFile','iterateDir',
+    node:['index','quickStart','packageJson','module','npmPublish','useful','commander','fs','querystring','global','process','child_process','Buffer','url','dns','http','https','path','copyFile','iterateDir',
         'createServer','sendRequest',
         'massage','guardProcess'
     ],

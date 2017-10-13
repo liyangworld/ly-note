@@ -1,10 +1,133 @@
 
 {% extends '../../../tpl/layout_os.html' %}
 
-{% set title_suffix = '命令行操作' %}
+{% set title_suffix = 'Shell' %}
 
 {% block content %}
 
-<h1>命令行操作</h1>
+<h1>Shell</h1>
+<h2>简介</h2>
+<p>在 UNIX/Linux 中比较流行的常见的 Shell 有 bash、zsh、ksh、csh 等等。</p>
+<p>使用man命令可在终端中查看使用手册。Manual pages 是 UNIX 或类 UNIX 操作系统中在线软件文档的一种普遍的形式， 内容包括计算机程序（包括库和系统调用）、正式的标准和惯例，甚至是抽象的概念。(man 命令)可查看该命令的使用说明，(命令 --help)更方便。</p>
+
+<h2>Shell 通配符</h2>
+<table>
+    <thead>
+        <tr>
+            <th>通配符</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>*</td>
+            <td>匹配 0 或多个字符</td>
+        </tr>
+        <tr>
+            <td>?</td>
+            <td>匹配任意一个字符</td>
+        </tr>
+        <tr>
+            <td>[list]</td>
+            <td>匹配 list 中的任意单一字符</td>
+        </tr>
+        <tr>
+            <td>[!list]</td>
+            <td>匹配 除list 中的任意单一字符以外的字符</td>
+        </tr>
+        <tr>
+            <td>[c1-c2]</td>
+            <td>匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]</td>
+        </tr>
+        <tr>
+            <td>{str1,str2,...}</td>
+            <td>匹配 str1 或 str2 (或更多)其一字符串</td>
+        </tr>
+        <tr>
+            <td>{c1..c2}</td>
+            <td>匹配 c1-c2 中全部字符 如{1..10}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<h2>常用命令</h2>
+<table>
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+        <tr>
+            <td>命令</td>
+            <td>说明</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
 
 {% endblock %}
