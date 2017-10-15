@@ -30,7 +30,7 @@ const routes = {
     react:[
         'index','quickStart','eventHandle','componentEvolutionJs'
     ],
-    os:['index','winHotKey','winCli','lixHotKey','lixCli'],
+    os:['index','winHotKey','winCli','lixHotKey','lixCli','lixFs'],
     express:['index'],
     koa:['index'],
     egg:['index'],

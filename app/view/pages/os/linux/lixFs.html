@@ -1,0 +1,227 @@
+
+{% extends '../../../tpl/layout_os.html' %}
+
+{% set title_suffix = '目录及文件操作' %}
+
+{% block content %}
+
+<h1>目录及文件操作</h1>
+<h2>简介</h2>
+<p>在 Linux 里面使用 . 表示当前目录，.. 表示上一级目录，- 表示上一次所在目录，～ 通常表示当前用户的 home 目录。</p>
+
+
+<h2>目录操作</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width: 120px;">命令</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>pwd</td>
+            <td>（print working dir）打印工作目录</td>
+        </tr>
+        <tr>
+            <td>mkdir</td>
+            <td>（make directories）创建一个空目录。使用 -p 参数，同时创建父目录（如果不存在该父目录）</td>
+        </tr>
+        <tr>
+            <td>cd</td>
+            <td>（change dir）切换目录</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>文件操作</h2>
+<table>
+    <tbody>
+        <tr>
+            <td>touch</td>
+            <td>新建空白文件</td>
+        </tr>
+
+        <tr>
+            <td>rm</td>
+            <td>删除一个文件（或目录），若只有只读权限则使用-f 参数可强制删除；删除目录时需要加上 -r 参数</td>
+        </tr>
+        <tr>
+            <td>mv xxx dir</td>
+            <td>（move）移动（剪切）文件到指定目录；移动目录时不用加-r参数。若指定目录不存在，则重命名</td>
+        </tr>
+        <tr>
+            <td>cp xxx dir</td>
+            <td>（copy）复制一个文件到指定目录；复制目录时需要加上 -r 参数，表示递归复制。若指定目录不存在，则复制一份并重命名为指定目录名，请确保指定目录已存在</td>
+        </tr>
+        <tr>
+            <td>rename newName xxx</td>
+            <td>（批量）重命名xxx，newName为正则表达式</td>
+        </tr>
+
+        <tr>
+            <td>echo</td>
+            <td>用于输出变量或字符串等。echo xxx > xx.xx 将内容覆盖到文件中；echo xxx >> xx.xx将内容追加到文件中（文件不存在则自动新建）</td>
+        </tr>
+    </tbody>
+</table>
+<h2>查看文件内容</h2>
+<table>
+    <tbody>
+        <tr>
+            <td>file</td>
+            <td>查看文件类型，（在 Linux 中文件的类型不是根据文件后缀来判断的）</td>
+        </tr>
+        <tr>
+            <td>cat</td>
+            <td>（concatenate 串联）打印文件内容，正序显示，-n 参数显示行号</td>
+        </tr>
+        <tr>
+            <td>tac</td>
+            <td>打印文件内容，倒序显示</td>
+        </tr>
+        <tr>
+            <td>nl</td>
+            <td>添加行号并打印，是个比 cat -n 更专业的行号打印命令。参数-b a表示无论是否为空行，同样列出行号，同("cat -n")；-b t只列出非空行的编号并列出（默认方式）</td>
+        </tr>
+        <tr>
+            <td>more</td>
+            <td>分页查看文件，默认只显示一屏内容，终端底部显示当前阅读的进度。可以使用 Enter 键向下滚动一行，使用 Space 键向下滚动一屏，按下 h 显示帮助，q 退出</td>
+        </tr>
+        <tr>
+            <td>less</td>
+            <td>分页查看文件，基本同more的用法</td>
+        </tr>
+        <tr>
+            <td>head</td>
+            <td>只查看文件的头几行（默认为 10 行），参数(-n 行数)设置查看行数</td>
+        </tr>
+        <tr>
+            <td>tail</td>
+            <td>只查看文件的尾几行（默认为 10 行），参数(-n 行数)设置查看行数，参数 -f，可以实现不停地读取某个文件的内容并显示。</td>
+        </tr>
+    </tbody>
+</table>
+<h2>搜索文件</h2>
+<table>
+    <tbody>
+        <tr>
+            <td style="width: 120px;">whereis xxx</td>
+            <td>搜索文件。简单快速，因为它并没有从硬盘中依次查找，而是直接从数据库中查询。但是只能搜索二进制文件(-b)，man 帮助文件(-m)和源代码文件(-s)。</td>
+        </tr>
+        <tr>
+            <td>which xxx</td>
+            <td>是 Shell 内建的一个命令，通常使用 which 来确定是否安装了某个指定的软件，因为它只从 PATH 环境变量指定的路径中去搜索命令</td>
+        </tr>
+        <tr>
+            <td>find [path] [option] [xxx]</td>
+            <td>不但可以通过文件类型、文件名进行查找而且可以根据文件的属性（如文件的时间戳，文件的权限等）进行搜索。</td>
+        </tr>
+        <tr>
+            <td>locate xxx</td>
+            <td>用来查找指定目录（及其子目录）下的文件。-c 参数表示只统计数目，-i 参数表示忽略大小写。通过“ /var/lib/mlocate/mlocate.db ”数据库查找，不过这个数据库也不是实时更新的，系统会使用定时任务每天自动执行 updatedb 命令更新一次，所以有时候你刚添加的文件，它可能会找不到，需要手动执行一次 updatedb 命令。</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>find 命令说明</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>参数</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-atime</td>
+            <td>最后访问时间</td>
+        </tr>
+        <tr>
+            <td>-ctime</td>
+            <td>最后修改文件内容的时间</td>
+        </tr>
+        <tr>
+            <td>-mtime</td>
+            <td>最后修改文件属性的时间</td>
+        </tr>
+        <tr>
+            <td>-newer xxx</td>
+            <td>xxx为一个已存在的文件（或目录），列出比 file 还要新的文件名</td>
+        </tr>
+        <tr>
+            <td>-name</td>
+            <td>以文件名查找</td>
+        </tr>
+    </tbody>
+</table>
+<p>下面以 -mtime 参数举例：</p>
+<ul>
+    <li>-mtime n：n 为数字，表示为在 n 天之前的“一天之内”修改过的文件</li>
+    <li>-mtime +n：列出在 n 天之前（不包含 n 天本身）被修改过的文件</li>
+    <li>-mtime -n：列出在 n 天之内（包含 n 天本身）被修改过的文件</li>
+</ul>
+<pre>
+find ~ -mtime 0  // 列出 home 目录中，当天（24 小时之内）有改动的文件
+</pre>
+
+<h2>文件打包与压缩</h2>
+<p>在 Windows 上最常见的不外乎这三种：*.zip，*.rar，*.7z 后缀的压缩文件。而在 Linux 上面常见的格式除了以上三种外，还有 *.gz，*.xz，*.bz2，*.tar，*.tar.gz，*.tar.xz，*.tar.bz2。是由不同的打包压缩程序制作而成的。Linux上常用的有 zip，rar，tar。</p>
+
+<h3>一、zip</h3>
+<p>1. 使用 zip 打包文件夹：</p>
+<pre>
+zip -r -q -e -o adminly.zip /home/adminly
+zip -r -9 -q -o adminly_9.zip /home/adminly -x ~/*.zip
+</pre>
+<p>-r 参数表示递归打包包含子目录的全部内容；-q 参数表示为安静模式，即不向屏幕输出信息；-e 表示加密打包；-o 表示输出文件，需在其后紧跟打包输出文件名；-9 参数表示压缩级别（9 最大，1 最小）；-x 表示排除文件，即不将其打包在内；-l 参数可将 LF 转换为 CR+LF（Carriage-Return+Line-Feed 回车加换行），因为Windows 中为CR+LF，Linux/Unix中为LF。</p>
+
+
+<p>2. 使用 unzip 命令解压缩 zip 文件</p>
+<pre>
+unzip adminly.zip //解压到当前目录
+unzip -q adminly.zip -d ziptest //解压到指定目录ziptest
+unzip -O GBK 中文压缩文件.zip
+unzip -l adminly.zip //不解压只查看压缩包的内容
+</pre>
+<p>-q 表示安静模式；-d 后接目录名；-O（大写 o）参数指定编码类型，通常 Windows 系统上面创建的压缩文件，如果有有包含中文的文档或以中文作为文件名的文件时默认会采用 GBK 或其它编码，而 Linux 上面默认使用的是 UTF-8 编码。</p>
+
+<h3>二、rar</h3>
+<p>1. 安装 rar 和 unrar 工具</p>
+<pre>
+sudo apt-get install rar unrar
+</pre>
+
+<p>2. 使用 rar 压缩文件或目录</p>
+<pre>
+rar a adminly.rar /home/adminly //添加目录到压缩包中
+rar d adminly.rar .zshrc //从压缩包文件中删除某个文件
+rar l adminly.rar //不解压只查看压缩包的内容
+</pre>
+<p>注：rar 的命令参数没有 - 。</p>
+
+<p>3. 使用 unrar 解压 rar 文件</p>
+<pre>
+unrar x adminly.rar //全路径解压
+unrar e adminly.rar tmp/  //去掉路径解压
+</pre>
+
+<h3>三、tar </h3>
+<p>在 Linux 上面更常用的是 tar 工具，tar 原本只是一个打包工具，只是同时还是实现了对 7z、gzip、xz、bzip2 等工具的支持。</p>
+<p>1. 使用 tar 打包和解包</p>
+<pre>
+tar -cf adminly.tar ~ //打包
+tar -xf adminly.tar -C tardir //解包
+tar -tf adminly.tar //不解包只查看
+</pre>
+<p>-c 表示创建一个 tar 包文件；-f 用于指定创建的文件名，注意文件名必须紧跟在 -f 参数之后；-v 参数表示以可视的的方式输出打包的文件；默认会自动去掉表示绝对路径的 /，可以使用 -P 保留绝对路径符；-x 参数表示解包；-C 参数后接目录名；-t 参数表示不解包只查看。</p>
+
+<p>2. 创建和解压 *.tar.gz 文件</p>
+<pre>
+tar -czf adminly.tar.gz ~
+tar -xzf adminly.tar.gz
+</pre>
+<p>对于创建不同的压缩格式的文件，对于 tar 来说是相当简单的，只需要在原有的基础上添加一个参数：-z（*.tar.gz）、-J（*.tar.xz）、-j（*tar.bz2）。</p>
+
+{% endblock %}
