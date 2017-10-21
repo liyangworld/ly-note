@@ -31,6 +31,10 @@
             <td>cd</td>
             <td>（change dir）切换目录</td>
         </tr>
+        <tr>
+            <td>ls</td>
+            <td>（list）列出目录中的文件和子目录</td>
+        </tr>
     </tbody>
 </table>
 
@@ -223,5 +227,73 @@ tar -czf adminly.tar.gz ~
 tar -xzf adminly.tar.gz
 </pre>
 <p>对于创建不同的压缩格式的文件，对于 tar 来说是相当简单的，只需要在原有的基础上添加一个参数：-z（*.tar.gz）、-J（*.tar.xz）、-j（*tar.bz2）。</p>
+
+
+
+<h2>磁盘管理</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width:120px;">命令</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>df</td>
+            <td>查看磁盘的容量，-h 参数表示以更易读的方式显示。更多关心的是环境中的rootfs或者物理主机上的/dev/sda2</td>
+        </tr>
+        <tr>
+            <td>du xxx</td>
+            <td>查看文件或目录的容量，-h 表示以更易读的方式显示；-d 指定查看目录的深度，-d 0表示只查看1级目录；-a 表示显示目录中所有文件的大小；-s 表示仅显示总计。</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<h2>定时任务</h2>
+<p>crontab 命令用于设置周期性被执行的指令。该命令从输入设备读取指令，并将其存放于 crontab 文件中，以供之后读取和执行。通常，crontab 储存的指令被其守护进程 crond 激活，crond 常常在后台运行。</p>
+<p>每个用户使用 crontab -e 添加计划任务，都会在 /var/spool/cron/crontabs 中添加一个该用户自己的任务文档。如果是系统级别的定时任务，只需要以 sudo 权限编辑 /etc/crontab 文件就可以。cron 服务监测时间最小单位是分钟，所以 cron 会每分钟去读取一次 /etc/crontab 与 /var/spool/cron/crontabs 里面的內容。</p>
+<ol>
+    <li>/etc/cron.daily，目录下的脚本会每天执行一次，在每天的6点25分时运行</li>
+    <li>/etc/cron.hourly，目录下的脚本会每个小时执行一次，在每小时的17分钟时运行</li>
+    <li>/etc/cron.monthly，目录下的脚本会每月执行一次，在每月1号的6点52分时运行</li>
+    <li>/etc/cron.weekly，目录下的脚本会每周执行一次，在每周第七天的6点47分时运行</li>
+</ol>
+<p>系统默认执行时间可以根据需求进行修改。</p>
+
+
+
+<h3>添加一个计划任务</h3>
+<pre>
+crontab -e
+</pre>
+<p>选择编辑器之后，在文档的最后一排加上所需执行的命令</p>
+<pre>
+*/1 * * * * touch /home/adminly/$(date +\%Y\%m\%d\%H\%M\%S)
+</pre>
+<p>该任务是每分钟会在/home/adminly目录下创建一个以当前的年月日时分秒为名字的空白文件。</p>
+<p>注：“ % ” 在 crontab 文件中，有结束命令行、换行、重定向的作用，前面加 ” \ ” 符号转义（此处表示重定向），否则，“ % ” 符号将执行其结束命令行或者换行的作用，并且其后的内容会被做为标准输入发送给前面的命令。</p>
+
+<h3>查看任务列表及 cron 的守护进程</h3>
+<pre>
+crontab -l
+pgrep cron
+</pre>
+
+<h3>查看日志信息</h3>
+<pre>
+sudo tail -f /var/log/syslog
+</pre>
+
+<h3>删除任务</h3>
+<pre>
+crontab -r
+</pre>
+
+
+
+
 
 {% endblock %}

@@ -1,0 +1,165 @@
+
+{% extends '../../../tpl/layout_os.html' %}
+
+{% set title_suffix = '命令执行顺序控制与管道' %}
+
+{% block content %}
+
+<h1>命令执行顺序控制与管道</h1>
+
+<h2>顺序执行</h2>
+<ol>
+    <li>单条命令：在终端输入一条命令，按下回车执行</li>
+    <li>多条命令：多条命令之间使用 ; 来分隔</li>
+</ol>
+<pre>
+sudo apt-get update //单条命令
+sudo apt-get update;sudo apt-get install some-tool;some-tool //多条命令
+</pre>
+
+<h2>有选择的执行命令</h2>
+<p>使用环境变量 $? 可获取上一次命令的执行状态，成功则返回0，否则非0。&& 表示当$?为0时执行后面的命令，否则不执行；||与&&相反。</p>
+
+<pre>
+which cowsay>/dev/null && echo "exist" || echo "not exist" //cowsay存在则输出"exist"，否则输出"not exist"
+</pre>
+
+<h2>管道</h2>
+<p>管道是一种通信机制，通常用于进程间的通信（也可通过socket进行网络通信）。表现形式就是将前面每一个进程的输出(stdout)直接作为下一个进程的输入(stdin)。</p>
+<pre>
+ls -al /etc | less
+</pre>
+
+<h2>管道常用命令</h2>
+<table>
+    <tbody>
+        <tr>
+            <td>cut</td>
+            <td>打印每一行的某一字段</td>
+        </tr>
+        <tr>
+            <td>grep</td>
+            <td>在文本中或 stdin 中查找匹配字符串</td>
+        </tr>
+        <tr>
+            <td>wc</td>
+            <td>用于统计并输出文件的行、单词和字节的数目</td>
+        </tr>
+        <tr>
+            <td>sort</td>
+            <td>将输入按照一定方式排序，然后再输出</td>
+        </tr>
+        <tr>
+            <td>uniq</td>
+            <td>用于过滤或者输出重复行</td>
+        </tr>
+        <tr>
+            <td>tr</td>
+            <td>用来删除一段文本信息中的某些文字，或者将其进行转换</td>
+        </tr>
+        <tr>
+            <td>col</td>
+            <td>可以将Tab换成对等数量的空格键，或反转这个操作</td>
+        </tr>
+        <tr>
+            <td>join</td>
+            <td>行合并，用于将两个文件中包含相同内容的那一行合并在一起</td>
+        </tr>
+        <tr>
+            <td>paste</td>
+            <td>行合并，类似于join 命令，但是它不对比数据，只是简单地将多个文件合并一起</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<h3>cut 命令</h3>
+<p>打印每一行的某一字段。</p>
+<pre>
+cut /etc/passwd -d ':' -f 1,6  //打印/etc/passwd文件中以:为分隔符的第1个字段和第6个字段
+
+cut /etc/passwd -c 5  //打印/etc/passwd文件中每一行的第5个字符
+cut /etc/passwd -c -5  //打印/etc/passwd文件中每一行的前5个字符（包含第五个）
+cut /etc/passwd -c 5-  //打印/etc/passwd文件中每一行的5个之后的字符（包含第五个）
+cut /etc/passwd -c 2-5  //打印/etc/passwd文件中每一行的2到5之间的字符（包含第二和第五个）
+</pre>
+
+<h3>grep 命令</h3>
+<p>（global search regular expression and print out the line），在文本中或 stdin 中查找匹配字符串。</p>
+
+<pre>
+grep [命令选项] 用于匹配的表达式 [文件]
+grep -rnI "test" ~  //搜索用户目录下所有包含"test"的所有文本文件，并显示出现在文本中的行号
+export | grep ".*test$"  //查看环境变量中以"test"结尾的字符串
+</pre>
+
+<p>-r 参数表示递归搜索子目录中的文件；-n 表示打印匹配项行号；-I 表示忽略二进制文件。</p>
+
+<h3>wc 命令</h3>
+<p>（word count）用于统计并输出文件的行、单词和字节的数目。</p>
+<pre>
+wc /etc/passwd  //输出行数、单词数、字节数
+wc -l /etc/passwd  //只输出行数
+ls -dl /etc/*/ | wc -l  //输出 /etc 下面所有目录数
+</pre>
+<p>-l 表示行数；-w 表示单词数；-c 表示字节数；-m 表示字符数；-L 表示最长行字节数。</p>
+
+<h3>sort 命令排序</h3>
+<p>将输入按照一定方式排序，然后再输出。支持的排序有：字典、数字、按月份、随机、反转、指定特定字段进行排序等等。默认为字典排序。</p>
+<pre>
+cat /etc/passswd | sort  //字典排序
+cat /etc/passwd | sort -r  //反转排序
+cat /etc/passwd | sort -t':' -k 3 -n  //按特定字段排序
+</pre>
+<p>-t 用于指定文本中字段的分隔符，这里以":"作为分隔符；-k 用于指定对哪一个字段进行排序，这里对第3个字段；默认情况下是按字典排序的，-n 表示按照数字排序。</p>
+
+<h3>uniq 命令去重</h3>
+<p>用于过滤或者输出重复行。</p>
+<pre>
+history | cut -c 8- | cut -d ' ' -f 1 | sort | uniq  //过滤重复行
+
+history | cut -c 8- | cut -d ' ' -f 1 | sort | uniq -D  //输出所有重复的行
+history | cut -c 8- | cut -d ' ' -f 1 | sort | uniq -dc  //输出重复过的行（重复的只输出一个）及重复次数
+</pre>
+<p>history 命令可查看最近执行过的命令。uniq 命令只能去连续重复的行，不是全文去重。</p>
+
+<h3>tr 命令</h3>
+<p>用来删除一段文本信息中的某些文字，或者将其进行转换。</p>
+<pre>
+tr [option] SET1 [SET2]
+
+echo 'hello world' | tr -d 'olh'  //删除字串中所有的'o','l','h'字符
+echo 'hello' | tr -s 'l'  //将"hello" 中的ll,去重为一个l
+cat 'input some text here' | tr '[:lower:]' '[:upper:]'  //将输入文本，全部转换为大写输出
+</pre>
+<p>-d 表示删除和set1匹配的字符；-s 表示将set1指定的连续并重复的字符合并为一个字符；'[:lower:]' '[:upper:]'也可以简单的写作'[a-z]' '[A-Z]'。</p>
+
+<h3>col 命令</h3>
+<p>可以将Tab换成对等数量的空格键，或反转这个操作</p>
+<pre>
+col [option]
+cat /etc/protocols | col -x | cat -A  //将内容中的 Tab 转换为空格
+</pre>
+<p>-x 表示将Tab转换为空格；-h 表示将空格转换为Tab（默认选项）。</p>
+<p>使用cat -A 可以看到文本中包含的不可见特殊字符。Linux 的\n表现出来就是一个$，而 Windows/dos的表现为^M$；Tab 为^I。</p>
+
+<h3>join 命令</h3>
+<p>行合并，用于将两个文件中包含相同内容的那一行合并在一起。</p>
+<pre>
+join [option] file1 file2
+sudo join -t':' -1 4 /etc/passwd -2 3 /etc/group  //将两个文件合并，指定以':'作为分隔符, 分别比对第4和第3个字段
+</pre>
+<p>-t 指定分隔符，默认为空格；-i 忽略大小写的差异；-1 指明第一个文件要用哪个字段来对比，默认对比第一个字段；-2	指明第二个文件要用哪个字段来对比，默认对比第一个字段。</p>
+
+<h3>paste 命令</h3>
+<p>行合并，类似于join 命令，但是它不对比数据，只是简单地将多个文件合并一起。</p>
+<pre>
+paste [option] file...
+paste -d ':' file1 file2 file3  //行合并，分隔符为 :
+</pre>
+<p>-d 指定合并的分隔符，默认为Tab；-s	不合并到一行，每个文件为一行。</p>
+
+
+
+{% endblock %}

@@ -30,11 +30,13 @@ const routes = {
     react:[
         'index','quickStart','eventHandle','componentEvolutionJs'
     ],
-    os:['index','winHotKey','winCli','lixHotKey','lixCli','lixFs'],
+    os:['index','winHotKey','winCli','lixHotKey','lixCli','lixFs','lixFlow','lixReg'],
     express:['index'],
     koa:['index'],
     egg:['index'],
-    python:['index','grammar']
+    python:['index',
+        'grammar','dataType','operator','number','string'
+    ]
 };
 
 module.exports = app => {

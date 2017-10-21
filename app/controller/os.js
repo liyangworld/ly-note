@@ -10,7 +10,9 @@ const actions = [
     {name:'winCli',hasAction:'winCli',dir:'windows'},
     {name:'lixHotKey',hasAction:'lixHotKey',dir:'linux'},
     {name:'lixCli',hasAction:'lixCli',dir:'linux'},
-    {name:'lixFs',hasAction:'lixFs',dir:'linux'}
+    {name:'lixFs',hasAction:'lixFs',dir:'linux'},
+    {name:'lixFlow',hasAction:'lixFlow',dir:'linux'},
+    {name:'lixReg',hasAction:'lixReg',dir:'linux'}
 ];
 
 module.exports = app => {

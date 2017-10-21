@@ -2,15 +2,20 @@
 /**
  * Created by liyang on 2017-08-06.
  */
+var makeController = require('../utils/makeController');
+
+const viewDir = 'python';
+const actions = [
+    {name:'index',hasAction:'',dir:''},
+    {name:'grammar',hasAction:'grammar',dir:'grammar'},
+    {name:'dataType',hasAction:'dataType',dir:'grammar'},
+    {name:'operator',hasAction:'operator',dir:'grammar'},
+    {name:'number',hasAction:'number',dir:'grammar'},
+    {name:'string',hasAction:'string',dir:'grammar'}
+];
 
 module.exports = app => {
-    class pythonController extends app.Controller {
-        * index(){
-            yield this.ctx.render('pages/python/index.html');
-        }
-        * grammar(){
-            yield this.ctx.render('pages/python/grammar/grammar.html',{action:'grammar'});
-        }
-    }
+    class pythonController extends app.Controller {}
+    makeController.makeActions(pythonController,viewDir,actions);
     return pythonController;
 };
