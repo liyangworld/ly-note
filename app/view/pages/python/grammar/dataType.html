@@ -8,13 +8,117 @@
 <h1>数据类型及类型转换</h1>
 
 <h2>常用数据类型</h2>
-<p>Python 中常用的数据类型有：空值（None）、布尔型（True、False）、整数、长整型、浮点数、字符串、列表、元组、Numpy数组、字典、集合、Pandas类型 等。</p>
-
+<p>Python 中常用的数据类型有：空值（None）、布尔型（True、False）、整数、浮点数、字符串、字节(types)、列表、元组、Numpy数组、字典、集合、Pandas类型 等。</p>
+<p>在Python 3里，只有一种整数类型 int，没有 python2 中的 Long。Python3 中的整型没有大小的限制。</p>
+<p>在Python2中是没有布尔型的，它用数字0表示False，用1表示True。到Python3中，把True和False定义成关键字了，但它们的值还是1和0，它们可以和数字进行运算。</p>
 
 <h2>数据类型的判断</h2>
+<h3>一、type()</h3>
+<pre>
+type(1) == int
+type('a') == type('')
+</pre>
+<p>type() 返回值有：int、str、bytes、bool、list、tuple、dict 等。</p>
+
+<h3>二、isinstance()</h3>
+<pre>
+isinstance(1,int)
+isinstance(b'kkk',bytes)
+</pre>
+<p>isinstance 用于判断变量是否是某个类型的实例。子类实例也属于父类类型，但是 type()将其判断为False。</p>
+
+<p>正常情况下不应该编写代码检查类型的，而应该直接假设被操作的instance具有你希望的属性，否则抛出异常。即使需要检查类型，也应该用isinstance来判断，这样你期望类型的subclass也能正常被处理。</p>
+
+
 
 <h2>类型转换</h2>
+<p>Python 中除了整数、布尔值 与 浮点数进行运算时会自动将其转为浮点数以外，其他时候实现类型转换都需要使用各种类型函数显示的进行。</p>
+<table>
+    <thead>
+        <tr>
+            <th>类型函数</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>str()</td>
+            <td>将对象转换为字符串。参数可以是任意类型，其他进制的整数将被转为10进制的。注：str(True) == 'True'</td>
+        </tr>
+        <tr>
+            <td>int()</td>
+            <td>将参数转换为整型。参数可以是 整数(各种进制)、布尔值、浮点数 和 (10进制)数字字符串。int(x, base=10)：base表示参数的进制数，若传入base参数，则x必须为字符串形式。int('0xf',16) == 15</td>
+        </tr>
+        <tr>
+            <td>float()</td>
+            <td>将参数转为浮点数。参数可以是 (各种进制)整数、布尔值、浮点数、(10进制)数值字符串。</td>
+        </tr>
 
+        <tr>
+            <td>complex()</td>
+            <td>创建一个复数，或将数值、字符串转为复数。complex(1, 2)、complex("1+2j")</td>
+        </tr>
+        <tr>
+            <td>bool()</td>
+            <td>将参数转换为布尔值，无参数则返回 False。bool是int的子类。注：0、''、None、[]、{} 返回False；负数返回True</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>list()</td>
+            <td>将序列转换成一个列表。参数可以是：字符串、range()对象、元组、集合等。</td>
+        </tr>
+        <tr>
+            <td>tuple()</td>
+            <td>将序列转换为元组。参数可以是 字符串、列表、集合等。</td>
+        </tr>
+        <tr>
+            <td>dict()</td>
+            <td>创建一个字典。无参数时返回空字典。参数有以下几种形式：dict(a='a', b='b')、dict([('a', 1), ('b', 2)])、dict(zip(['a', 'b'], [1, 2]))</td>
+        </tr>
+        <tr>
+            <td>set()</td>
+            <td>创建一个无序不重复的集合。参数可以是 字符串、列表 等。</td>
+        </tr>
+        <tr>
+            <td>frozenset()</td>
+            <td>返回一个冻结的集合，冻结后集合不能再添加或删除任何元素。参数为可迭代的对象，如列表、元组、字典等。</td>
+        </tr>
+
+        <tr>
+            <td>bytearray()</td>
+            <td>创建一个字节数组。这个数组里的元素是可变的，并且每个元素的值范围为[0,255]。参数为整数，则表示数组长度；参数为iterable，则元素必须为[0 ,255] 中的整数；参数为字符串，则按照指定的编码将字符串转换为字节序列。如：bytearray(3)、bytearray([1,2,3])、bytearray('abc', 'utf-8')。另：b'abc123'为字节类型</td>
+        </tr>
+        <tr>
+            <td>bytes()</td>
+            <td>创建一个bytes对象（b'abc123'）。是一个[0,255]区间内的整数不可变序列。它是 bytearray 的不可变版本。</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>bin()</td>
+            <td>将一个整数(各种进制)转换成二进制字符串。bin(2) == '0b10'</td>
+        </tr>
+        <tr>
+            <td>oct()</td>
+            <td>将一个整数(各种进制)转换成8进制字符串。oct(8) == '0o10'</td>
+        </tr>
+        <tr>
+            <td>hex()</td>
+            <td>将一个整数(各种进制)转换成16进制字符串（'oxf'）。</td>
+        </tr>
+
+        <tr>
+            <td>chr()</td>
+            <td>返回一个[0,255]范围内的整数所对应的字符。参数可以是各种进制的整数。</td>
+        </tr>
+        <tr>
+            <td>ord()</td>
+            <td>以一个字符（长度为1的字符串）作为参数，返回对应的 ASCII 数值，或者 Unicode 数值（一个十进制整数）。</td>
+        </tr>
+    </tbody>
+</table>
 
 
 {% endblock %}

@@ -1,11 +1,282 @@
 
 {% extends '../../../tpl/layout_python.html' %}
 
-{% set title_suffix = '字符串' %}
+{% set title_suffix = '字符串 - 说明' %}
 
 {% block content %}
 
-<h1>字符串</h1>
+<h1>字符串 - 说明</h1>
+
+<h2>创建字符串</h2>
+<p>Python 中可以用成对的单引号或者双引号来创建字符串。</p>
+<pre>
+s = 'abc'
+s = "abc"
+s = "abc" "def"  #等同于"abcdef"
+</pre>
+
+<h3>1. 单行字符串使用 () 或 \ 实现换行书写，“行”之间没有换行符（\n）</h3>
+<pre>
+s = ("abc"
+    "def")
+</pre>
+<pre>
+s = "abc"\
+    "def"
+</pre>
+<p>等同于 "abcdef" 。</p>
+<h3>2. 多行字符串，使用成对的三引号实现，“行”之间有换行符（\n）</h3>
+<pre>
+s = '''abc
+    def'''
+</pre>
+<pre>
+s = """abc
+    def"""
+</pre>
+<p>等同于 "abc\ndef" 。</p>
+
+<h2>使用反斜杠（\）转义字符</h2>
+<p>在字符串中可以表示换行符、制表符等，但需要进行转义，比如：\n 、\t 、\' 、\" 。注：反斜杠处于行尾时表示续行。</p>
+
+<h2>字符串操作符</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width:100px;">操作符</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>+</td>
+            <td>字符串连接。'abc' + '123' 相当于 'abc123'</td>
+        </tr>
+        <tr>
+            <td>*</td>
+            <td>重复字符串。'abc'*2 相当于 'abcabc'</td>
+        </tr>
+        <tr>
+            <td>[i]</td>
+            <td>通过索引获取字符串中的字符。'abc'[0]、'abc'[-1]</td>
+        </tr>
+        <tr>
+            <td>[a:b]</td>
+            <td>截取字符串中的一部分（字符串切片）。冒号前后指明索引值范围，取头不取尾，索引值可省略。若 a>=b 则返回空字符串。[a:b:n] 第一个冒号前后指明索引值范围，第二个冒号后指明步长。</td>
+        </tr>
+        <tr>
+            <td>in、not in</td>
+            <td>成员运算符，判断字符串中是否包含给定的字符。'b' in 'abc' 返回True</td>
+        </tr>
+        <tr>
+            <td>r/R</td>
+            <td>原始字符串，字符串直接按照字面的意思来使用，取消（\）的转义功能。r'a\nb' 相当于 'a\\nb'</td>
+        </tr>
+        <tr>
+            <td>u</td>
+            <td>Unicode字符串。在Python2中，普通字符串是以8位ASCII码进行存储的，表示Unicode字符串时需加前缀u，（u'hi你'）。在Python3中，所有的字符串都是Unicode字符串。</td>
+        </tr>
+        <tr>
+            <td>%</td>
+            <td>字符串格式化</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>字符串格式化</h2>
+<h3>1. 使用 %()</h3>
+<pre>
+"我叫 %s ，今年 %d 岁!" % ('小明', 10)
+</pre>
+<table>
+    <thead>
+        <tr>
+            <th>占位符</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>%c</td>
+            <td>字符及其ASCII码</td>
+        </tr>
+        <tr>
+            <td>%s</td>
+            <td>字符串</td>
+        </tr>
+        <tr>
+            <td>%d、%u</td>
+            <td>整数、无符号整型</td>
+        </tr>
+        <tr>
+            <td>%f</td>
+            <td>浮点数，可指定小数点后的精度。如：%.2f</td>
+        </tr>
+        <tr>
+            <td>%e、%E</td>
+            <td>用科学计数法格式化浮点数</td>
+        </tr>
+        <tr>
+            <td>%g、%G</td>
+            <td>%f和%e的简写、%f 和 %E 的简写</td>
+        </tr>
+        <tr>
+            <td>%o</td>
+            <td>无符号八进制数</td>
+        </tr>
+        <tr>
+            <td>%x、%X</td>
+            <td>无符号十六进制数、（大写）</td>
+        </tr>
+        <tr>
+            <td>%p</td>
+            <td>用十六进制数格式化变量的地址</td>
+        </tr>
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <th>辅助符号</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <thead>
+        <tr>
+            <td>%</td>
+            <td>'%%'输出一个单一的'%'</td>
+        </tr>
+        <tr>
+            <td>m.n</td>
+            <td>m 是显示的最小总宽度，n 是小数点后的位数</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>在八进制数前面显示'0o'，在十六进制前面显示'0x'或者'0X'(取决于用的是'x'还是'X')</td>
+        </tr>
+        <tr>
+            <td>*</td>
+            <td>定义宽度或者小数点精度</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>用做左对齐</td>
+        </tr>
+        <tr>
+            <td>+</td>
+            <td>在正数前面显示加号( + )</td>
+        </tr>
+        <tr>
+            <td>&lt;sp&gt;</td>
+            <td>在正数前面显示空格</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>显示的数字前面填充'0'而不是默认的空格</td>
+        </tr>
+        <tr>
+            <td>(var)</td>
+            <td>映射变量(字典参数)</td>
+        </tr>
+    </thead>
+</table>
+
+
+<h3>2. format()方法</h3>
+<pre>
+'{} {} {}'.format('a', 2, 'c')  #输出'a 2 c'
+'{2} {1} {0}'.format('a', 2, 'c')  #输出'c 2 0'
+'{color} {0} {x} {1}'.format(1, 'abc', x = 1.5, color='blue')  #输出'blue 1 1.5 abc'
+</pre>
+<p>format()方法的参数不限个数，可接受的参数类型有 字符串、数字 和 各种对象，返回格式化后的字符串。花括号中可指明参数位置(0索引) 或 关键字参数。花括号可转义花括号，即{{n}}输出{n}。</p>
+
+<pre>
+# 通过列表索引设置参数
+person = ['张三', 20]
+print("姓名：{0[0]}, 年龄：{0[1]}".format(person))
+</pre>
+<pre>
+# 通过字典设置参数
+person = {"name": "张三", "age": 20}
+print("姓名：{name}, 年龄：{age}".format(**person))
+</pre>
+<pre>
+# 传入对象
+class Person(object):
+	def __init__(self, name, age):
+		self.name = name
+		self.age = age
+person1 = Person('张三', 20)
+print("姓名：{0.name}, 年龄：{0.age}".format(person1))
+</pre>
+<h4>使用{:}指定格式</h4>
+<p>冒号前为参数索引或参数名，冒号后为格式。</p>
+<pre>
+"{0:.2f}".format(3.1415926)
+</pre>
+<table>
+    <thead>
+        <tr>
+            <th style="width:100px;">格式</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{:10.2f}</td>
+            <td>保留小数点后两位，总宽度为10，左边补空格。参数只能是 整数、布尔值、浮点数。</td>
+        </tr>
+        <tr>
+            <td>{:+.2f}</td>
+            <td>带符号保留小数点后两位，负数前显示 -，正数前显示 +</td>
+        </tr>
+        <tr>
+            <td>{: .2f}</td>
+            <td>带符号保留小数点后两位，负数前显示 -，正数前加空格</td>
+        </tr>
+        <tr>
+            <td>{:10}</td>
+            <td>宽度为10，左边补空格，右对齐。参数只能是 整数、布尔值、浮点数；当参数为字符串时，右边补空格，左对齐。</td>
+        </tr>
+        <tr>
+            <td>{:10d}</td>
+            <td>宽度为10，左边补空格，右对齐。参数只能是 整数、布尔值。</td>
+        </tr>
+        <tr>
+            <td>{:x>10d}</td>
+            <td>宽度为10，左边补x，右对齐。参数只能是 整数、布尔值。x默认为空格。</td>
+        </tr>
+        <tr>
+            <td>{:x<10d}</td>
+            <td>宽度为10，右边补x，左对齐。参数只能是 整数、布尔值。x默认为空格。</td>
+        </tr>
+        <tr>
+            <td>{:x^10d}</td>
+            <td>宽度为10，两边补x，中间对齐。参数只能是 整数、布尔值。x默认为空格。</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>{:,}</td>
+            <td>以逗号分隔数字的整数部分(4,123.1234)。参数只能是 整数、布尔值、浮点数。</td>
+        </tr>
+        <tr>
+            <td>{:.2%}</td>
+            <td>百分比格式。参数只能是 整数、布尔值、浮点数。</td>
+        </tr>
+        <tr>
+            <td>{:.2e}</td>
+            <td>科学计数法(1.00e+04)。参数只能是 整数、布尔值、浮点数。</td>
+        </tr>
+        <tr>
+            <td>{:q}</td>
+            <td>此处q指代进制数，b、d、o、x 分别是二进制、十进制、八进制、十六进制。将参数转换为其他进制显示，参数只能是 整数、布尔值。</td>
+        </tr>
+        <tr>
+            <td>{:#x}或{:#X}</td>
+            <td>井号表示返回的进制数前加前缀 0x 或 0X</td>
+        </tr>
+    </tbody>
+</table>
 
 
 

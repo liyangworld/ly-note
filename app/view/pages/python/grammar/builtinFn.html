@@ -1,0 +1,238 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '内置函数' %}
+
+{% block content %}
+
+<h1>内置函数</h1>
+<p>Python 内置了一些函数以供使用，其中类型函数放置在类型转换章节。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th style="min-width:100px;">函数</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>help()</td>
+            <td>用于查看函数或模块用途的详细说明。</td>
+        </tr>
+        <tr>
+            <td>dir()</td>
+            <td>不带参数时，返回当前范围内的变量、方法和定义的类型列表；带参数时，返回参数的属性、方法列表。如果参数包含方法__dir__()，该方法将被调用。如果参数不包含__dir__()，该方法将最大限度地收集参数信息。</td>
+        </tr>
+        <tr>
+            <td>id()</td>
+            <td>用于获取对象的内存地址。</td>
+        </tr>
+        <tr>
+            <td>hash()</td>
+            <td>用于获取一个对象的哈希值。</td>
+        </tr>
+        <tr>
+            <td>memoryview()</td>
+            <td>返回给定参数的内存查看对象(Momory view)。所谓内存查看对象，是指对支持缓冲区协议的数据进行包装，在不需要复制对象基础上允许Python代码访问。</td>
+        </tr>
+
+        <tr>
+            <td>__import__()</td>
+            <td>用于动态加载类和函数，如果一个模块经常变化就可以使用它来动态载入。返回元组列表。__import__('xx')</td>
+        </tr>
+        <tr>
+            <td>globals()</td>
+            <td>以字典形式返回当前位置的全局变量。</td>
+        </tr>
+        <tr>
+            <td>locals()</td>
+            <td>以字典形式返回当前位置的全部局部变量。</td>
+        </tr>
+        <tr>
+            <td>vars()</td>
+            <td>返回由参数对象的属性和属性值组成的字典对象。无参时返回当前调用位置的属性和属性值，类似 locals()。</td>
+        </tr>
+
+        <tr>
+            <td>print()</td>
+            <td>打印输出。print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)</td>
+        </tr>
+        <tr>
+            <td>input()</td>
+            <td>相等于eval(raw_input(prompt))，用来获取控制台的输入。input()返回数值或字符串；推荐使用 raw_input()，始终返回字符串</td>
+        </tr>
+        <tr>
+            <td>open()</td>
+            <td>用于打开文件，返回一个file对象。open(name[, mode[, buffering]])：mode 指明了打开文件的模式：只读(r)、写入(w)、追加(a)等。</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>type()</td>
+            <td>一个参数时返回该参数类型，三个参数时创建一个新类。X = type('X', (object,), dict(a=1))</td>
+        </tr>
+        <tr>
+            <td>isinstance()</td>
+            <td>判断一个对象是否是某类型的实例，考虑继承关系。第二个参数可为元组：isinstance(1,(str,int,list)) == True</td>
+        </tr>
+        <tr>
+            <td>issubclass()</td>
+            <td>判断某个类是否是另一个类的子类。issubclass(Child,Parent)</td>
+        </tr>
+        <tr>
+            <td>callable()</td>
+            <td>用于检查一个对象是否是可调用的。如果返回True，object仍然可能调用失败；但如果返回False，调用对象ojbect绝对不会成功。对于函数、方法、lambda、类、以及实现了 __call__ 方法的类实例, 它都返回 True。</td>
+        </tr>
+
+        <tr>
+            <td>eval()</td>
+            <td>用来执行一个字符串表达式，并返回表达式的值。eval('2 + 2') == 4</td>
+        </tr>
+
+        <tr>
+            <td>exec()</td>
+            <td>执行储存在字符串或文件中的 Python 语句，相比于 eval，exec可以执行更复杂的 Python 代码。exec 返回值永远为 None。</td>
+        </tr>
+        <tr>
+            <td>compile()</td>
+            <td>将一个字符串编译为字节代码，返回一个字节代码对象 c 。然后可被exec(c)或eval(c)执行。</td>
+        </tr>
+        <tr>
+            <td>repr()</td>
+            <td>将对象转化为供解释器读取的形式，返回一个字符串。repr('abc') == "'abc'"</td>
+        </tr>
+        <tr>
+            <td>ascii()</td>
+            <td>参数为对象，返回值为字符串，类似于repr()函数。但是对于字符串中的非 ASCII 字符则返回通过 repr() 函数使用 \x, \u 或 \U 编码的字符。如：ascii('runoob')返回 "'runoob'" </td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>super()</td>
+            <td>返回父类实例。super(Child,self)</td>
+        </tr>
+        <tr>
+            <td>classmethod</td>
+            <td>@classmethod 修饰符创建类方法。类方法需要表示自身类的cls参数，不需要self参数</td>
+        </tr>
+        <tr>
+            <td>staticmethod()</td>
+            <td>修饰器，用于创建类的静态方法。@staticmethod</td>
+        </tr>
+        <tr>
+            <td>property()</td>
+            <td>在新式类中返回属性值。有两种使用形式：1.在类中定义一个可控属性值x，x = property(getfn, setfn, delfn, "I'm the 'x' property.")；2.作为装饰器创建只读属性，@property，搭配@x.setter、@x.deleter实现第一种的效果</td>
+        </tr>
+
+        <tr>
+            <td>hasattr()</td>
+            <td>判断对象是否包含对应的属性。</td>
+        </tr>
+        <tr>
+            <td>getattr()</td>
+            <td>返回一个对象的某个属性值。getattr(object, name[, default])：default用于在没有对应属性时返回的值，否则在没有对应属性时，将触发 AttributeError</td>
+        </tr>
+        <tr>
+            <td>setattr()</td>
+            <td>用于设置属性值，该属性必须存在。setattr(object, name, value)</td>
+        </tr>
+        <tr>
+            <td>delattr()</td>
+            <td>删除属性。delattr(x, 'foobar') 相当于 del x.foobar</td>
+        </tr>
+
+
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>round()</td>
+            <td>对数值进行四舍五入，当考查数为5时，奇进偶不进（整数部分为奇数，则进1，偶数则舍去）。round(x[,n])：n表示小数点位数，默认为0。默认舍去末尾连续的0，特例(.0)的形式。</td>
+        </tr>
+        <tr>
+            <td>abs()</td>
+            <td>返回数字的绝对值。如果参数是一个复数，则返回它的大小。</td>
+        </tr>
+        <tr>
+            <td>pow()</td>
+            <td>返回x^y（x的y次方）。pow(x, y[, z])相当于x**y%z 。区别于math.pow(x,y)，math.pow会将参数转为float型。</td>
+        </tr>
+        <tr>
+            <td>divmod()</td>
+            <td>返回一个包含商和余数的元组(a // b, a % b) 如：divmod(a,b)</td>
+        </tr>
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>len()</td>
+            <td>返回对象（字符串、列表、元组、集合、字典 等）长度。</td>
+        </tr>
+        <tr>
+            <td>sum()</td>
+            <td>对序列进行求和。参数可以是 列表、元组。sum(iterable[, start])：start为累加初始值，默认为0。sum([1,2],2) == 5</td>
+        </tr>
+        <tr>
+            <td>max()</td>
+            <td>返回多个参数中的最大值或序列中的最大值。max(1,2)、max([1,2])</td>
+        </tr>
+        <tr>
+            <td>min()</td>
+            <td>返回多个参数中的最小值或序列中的最小值。min(1,2)、min([1,2])</td>
+        </tr>
+        <tr>
+            <td>range()</td>
+            <td>创建一个整数序列。range(start, stop[, step])，一个参数时表示stop，start为0。取头不取尾，常用于for循环</td>
+        </tr>
+        <tr>
+            <td>slice()</td>
+            <td>返回一个切片对象。功能与切片[::]相同。slice(stop)或slice(start, stop[, step]) 如：arr[slice(0,5,2)]</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>all()</td>
+            <td>判断给定的可迭代参数 iterable 中的所有元素，都不为 0、''、False 则返回 True，否则返回 False。注：空元组、空列表返回True</td>
+        </tr>
+        <tr>
+            <td>any()</td>
+            <td>判断给定的可迭代参数 iterable 中的所有元素，如果都为空、0、False，则返回 False，否则(即有一个非false)就返回 True。注：空元组、空列表返回False</td>
+        </tr>
+
+        <tr>
+            <td>map()</td>
+            <td>遍历序列，对每个元素调用函数，返回map对象，可直接for循环，也可用list()转列表。map(fn, iterable, ...)可接受多个序列，以短的为准。</td>
+        </tr>
+        <tr>
+            <td>filter()</td>
+            <td>过滤掉不符合条件的元素，返回由符合条件元素组成的新列表。filter(fn, iterable)</td>
+        </tr>
+        <tr>
+            <td>reversed()</td>
+            <td>反转序列(字符串、列表、元组、range())，返回reversed对象，可直接for循环，也可用list()转列表。</td>
+        </tr>
+        <tr>
+            <td>sorted()</td>
+            <td>对所有可迭代的对象进行排序操作，返回一个新对象。sorted(iterable[, cmpfn[, key[, reverse]]])：后面的三个为关键字参数。cmpfn 比较的函数，大于则返回1，小于则返回-1，等于则返回0。key 指明比较的元素，如key=lambda x:x[1]。reverse默认False升序。key 和 reverse 比一个等价的 cmp 函数处理速度要快。这是因为对于每个列表元素，cmpfn 都会被调用多次，而 key 和 reverse 只被调用一次。</td>
+        </tr>
+
+        <tr>
+            <td>enumerate()</td>
+            <td>用于将一个可遍历的对象(如列表、元组或字符串)组合为一个索引序列，返回enumerate(枚举)对象。常用于for循环中，类似于[(0,'a'),(1,'b')]。enumerate(sequence, [start=0])默认索引从0开始。</td>
+        </tr>
+        <tr>
+            <td>zip()</td>
+            <td>将多个可迭代对象中位置对应的元素打包成元组，返回一个由多个元组所组成的列表，该列表的长度由最短的决定。</td>
+        </tr>
+        <tr>
+            <td>iter()</td>
+            <td>返回参数对象的迭代器。参数一般为列表、元组、集合等。可用for 循环迭代器。</td>
+        </tr>
+        <tr>
+            <td>next()</td>
+            <td>返回迭代器的下一个项目。next(iterator[, default])：default 可选，用于设置在没有下一个元素时返回该默认值，如果不设置，又没有下一个元素则会触发 StopIteration 异常。</td>
+        </tr>
+
+    </tbody>
+</table>
+
+{% endblock %}

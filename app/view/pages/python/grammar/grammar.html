@@ -12,12 +12,60 @@
 <p>变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。</p>
 <pre>
 a = 1
+a = b = c = 1
+a, b = 1, 2
+a, b = b, a
 </pre>
 
 <h2>常量</h2>
 <p>常量即不能变的变量，比如数学常数π。但由于 Python 中变量不用声明，所以 Python 根本没有任何机制保证变量不会被改变，因此实际上 Python 中是没有绝对常量的，但通常用全部大写的变量名表示常量。</p>
 
+<h2>标识符</h2>
+<p>标识符 是用来识别具体对象的一个名称。最常见的标识符就是 变量名、函数名、类名。几乎所有编程语言的标识符都对大小写敏感。</p>
+<p>标识符可以使用任意Unicode字母（包括英文字母和其他语言的字母），以及下划线（_）。但首字符不能是数字（0-9）。</p>
 
+<h2>注释</h2>
+<p>单行注释：#此处为注释内容；多行注释：'''此处为注释内容'''，或 """此处为注释内容"""。</p>
+<h4>Shebang（#!）</h4>
+<p>Shebang这个符号通常在Unix系统的脚本中第一行开头中写到，它指明了执行这个脚本文件的解释程序。如：</p>
+<pre>
+#!/usr/bin/env python3
+</pre>
+<h4>编码格式</h4>
+<p>可以在文件的开头声明文件的编码格式。如：</p>
+<pre>
+#coding=utf-8
+# -*- coding: UTF-8 -*-
+</pre>
 
+<h2>import 与 from...import</h2>
+<p>在 python 中用 import 或者 from...import 来导入相应的模块。</p>
+<ol>
+    <li>将整个模块(xxx)导入，格式为： import xxx</li>
+    <li>从某个模块中导入多个成员,格式为： from xxx import fn1, fn2, fn3</li>
+    <li>将某个模块中的全部成员导入，格式为： from xxx import *</li>
+</ol>
+
+<h2>同一行显示多条语句</h2>
+<p>Python 中可以在同一行中使用多条语句，语句之间使用分号(;)分隔。</p>
+<pre>
+import sys; x = 'aaa'; sys.stdout.write(x + '\n')
+</pre>
+
+<h2>help() 查看帮助</h2>
+<p>在Python 交互环境中，输入help([xx])可查看帮助说明。比如：help(print)</p>
+
+<h2>input() 输入、print() 输出</h2>
+<ol>
+    <li>input(prompt=None)：接收用户输入，并返回字符串（末尾换行符已去除）。唯一参数prompt表示提示语，默认为None。</li>
+    <li>print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)：输出信息到file中。</li>
+</ol>
+
+<h2>dir()</h2>
+<p>dir() 可获得一个对象的所有属性和方法，返回一个 list。</p>
+<pre>
+dir(str)
+dir('')
+</pre>
 
 {% endblock %}

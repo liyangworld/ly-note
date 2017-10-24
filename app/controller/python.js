@@ -10,8 +10,10 @@ const actions = [
     {name:'grammar',hasAction:'grammar',dir:'grammar'},
     {name:'dataType',hasAction:'dataType',dir:'grammar'},
     {name:'operator',hasAction:'operator',dir:'grammar'},
+    {name:'builtinFn',hasAction:'builtinFn',dir:'grammar'},
     {name:'number',hasAction:'number',dir:'grammar'},
-    {name:'string',hasAction:'string',dir:'grammar'}
+    {name:'string',hasAction:'string',dir:'grammar'},
+    {name:'stringFn',hasAction:'stringFn',dir:'grammar'}
 ];
 
 module.exports = app => {
