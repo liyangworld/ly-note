@@ -13,7 +13,11 @@ const actions = [
     {name:'builtinFn',hasAction:'builtinFn',dir:'grammar'},
     {name:'number',hasAction:'number',dir:'grammar'},
     {name:'string',hasAction:'string',dir:'grammar'},
-    {name:'stringFn',hasAction:'stringFn',dir:'grammar'}
+    {name:'stringFn',hasAction:'stringFn',dir:'grammar'},
+    {name:'list',hasAction:'list',dir:'grammar'},
+    {name:'tuple',hasAction:'tuple',dir:'grammar'},
+    {name:'dict',hasAction:'dict',dir:'grammar'},
+    {name:'set',hasAction:'set',dir:'grammar'}
 ];
 
 module.exports = app => {

@@ -6,7 +6,188 @@
 {% block content %}
 
 <h1>字符串 - 常用方法</h1>
+<h2>简介</h2>
+<p>字符串有许多可用的方法，可使用dir('')查看。</p>
 
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="min-width: 100px;">方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>count()</td>
+            <td>用于统计字符串中某个子字符串出现的次数。str.count(sub, start= 0,end=len(string))</td>
+        </tr>
+        <tr>
+            <td>find()</td>
+            <td>检测字符串中是否包含子字符串，包含则返回索引值，否则返回-1。str.find(sub,start=0,end=len(str))</td>
+        </tr>
+        <tr>
+            <td>index()</td>
+            <td>跟find()方法一样，只不过如果子串不在则会报一个异常。str.index(sub,start=0,end=len(str))</td>
+        </tr>
+        <tr>
+            <td>rfind()</td>
+            <td>同find()，不过是从右边开始查找。</td>
+        </tr>
+        <tr>
+            <td>rindex()</td>
+            <td>同index()，不过是从右边开始。</td>
+        </tr>
+
+        <tr>
+            <td>startswith()</td>
+            <td>判断字符串是否以指定字符串开头。str.startswith(sub,start=0,end=len(str))</td>
+        </tr>
+
+        <tr>
+            <td>endswith()</td>
+            <td>判断字符串是否以指定字符串结尾。str.endswith(suffix, start=0, end=len(str))，start、end指明检索的范围</td>
+        </tr>
+
+
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>split()</td>
+            <td>将字符串以指定的分隔符进行分割，返回字符串列表。str.split(sep=" ",num=str.count(sep))，sep不能为空字符串('')，无参数时默认以空字符(空格、换行(\n)、制表符(\t)等)进行分割。num指明分割次数，num+1即为返回值列表的长度</td>
+        </tr>
+        <tr>
+            <td>splitlines()</td>
+            <td>按照行('\r', '\r\n', \n')分隔，返回一个包含各行作为元素的列表。str.splitlines([keepends]) keepends指明是否保留每一行的换行符。默认为False，不保留</td>
+        </tr>
+        <tr>
+            <td>join(seq)</td>
+            <td>将序列中的元素以指定的分隔符连接生成一个新的字符串。sep.join(sequence)，序列中的元素必须都是字符串类型（序列是字符串时特例）</td>
+        </tr>
+
+        <tr>
+            <td>strip()</td>
+            <td>截掉字符串两边的空格或指定子串（贪婪模式）。str.strip([chars])</td>
+        </tr>
+        <tr>
+            <td>lstrip()</td>
+            <td>截掉字符串左边的空格或指定子串（贪婪模式）。str.lstrip([chars])</td>
+        </tr>
+        <tr>
+            <td>rstrip()</td>
+            <td>截掉字符串右边的空格或指定子串（贪婪模式）。str.rstrip([chars])</td>
+        </tr>
+        <tr>
+            <td>replace()</td>
+            <td>将字符串中的指定子串替换成新子串。str.replace(old,new[,max])，max指明替换的次数上限。</td>
+        </tr>
+        <tr>
+            <td>expandtabs()</td>
+            <td>把字符串中的 tab 符号('\t')转为空格。str.expandtabs(tabsize=8)</td>
+        </tr>
+        <tr>
+            <td>maketrans()</td>
+            <td>str类方法，用于创建字符映射的转换表，返回一个字典(d)，可搭配translate()使用。str.maketrans(in,out)，字符串in与out长度必须相同。d = str.maketrans('ac','13');'abc'.translate(d)</td>
+        </tr>
+        <tr>
+            <td>translate()</td>
+            <td>根据参数table给出的映射表转换字符串的字符。str.translate(table)</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>center()</td>
+            <td>返回一个指定宽度的字符串，若指定宽度小于原字符串宽度，则直接返回字符串，否则在两边填充指定字符(中间对齐)，默认为空格。str.center(width[,fillchar])</td>
+        </tr>
+        <tr>
+            <td>ljust()</td>
+            <td>返回一个指定宽度的字符串，若指定宽度小于原字符串宽度，则直接返回字符串，否则在右边填充指定字符(左对齐)，默认为空格。str.ljust(width[,fillchar])</td>
+        </tr>
+        <tr>
+            <td>rjust()</td>
+            <td>返回一个指定宽度的字符串，若指定宽度小于原字符串宽度，则直接返回字符串，否则在左边填充指定字符(右对齐)，默认为空格。str.rjust(width[,fillchar])</td>
+        </tr>
+        <tr>
+            <td>zfill()</td>
+            <td>返回指定宽度的字符串，原字符串右对齐，前面填充0(zero)。</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>upper()</td>
+            <td>将字符串中的小写字母转为大写字母。</td>
+        </tr>
+        <tr>
+            <td>lower()</td>
+            <td>转换字符串中所有大写字符为小写。</td>
+        </tr>
+        <tr>
+            <td>swapcase()</td>
+            <td>将字符串中大写转换为小写，小写转换为大写</td>
+        </tr>
+        <tr>
+            <td>capitalize()</td>
+            <td>将字符串的第一个字母变成大写，其他所有字母变小写。若第一个字符为空格，则无变化。</td>
+        </tr>
+        <tr>
+            <td>title()</td>
+            <td>返回"标题化"的字符串，即所有单词都转为以大写开始，其余字母均为小写。连续的字母才看作是一个单词</td>
+        </tr>
+
+        <tr>
+            <td>encode()</td>
+            <td>以指定的编码格式编码字符串，返回一个 bytes 对象。str.encode(encoding='UTF-8',errors='strict')</td>
+        </tr>
+        <tr>
+            <td>bytes.decode()</td>
+            <td>Python3中字符串没有decode方法，此时可用bytes对象的decode()方法来解码给定的bytes对象。bytes.decode(encoding="utf-8", errors="strict")</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>isupper()</td>
+            <td>检测字符串中的字母是否都是大写。字符串中至少包含一个区分大小写的字符，否则返回False</td>
+        </tr>
+        <tr>
+            <td>islower()</td>
+            <td>检测字符串中的字母是否都是小写。字符串中至少包含一个区分大小写的字符，否则返回False</td>
+        </tr>
+        <tr>
+            <td>istitle()</td>
+            <td>如果字符串是标题化的则返回 True，否则返回 False</td>
+        </tr>
+        <tr>
+            <td>isspace()</td>
+            <td>检测字符串是否是只由空白字符组成的，空白符包含：空格、制表符(\t)、换行(\n)、回车(\r）等。空字符串返回False</td>
+        </tr>
+
+        <tr>
+            <td>isalnum()</td>
+            <td>检测字符串是否是只由字母和数字组成的。空字符串返回False</td>
+        </tr>
+        <tr>
+            <td>isalpha()</td>
+            <td>检测字符串是否是只由字母组成的。空字符串返回False</td>
+        </tr>
+        <tr>
+            <td>isdigit()</td>
+            <td>检测字符串是否是只由数字组成的。空字符串返回False</td>
+        </tr>
+        <tr>
+            <td>isnumeric()</td>
+            <td>同isdigit()，检测字符串是否是只由数字组成的。空字符串返回False</td>
+        </tr>
+        <tr>
+            <td>isdecimal()</td>
+            <td>检查字符串是否只包含十进制字符，即数字。</td>
+        </tr>
+
+
+
+    </tbody>
+</table>
 
 
 {% endblock %}

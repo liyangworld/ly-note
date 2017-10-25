@@ -1,0 +1,130 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '列表' %}
+
+{% block content %}
+
+<h1>列表</h1>
+
+<h2>简介</h2>
+<p>列表（list）是一个有序的序列。用一对中括号表示，元素之间用逗号隔开，如：['a','b',1,2]。</p>
+<p>列表的长度是可变的，并且列表的元素不要求是同一类型的。</p>
+<p>空列表可以用 [] 或者 list() 生成：</p>
+<pre>
+ls1 = []
+ls2 = list()
+</pre>
+
+<h2>列表操作符</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width:100px;">操作符</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>+</td>
+            <td>列表连接。['a','b'] + [1,2] 返回 ['a','b',1,2] </td>
+        </tr>
+        <tr>
+            <td>*</td>
+            <td>重复列表元素。[1,2]*2 返回 [1,2,1,2]</td>
+        </tr>
+        <tr>
+            <td>[i]</td>
+            <td>通过索引获取列表元素，可读可写。</td>
+        </tr>
+        <tr>
+            <td>[a:b]</td>
+            <td>截取列表中的一部分（切片），浅复制，可读可写。冒号前后指明索引值范围，取头不取尾，索引值可省略。若 a>=b 则返回空列表。[a:b:n] 第一个冒号前后指明索引值范围，第二个冒号后指明步长。若n为负，则从后向前取值，a应大于b。赋值给连续切片(步长为1)时，长度不需要与切片长度一致；但赋值给非连续切片(步长不为1)时，长度必须与切片长度一致</td>
+        </tr>
+        <tr>
+            <td>for in</td>
+            <td>遍历列表。for e in [1,2]: print(e)</td>
+        </tr>
+        <tr>
+            <td>in、not in</td>
+            <td>成员运算符，判断列表中是否包含给定的元素。'b' in ['a','b','c'] 返回True</td>
+        </tr>
+        <tr>
+            <td>del</td>
+            <td>删除列表中的元素。del [-1]、del [::2]</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>列表解析</h2>
+<p>列表解析 是根据可迭代对象，高效创建新列表的方式。可接受for in 语句 和 if 语句。</p>
+<pre>
+ls = [i*2 for i in range(10) if i % 2 == 0]
+ls = ['%d*%d=%d'%(x,y,x*y) for x in range(1,10) for y in range(1,10) if x <= y]
+</pre>
+
+
+
+<h2>方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>count()</td>
+            <td>统计某个元素在列表中出现的次数。</td>
+        </tr>
+
+        <tr>
+            <td>index()</td>
+            <td>查找元素索引值，未找到则抛出异常。</td>
+        </tr>
+        <tr>
+            <td>append()</td>
+            <td>添加新元素到列表末尾。</td>
+        </tr>
+        <tr>
+            <td>insert()</td>
+            <td>将元素插入到列表的指定位置。list.insert(index, obj) 若索引参数越界，则添加在最后</td>
+        </tr>
+        <tr>
+            <td>pop()</td>
+            <td>移除列表中指定索引的元素，并返回该元素。默认移除最后一个。索引参数不能越界</td>
+        </tr>
+        <tr>
+            <td>remove()</td>
+            <td>移除列表中某个元素的第一个匹配项。元素必须存在于列表中</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+
+        <tr>
+            <td>extend()</td>
+            <td>在列表末尾追加另一个序列中的所有元素。</td>
+        </tr>
+        <tr>
+            <td>copy()</td>
+            <td>复制列表。类似于 a[:]，即浅复制</td>
+        </tr>
+        <tr>
+            <td>clear()</td>
+            <td>清空列表。类似于 del ls[:] 或 ls[:] = []</td>
+        </tr>
+        <tr>
+            <td>reverse()</td>
+            <td>反向列表中的元素。</td>
+        </tr>
+        <tr>
+            <td>sort()</td>
+            <td>对列表元素进行排序。默认要求元素类型相同。list.sort([fn])可自定义排序函数</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

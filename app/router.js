@@ -35,7 +35,7 @@ const routes = {
     koa:['index'],
     egg:['index'],
     python:['index',
-        'grammar','dataType','operator','builtinFn','number','string','stringFn'
+        'grammar','dataType','operator','builtinFn','number','string','stringFn','list','tuple','dict','set'
     ]
 };
 
