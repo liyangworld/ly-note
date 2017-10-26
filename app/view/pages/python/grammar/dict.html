@@ -8,6 +8,116 @@
 <h1>字典</h1>
 
 <h2>简介</h2>
+<p>字典（dict）是一种由键值对组成的无序数据结构。在一些编程语言中也被称为 hash 或 map 。</p>
+<p>键必须是唯一的，且不可变的。键可以是：数字、布尔值、字符串、元组，不推荐使用浮点数。重复的键以后定义的为准。</p>
+
+<pre>
+dic = {'name': 'yang', 'age': 20}
+dic = dict([('name','yang'),('age',20)])
+dic = { x:y for x,y in zip([1,2,3], ['a','b','c']) }
+</pre>
+
+<h2>字典操作符</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width:100px;">操作符</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>[key]</td>
+            <td>通过 key 获取值，可读可写。访问不存在的key则报错。赋值时，若存在则修改，不存在则新增。</td>
+        </tr>
+        <tr>
+            <td>for in</td>
+            <td>遍历字典。for key in dic: print(key)</td>
+        </tr>
+        <tr>
+            <td>in、not in</td>
+            <td>成员运算符，判断字典中是否包含给定的key。'a' in {'a': 1} 返回True</td>
+        </tr>
+        <tr>
+            <td>del</td>
+            <td>删除字典中的键。del dic['a']。删除不存在的键则报错</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>类方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>类方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>fromkeys()</td>
+            <td>创建一个新字典。dict.fromkeys(seq, value=None)。以序列seq中的各个元素做为键，value为值，默认为None</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+
+<h2>实例方法</h2>
+<table>
+    <thead>
+        <tr>
+            <th>实例方法</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        <tr>
+            <td>items()</td>
+            <td>返回由键值组成的类元组列表，可遍历。dict_items([(key1,value1),(key2,value2)])</td>
+        </tr>
+        <tr>
+            <td>keys()</td>
+            <td>返回由所有的键组成的类列表，可遍历。dict_keys([key1,key2])</td>
+        </tr>
+        <tr>
+            <td>values()</td>
+            <td>返回由所有的值组成的类列表，可遍历。dict_values([value1,value2])。可用list()转为列表</td>
+        </tr>
+        <tr>
+            <td>get()</td>
+            <td>返回指定键的值，如果键不存在则返回默认值 None。dict.get(key, default=None)</td>
+        </tr>
+        <tr>
+            <td>setdefault()</td>
+            <td>为字典添加键值，若已存在则无变化，若不存在则设为默认值。dict.setdefault(key, default=None)</td>
+        </tr>
+        <tr>
+            <td>update()</td>
+            <td>以一个字典为参数，批量修改字典。dict.update(dict2) 已存在的则修改，不存在的则添加</td>
+        </tr>
+
+        <tr>
+            <td>copy()</td>
+            <td>返回一个字典的浅复制。</td>
+        </tr>
+        <tr>
+            <td>clear()</td>
+            <td>清空字典的所有元素。</td>
+        </tr>
+        <tr>
+            <td>pop()</td>
+            <td>删除指定的键值。若存在则返回删除的值，若不存在则返回默认值，此时必须传默认值，否则报错。pop(key[,default])</td>
+        </tr>
+        <tr>
+            <td>popitem()</td>
+            <td>随机删除一对键值并返回该键值组成的元组，空字典调用此方法则报错。</td>
+        </tr>
+    </tbody>
+</table>
 
 
 {% endblock %}
