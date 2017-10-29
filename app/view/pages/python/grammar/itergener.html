@@ -1,0 +1,47 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '迭代器和生成器' %}
+
+{% block content %}
+
+<h1>迭代器和生成器</h1>
+
+<h2>可迭代对象</h2>
+<p>Python 中有许多可迭代对象(iterable)，可以使用for循环进行遍历。如：字符串、range()、列表、元组、集合、字典 等。</p>
+
+<h2>迭代器</h2>
+<p>迭代器对象(iterator)可以记住遍历的位置。可以使用 next() 函数不断的去获取迭代器的下一个值，直到返回 StopIteration 异常。也可以使用for循环来遍历迭代器。一个迭代器只能被迭代一次。</p>
+<p>所有的可迭代对象都可以通过 iter() 函数去获取它的迭代器。因为所有的可迭代对象都实现了 __iter__() 和 __next__() 方法。</p>
+<pre>
+for i in iter([1,2,3]):
+    print(i)
+
+it = iter([1,2,3])
+while True:
+    try:
+        print(next(it))
+    except StopIteration:
+        sys.exit()
+</pre>
+
+<h2>生成器</h2>
+<p>在 Python 中，函数可以使用 yield  断续的返回值。调用这种函数时将返回一个生成器（generator），生成器同迭代器一样，可以for循环，也可使用next()，但是多次迭代生成器时不会报错。该生成器的每个值便是每次yield值，return值将不会被得到。</p>
+<pre>
+def ge():
+    yield 1
+    yield 2
+    return 3
+for i in ge():
+    print(i)
+# 将打印 1 2
+</pre>
+<pre>
+g = (x for x in range(3)) # 生成器
+for i in g:
+    print(i)
+</pre>
+<p>因为生成器不是把所有元素存在内存，而是动态生成的，所以当要迭代的对象有非常多的元素时，使用生成器能节约很多内存。</p>
+
+
+{% endblock %}

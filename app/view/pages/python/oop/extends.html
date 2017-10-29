@@ -1,0 +1,56 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '继承' %}
+
+{% block content %}
+
+<h1>继承</h1>
+
+<h2>简介</h2>
+<p>Python 支持类的继承，并且所有的类都默认继承自 object 。以下两种方式是等价的。</p>
+
+<pre>
+class Dog:
+    pass
+
+class Dog(object):
+    pass
+</pre>
+
+<h2>多重继承</h2>
+<p>多重继承，指的是一个子类可以同时从多个父类继承行为与特征的功能。</p>
+<pre>
+class Dog(p1, p2, p3):
+    pass
+</pre>
+<p>多重继承 是有顺序的，当子类调用某方法时，若子类自身没有定义，则会从左往右在继承的父类中查找，找到即停止。即先查找p1、再查找p2，以此类推。该顺序可通过 类属性 __mro__ 或者 类方法 mro() 来查看。</p>
+
+<h2>方法重写</h2>
+<p>当父类的方法不满足需求时，可以在子类中重写该方法。通常在重写父类的方法时，可以通过 super()函数在子类中先调用父类定义的方法，再扩充功能。</p>
+<pre>
+class Leaf(object):
+    def __init__(self, color="green"):
+        self.color = color
+    def fall(self):
+        print(self.color)
+        self.say('这是子类定义的方法')
+
+class MapleLeaf(Leaf):
+    def change_color(self):
+        self.color = "red"
+
+    def fall(self):
+        self.change_color()
+        super(MapleLeaf, self).fall()
+
+    def say(self, value):
+    	print(value)
+</pre>
+<p>以上，super(MapleLeaf, self).fall() 将在 MapleLeaf 的所有父类中查找 fall()方法，并且将 fall()方法中的 self 指向当前子类的实例对象，因此才能够像以上代码在父类中调用子类中定义的方法（这种方式只为演示）。</p>
+
+
+
+
+
+{% endblock %}

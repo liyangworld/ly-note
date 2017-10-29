@@ -1,0 +1,49 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '模块和包' %}
+
+{% block content %}
+
+<h1>模块和包</h1>
+
+<h2>简介</h2>
+<p>在 Python 中，每一个.py文件都被视为一个模块。而包含__init.py__文件的文件夹被称之为包，包是一种管理 Python 模块的命名空间，采用"点模块名称"。</p>
+<p>在导入一个包和模块时，Python 会根据 sys.path 中的目录来寻找。sys.path是一个包含了多个目录的列表，由以下几项组成：</p>
+<ol>
+    <li>当前项目的目录，或空字符串</li>
+    <li>PYTHONPATH目录</li>
+    <li>标准连接库目录，安装 Python 时自动设置的</li>
+    <li>.pth后缀文件的内容，其中每一行对应一个目录</li>
+</ol>
+<p>在 ~/.zshrc 文件中添加环境变量 PYTHONPATH ，可在这些目录中放置自己编写的包和模块。</p>
+<pre>
+echo 'export PYTHONPATH="$PYTHONPATH:/home/adminly/mypy"' >> .zshrc
+</pre>
+
+<h2>import 与 from...import</h2>
+<p>在 python 中用 import 或者 from...import 来导入相应的模块。</p>
+<ol>
+    <li>import xxx as xx：xxx 为包名或模块名，xx为别名</li>
+    <li>from xxx import fn1, fn2：xxx 为包名或模块名，包中的模块使用点符号获取(p1.m1)；import后可接 包名、模块名、变量、函数、类 等</li>
+    <li>from xxx import *：将模块中的全部成员导入，不推荐使用</li>
+</ol>
+<p>模块在导入时便会立即执行，但一个模块只会被导入一次，不管你执行了多少次import。</p>
+
+<h2>__name__属性</h2>
+<p>每个模块都有一个__name__属性，当其值是'__main__'时，表明该模块自身在运行，否则是被其他模块引入的。</p>
+
+
+<h2>标准模块</h2>
+<p>Python 语言本身带着一些标准的模块库，而一些 Python 解析器也会内置一些模块。</p>
+
+<h2>PyPI</h2>
+<p>PyPI - the Python Package Index，可以搜索第三方发布的包，<a href="https://pypi.python.org/pypi" target="_blank">官网地址</a>。</p>
+
+<h2>pip</h2>
+<p>pip - Python 包管理工具，<a href="https://pip.pypa.io/en/stable/" target="_blank">官网地址</a>。</p>
+
+
+
+
+{% endblock %}

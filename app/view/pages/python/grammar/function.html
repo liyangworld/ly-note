@@ -1,0 +1,124 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '函数' %}
+
+{% block content %}
+
+<h1>函数</h1>
+
+<h2>定义函数</h2>
+<p>使用 def 关键字来定义一个函数，函数可以有多个返回值，默认返回None。</p>
+<pre>
+def add(x,y):
+    return x + y
+</pre>
+
+<h2>参数</h2>
+<p>Python 中的参数可以分为多种：位置参数、关键字参数、默认值参数、不定长参数 。</p>
+
+<h3>一、位置参数</h3>
+<p>调用函数时 位置参数 必须按顺序传入，并且数量必须与申明时的一样。</p>
+<pre>
+def person(name, age):
+    print('%s is %d years old'%(name, age))
+person('God', 10000)
+</pre>
+
+<h3>二、关键字参数</h3>
+<p>关键字参数 是指调用函数时明确的指明参数名。此时不要求参数的传入顺序，只要保证函数能正确的获取到参数。注：关键字参数必须在位置参数之后传入，同一个参数不能重复传入。</p>
+<pre>
+def person(sex, name, age):
+    print('the %s %s is %d years old'%(sex, name, age))
+person(age=10000, name='God', sex='male')
+person('male', age=10000, name='God')
+</pre>
+
+
+<h3>三、默认值参数</h3>
+<p>声明函数时，可以给参数设置默认值。调用时若没有传入相应的参数，则使用其默认值。注：默认值参数 必须在位置参数之后声明。</p>
+<pre>
+def person(sex, name, age = 20):
+    print('the %s %s is %d years old'%(sex, name, age))
+person('male', 'God', 10000)
+person('male', 'God')
+person(name='God', sex='male')
+</pre>
+<p>参数默认值的创建和绑定是发生在函数定义的时候，以后每次调用默认参数时都会使用同一个引用。</p>
+<pre>
+def f(x = []):
+    x.append(1)
+#调用3次f()后，默认值列表将变为[1, 1, 1]
+</pre>
+
+
+
+<h3>四、不定长参数</h3>
+<p>不定长参数 指参数数目不定，可用星号(*)来构造。注：不定长参数 必须在位置参数之后声明。</p>
+<pre>
+def add(x, *args):
+    total = x
+    for arg in args:
+        total += arg
+    print(total)
+add(1, 2, 3)
+</pre>
+<p>*args 表示不定长参数，可以看成一个元组。调用这种形式的函数时，不能使用 关键字传参。</p>
+
+<pre>
+def add(x, **kwargs):
+    total = x
+    for arg, value in kwargs.items():
+        total += value
+    print(total)
+add(10, y=11, z=12, w=13)
+add(y=11, z=12, w=13, x=10)
+</pre>
+<p>**kwargs 表示不定长(关键字)参数，相当于一个字典。</p>
+
+<pre>
+def log(*args, **kwargs):
+    print(args, kwargs)
+log(1, 2, a=3, b=4)
+</pre>
+<p>此函数可接收任意数目的位置参数和关键字参数。</p>
+
+<h2>参数使用 元组、字典 的方式传入</h2>
+<pre>
+def add(x, y):
+    print(x + y)
+tup = (1, 2)
+add(*tup)
+
+dic = {'y':2, 'x':1 }
+add(**dic)
+</pre>
+
+
+<h2>解构赋值</h2>
+<pre>
+a, b, c = [1, 2, 3]
+a, b, c = (1, 2, 3)
+a, b, c = {1, 2, 3}
+</pre>
+<p>列表、元组、集合 都可使用这种方法解构赋值，字典不行。注：左侧变量的数量必须与右侧的元素数量相同。</p>
+
+<h2>return语句</h2>
+<p>使用 return 返回值并退出函数，函数默认返回None，不带参数值的return语句(return;)也返回None。函数可返回多个值，相当于返回一个元组。</p>
+<pre>
+def log(a, b):
+    return a, b
+x, y = log(1, 2)
+tup = log(1, 2)
+</pre>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

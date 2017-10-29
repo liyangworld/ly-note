@@ -38,34 +38,55 @@ a, b = b, a
 # -*- coding: UTF-8 -*-
 </pre>
 
-<h2>import 与 from...import</h2>
-<p>在 python 中用 import 或者 from...import 来导入相应的模块。</p>
-<ol>
-    <li>将整个模块(xxx)导入，格式为： import xxx</li>
-    <li>从某个模块中导入多个成员,格式为： from xxx import fn1, fn2, fn3</li>
-    <li>将某个模块中的全部成员导入，格式为： from xxx import *</li>
-</ol>
-
 <h2>同一行显示多条语句</h2>
 <p>Python 中可以在同一行中使用多条语句，语句之间使用分号(;)分隔。</p>
 <pre>
 import sys; x = 'aaa'; sys.stdout.write(x + '\n')
 </pre>
 
-<h2>help() 查看帮助</h2>
-<p>在Python 交互环境中，输入help([xx])可查看帮助说明。比如：help(print)</p>
-
-<h2>input() 输入、print() 输出</h2>
-<ol>
-    <li>input(prompt=None)：接收用户输入，并返回字符串（末尾换行符已去除）。唯一参数prompt表示提示语，默认为None。</li>
-    <li>print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)：输出信息到file中。</li>
-</ol>
-
-<h2>dir()</h2>
-<p>dir() 可获得一个对象的所有属性和方法，返回一个 list。</p>
+<h2>条件语句</h2>
+<p>Python 中的条件语句只有 if – elif – else 。没有switch – case，也没有三元运算符( ? : )。</p>
+<p>以下表达式值会被当作False ：False、None、0、空字符串、空列表、空字典、空集合。</p>
 <pre>
-dir(str)
-dir('')
+score = 99
+if score >= 80 :
+    print('优秀')
+elif score >= 60 :
+    print('及格')
+else:
+    print('不及格')
 </pre>
+
+<h2>循环</h2>
+<p>循环中可以使用 break 终止循环，使用 continue 立即停止本次循环而进行下一次循环。else 语句只有在循环正常结束时才执行，使用 break 终止时不会被执行。</p>
+
+<h3>一、for ... in</h3>
+<pre>
+for i in range(10):
+    print(i)
+else:
+    print('end')
+# 无限循环
+ls = [1]
+for i in ls:
+    print(i)
+    ls.append(i+1)
+</pre>
+
+<h3>二、while</h3>
+<pre>
+a = 3
+while a > 0:
+    print(a)
+    a -= 1
+else:
+    print('end')
+# 无限循环
+while True:
+    print(1)
+</pre>
+
+
+
 
 {% endblock %}

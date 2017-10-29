@@ -1,0 +1,110 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '定义 class' %}
+
+{% block content %}
+
+<h1>定义 class</h1>
+
+<h2>简介</h2>
+<p>使用 class 关键字可以定义一个类。</p>
+<pre>
+class Dog:
+    pass
+</pre>
+
+<h2>属性和方法</h2>
+<pre>
+class Dog:
+
+	tegs = 4
+	def eat():
+		print('Dog can eat', Dog.tegs)
+
+	def __init__(self,name):
+		self.name = name
+
+	def bark(self):
+		print('dog can bark')
+dog1 = Dog('wangcai')
+</pre>
+<p>以上，通过类名可访问 属性tegs、方法eat()；通过实例对象可访问 属性tegs、属性name、方法bark()。__init__()用于初始化实例对象。</p>
+
+<h2>附加属性和方法</h2>
+<p>可以为已定义的类和已创建的实例对象再附加属性和方法。</p>
+<pre>
+Dog.eyes = 2
+def see():
+    print('Dog can see')
+Dog.see = see
+</pre>
+<pre>
+dog1.color = 'black'
+def run(self):
+	print(self.name,'is running')
+dog1.run = run
+dog1.run(dog1)
+</pre>
+<p>以上，定义在类上的属性eyes可被所有的实例对象访问，而定义在实例对象dog1上的属性和方法只有dog1才能访问，并且dog1调用有参数的方法run()时必须将自身传入。</p>
+
+
+<h2>类方法</h2>
+<p>使用装饰器 @classmethd 可以定义类方法，即需要通过类名来调用该方法。类方法的第一个参数是该类，一般用 cls 表示。</p>
+<pre>
+class Dog:
+	tegs = 4
+
+	@classmethd
+	def teg(cls):
+		print(cls.tegs)
+</pre>
+
+<h2>静态方法</h2>
+<p>使用装饰器 @staticmethod 可以定义静态方法，但不需要像类方法一样传入参数 cls。调用时依然是通过类名来调用。不常用。</p>
+<pre>
+class Dog:
+
+	@staticmethod
+	def teg():
+		print('this is a static method')
+</pre>
+
+
+<h2>setter 和 getter</h2>
+<h3>一、使用 property()方法</h3>
+<pre>
+class Dog:
+
+	def __init__(self,name):
+		self._name = name
+
+	def get_name(self):
+		return self._name.title()
+
+	def set_name(self, value):
+		self._name = value.lower()
+
+	name = property(get_name, set_name)
+</pre>
+
+<h3>二、使用 修饰符 @property、@xx.setter</h3>
+<pre>
+class Dog:
+
+	def __init__(self,name):
+		self._name = name
+
+	@property
+	def name(self):
+		return self._name.title()
+
+	@name.setter
+	def name(self, value):
+		self._name = value.lower()
+</pre>
+
+
+
+
+{% endblock %}

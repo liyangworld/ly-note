@@ -60,7 +60,7 @@
         </tr>
         <tr>
             <td>input()</td>
-            <td>相等于eval(raw_input(prompt))，用来获取控制台的输入。input()返回数值或字符串；推荐使用 raw_input()，始终返回字符串</td>
+            <td>接收用户输入，并返回字符串（末尾换行符已去除）。唯一参数prompt表示提示语，默认为None。</td>
         </tr>
         <tr>
             <td>open()</td>
@@ -204,7 +204,7 @@
         </tr>
         <tr>
             <td>filter()</td>
-            <td>过滤掉不符合条件的元素，返回由符合条件元素组成的新列表。filter(fn, iterable)</td>
+            <td>过滤掉不符合条件的元素，返回由符合条件元素组成的类列表对象。filter(fn, iterable)</td>
         </tr>
         <tr>
             <td>reversed()</td>

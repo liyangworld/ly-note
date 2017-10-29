@@ -8,6 +8,111 @@
 <h1>集合</h1>
 
 <h2>简介</h2>
+<p>集合 是一种无序的不重复的序列。为了保证元素的唯一性，元素只能是不可变的。元素不能是列表、字典、集合等。</p>
+<pre>
+st = {1,2,3}
+st = set([1,2,3])
+st = { x for x in range(10) }
+</pre>
+
+<h2>不可变集合</h2>
+<p>相对于集合（set），可以使用 frozenset() 来创建一个不可变集合，不可变集合不能添加和删除元素。一个主要应用是作为字典的键。</p>
+<pre>
+st = frozenset([1, 2, 3, 'a', 1])
+</pre>
+
+
+<h2>集合操作符</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="width:100px;">操作符</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>|</td>
+            <td>取并集，返回包含两个集合所有元素的集合（去除重复）。a | b 同 a.union(b)</td>
+        </tr>
+        <tr>
+            <td>&</td>
+            <td>取交集，返回包含两个集合共有元素的集合。a & b 同 a.intersection(b)</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>取差集，返回只在 a 不在 b 的元素组成的集合。a - b 同 a.difference(b)</td>
+        </tr>
+        <tr>
+            <td>^</td>
+            <td>取对称差集，返回在 a 或在 b 中，但是不同时在 a 和 b 中的元素组成的集合。a ^ b 同 a.symmetric_difference(b)</td>
+        </tr>
+        <tr>
+            <td><= 、< </td>
+            <td>判断是否是子集或真子集。a <= b 同 a.issubset(b)</td>
+        </tr>
+        <tr>
+            <td> >= 、> </td>
+            <td>判断是否是超集。a >= b 同 a.issuperset(b)</td>
+        </tr>
+
+        <tr>
+            <td>for in</td>
+            <td>遍历集合。for s in {1,2,3}: print(s)</td>
+        </tr>
+        <tr>
+            <td>in、not in</td>
+            <td>成员运算符，判断集合中是否包含给定的元素。'a' in {'a', 1} 返回True</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+
+<h2>方法</h2>
+<table>
+    <thead>
+    <tr>
+        <th style="width:100px;">方法</th>
+        <th>说明</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>add()</td>
+            <td>添加元素，如果已存在则无变化。s.add('abc')</td>
+        </tr>
+        <tr>
+            <td>update()</td>
+            <td>添加多个元素。s.update(seq) 将seq中的元素添加到s中。s.update([5, 6, 7])</td>
+        </tr>
+        <tr>
+            <td>remove()</td>
+            <td>移除元素，若元素不存在则报错。s.remove(ob)</td>
+        </tr>
+        <tr>
+            <td>discard()</td>
+            <td>移除元素，但元素不存在时不报错。s.discard(ob)</td>
+        </tr>
+        <tr>
+            <td>pop()</td>
+            <td>随机删除一个元素，并返回。空集合调用此方法则报错。</td>
+        </tr>
+
+        <tr>
+            <td>difference_update()</td>
+            <td>从a中去除所有属于b的元素。a.difference_update(b)</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+
+
+
 
 
 {% endblock %}

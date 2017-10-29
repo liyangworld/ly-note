@@ -34,8 +34,9 @@ const routes = {
     express:['index'],
     koa:['index'],
     egg:['index'],
-    python:['index',
-        'grammar','dataType','operator','builtinFn','number','string','stringFn','list','tuple','dict','set'
+    python:['index','module',
+        'grammar','dataType','operator','builtinFn','number','string','stringFn','list','tuple','dict','set','function','functionHigh','itergener',
+        'class','private','extends'
     ]
 };
 
