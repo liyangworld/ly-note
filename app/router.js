@@ -35,9 +35,17 @@ const routes = {
     koa:['index'],
     egg:['index'],
     python:['index','module',
-        'grammar','dataType','operator','builtinFn','number','string','stringFn','list','tuple','dict','set','function','functionHigh','itergener',
+        'grammar','dataType','operator','builtinFn','number','string','stringFn','list','tuple','dict','set','function','functionHigh','itergener','error','with',
         'class','private','extends'
-    ]
+    ],
+    flask:['index'],
+    scrapy:['index'],
+    sql:['index','guide','sqlfn','mysqltype','sqlservertype',
+        'select','join','union','where','orderBy','insertInto','update','delete','constraints'
+    ],
+    mysql:['index','quickstart'],
+    mongodb:['index'],
+    redis:['index']
 };
 
 module.exports = app => {

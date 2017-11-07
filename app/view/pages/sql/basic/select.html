@@ -1,0 +1,73 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'select' %}
+
+{% block content %}
+<h1>select</h1>
+
+<h2>简介</h2>
+<p>SELECT 语句用于从数据库中选取数据。结果被存储在一个结果表中，称为结果集。</p>
+
+<h2>一、选取所有的列</h2>
+<pre>
+SELECT * FROM table_name;
+</pre>
+
+<h2>二、选取特定的几列</h2>
+<pre>
+SELECT column_name,column_name
+FROM table_name;
+</pre>
+
+<h2>三、过滤列中重复值</h2>
+<p>针对某些列只选取不同值，过滤掉重复值，可用于查看某列中存在哪些值。</p>
+<pre>
+SELECT DISTINCT column_name,column_name
+FROM table_name;
+</pre>
+
+<h2>四、获取头几行</h2>
+<p>一、SQL Server 使用 SELECT TOP</p>
+<pre>
+SELECT TOP number|percent column_name(s)
+FROM table_name;
+</pre>
+
+<p>二、MySQL 使用 LIMIT</p>
+<pre>
+SELECT column_name(s)
+FROM table_name
+LIMIT number;
+</pre>
+
+<p>三、Oracle 使用 ROWNUM</p>
+<pre>
+SELECT column_name(s)
+FROM table_name
+WHERE ROWNUM <= number;
+</pre>
+
+<h2>五、使用 as 创建别名</h2>
+<p>使用 as 可以为表名称或列名称指定别名。</p>
+<pre>
+SELECT column_name AS alias_name1
+FROM table_name AS alias_name2;
+</pre>
+
+<h2>六、使用 SELECT INTO 复制表</h2>
+<pre>
+SELECT column_name(s)
+INTO newtable
+FROM table1;
+</pre>
+<p>要求新表事先不存在，新表将会使用 SELECT 语句中定义的列名称和类型进行创建。此时可以使用 AS 子句来自定义新列名。</p>
+<p>注：MySQL 不支持 SELECT INTO 语句，但支持 INSERT INTO SELECT。另，可以使用以下方式复制表：</p>
+<pre>
+CREATE TABLE 新表 SELECT * FROM 旧表
+</pre>
+
+
+
+
+{% endblock %}

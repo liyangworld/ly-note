@@ -1,0 +1,107 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'SQL函数速览手册' %}
+
+{% block content %}
+<h1>SQL函数速览手册</h1>
+
+<h2>简介</h2>
+<p>SQL 拥有很多用于计数和计算的内建函数。</p>
+
+<h2>Aggregate 函数</h2>
+<p>Aggregate 函数用于计算从列中取得的值，返回一个单一的值。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>常用函数</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>AVG()</td>
+            <td>返回平均值</td>
+        </tr>
+        <tr>
+            <td>COUNT()</td>
+            <td>返回行数</td>
+        </tr>
+        <tr>
+            <td>FIRST()</td>
+            <td>返回第一个记录的值</td>
+        </tr>
+        <tr>
+            <td>LAST()</td>
+            <td>返回最后一个记录的值</td>
+        </tr>
+        <tr>
+            <td>MAX()</td>
+            <td>返回最大值</td>
+        </tr>
+        <tr>
+            <td>MIN()</td>
+            <td>返回最小值</td>
+        </tr>
+        <tr>
+            <td>SUM()</td>
+            <td>返回总和</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2>Scalar 函数</h2>
+<p>Scalar 函数基于输入值，返回一个单一的值。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>常用函数</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>UCASE()</td>
+            <td>将某个字段转换为大写</td>
+        </tr>
+        <tr>
+            <td>LCASE()</td>
+            <td>将某个字段转换为小写</td>
+        </tr>
+        <tr>
+            <td>MID()</td>
+            <td>从某个文本字段提取字符，MySql 中使用</td>
+        </tr>
+        <tr>
+            <td>SubString(字段，1，end)</td>
+            <td>从某个文本字段提取字符</td>
+        </tr>
+        <tr>
+            <td>LEN()</td>
+            <td>返回某个文本字段的长度</td>
+        </tr>
+        <tr>
+            <td>ROUND()</td>
+            <td>对某个数值字段进行指定小数位数的四舍五入</td>
+        </tr>
+        <tr>
+            <td>NOW()</td>
+            <td>返回当前的系统日期和时间</td>
+        </tr>
+        <tr>
+            <td>FORMAT()</td>
+            <td>格式化某个字段的显示方式</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+{% endblock %}

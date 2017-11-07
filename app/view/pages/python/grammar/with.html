@@ -1,0 +1,65 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = 'with和上下文管理器' %}
+
+{% block content %}
+
+<h1>with和上下文管理器</h1>
+<h2>简介</h2>
+<p>处理文件、线程、数据库、网络编程等资源的时候，通常需要注意使用结束后要将其释放。Python 提供了 with 语句来自动进行资源释放的处理。以下两种方式是等价的。</p>
+<pre>
+fp = open('my_file', 'w')
+try:
+    data_len = fp.write("Hello world")
+finally:
+    fp.close()
+</pre>
+<pre>
+with open('my_file', 'w') as fp:
+    data_len = fp.write("Hello world")
+</pre>
+
+<h2>上下文管理器</h2>
+<p>上下文管理器 指的是 __enter__() 和 __exit__()这种‘生命’方法。如 open()返回的文件对象就实现了这两个方法。它们分别会在代码块开始和结束时被调用。</p>
+<pre>
+class ContextManager(object):
+    def __init__(self, value):
+        self.value = value
+
+    def __enter__(self):
+        print("Entering")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Exiting")
+</pre>
+
+<pre>
+with ContextManager() as ctx:
+    print(ctx.value)
+</pre>
+<p>即使代码块中执行的内容出错，__exit__ 也会被执行。上下文管理器对象将错误处理交给 __exit__ 进行，可以将错误类型、错误值和 traceback 等内容作为参数传递给 __exit__ 函数。如果没有错误，这些值都将是 None。在__exit__ 函数中可以 return True 来阻止错误继续上抛。</p>
+
+<h2>使用 contextlib 模块来实现</h2>
+<pre>
+from contextlib import contextmanager
+
+@contextmanager
+def transaction(connection):
+    cursor = connection.cursor()
+    try:
+        yield cursor
+    except:
+        connection.rollback()
+        raise
+    else:
+        connection.commit()
+</pre>
+<pre>
+with transaction(conn) as cursor:
+    print('xxx')
+</pre>
+<p>yield 之前的部分可以看成是 __enter__ 的部分，yield 的值可以看成是 __enter__ 返回的值，yield 之后的部分可以看成是 __exit__ 的部分。</p>
+
+{% endblock %}

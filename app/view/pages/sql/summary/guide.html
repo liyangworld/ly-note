@@ -1,0 +1,208 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'SQL命令速览手册' %}
+
+{% block content %}
+<h1>SQL命令速览手册</h1>
+
+<h2>简介</h2>
+<p>SQL 命令对大小写不敏感，即大小写都可以。</p>
+<p>分号是在数据库系统中分隔每条 SQL 语句的标准方法，并且某些数据库系统要求在每条 SQL 语句的末端都使用分号，因此建议始终使用分号。</p>
+
+
+<h2>速览手册</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 140px;">SQL 命令</th>
+            <th>用法</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>show variables like '%char%';</td>
+            <td>查看数据库所设置的字符集变量，wins下配置文件为my.ini</td>
+        </tr>
+        <tr>
+            <td>set names utf8;</td>
+            <td>设置某数据库的客户端传来和接受的数据所使用的字符集</td>
+        </tr>
+        <tr>
+            <td>show databases</td>
+            <td>show databases</td>
+        </tr>
+        <tr>
+            <td>show tables</td>
+            <td>show tables</td>
+        </tr>
+        <tr>
+            <td>use database_name</td>
+            <td>use database_name</td>
+        </tr>
+        <tr>
+            <td>create database</td>
+            <td>CREATE DATABASE database_name</td>
+        </tr>
+        <tr>
+            <td>create table</td>
+            <td>CREATE TABLE table_name ( column_name1 data_type, column_name2 data_type, ... )</td>
+        </tr>
+        <tr>
+            <td>create view</td>
+            <td>CREATE VIEW view_name AS SELECT column_name(s) FROM table_name WHERE condition</td>
+        </tr>
+        <tr>
+            <td>create index</td>
+            <td>CREATE INDEX index_name ON table_name (column_name) 或 CREATE UNIQUE INDEX index_name ON table_name (column_name)</td>
+        </tr>
+
+
+        <tr>
+            <td>drop database</td>
+            <td>DROP DATABASE database_name</td>
+        </tr>
+
+        <tr>
+            <td>drop table</td>
+            <td>DROP TABLE table_name</td>
+        </tr>
+        <tr>
+            <td>truncate table</td>
+            <td>TRUNCATE TABLE table_name</td>
+        </tr>
+        <tr>
+            <td>drop index</td>
+            <td>DROP INDEX table_name.index_name (SQL Server) 或 ALTER TABLE table_name
+                DROP INDEX index_name (MySQL)</td>
+        </tr>
+        <tr>
+            <td>delete</td>
+            <td>DELETE FROM table_name WHERE some_column=some_value 或 DELETE FROM table_name (Note: Deletes the entire table!!) 或 DELETE * FROM table_name (Note: Deletes the entire table!!)</td>
+        </tr>
+        <tr>
+            <td>alter table</td>
+            <td>ALTER TABLE table_name ADD column_name datatype 或 ALTER TABLE table_name DROP COLUMN column_name</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+        <tr>
+            <td>insert into</td>
+            <td>INSERT INTO table_name VALUES (value1, value2, value3,....) 或 INSERT INTO table_name (column1, column2, column3,...) VALUES (value1, value2, value3,....)</td>
+        </tr>
+        <tr>
+            <td>update</td>
+            <td>UPDATE table_name SET column1=value, column2=value,... WHERE some_column=some_value</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+
+        <tr>
+            <td>select</td>
+            <td>SELECT column_name(s) FROM table_name</td>
+        </tr>
+
+        <tr>
+            <td>select *</td>
+            <td>SELECT * FROM table_name</td>
+        </tr>
+        <tr>
+            <td>select distinct</td>
+            <td>SELECT DISTINCT column_name(s) FROM table_name</td>
+        </tr>
+
+        <tr>
+            <td>select top</td>
+            <td>SELECT TOP number|percent column_name(s) FROM table_name</td>
+        </tr>
+        <tr>
+            <td>select into</td>
+            <td>SELECT * INTO new_table_name [IN externaldatabase] FROM old_table_name 或 SELECT column_name(s) INTO new_table_name [IN externaldatabase] FROM old_table_name</td>
+        </tr>
+        <tr>
+            <td>as (alias)</td>
+            <td>SELECT column_name AS column_alias FROM table_name 或 SELECT column_name FROM table_name AS table_alias</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>where</td>
+            <td>SELECT column_name(s) FROM table_name WHERE column_name operator value</td>
+        </tr>
+        <tr>
+            <td>and、or</td>
+            <td>SELECT column_name(s) FROM table_name WHERE condition AND|OR condition</td>
+        </tr>
+
+        <tr>
+            <td>between</td>
+            <td>SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2</td>
+        </tr>
+        <tr>
+            <td>in</td>
+            <td>SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,..)</td>
+        </tr>
+        <tr>
+            <td>like</td>
+            <td>SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern</td>
+        </tr>
+
+        <tr class="separator"><td></td><td></td></tr>
+
+
+        <tr>
+            <td>group by</td>
+            <td>SELECT column_name, aggregate_function(column_name) FROM table_name WHERE column_name operator value GROUP BY column_name</td>
+        </tr>
+        <tr>
+            <td>having</td>
+            <td>SELECT column_name, aggregate_function(column_name) FROM table_name WHERE column_name operator value GROUP BY column_name HAVING aggregate_function(column_name) operator value</td>
+        </tr>
+        <tr>
+            <td>order by</td>
+            <td>SELECT column_name(s) FROM table_name ORDER BY column_name [ASC|DESC]</td>
+        </tr>
+
+
+
+
+
+
+
+        <tr class="separator"><td></td><td></td></tr>
+        <tr>
+            <td>inner join</td>
+            <td>SELECT column_name(s) FROM table_name1 INNER JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+        </tr>
+        <tr>
+            <td>left join</td>
+            <td>SELECT column_name(s) FROM table_name1 LEFT JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+        </tr>
+        <tr>
+            <td>right join</td>
+            <td>SELECT column_name(s) FROM table_name1 RIGHT JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+        </tr>
+        <tr>
+            <td>full join</td>
+            <td>SELECT column_name(s) FROM table_name1 FULL JOIN table_name2 ON table_name1.column_name=table_name2.column_name</td>
+        </tr>
+        <tr>
+            <td>union</td>
+            <td>SELECT column_name(s) FROM table_name1 UNION SELECT column_name(s) FROM table_name2</td>
+        </tr>
+        <tr>
+            <td>union all</td>
+            <td>SELECT column_name(s) FROM table_name1 UNION ALL SELECT column_name(s) FROM table_name2</td>
+        </tr>
+
+
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}

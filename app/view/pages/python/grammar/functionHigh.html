@@ -31,6 +31,41 @@ add1 = adder(1)
 print(add1(2))  #3
 </pre>
 
+<h2>装饰器</h2>
+<p>装饰器 也是一种高阶函数，通常使用 @xxx 的形式来装饰一个函数。</p>
+<pre>
+def plus_one(fn):
+    def new_fn(x):
+        return fn(x) + 1
+    return new_fn
+
+def times_two(fn):
+    def new_fn(x):
+        return fn(x) * 2
+    return new_fn
+</pre>
+<pre>
+@plus_one
+@times_two
+def foo(x):
+    return x
+print(foo(10))  # 将先乘2再加1，返回 21
+</pre>
+<p>使用装饰器之后有一个问题，就是函数的__name__和__doc__属性变了，比如上面的foo.__name__从'foo'变为了'new_fn'。通常可以使用 functools 模块中的wraps()函数来处理。</p>
+<pre>
+import functools
+
+def plus_one(fn):
+    @functools.wraps(fn)
+    def new_fn(x):
+        return fn(x) + 1
+    return new_fn
+</pre>
+
+<p>装饰器 不只是可以装饰函数，还可以装饰类，即接受一个类作为参数并返回一个新类。</p>
+
+
+
 <h2>global 变量</h2>
 <p>在函数中可以访问全局变量的值，但若想在函数中对全局变量重新赋值，则需使用 global 关键字。</p>
 <pre>

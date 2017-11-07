@@ -23,6 +23,8 @@ const actions = [
     {name:'function',hasAction:'function',dir:'grammar'},
     {name:'functionHigh',hasAction:'functionHigh',dir:'grammar'},
     {name:'itergener',hasAction:'itergener',dir:'grammar'},
+    {name:'error',hasAction:'error',dir:'grammar'},
+    {name:'with',hasAction:'with',dir:'grammar'},
 
     {name:'class',hasAction:'class',dir:'oop'},
     {name:'private',hasAction:'private',dir:'oop'},

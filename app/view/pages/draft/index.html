@@ -13,7 +13,10 @@
     <li><a href="http://linux.vbird.org/new_linux.php" target="_blank">鸟哥的Linux 私房菜</a></li>
 </ol>
 
-
+<p>如果你使用的是最新版的Scrapy，如现在的最新版本为1.2.1，那么当你在运行爬虫的时候，你可以输入以下命令来实现输出的json格式文件直接显示中文：</p>
+<pre>
+scrapy crawl yourspider -o name.json -s FEED_EXPORT_ENCODING=utf-8
+</pre>
 
 
 <h3>判断一个对象是否为空 {} 的三种方法</h3>

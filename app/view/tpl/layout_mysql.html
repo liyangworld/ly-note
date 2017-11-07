@@ -1,0 +1,15 @@
+
+{% extends './layout_base.html' %}
+
+{% set title = 'MySQL-'+ title_suffix %}
+{% set controller = 'mysql' %}
+{% set sideBarItems = [
+                {
+                    title:'常用总结',
+                    action:'',
+                    children:[
+                        {title:'快速安装使用',action:'quickstart'}
+                    ]
+                }
+            ]
+%}

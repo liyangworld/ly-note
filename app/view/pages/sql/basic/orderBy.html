@@ -1,0 +1,20 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'order by' %}
+
+{% block content %}
+<h1>order by</h1>
+
+<h2>简介</h2>
+<p>ORDER BY 关键字用于对结果集按照一个列或者多个列进行排序。默认是升序，降序可以使用 DESC 关键字。</p>
+
+<pre>
+SELECT column_name,column_name
+FROM table_name
+WHERE column_name operator value
+ORDER BY column_name,column_name ASC|DESC;
+</pre>
+
+
+{% endblock %}

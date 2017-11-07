@@ -1,0 +1,49 @@
+
+{% extends '../../../tpl/layout_mysql.html' %}
+
+{% set title_suffix = '快速安装使用' %}
+
+{% block content %}
+
+<h1>快速安装使用</h1>
+<h2>安装</h2>
+<p>可以在官网上下载各操作系统对应的社区版本进行安装。</p>
+<p>将会安装 MySQL服务器 和 MySQL 客户端程序等。安装好之后可以将bin目录添加到环境变量中，以便使用 mysqladmin、mysql 等命令。</p>
+
+
+<h2>启动MySQL服务器</h2>
+<p>MySQL数据库服务器通常指的的是mysqld，而命令行mysql则是mysql客户端程序。启动mysql服务器即是启动mysqld进程，mysqld启动后，可以通过mysql连接到mysql服务器。</p>
+
+<p>1、使用mysqld 命令启动，后面可接各种选项：</p>
+<pre>
+mysqld --console --print-defaults // 启动MySQL服务器，并打印默认配置
+</pre>
+
+<p>2、mysqladmin 关闭服务器</p>
+<pre>
+mysqladmin -uroot -pxxx shutdown
+</pre>
+
+<h2>打开MySQL客户端</h2>
+<pre>
+mysql -u root -p
+</pre>
+<p>回车之后输入密码，即可进入。</p>
+<p>若是第一次打开，则默认的root用户密码为空，此时直接回车即可。但是不能执行任何操作，MySQL服务器要求必须设置密码再执行其它操作。使用以下命令创建root用户密码：</p>
+<pre>
+mysqladmin -u root password "new_password"
+</pre>
+
+<p>进入之后便可进行各种操作，如查看服务器中所有的数据库：</p>
+<pre>
+show databases;
+use xxx; //切换到某个数据库
+</pre>
+
+
+<h2>图形界面工具 Navicat</h2>
+<p>在实际使用中可以安装图形界面工具 Navicat来方便对数据库进行操作。<a href="http://www.navicat.com.cn/products" target="_blank">Navicat官网</a></p>
+<p>如果后续忘记了服务器密码，则可以在Navicat上很方便的更改密码。</p>
+
+
+{% endblock %}

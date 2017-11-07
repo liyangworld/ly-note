@@ -1,0 +1,22 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'update' %}
+
+{% block content %}
+<h1>update</h1>
+
+<h2>简介</h2>
+<p>UPDATE 语句用于更新表中已存在的记录。</p>
+
+<pre>
+UPDATE table_name
+SET column1=value1, column2=value2,...
+WHERE column_name operator value;
+</pre>
+<p>注：WHERE 子句规定哪条记录或者哪些记录需要更新。如果您省略了 WHERE 子句，所有的记录都将被更新！</p>
+
+
+
+
+{% endblock %}

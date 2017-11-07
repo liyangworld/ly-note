@@ -1,0 +1,352 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = '约束' %}
+
+{% block content %}
+<h1>约束</h1>
+
+<h2>简介</h2>
+<p>约束用于规定表中的数据规则。可以在创建表时规定（通过 CREATE TABLE 语句），或者在表创建之后规定（通过 ALTER TABLE 语句）。</p>
+
+<pre>
+CREATE TABLE table_name
+(
+column_name1 data_type(size) constraint_name,
+column_name2 data_type(size) constraint_name,
+column_name3 data_type(size) constraint_name,
+....
+);
+</pre>
+
+<h2>约束类别</h2>
+<table>
+    <thead>
+        <tr>
+            <th>约束类别</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>NOT NULL</td>
+            <td>指示某列不能存储 NULL 值。默认情况下，表的列接受 NULL 值。</td>
+        </tr>
+        <tr>
+            <td>UNIQUE</td>
+            <td>保证某列的每行必须有唯一的值。</td>
+        </tr>
+        <tr>
+            <td>PRIMARY KEY</td>
+            <td>主键，NOT NULL 和 UNIQUE 的结合。确保某列（或多列的组合）有唯一标识</td>
+        </tr>
+        <tr>
+            <td>FOREIGN KEY</td>
+            <td>外键</td>
+        </tr>
+        <tr>
+            <td>CHECK</td>
+            <td>保证列中的值符合指定的条件。</td>
+        </tr>
+        <tr>
+            <td>DEFAULT</td>
+            <td>规定没有给列赋值时的默认值。</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>UNIQUE</h2>
+
+<h3>一、创建约束</h3>
+<p>MySQL：</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+UNIQUE (P_Id)
+)
+</pre>
+
+<p>SQL Server / Oracle</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL UNIQUE,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+)
+</pre>
+
+<p>命名 UNIQUE 约束，MySQL / SQL Server / Oracle </p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+CONSTRAINT uc_PersonID UNIQUE (P_Id, LastName)
+)
+</pre>
+
+
+<h3>二、追加约束</h3>
+<p>MySQL / SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Persons
+ADD UNIQUE (P_Id)
+</pre>
+<pre>
+ALTER TABLE Persons
+ADD CONSTRAINT uc_PersonID UNIQUE (P_Id,LastName)
+</pre>
+
+
+<h3>三、撤销约束</h3>
+<p>MySQL</p>
+<pre>
+ALTER TABLE Persons
+DROP INDEX uc_PersonID
+</pre>
+
+<p>SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Persons
+DROP CONSTRAINT uc_PersonID
+</pre>
+
+
+<h2>PRIMARY KEY</h2>
+
+<h3>一、创建约束</h3>
+<p>MySQL</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+PRIMARY KEY (P_Id)
+)
+</pre>
+
+<p>SQL Server / Oracle </p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL PRIMARY KEY,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+)
+</pre>
+
+<p>命名 PRIMARY KEY 约束，MySQL / SQL Server / Oracle</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+CONSTRAINT pk_PersonID PRIMARY KEY (P_Id, LastName)  //组合键
+)
+</pre>
+
+<h3>二、追加约束</h3>
+<p>追加主键约束时必须确保创建表时将相应的列设置为了 not null，MySQL / SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Persons
+ADD PRIMARY KEY (P_Id)
+</pre>
+<pre>
+ALTER TABLE Persons
+ADD CONSTRAINT pk_PersonID PRIMARY KEY (P_Id,LastName)
+</pre>
+
+
+<h3>三、撤销约束</h3>
+<p>MySQL</p>
+<pre>
+ALTER TABLE Persons
+DROP PRIMARY KEY
+</pre>
+
+<p>SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Persons
+DROP CONSTRAINT P_Id（或pk_PersonID）
+</pre>
+
+
+<h2>FOREIGN KEY</h2>
+
+<h3>一、创建约束</h3>
+<p>MySQL</p>
+<pre>
+CREATE TABLE Orders
+(
+O_Id int NOT NULL,
+OrderNo int NOT NULL,
+P_Id int,
+PRIMARY KEY (O_Id),
+FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)
+)
+</pre>
+
+<p>SQL Server / Oracle </p>
+<pre>
+CREATE TABLE Orders
+(
+O_Id int NOT NULL PRIMARY KEY,
+OrderNo int NOT NULL,
+P_Id int FOREIGN KEY REFERENCES Persons(P_Id)
+)
+</pre>
+
+<p>命名 FOREIGN KEY 约束，MySQL / SQL Server / Oracle</p>
+<pre>
+CREATE TABLE Orders
+(
+O_Id int NOT NULL,
+OrderNo int NOT NULL,
+P_Id int,
+PRIMARY KEY (O_Id),
+CONSTRAINT fk_PerOrders FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)
+)
+</pre>
+
+<h3>二、追加约束</h3>
+<p>MySQL / SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Orders
+ADD FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)
+</pre>
+<pre>
+ALTER TABLE Orders
+ADD CONSTRAINT fk_PerOrders FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)
+</pre>
+
+
+<h3>三、撤销约束</h3>
+<p>MySQL</p>
+<pre>
+ALTER TABLE Orders
+DROP FOREIGN KEY fk_PerOrders
+</pre>
+
+<p>SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Orders
+DROP CONSTRAINT fk_PerOrders
+</pre>
+
+<h2>CHECK</h2>
+<p>CHECK 约束用于限制列中的值的范围。如果对单个列定义 CHECK 约束，那么该列只允许特定的值。如果对一个表定义 CHECK 约束，那么此约束会基于行中其他列的值在特定的列中对值进行限制。</p>
+<h3>一、创建约束</h3>
+<p>MySQL</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+CHECK (P_Id>0)
+)
+</pre>
+<p>SQL Server / Oracle</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL CHECK (P_Id>0),
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+)
+</pre>
+<p>命名 CHECK 约束，MySQL / SQL Server / Oracle</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+City varchar(255),
+CONSTRAINT chk_Person CHECK (P_Id>0 AND City='Sandnes')
+)
+</pre>
+<h3>二、追加约束</h3>
+<p>MySQL / SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Persons
+ADD CHECK (P_Id>0)
+</pre>
+<pre>
+ALTER TABLE Persons
+ADD CONSTRAINT chk_Person CHECK (P_Id>0 AND City='Sandnes')
+</pre>
+<h3>三、撤销约束</h3>
+<p>MySQL</p>
+<pre>
+ALTER TABLE Persons
+DROP CHECK chk_Person
+</pre>
+
+<p>SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Persons
+DROP CONSTRAINT chk_Person
+</pre>
+
+<h2>DEFAULT</h2>
+<h3>一、创建约束</h3>
+<p>My SQL / SQL Server / Oracle</p>
+<pre>
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+City varchar(255) DEFAULT 'Sandnes'
+)
+</pre>
+
+<pre>
+CREATE TABLE Orders
+(
+O_Id int NOT NULL,
+OrderNo int NOT NULL,
+P_Id int,
+OrderDate date DEFAULT GETDATE()
+)
+</pre>
+
+<h3>二、追加约束</h3>
+<p>MySQL</p>
+<pre>
+ALTER TABLE Persons
+ALTER City SET DEFAULT 'SANDNES'
+</pre>
+<p>SQL Server</p>
+<pre>
+ALTER TABLE Persons
+ALTER COLUMN City SET DEFAULT 'SANDNES'
+</pre>
+<p>Oracle</p>
+<pre>
+ALTER TABLE Persons
+MODIFY City DEFAULT 'SANDNES'
+</pre>
+
+<h3>三、撤销约束</h3>
+<p>MySQL</p>
+<pre>
+ALTER TABLE Persons
+ALTER City DROP DEFAULT
+</pre>
+
+<p>SQL Server / Oracle</p>
+<pre>
+ALTER TABLE Persons
+ALTER COLUMN City DROP DEFAULT
+</pre>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'join' %}
+
+{% block content %}
+<h1>join</h1>
+
+<h2>简介</h2>
+<p>JOIN 用于把来自两个或多个表的行进行合并。JOIN 有四种类型。</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>JOIN 类型</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>INNER JOIN</td>
+            <td>对表中的每一个匹配返回一行，无匹配则忽略</td>
+        </tr>
+        <tr>
+            <td>LEFT JOIN</td>
+            <td>以左表为基准，即使左表中的行在右表中无匹配，也返回一行，该行中属于右表的字段以空值填充</td>
+        </tr>
+        <tr>
+            <td>RIGHT JOIN</td>
+            <td>以右表为基准，即使右表中的行在左表中无匹配，也返回一行，该行中属于左表的字段以空值填充</td>
+        </tr>
+        <tr>
+            <td>FULL JOIN</td>
+            <td>对表中的每一个匹配返回一行，无匹配的行也返回一行，该行中属于其他表的字段以空值填充</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>一、INNER JOIN</h2>
+<pre>
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name=table2.column_name;
+</pre>
+<pre>
+SELECT column_name(s)
+FROM table1
+JOIN table2
+ON table1.column_name=table2.column_name;
+</pre>
+<p>注：INNER JOIN 与 JOIN 是相同的。</p>
+
+<h2>二、LEFT JOIN</h2>
+<pre>
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name=table2.column_name;
+</pre>
+<p>注：在某些数据库中，LEFT JOIN 被称为 LEFT OUTER JOIN。</p>
+
+<h2>三、RIGHT JOIN</h2>
+<pre>
+SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name=table2.column_name;
+</pre>
+<p>注：在某些数据库中，RIGHT JOIN 被称为 RIGHT OUTER JOIN。</p>
+
+
+
+
+<h2>四、FULL JOIN</h2>
+<pre>
+SELECT column_name(s)
+FROM table1
+FULL JOIN table2
+ON table1.column_name=table2.column_name;
+</pre>
+<p>注：在某些数据库中，FULL JOIN 被称为 FULL OUTER JOIN。MySQL 不支持 FULL JOIN，可以使用UNION ALL子句 将 左、右连接合并。</p>
+<pre>
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name=table2.column_name;
+UNION ALL
+SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name=table2.column_name;
+</pre>
+
+
+
+{% endblock %}

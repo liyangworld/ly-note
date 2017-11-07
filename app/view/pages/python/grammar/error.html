@@ -1,0 +1,70 @@
+
+{% extends '../../../tpl/layout_python.html' %}
+
+{% set title_suffix = '错误和异常' %}
+
+{% block content %}
+
+<h1>错误和异常</h1>
+
+<h2>简介</h2>
+<p>Python 中有两种错误很容易辨认：语法错误和异常。</p>
+<ol>
+    <li>语法错误(SyntaxError)：如 缺少冒号、缩进不对等。</li>
+    <li>异常：程序运行期间可能遇到各种错误，如 数据类型不对、变量未定义等。</li>
+</ol>
+
+<h2>异常处理</h2>
+<p>通常使用 try、except、else、finally、raise 来处理可能发生的异常。</p>
+<pre>
+try:
+    f = open('myfile.txt')
+    s = f.readline()
+    i = int(s.strip())
+except OSError as err:
+    print("OS error: {0}".format(err.message))
+except (ValueError, TypeError):
+    print("ValueError or TypeError")
+except:
+    print("Unexpected error:")
+    raise  #继续上抛异常
+else:
+    print("无异常时执行")
+finally:
+    print("无论是否发生异常都将执行")
+    f.close()
+</pre>
+
+<h2>自定义异常</h2>
+<p>我们可以自定义自己的异常类，只需要直接或者间接的继承自 Exception 类就可以了。</p>
+<pre>
+class MyError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+</pre>
+<pre>
+try:
+    raise MyError(3)
+except MyError as e:
+    print('My exception occurred, value:', e.value)
+</pre>
+
+<h2>警告</h2>
+<p>当出现了一些需要让用户知道的问题，但又不想停止程序时，可以使用 模块(warnings) 来进行提示。</p>
+<pre>
+import warnings
+
+def my_warn():
+    warnings.warn('自定义警告', RuntimeWarning)
+
+warnings.filterwarnings(action = 'ignore', category = RuntimeWarning) #忽略警告
+my_warn()
+</pre>
+<p>以上代码中使用 warn() 函数打印警告，使用 filterwarnings() 函数过滤警告。</p>
+
+
+
+
+{% endblock %}

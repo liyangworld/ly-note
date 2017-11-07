@@ -1,0 +1,27 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'delete' %}
+
+{% block content %}
+<h1>delete</h1>
+
+<h2>简介</h2>
+<p>DELETE 语句用于删除表中的行。</p>
+
+<h2>删除符合条件的行</h2>
+<pre>
+DELETE FROM table_name
+WHERE column_name operator value;
+</pre>
+
+<h2>删除所有行</h2>
+<p>在不删除表的情况下，删除表中所有的行。这意味着表结构、属性、索引将保持不变。</p>
+<pre>
+DELETE FROM table_name;
+或
+DELETE * FROM table_name;
+</pre>
+
+
+{% endblock %}

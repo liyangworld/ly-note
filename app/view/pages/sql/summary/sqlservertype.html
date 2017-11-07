@@ -1,0 +1,212 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'SQL Server数据类型速览' %}
+
+{% block content %}
+<h1>SQL Server数据类型速览</h1>
+
+<h2>简介</h2>
+<p>SQL Server 支持多种数据类型：String 类型、Number 类型、Date 类型 及 其它类型。</p>
+
+<h2>String 类型</h2>
+<table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>char(n)</td>
+            <td>固定长度的字符串。最多 8,000 个字符。</td>
+        </tr>
+        <tr>
+            <td>varchar(n)</td>
+            <td>可变长度的字符串。最多 8,000 个字符。</td>
+        </tr>
+        <tr>
+            <td>varchar(max)</td>
+            <td>可变长度的字符串。最多 1,073,741,824 个字符。</td>
+        </tr>
+
+        <tr>
+            <td>nchar</td>
+            <td>固定长度的 Unicode 字符串。最多 4,000 个字符。</td>
+        </tr>
+        <tr>
+            <td>nvarchar</td>
+            <td>可变长度的 Unicode 字符串。最多 4,000 个字符。</td>
+        </tr>
+        <tr>
+            <td>nvarchar(max)</td>
+            <td>可变长度的 Unicode 字符串。最多 536,870,912 个字符。</td>
+        </tr>
+        <tr>
+            <td>text</td>
+            <td>可变长度的字符串。最多 2GB 文本数据。</td>
+        </tr>
+        <tr>
+            <td>ntext</td>
+            <td>可变长度的 Unicode 字符串。最多 2GB 文本数据。</td>
+        </tr>
+        <tr>
+            <td>bit</td>
+            <td>允许 0、1 或 NULL</td>
+        </tr>
+        <tr>
+            <td>binary(n)</td>
+            <td>固定长度的二进制字符串。最多 8,000 字节。</td>
+        </tr>
+        <tr>
+            <td>varbinary</td>
+            <td>可变长度的二进制字符串。最多 8,000 字节。</td>
+        </tr>
+        <tr>
+            <td>varbinary(max)</td>
+            <td>可变长度的二进制字符串。最多 2GB。</td>
+        </tr>
+        <tr>
+            <td>image</td>
+            <td>可变长度的二进制字符串。最多 2GB。</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<h2>Number 类型</h2>
+<table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>int</td>
+            <td>允许介于 -2,147,483,648 与 2,147,483,647 的所有数字。4 字节</td>
+        </tr>
+        <tr>
+            <td>tinyint</td>
+            <td>允许从 0 到 255 的所有数字。1 字节</td>
+        </tr>
+        <tr>
+            <td>smallint</td>
+            <td>允许介于 -32,768 与 32,767 的所有数字。2 字节</td>
+        </tr>
+        <tr>
+            <td>bigint</td>
+            <td>允许介于 -9,223,372,036,854,775,808 与 9,223,372,036,854,775,807 之间的所有数字。8 字节</td>
+        </tr>
+        <tr>
+            <td>money</td>
+            <td>介于 -922,337,203,685,477.5808 与 922,337,203,685,477.5807 之间的货币数据。8 字节</td>
+        </tr>
+        <tr>
+            <td>smallmoney</td>
+            <td>介于 -214,748.3648 与 214,748.3647 之间的货币数据。4 字节</td>
+        </tr>
+        <tr>
+            <td>decimal(p,s)</td>
+            <td>固定精度和比例的数字。允许从 -10^38 +1 到 10^38 -1 之间的数字。p表示总位数，1 到 38 之间，默认是 18。s表示小数位数，默认是 0</td>
+        </tr>
+        <tr>
+            <td>numeric(p,s)</td>
+            <td>同decimal(p,s)</td>
+        </tr>
+
+        <tr>
+            <td>float(n)</td>
+            <td>从 -1.79E + 308 到 1.79E + 308 的浮动精度数字数据。n表示储存位数(24、53)。4 或 8 字节</td>
+        </tr>
+        <tr>
+            <td>real</td>
+            <td>从 -3.40E + 38 到 3.40E + 38 的浮动精度数字数据。4 字节</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2>Date 类型</h2>
+<table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>datetime</td>
+            <td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 3.33 毫秒。8 字节</td>
+        </tr>
+        <tr>
+            <td>datetime2</td>
+            <td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 100 纳秒。6-8 字节</td>
+        </tr>
+        <tr>
+            <td>smalldatetime</td>
+            <td>从 1900 年 1 月 1 日 到 2079 年 6 月 6 日，精度为 1 分钟。4 字节</td>
+        </tr>
+        <tr>
+            <td>date</td>
+            <td>仅存储日期。从 0001 年 1 月 1 日 到 9999 年 12 月 31 日。3 bytes</td>
+        </tr>
+        <tr>
+            <td>time</td>
+            <td>仅存储时间。精度为 100 纳秒。3-5 字节</td>
+        </tr>
+        <tr>
+            <td>datetimeoffset</td>
+            <td>与 datetime2 相同，外加时区偏移。8-10 字节</td>
+        </tr>
+        <tr>
+            <td>timestamp</td>
+            <td>存储唯一的数字，每当创建或修改某行时，该数字会更新。timestamp 值基于内部时钟，不对应真实时间。每个表只能有一个 timestamp 变量。</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<h2>其他 类型</h2>
+<table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>sql_variant</td>
+            <td>存储最多 8,000 字节不同数据类型的数据，除了 text、ntext 以及 timestamp。</td>
+        </tr>
+        <tr>
+            <td>uniqueidentifier</td>
+            <td>存储全局唯一标识符 (GUID)。</td>
+        </tr>
+        <tr>
+            <td>xml</td>
+            <td>存储 XML 格式化数据。最多 2GB。</td>
+        </tr>
+        <tr>
+            <td>cursor</td>
+            <td>存储对用于数据库操作的指针的引用。</td>
+        </tr>
+        <tr>
+            <td>table</td>
+            <td>存储结果集，供稍后处理。</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,46 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'insert into' %}
+
+{% block content %}
+<h1>insert into</h1>
+
+<h2>简介</h2>
+<p>INSERT INTO 语句用于向表中插入新记录。</p>
+
+<h2>几种使用形式</h2>
+
+<p>一、不指定列名</p>
+<pre>
+INSERT INTO table_name
+VALUES (value1,value2,value3,...) , (value1,value2,value3,...);
+</pre>
+
+<p>二、指定列名</p>
+<pre>
+INSERT INTO table_name (column1,column2,column3,...)
+VALUES (value1,value2,value3,...) , (value1,value2,value3,...);
+</pre>
+
+<p>三、插入结果集</p>
+<p>可用于表的复制，但是要求表已存在。对比于 SELECT INTO 方法。</p>
+<pre>
+INSERT INTO table_name1 (column1,column2,column3,...)
+SELECT column_name,column_name,column_name
+FROM table_name2;
+</pre>
+
+<p>四、明确插入单条数据</p>
+<p>不常用。</p>
+<pre>
+INSERT INTO table_name (column1,column2,column3,...)
+VALUE (value1,value2,value3,...);
+</pre>
+
+
+
+
+
+
+{% endblock %}
