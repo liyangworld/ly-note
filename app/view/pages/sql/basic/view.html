@@ -1,0 +1,38 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = '视图' %}
+
+{% block content %}
+<h1>视图</h1>
+
+<h2>简介</h2>
+<p>视图是可视化的表，基于 SQL 语句所得的结果集。视图包含行和列，就像一个真实的表。可以向视图添加 SQL 函数、WHERE 以及 JOIN 语句，也可以呈现数据，就像这些数据来自于某个单一的表一样。</p>
+<p>注：视图总是显示最新的数据！每当用户查询视图时，数据库引擎通过使用视图的 SQL 语句重建数据。</p>
+
+<h2>创建视图</h2>
+<pre>
+CREATE VIEW view_name AS
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+</pre>
+
+<h2>更新视图</h2>
+<pre>
+CREATE OR REPLACE VIEW view_name AS
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+</pre>
+
+
+
+<h2>删除视图</h2>
+<pre>
+DROP VIEW view_name
+</pre>
+
+
+
+{% endblock %}

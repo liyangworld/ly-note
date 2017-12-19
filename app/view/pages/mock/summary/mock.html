@@ -1,0 +1,37 @@
+
+{% extends '../../../tpl/layout_mock.html' %}
+
+{% set title_suffix = 'Mock.mock()' %}
+
+{% block content %}
+
+<h1>Mock.mock()</h1>
+<h2>简介</h2>
+<pre>
+Mock.mock( rurl?, rtype?, template|function( options ) )
+</pre>
+
+<p>当拦截到匹配 rurl、rtype 的 Ajax 请求时，将根据数据模板 生成模拟数据。rurl、rtype 可选。</p>
+<p>注：从 1.0 开始，Mock.js 通过覆盖和模拟原生 XMLHttpRequest 的行为来拦截 Ajax 请求，不再依赖于第三方 Ajax 工具库（例如 jQuery、Zepto 等）。</p>
+
+<h2>rurl</h2>
+<p>可选。表示需要拦截的 URL，可以是 URL 字符串或 URL 正则。</p>
+
+<h2>rtype</h2>
+<p>可选。表示需要拦截的 Ajax 请求类型。例如 GET、POST、PUT、DELETE 等。</p>
+
+<h2>template</h2>
+<p>表示数据模板，可以是对象或字符串。例如 { 'data|1-10':[{}] }、'@EMAIL'。</p>
+
+<h2>function(options)</h2>
+<p>表示用于生成响应数据的函数。options 指向本次请求的 Ajax 选项集，含有 url、type 和 body 三个属性。</p>
+
+
+
+
+
+
+
+
+
+{% endblock %}

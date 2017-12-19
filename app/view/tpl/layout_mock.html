@@ -1,0 +1,28 @@
+
+{% extends './layout_base.html' %}
+
+{% set title = 'Mock-'+ title_suffix %}
+{% set controller = 'mock' %}
+{% set sideBarItems = [
+                {
+                    title:'常用总结',
+                    action:'',
+                    children:[
+
+                    ]
+                },
+                {
+                    title:'基本语法',
+                    action:'',
+                    children:[
+                        {title:'数据模板定义规范',action:'dataTemplate'},
+                        {title:'数据占位符定义规范',action:'dataPlaceholder'},
+                        {title:'Mock.Random',action:'random'},
+                        {title:'Mock.mock()',action:'mock'},
+                        {title:'Mock.setup()',action:'setup'},
+                        {title:'Mock.valid()',action:'valid'},
+                        {title:'Mock.toJSONSchema()',action:'toJSONSchema'}
+                    ]
+                }
+            ]
+%}

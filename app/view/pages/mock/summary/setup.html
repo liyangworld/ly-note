@@ -1,0 +1,37 @@
+
+{% extends '../../../tpl/layout_mock.html' %}
+
+{% set title_suffix = 'Mock.setup()' %}
+
+{% block content %}
+
+<h1>Mock.setup()</h1>
+
+<h2>简介</h2>
+<pre>
+Mock.setup( settings )
+</pre>
+<p>配置拦截 Ajax 请求时的行为。支持的配置项有：timeout。</p>
+<p>注：目前，接口 Mock.setup( settings ) 仅用于配置 Ajax 请求，将来可能用于配置 Mock 的其他行为。</p>
+
+
+<h2>timeout</h2>
+<p>指定被拦截的 Ajax 请求的响应时间，单位是毫秒。值可以是正整数，例如 400，表示 400 毫秒 后才会返回响应内容；也可以是横杠 '-' 风格的字符串，例如 '200-600'，表示响应时间介于 200 和 600 毫秒之间。默认值是'10-100'。</p>
+
+<pre>
+Mock.setup({
+    timeout: 400
+})
+Mock.setup({
+    timeout: '200-600'
+})
+</pre>
+
+
+
+
+
+
+
+
+{% endblock %}

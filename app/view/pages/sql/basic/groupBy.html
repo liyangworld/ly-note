@@ -1,0 +1,23 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'group by' %}
+
+{% block content %}
+<h1>group by</h1>
+
+<h2>简介</h2>
+<p>GROUP BY 语句可根据一个或多个列对结果集进行分组，常与聚合函数结合使用。</p>
+
+<pre>
+SELECT column_name, aggregate_function(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name;
+</pre>
+
+
+
+
+
+{% endblock %}

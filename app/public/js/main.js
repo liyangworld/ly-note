@@ -43,5 +43,33 @@ window._initMyTitle = function () {
 
 window.onload = function () {
     _initMyTitle();
+
+
+    var popLayers = document.getElementsByClassName('pop-layer');
+    var navLayer = document.getElementById('navLayer');
+
+    var curKey = '';
+    document.addEventListener("keypress", function (e) {
+        //console.warn(e.key);
+        if(e.key !== curKey){
+            hideAllLayers();
+            curKey = '';
+            switch (e.key){
+                case 'q':
+                    navLayer.style.display = 'block';
+                    curKey = 'q';
+                    break;
+            }
+        }
+
+    }, false);
+
+    function hideAllLayers() {
+        for(let layer of popLayers){
+            layer.style.display = 'none';
+        }
+    }
+
+
 };
 

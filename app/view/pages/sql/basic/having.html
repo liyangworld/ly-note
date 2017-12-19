@@ -1,0 +1,21 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'having' %}
+
+{% block content %}
+<h1>having</h1>
+
+<h2>简介</h2>
+<p>在 SQL 中增加 HAVING 子句的原因是：WHERE 关键字无法与聚合函数一起使用。HAVING 子句可以筛选分组后的各组数据。</p>
+
+<pre>
+SELECT column_name, aggregate_function(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name
+HAVING aggregate_function(column_name) operator value;
+</pre>
+
+
+{% endblock %}

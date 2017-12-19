@@ -1,0 +1,43 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = 'NULL 替换值' %}
+
+{% block content %}
+<h1>NULL 替换值</h1>
+
+<h2>简介</h2>
+<p>有 NULL 值的列是不可以直接与其他列运算的，此时可以为 NULL 值设置替换值。</p>
+
+<h2>MySQL 使用 IFNULL() 或 COALESCE() </h2>
+<pre>
+SELECT ProductName,UnitPrice*(UnitsInStock+IFNULL(UnitsOnOrder,0))
+FROM Products
+</pre>
+
+<pre>
+SELECT ProductName,UnitPrice*(UnitsInStock+COALESCE(UnitsOnOrder,0))
+FROM Products
+</pre>
+
+<h2>SQL Server 使用 ISNULL()</h2>
+<pre>
+SELECT ProductName,UnitPrice*(UnitsInStock+ISNULL(UnitsOnOrder,0))
+FROM Products
+</pre>
+
+<h2>Oracle 使用 NVL()</h2>
+<pre>
+SELECT ProductName,UnitPrice*(UnitsInStock+NVL(UnitsOnOrder,0))
+FROM Products
+</pre>
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+
+{% extends '../../../tpl/layout_mock.html' %}
+
+{% set title_suffix = 'Mock.toJSONSchema()' %}
+
+{% block content %}
+
+<h1>Mock.toJSONSchema()</h1>
+<h2>简介</h2>
+<pre>
+Mock.toJSONSchema( template )
+</pre>
+<p>把 Mock.js 风格的数据模板 template 转换成 JSON Schema。</p>
+
+<pre>
+var template = {
+    'key|1-10': '★'
+}
+Mock.toJSONSchema(template)
+</pre>
+<pre>
+{
+    "name": undefined,
+    "path": [
+        "ROOT"
+    ],
+    "type": "object",
+    "template": {
+        "key|1-10": "★"
+    },
+    "rule": {},
+    "properties": [{
+        "name": "key",
+        "path": [
+            "ROOT",
+            "key"
+        ],
+        "type": "string",
+        "template": "★",
+        "rule": {
+            "parameters": ["key|1-10", "key", null, "1-10", null],
+            "range": ["1-10", "1", "10"],
+            "min": 1,
+            "max": 10,
+            "count": 3,
+            "decimal": undefined,
+            "dmin": undefined,
+            "dmax": undefined,
+            "dcount": undefined
+        }
+    }]
+}
+</pre>
+
+
+
+
+
+
+
+
+
+{% endblock %}

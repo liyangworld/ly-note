@@ -1,0 +1,47 @@
+
+{% extends '../../../tpl/layout_mock.html' %}
+
+{% set title_suffix = 'Mock.valid()' %}
+
+{% block content %}
+
+<h1>Mock.valid()</h1>
+
+<h2>简介</h2>
+<pre>
+Mock.valid( template, data )
+</pre>
+
+<p>校验真实数据 data 是否与数据模板 template 匹配。template 可以是对象或字符串，例如 { 'list|1-10':[{}] }、'@EMAIL'。</p>
+<p>注：经过测试，只能判断字符串是否相等，无法判断是否匹配。</p>
+
+<pre>
+var template = {
+    name: 'value1'
+}
+var data = {
+    name: 'value2'
+}
+Mock.valid(template, data)
+// =>
+[
+    {
+        "path": [
+            "data",
+            "name"
+        ],
+        "type": "value",
+        "actual": "value2",
+        "expected": "value1",
+        "action": "equal to",
+        "message": "[VALUE] Expect ROOT.name'value is equal to value1, but is value2"
+    }
+]
+</pre>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,158 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = '日期' %}
+
+{% block content %}
+<h1>日期</h1>
+
+<h2>简介</h2>
+<p>在处理日期时，最麻烦的便是确保所插入的日期格式，与数据库中日期列的格式相匹配。如果数据只包含日期部分，运行查询则不会出问题；但是，如果涉及时间部分，情况就有点复杂了。因此，建议不要在日期中使用时间部分！</p>
+
+<h2>基本用法</h2>
+<pre>
+SELECT * FROM Orders WHERE OrderDate='2008-11-11'
+等同于
+SELECT * FROM Orders WHERE OrderDate='2008-11-11 00:00:00'
+</pre>
+<p>如果没有时间部分，默认时间为 00:00:00。</p>
+
+
+
+<h2>MySQL</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>日期函数</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>NOW()</td>
+            <td>返回当前的日期和时间</td>
+        </tr>
+        <tr>
+            <td>CURDATE()</td>
+            <td>返回当前的日期</td>
+        </tr>
+        <tr>
+            <td>CURTIME()</td>
+            <td>返回当前的时间</td>
+        </tr>
+        <tr>
+            <td>DATE()</td>
+            <td>提取日期或日期/时间表达式的日期部分</td>
+        </tr>
+        <tr>
+            <td>EXTRACT()</td>
+            <td>返回日期/时间的单独部分</td>
+        </tr>
+        <tr>
+            <td>DATE_ADD()</td>
+            <td>向日期添加指定的时间间隔</td>
+        </tr>
+        <tr>
+            <td>DATE_SUB()</td>
+            <td>从日期减去指定的时间间隔</td>
+        </tr>
+        <tr>
+            <td>DATEDIFF()</td>
+            <td>返回两个日期之间的天数</td>
+        </tr>
+        <tr>
+            <td>DATE_FORMAT()</td>
+            <td>用不同的格式显示日期/时间</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date 数据类型</th>
+            <th>格式</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>DATE</td>
+            <td>YYYY-MM-DD</td>
+        </tr>
+        <tr>
+            <td>DATETIME</td>
+            <td>YYYY-MM-DD HH:MM:SS</td>
+        </tr>
+        <tr>
+            <td>TIMESTAMP</td>
+            <td>YYYY-MM-DD HH:MM:SS</td>
+        </tr>
+        <tr>
+            <td>YEAR</td>
+            <td>YYYY 或 YY</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>SQL Server</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>日期函数</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GETDATE()</td>
+            <td>返回当前的日期和时间</td>
+        </tr>
+        <tr>
+            <td>DATEPART()</td>
+            <td>返回日期/时间的单独部分</td>
+        </tr>
+        <tr>
+            <td>DATEADD()</td>
+            <td>在日期中添加或减去指定的时间间隔</td>
+        </tr>
+        <tr>
+            <td>DATEDIFF()</td>
+            <td>返回两个日期之间的时间</td>
+        </tr>
+        <tr>
+            <td>CONVERT()</td>
+            <td>用不同的格式显示日期/时间</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th>Date 数据类型</th>
+            <th>格式</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>DATE</td>
+            <td>YYYY-MM-DD</td>
+        </tr>
+        <tr>
+            <td>DATETIME</td>
+            <td>YYYY-MM-DD HH:MM:SS</td>
+        </tr>
+        <tr>
+            <td>TIMESTAMP</td>
+            <td>唯一的数字</td>
+        </tr>
+        <tr>
+            <td>SMALLDATETIME</td>
+            <td>YYYY-MM-DD HH:MM:SS</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

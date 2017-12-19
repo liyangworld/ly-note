@@ -1,0 +1,48 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = '自增' %}
+
+{% block content %}
+<h1>自增</h1>
+
+<h2>简介</h2>
+<p>自增 指在新记录插入表中时自动生成一个唯一的数字。常用于创建主键字段。</p>
+
+<h2>MySQL</h2>
+<p>定义自增列</p>
+<pre>
+CREATE TABLE Persons
+(
+ID int NOT NULL AUTO_INCREMENT,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+PRIMARY KEY (ID)
+)
+</pre>
+<p>默认地，AUTO_INCREMENT 的开始值是 1，每条新记录递增 1。用以下语句设置起始值。</p>
+<pre>
+ALTER TABLE Persons AUTO_INCREMENT=100
+</pre>
+
+<p>追加自增列</p>
+<pre>
+ALTER TABLE table_name
+CHANGE column_name column_name data_type(size) constraint_name AUTO_INCREMENT;
+</pre>
+
+
+
+
+<h2>SQL Server</h2>
+<p>定义自增列</p>
+<pre>
+CREATE TABLE Persons
+(
+ID int IDENTITY(1,1) PRIMARY KEY,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+)
+</pre>
+
+{% endblock %}

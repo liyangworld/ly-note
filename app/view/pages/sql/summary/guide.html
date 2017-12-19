@@ -70,7 +70,7 @@
         </tr>
         <tr>
             <td>truncate table</td>
-            <td>TRUNCATE TABLE table_name</td>
+            <td>TRUNCATE TABLE table_name。仅仅删除表内的数据，但并不删除表本身，索引将重置为初始值</td>
         </tr>
         <tr>
             <td>drop index</td>
@@ -83,7 +83,7 @@
         </tr>
         <tr>
             <td>alter table</td>
-            <td>ALTER TABLE table_name ADD column_name datatype 或 ALTER TABLE table_name DROP COLUMN column_name</td>
+            <td>ALTER TABLE table_name ADD column_name datatype 或 ALTER TABLE table_name DROP COLUMN column_name 或 ALTER TABLE table_name MODIFY COLUMN column_name datatype（MySQL） 或 ALTER TABLE table_name ALTER COLUMN column_name datatype（SQL Server）</td>
         </tr>
 
         <tr class="separator"><td></td><td></td></tr>

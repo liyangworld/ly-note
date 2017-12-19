@@ -1,0 +1,41 @@
+
+{% extends '../../../tpl/layout_sql.html' %}
+
+{% set title_suffix = '索引' %}
+
+{% block content %}
+<h1>索引</h1>
+
+<h2>简介</h2>
+<p>索引 用于在不读取整个表的情况下，更快地查找数据。用户无法看到索引，它们只能被用来加速搜索/查询。</p>
+<p>注：更新一个包含索引的表需要比更新一个没有索引的表花费更多的时间，这是由于索引本身也需要更新。因此，理想的做法是仅仅在常常被搜索的列（以及表）上面创建索引。</p>
+
+<h2>创建索引</h2>
+<p>允许行与行有重复的值：</p>
+<pre>
+CREATE INDEX index_name
+ON table_name (column_name1, column_name2)
+</pre>
+
+<p>不允许行与行有重复的值：</p>
+<pre>
+CREATE UNIQUE INDEX index_name
+ON table_name (column_name1, column_name2)
+</pre>
+
+<h2>删除索引</h2>
+<p>MySQL</p>
+<pre>
+ALTER TABLE table_name
+DROP INDEX index_name
+</pre>
+
+<p>SQL Server</p>
+<pre>
+DROP INDEX table_name.index_name
+</pre>
+
+
+
+
+{% endblock %}

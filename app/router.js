@@ -34,6 +34,9 @@ const routes = {
     express:['index'],
     koa:['index'],
     egg:['index'],
+    mock:['index',
+        'dataTemplate','dataPlaceholder','random','mock','setup','valid','toJSONSchema'
+    ],
     python:['index','module',
         'grammar','dataType','operator','builtinFn','number','string','stringFn','list','tuple','dict','set','function','functionHigh','itergener','error','with',
         'class','private','extends'
@@ -41,7 +44,7 @@ const routes = {
     flask:['index'],
     scrapy:['index'],
     sql:['index','guide','sqlfn','mysqltype','sqlservertype',
-        'select','join','union','where','orderBy','insertInto','update','delete','constraints'
+        'select','join','union','where','orderBy','groupBy','having','insertInto','update','delete','constraints','indexes','autoIncrement','view','date','nullValue'
     ],
     mysql:['index','quickstart'],
     mongodb:['index'],

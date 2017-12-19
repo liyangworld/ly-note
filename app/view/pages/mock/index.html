@@ -1,0 +1,21 @@
+
+{% extends '../../tpl/layout_mock.html' %}
+
+{% set title_suffix = '引言' %}
+
+{% block content %}
+
+<h1>引言</h1>
+<p>Mock.js 根据一定的规则生成数据，用于前后端分离开发。<a href="https://github.com/nuysoft/Mock/wiki" target="_blank">官方文档</a> <a href="http://mockjs.com/examples.html" target="_blank">官方示例</a></p>
+
+<p>Mock.js 定义了特定的语法规范，包括两部分：</p>
+<ol>
+    <li>数据模板定义规范（Data Template Definition，DTD）</li>
+    <li>数据占位符定义规范（Data Placeholder Definition，DPD）</li>
+</ol>
+
+<p>Mock.js 提供了一些 API ：Mock.mock()、Mock.setup()、Mock.valid()、Mock.toJSONSchema() 和 Mock.Random 工具类。</p>
+
+
+
+{% endblock %}
