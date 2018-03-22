@@ -6,7 +6,68 @@
 {% block content %}
 
 <h1>快速使用</h1>
-<h3>一、初始化项目</h3>
+<h3>一、创建 React 项目</h3>
+<p>可以在线体验使用 React和JSX语法构建页面：<a href="https://codesandbox.io/s/new" target="_blank">CodeSandbox</a></p>
+<p>使用 React 构建项目有以下几种形式：</p>
+<ol>
+    <li>以&lt;script>标签的形式直接引入到html文件中（很少使用）</li>
+    <li>手动安装 React、Bable、Webpack 等，自己配置开发环境</li>
+    <li>使用现成的项目脚手架生成项目结构及开发环境（最常使用）</li>
+</ol>
+
+<h4>1.以&lt;script>标签的形式直接引入到html文件中</h4>
+<pre>
+&lt;!DOCTYPE html>
+&lt;html>
+    &lt;head>
+    &lt;meta charset="UTF-8" />
+    &lt;title>Hello World&lt;/title>
+    &lt;script src="https://unpkg.com/react@16/umd/react.development.js">&lt;/script>
+    &lt;script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js">&lt;/script>
+    &lt;script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js">&lt;/script>
+    &lt;/head>
+    &lt;body>
+    &lt;div id="root">&lt;/div>
+    &lt;script type="text/babel">
+
+        ReactDOM.render(
+        &lt;h1>Hello, world!&lt;/h1>,
+        document.getElementById('root')
+        );
+
+    &lt;/script>
+    
+    &lt;/body>
+&lt;/html>
+</pre>
+
+<h4>2.手动安装 React、Bable、Webpack 等，自己配置开发环境</h4>
+<p>这种方式可以创建单页和多页应用，也可以对接到已存在的项目中。
+    <a href="https://reactjs.org/docs/add-react-to-an-existing-app.html" target="_blank">官方使用说明</a> 
+    <a href="http://webpackbook.rails365.net/467004" target="_blank">详细过程</a> 
+</p>
+<pre>
+npm install react react-dom -S
+npm install babel-core babel-preset-react babel-preset-env -D
+</pre>
+<p>创建 .babelrc 文件</p>
+<pre>
+{
+    "presets": ["env", "react"]
+}
+</pre>
+<p>在 webpack 中使用 babel-loader</p>
+<pre>
+npm install babel-loader -D
+</pre>
+<pre>
+// webpack配置文件中 module.rules
+{ test: /\.(js|jsx)$/, loader: 'babel-loader', exclude: /node_modules/ }
+</pre>
+
+<h4>3.使用 create-react-app 生成单页应用</h4>
+<p>create-react-app 是官方提供的。<a href="https://reactjs.org/docs/add-react-to-a-new-app.html" target="_blank">使用说明</a> <a href="https://github.com/facebook/create-react-app" target="_blank">GitHub地址</a> </p>
+<p>社区提供了许多脚手架。<a href="https://reactjs.org/community/starter-kits.html" target="_blank">参考地址</a></p>
 <pre>
 npm install create-react-app -g
 create-react-app my-app
